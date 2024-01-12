@@ -6,13 +6,13 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:47:55 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/12 12:48:36 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:27:14 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int	ft_isdigit(int c)
 {
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
+	return (c >= 48 && c <= 57);
 }

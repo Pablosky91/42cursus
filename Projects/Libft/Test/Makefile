@@ -1,6 +1,6 @@
 #VARIABLES
 
-NAME = libft.a
+NAME = test
 
 CC = cc
 
@@ -15,7 +15,7 @@ OBJECTS = $(SOURCES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	ar -cr $(NAME) $(OBJECTS)
+	$(CC) $(CFLAGS) -L.. -l ft -o $(NAME) $(OBJECTS)
 
 clean:
 	rm -f $(OBJECTS)

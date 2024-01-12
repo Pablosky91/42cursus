@@ -6,13 +6,13 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:51:51 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/12 13:06:14 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/12 18:27:24 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int	ft_isprint(int c)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	return (0);
+	return (c >= 32 && c <= 126);
 }
