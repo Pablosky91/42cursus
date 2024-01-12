@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/12 18:07:52 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/12 20:10:51 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ int	main(void)
 	test_same_result("ISALNUM", isalnum, ft_isalnum);
 	test_same_result("ISASCII", isascii, ft_isascii);
 	test_same_result("ISPRINT", isprint, ft_isprint);
+	printf("\nLEN: %zu\n", ft_strlen("12345"));
 	return (0);
 }
