@@ -1,6 +1,6 @@
 #VARIABLES
 
-TARGET = test
+TARGET = libft
 
 CC = cc
 
@@ -23,8 +23,8 @@ clean:
 fclean: clean
 	rm -f $(TARGET)
 
+re: fclean all
+
 exec: all
 	@clear
 	@./$(TARGET)
-
-re: fclean all
