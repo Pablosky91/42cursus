@@ -4,6 +4,8 @@ NAME = libft.a
 
 CC = cc
 
+RM = rm -f
+
 CFLAGS = -Wall -Wextra -Werror
 
 SOURCES = $(wildcard *.c)
@@ -18,10 +20,10 @@ $(NAME): $(OBJECTS)
 	ar -cr $(NAME) $(OBJECTS)
 
 clean:
-	rm -f $(OBJECTS)
+	$(RM) $(OBJECTS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 

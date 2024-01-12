@@ -1,8 +1,10 @@
 #VARIABLES
 
-NAME = test
+NAME = test.out
 
 CC = cc
+
+RM = rm -f
 
 CFLAGS = -Wall -Wextra -Werror
 
@@ -18,10 +20,10 @@ $(NAME): $(OBJECTS)
 	$(CC) $(CFLAGS) -L.. -l ft -o $(NAME) $(OBJECTS)
 
 clean:
-	rm -f $(OBJECTS)
+	$(RM) $(OBJECTS)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
