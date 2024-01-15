@@ -6,12 +6,11 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/12 20:10:51 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/15 21:39:31 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
-#include <stdio.h>
+#include "libft.h"
 #include <ctype.h>
 
 void	test_same_result(char *name, int (*mine)(int), int (*real)(int))
