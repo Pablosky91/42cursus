@@ -12,6 +12,7 @@ SOURCES =	ft_isalnum.c\
 			ft_strlen.c\
 			ft_tolower.c\
 			ft_toupper.c\
+			ft_memset.c\
 
 OBJECTS = $(SOURCES:.c=.o)
 
