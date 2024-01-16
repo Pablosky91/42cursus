@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:05:30 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/16 18:02:00 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:57:55 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	*ft_memset(void *s, int c, size_t n)
 		copy[aux] = c;
 		aux++;
 	}
-	return (s);
+	return (copy);
 }
