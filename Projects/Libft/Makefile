@@ -32,4 +32,7 @@ re: fclean all
 
 library: all clean
 
-.PHONY = all clean fclean re library
+exec: library
+	$(MAKE) -s -C ./Test exec fclean
+
+.PHONY = all clean fclean re library exec
