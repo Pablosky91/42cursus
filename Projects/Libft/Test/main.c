@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/16 19:14:23 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/18 19:23:38 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(void)
 	test_same_result("ISALNUM", isalnum, ft_isalnum);
 	test_same_result("ISASCII", isascii, ft_isascii);
 	test_same_result("ISPRINT", isprint, ft_isprint);
-	printf("\n\tLEN\n\n%s: %zu\n%s: %zu\n",
+	printf("\n\tLEN\n\n%s-> %zu\n%s-> %zu\n",
 		text1, ft_strlen(text1), empty, ft_strlen(empty));
 	printf("\n\tMEMSET\n\n%s -> ", text1);
 	printf("%s\n%s -> ", ft_memset(text1, '_', 4), empty);

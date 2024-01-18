@@ -4,15 +4,16 @@ NAME = libft.a
 
 RM = rm -f
 
-SOURCES =	ft_isalnum.c\
+SOURCES =	ft_bzero.c\
 			ft_isalpha.c\
+			ft_isalnum.c\
 			ft_isascii.c\
 			ft_isdigit.c\
 			ft_isprint.c\
+			ft_memset.c\
 			ft_strlen.c\
 			ft_tolower.c\
 			ft_toupper.c\
-			ft_memset.c\
 
 OBJECTS = $(SOURCES:.c=.o)
 
