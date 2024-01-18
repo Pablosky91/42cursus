@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/18 19:23:38 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/18 20:30:40 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	test_same_result(char *name, int (*mine)(int), int (*real)(int))
 	if (ok)
 		printf("Everyhing matches up.\n");
 }
-
+/*
 int	main(void)
 {
 	char	text1[50] = "This is a standart text";;
@@ -54,3 +54,4 @@ int	main(void)
 	printf("%s\n", ft_memset(empty, '_', 4));
 	return (0);
 }
+*/
