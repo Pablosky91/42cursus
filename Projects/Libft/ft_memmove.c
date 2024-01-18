@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/16 17:05:30 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/18 20:56:01 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/01/18 20:57:48 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/01/18 22:15:29 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t			i;
-	unsigned char	*copy;
+	void	*temp;
 
-	copy = (unsigned char *) s;
-	i = 0;
-	while (i < n)
-	{
-		copy[i] = c;
-		i++;
-	}
-	return (copy);
+	if (dst == 0 && src == 0)
+		return (dst);
+	temp = 0;
+	ft_memcpy(temp, src, len);
+	ft_memcpy(dst, temp, len);
+	return (dst);
 }

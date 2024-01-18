@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:41:31 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/18 20:54:20 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/18 22:28:03 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	unsigned char	*src_copy;
 
 
-	if (dst == '\0' && src == '\0')
+	if (dst == 0 && src == 0)
 		return (dst);
 	i = 0;
 	dst_copy = (unsigned char *) dst;
