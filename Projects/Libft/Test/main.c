@@ -6,12 +6,13 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/18 20:30:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/24 01:51:32 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <ctype.h>
+#include <string.h>
 
 void	test_same_result(char *name, int (*mine)(int), int (*real)(int))
 {
@@ -37,10 +38,10 @@ void	test_same_result(char *name, int (*mine)(int), int (*real)(int))
 	if (ok)
 		printf("Everyhing matches up.\n");
 }
-/*
+
 int	main(void)
 {
-	char	text1[50] = "This is a standart text";;
+	/*char	text1[50] = "This is a standart text";;
 	char	empty[50] = "";
 	test_same_result("ISALPHA", isalpha, ft_isalpha);
 	test_same_result("ISDIGIT", isdigit, ft_isdigit);
@@ -51,7 +52,25 @@ int	main(void)
 		text1, ft_strlen(text1), empty, ft_strlen(empty));
 	printf("\n\tMEMSET\n\n%s -> ", text1);
 	printf("%s\n%s -> ", ft_memset(text1, '_', 4), empty);
-	printf("%s\n", ft_memset(empty, '_', 4));
+	printf("%s\n", ft_memset(empty, '_', 4));*/
+/*	char	string[] = "Hello";
+	char	buffer1[50] = "Previous";
+	char	buffer2[50] = "Previous";
+	size_t	size = 0;
+
+	size_t r1 = strlcpy(buffer1, string, size);
+	size_t r2 = ft_strlcpy(buffer2, string, size);
+	printf("Copied '%s' into '%s', length %zu\n", string, buffer1, r1);
+	printf("Copied '%s' into '%s', length %zu\n", string, buffer2, r2);*/
+	
+	char	string[] = "Hello";
+	char	buffer1[50] = "Previous";
+	char	buffer2[50] = "Previous";
+	size_t	size = 13;
+	size_t r1 = strlcat(buffer1, string, size);
+	size_t r2 = ft_strlcat(buffer2, string, size);
+	printf("Copied '%s' into '%s', length %zu\n", string, buffer1, r1);
+	printf("Copied '%s' into '%s', length %zu\n", string, buffer2, r2);
+	
 	return (0);
 }
-*/
