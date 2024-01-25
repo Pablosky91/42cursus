@@ -6,9 +6,11 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 19:48:34 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/25 20:13:02 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/25 21:00:21 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 static int	is_space(char c)
 {
