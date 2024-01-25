@@ -10,10 +10,10 @@ CFLAGS = -Wall -Wextra -Werror
 SOURCES = main.c
 OBJECTS = $(SOURCES:.c=.o)
 
-INCLUDE_PATH = ..
+INCLUDE_PATH = ../Libft
 C_INCLUDE = -I $(INCLUDE_PATH)
 
-LIBRARY_PATH = ..
+LIBRARY_PATH = ../Libft
 LIBRARY_NAME = ft
 C_LIBRARY = -L $(LIBRARY_PATH) -l $(LIBRARY_NAME)
 
