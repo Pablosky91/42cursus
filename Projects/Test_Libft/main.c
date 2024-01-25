@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/25 18:49:44 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/25 19:27:01 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,18 @@ int	main(void)
 	//printf("Original -> .%s.\n", strchr("teste", 'e'));
 	//printf("Mia -> .%s.\n", ft_strchr("teste", 'e'));
 
-	char	s1[50] = "Hel\200\200o";
-	char	s2[50] = "Hel\200\222o World";
-	int		size = 6;
+	// char	s1[50] = "Hel\200\200o";
+	// char	s2[50] = "Hel\200\222o World";
+	// int		size = 6;
 
-	printf("Original -> %d\n", strncmp(s1, s2, size));
-	printf("Mia -> %d\n", ft_strncmp(s1, s2, size));
+	// printf("Original -> %d\n", strncmp(s1, s2, size));
+	// printf("Mia -> %d\n", ft_strncmp(s1, s2, size));
+
+	char	s1[50] = "";
+	char	s2[50] = "a";
+	int		size = 1;
+
+	printf("Original -> %s\n", strnstr(s1, s2, size));
+	printf("   Mia   -> %s\n", ft_strnstr(s1, s2, size));
 	return (0);
 }
