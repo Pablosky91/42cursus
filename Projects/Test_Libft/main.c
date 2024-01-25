@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/25 16:57:44 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/25 18:49:44 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,14 @@ int	main(void)
 	printf("Copied '%s' into '%s', length %zu\n", string, buffer1, r1);
 	printf("Copied '%s' into '%s', length %zu\n", string, buffer2, r2);*/
 	
-	printf("Original -> .%s.\n", strchr("teste", 'e'));
-	printf("Mia -> .%s.\n", ft_strchr("teste", 'e'));
-	
+	//printf("Original -> .%s.\n", strchr("teste", 'e'));
+	//printf("Mia -> .%s.\n", ft_strchr("teste", 'e'));
+
+	char	s1[50] = "Hel\200\200o";
+	char	s2[50] = "Hel\200\222o World";
+	int		size = 6;
+
+	printf("Original -> %d\n", strncmp(s1, s2, size));
+	printf("Mia -> %d\n", ft_strncmp(s1, s2, size));
 	return (0);
 }

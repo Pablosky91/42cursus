@@ -17,6 +17,7 @@ SOURCES =	ft_bzero.c\
 			ft_strlcpy.c\
 			ft_strlcat.c\
 			ft_strlen.c\
+			ft_strncmp.c\
 			ft_strrchr.c\
 			ft_tolower.c\
 			ft_toupper.c\
