@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:45:00 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/25 19:05:16 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:04:08 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 
+int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);
 int		ft_isalpha(int c);
 int		ft_isalnum(int c);

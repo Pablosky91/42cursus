@@ -6,13 +6,14 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/25 19:27:01 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/25 20:11:44 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
 
 void	test_same_result(char *name, int (*mine)(int), int (*real)(int))
 {
@@ -82,11 +83,16 @@ int	main(void)
 	// printf("Original -> %d\n", strncmp(s1, s2, size));
 	// printf("Mia -> %d\n", ft_strncmp(s1, s2, size));
 
-	char	s1[50] = "";
-	char	s2[50] = "a";
-	int		size = 1;
+	// char	s1[50] = "";
+	// char	s2[50] = "a";
+	// int		size = 1;
 
-	printf("Original -> %s\n", strnstr(s1, s2, size));
-	printf("   Mia   -> %s\n", ft_strnstr(s1, s2, size));
+	// printf("Original -> %s\n", strnstr(s1, s2, size));
+	// printf("   Mia   -> %s\n", ft_strnstr(s1, s2, size));
+	
+	char n[] = "  -123456789123";
+	printf("Original -> %d\n", atoi(n));
+	printf("   Mia   -> %d\n", ft_atoi(n));
+	
 	return (0);
 }
