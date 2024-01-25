@@ -30,7 +30,7 @@ OBJECTS = $(SOURCES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	ar -rcs $(NAME) $(OBJECTS)
+	ar -cr $(NAME) $(OBJECTS)
 
 clean:
 	$(RM) $(OBJECTS)
