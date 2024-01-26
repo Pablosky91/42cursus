@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/26 17:12:37 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/26 17:41:09 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/01/26 17:38:25 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/01/26 18:31:20 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size)
+char	*ft_strdup(const char *s1)
 {
-	void	*array;
+	int		i;
+	size_t	len;
+	char	*copy;
 
-	array = malloc(count * size);
-	if (!array)
+	i = 0;
+	len = ft_strlen(s1) + 1;
+	copy = malloc((len) * sizeof(char));
+	if (!copy)
 		return (0);
-	ft_bzero(array, count * size);
-	return (array);
+	ft_memmove(copy, s1, len);
+	return (copy);
 }
