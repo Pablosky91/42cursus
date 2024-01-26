@@ -6,12 +6,18 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:15:57 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/25 17:48:29 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:32:02 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+Locates the first occurrence of c (converted to a char)
+	in the string pointed to by s.
+The terminating null character is considered to be part of the string;
+	therefore if c is '\0', the functions locate the terminating '\0'.
+*/
 char	*ft_strchr(const char *s, int c)
 {
 	int		i;

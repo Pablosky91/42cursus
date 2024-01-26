@@ -6,12 +6,16 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:48:52 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/23 18:12:43 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:27:42 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+Copies up to dstsize - 1 characters from the string src to dst,
+	NUL-terminating the result if dstsize is not 0.
+*/
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
 	size_t	src_len;

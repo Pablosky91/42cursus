@@ -6,12 +6,18 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 18:04:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/25 19:31:49 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:35:57 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+Lexicographically compares the null-terminated strings s1 and s2.
+The strncmp() function compares not more than n characters.
+Because strncmp() is designed for comparing strings rather than binary data,
+	characters that appear after a '\0' character are not compared.
+*/
 int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;

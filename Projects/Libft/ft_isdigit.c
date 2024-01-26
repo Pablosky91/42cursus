@@ -6,12 +6,15 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:47:55 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/25 22:27:56 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:12:01 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+Tests for a decimal digit character.
+*/
 int	ft_isdigit(int c)
 {
 	return (c >= '0' && c <= '9');

@@ -6,12 +6,19 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 17:12:37 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/26 17:41:09 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:34:32 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+Allocates memory.
+The allocated memory is aligned such that it can be used for any data type.
+Contiguously allocates enough space for count objects that are size bytes
+	of memory each and returns a pointer to the allocated memory.
+The allocated memory is filled with bytes of value zero.
+*/
 void	*ft_calloc(size_t count, size_t size)
 {
 	void	*array;

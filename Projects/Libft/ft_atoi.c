@@ -6,11 +6,44 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 19:48:34 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/25 21:00:21 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/26 23:33:19 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static int	is_space(char c);
+static int	is_operand(char c);
+static int	is_number(char c);
+
+/*
+Converts the initial portion of the string
+	pointed to by str to int representation.
+*/
+int	ft_atoi(const char *str)
+{
+	int	i;
+	int	nbr;
+	int	sign;
+
+	i = 0;
+	nbr = 0;
+	sign = 1;
+	while (is_space(str[i]) == 1)
+		i++;
+	if (is_operand(str[i]) != 0)
+	{
+		sign *= is_operand(str[i]);
+		i++;
+	}
+	while (is_number(str[i]) != -1)
+	{
+		nbr *= 10;
+		nbr += is_number(str[i]);
+		i++;
+	}
+	return (nbr * sign);
+}
 
 static int	is_space(char c)
 {
@@ -43,29 +76,4 @@ static int	is_number(char c)
 	if (c >= '0' && c <= '9')
 		return (c - '0');
 	return (-1);
-}
-
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	nbr;
-	int	sign;
-
-	i = 0;
-	nbr = 0;
-	sign = 1;
-	while (is_space(str[i]) == 1)
-		i++;
-	if (is_operand(str[i]) != 0)
-	{
-		sign *= is_operand(str[i]);
-		i++;
-	}
-	while (is_number(str[i]) != -1)
-	{
-		nbr *= 10;
-		nbr += is_number(str[i]);
-		i++;
-	}
-	return (nbr * sign);
 }
