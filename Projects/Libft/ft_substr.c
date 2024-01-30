@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:45:22 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/26 22:55:25 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/30 23:57:20 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,20 @@ The substring begins at index ’start’ and is of maximum size ’len’.
 */
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
+	char	*sub;
+	size_t	s_len;
+	size_t	sub_len;
 
+	s_len = ft_strlen(s);
+	sub_len = len + 1;
+	if (start > s_len)
+		sub_len = 1;
+	else if (start + len > s_len)
+		sub_len = s_len - start + 1;
+	sub = ft_calloc(sub_len, sizeof(char));
+	if (!sub)
+		return (0);
+	if (start < s_len)
+		ft_strlcpy(sub, &s[start], sub_len);
+	return (sub);
 }

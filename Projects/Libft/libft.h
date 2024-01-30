@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:45:00 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/26 21:46:22 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/30 14:11:59 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <stdio.h>
+# include <stdlib.h>
 
 int		ft_atoi(const char *str);
 void	ft_bzero(void *s, size_t n);

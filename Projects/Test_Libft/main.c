@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/25 20:11:44 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/30 23:50:56 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,14 @@ int	main(void)
 	// printf("Original -> %s\n", strnstr(s1, s2, size));
 	// printf("   Mia   -> %s\n", ft_strnstr(s1, s2, size));
 	
-	char n[] = "  -123456789123";
-	printf("Original -> %d\n", atoi(n));
-	printf("   Mia   -> %d\n", ft_atoi(n));
+	// char n[] = "  -123456789123";
+	// printf("Original -> %d\n", atoi(n));
+	// printf("   Mia   -> %d\n", ft_atoi(n));
 	
+	char sub[] = "asd";
+	int start = 3;
+	int len = 1;
+	//printf("Original -> .%s.\n", substr(sub, start, len));
+	printf("   Mia   -> .%s.\n", ft_substr(sub, start, len));
 	return (0);
 }
