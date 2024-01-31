@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:45:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/31 16:40:57 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:59:03 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,37 +18,29 @@ static int	is_in_set(char const c, char const *set);
 Allocates (with malloc(3)) and returns a copy of ’s1’ with the characters
 	specified in ’set’ removed from the beginning and the end of the string.
 */
-//printf("%d--->%d_%d-->%d\n", len, i, j, join_len);
 char	*ft_strtrim(char const *s1, char const *set)
 {
 	size_t	len;
-	int		i;
-	int		j;
+	size_t	first;
+	size_t	last;
 	size_t	join_len;
 	char	*trim;
 
 	if (!s1 || !set)
 		return (0);
-//	printf("start\n");
 	len = ft_strlen(s1);
-	i = 0;
-	while (is_in_set(s1[i], set))
-		i++;
-	j = len - 1;
-	while (is_in_set(s1[j], set) && j > i)
-	{
-//		printf("j--");
-		j--;
-	}
-	join_len = 1;
-	if (i <= j)
-		join_len = j - i + 2;
-	printf("%d--->%d_%d-->%d\n", len, i, j, join_len);
-	trim = ft_calloc(join_len, sizeof(char));
+	first = 0;
+	while (is_in_set(s1[first], set))
+		first++;
+	last = len - 1;
+	while (is_in_set(s1[last], set) && last > first)
+		last--;
+	join_len = 0;
+	if (first <= last)
+		join_len = last - first + 1;
+	trim = ft_substr(s1, first, join_len);
 	if (!trim)
 		return (0);
-	if (join_len > 1)
-		trim = ft_substr(s1, i, join_len - 1);
 	return (trim);
 }
 

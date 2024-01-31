@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/31 16:42:20 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/01/31 17:37:32 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,14 +94,14 @@ int	main(void)
 	// printf("Original -> %d\n", atoi(n));
 	// printf("   Mia   -> %d\n", ft_atoi(n));
 	
-	// char sub[] = "asd";
-	// int start = 3;
-	// int len = 1;
+	/*char sub[] = "asd";
+	int start = 2;
+	int len = 0;
 	//printf("Original -> .%s.\n", substr(sub, start, len));
-	//printf("   Mia   -> .%s.\n", ft_substr(sub, start, len));
-	
-	char *trim = "1232";
-	char *set = "123";
-	printf("Word: %s, Set: %s\nTrim:_%s_", trim, set, ft_strtrim(trim, set));
+	printf("   Mia   -> .%s.\n", ft_substr(sub, start, len));
+	*/
+	char *trim = 0;
+	char *set = " \n\t";
+	printf("Word: _%s_, Set: _%s_\nTrim:_%s_", trim, set, ft_strtrim(trim, set));
 	return (0);
 }
