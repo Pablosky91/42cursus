@@ -6,12 +6,13 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:45:17 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/01 15:23:31 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/01 16:12:14 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+static void		copy_words(char **words, char const *s, char c);
 static size_t	count_words(char const *s, char c);
 
 /*
@@ -21,10 +22,45 @@ The array must end with a NULL pointer.
 */
 char	**ft_split(char const *s, char c)
 {
-	printf("Frase: _%s_\nSeparador: _%c_\nPalabras: %zu", s, c, count_words(s, c));
-	return (0);
+	char	**words;
+
+	words = ft_calloc(count_words(s, c) + 1, sizeof(char*));
+	if (!words)
+		return (0);
+	copy_words(words, s, c);
+	return (words);
 }
 
+static void	copy_words(char **words, char const *s, char c)
+{
+	size_t	start_word;
+	size_t	word_len;
+	size_t	i;
+	size_t	num_word;	
+
+	start_word = 0;
+	word_len = 0;
+	i = 0;
+	num_word = 0;
+	while (i <= ft_strlen(s))
+	{
+		if ((s[i] == c || s[i] == '\0') && word_len != 0)
+		{
+			words[num_word] = ft_substr(s, start_word, word_len);
+			word_len = 0;
+			num_word++;
+		}
+		else if (s[i] != c)
+		{
+			if (word_len == 0)
+				start_word = i;
+			word_len++;
+		}
+		i++;
+	}
+}
+
+//printf("Frase: _%s_\nSeparador: _%c_\nPalabras: %zu", s, c, count_words(s, c));
 static size_t	count_words(char const *s, char c)
 {
 	size_t	count;
