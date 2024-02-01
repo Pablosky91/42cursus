@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/01 18:00:57 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:05:54 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,15 @@ int	main(void)
 	printf("Word: _%s_, Set: _%s_\nTrim:_%s_", trim, set, ft_strtrim(trim, set));*/
 
 	//printf("Frase: _%s_\nSeparador: _%c_\nPalabras: %zu", s, c, count_words(s, c));
-	char **words = ft_split("\t\t\t\thello!\t\t\t\t", 9);
+	/*char **words = ft_split("\t\t\t\thello!\t\t\t\t", 9);
 	int i = 0;
 	printf("Split:\n");
 	while (words[i] != 0)
 	{
 		printf("_%s_\n", words[i]);
 		i++;
-	}
+	}*/
+
+	//printf("%s", ft_itoa(0));
 	return (0);
 }
