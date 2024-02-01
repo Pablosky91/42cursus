@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:45:13 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/26 23:03:15 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/01 19:13:35 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,5 @@ Outputs the character ’c’ to the given file descriptor.
 */
 void	ft_putchar_fd(char c, int fd)
 {
-
+	write(fd, &c, 1);
 }
