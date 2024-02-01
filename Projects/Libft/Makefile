@@ -4,6 +4,10 @@ NAME = libft.a
 
 RM = rm -f
 
+AR = ar
+
+AR_FLAGS = -cr
+
 SOURCES =	ft_atoi.c\
 			ft_bzero.c\
 			ft_calloc.c\
@@ -46,7 +50,7 @@ OBJECTS = $(SOURCES:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
-	ar -cr $(NAME) $(OBJECTS)
+	$(AR) $(AR_FLAGS) $(NAME) $(OBJECTS)
 
 clean:
 	$(RM) $(OBJECTS)
@@ -58,7 +62,8 @@ re: fclean all
 
 library: all clean
 
-exec: library
+exec: re
 	$(MAKE) -s -C ../Test_Libft exec fclean
+	$(MAKE) fclean
 
 .PHONY = all clean fclean re library exec
