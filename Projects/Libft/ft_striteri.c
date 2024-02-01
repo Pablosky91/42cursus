@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:45:18 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/26 23:02:46 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/01 20:26:13 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,12 @@ Each character is passed by address to ’f’ to be modified if necessary.
 */
 void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
+	unsigned int	i;
 
+	i = 0;
+	while (s[i] != '\0')
+	{
+		f(i, &s[i]);
+		i++;
+	}
 }
