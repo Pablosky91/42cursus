@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/01 15:27:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/01 17:28:24 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,13 @@ int	main(void)
 	char *set = " \n\t";
 	printf("Word: _%s_, Set: _%s_\nTrim:_%s_", trim, set, ft_strtrim(trim, set));*/
 
-	ft_split("  Hola   Mundo  ", ' ');
+	char **words = ft_split("\t\t\t\thello!\t\t\t\t", 9);
+	int i = 0;
+	printf("Split:\n");
+	while (words[i] != 0)
+	{
+		printf("_%s_\n", words[i]);
+		i++;
+	}
 	return (0);
 }
