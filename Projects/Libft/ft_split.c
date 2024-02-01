@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:45:17 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/01 16:12:14 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/01 18:01:31 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	**ft_split(char const *s, char c)
 {
 	char	**words;
 
-	words = ft_calloc(count_words(s, c) + 1, sizeof(char*));
+	words = ft_calloc(count_words(s, c) + 1, sizeof(char *));
 	if (!words)
 		return (0);
 	copy_words(words, s, c);
@@ -60,7 +60,6 @@ static void	copy_words(char **words, char const *s, char c)
 	}
 }
 
-//printf("Frase: _%s_\nSeparador: _%c_\nPalabras: %zu", s, c, count_words(s, c));
 static size_t	count_words(char const *s, char c)
 {
 	size_t	count;
