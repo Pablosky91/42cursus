@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/31 17:37:32 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/01 15:27:24 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,10 @@ int	main(void)
 	//printf("Original -> .%s.\n", substr(sub, start, len));
 	printf("   Mia   -> .%s.\n", ft_substr(sub, start, len));
 	*/
-	char *trim = 0;
+	/*char *trim = 0;
 	char *set = " \n\t";
-	printf("Word: _%s_, Set: _%s_\nTrim:_%s_", trim, set, ft_strtrim(trim, set));
+	printf("Word: _%s_, Set: _%s_\nTrim:_%s_", trim, set, ft_strtrim(trim, set));*/
+
+	ft_split("  Hola   Mundo  ", ' ');
 	return (0);
 }
