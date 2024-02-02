@@ -6,13 +6,14 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:45:17 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/01 19:07:38 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:12:13 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void		copy_words(char **words, char const *s, char c);
+static char		**free_all(char **words, size_t count);
+static char		**copy_words(char **words, char const *s, char c);
 static size_t	count_words(char const *s, char c);
 
 /*
@@ -27,11 +28,25 @@ char	**ft_split(char const *s, char c)
 	words = ft_calloc(count_words(s, c) + 1, sizeof(char *));
 	if (!words)
 		return (0);
-	copy_words(words, s, c);
+	words = copy_words(words, s, c);
 	return (words);
 }
 
-static void	copy_words(char **words, char const *s, char c)
+static char	**free_all(char **words, size_t count)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < count)
+	{
+		free(words[i]);
+		i++;
+	}
+	free(words);
+	return (0);
+}
+
+static char	**copy_words(char **words, char const *s, char c)
 {
 	size_t	start_word;
 	size_t	word_len;
@@ -47,17 +62,17 @@ static void	copy_words(char **words, char const *s, char c)
 		if ((s[i] == c || s[i] == '\0') && word_len != 0)
 		{
 			words[num_word] = ft_substr(s, start_word, word_len);
+			if (!words[num_word])
+				return (free_all(words, num_word));
 			word_len = 0;
 			num_word++;
 		}
 		else if (s[i] != c)
-		{
-			if (word_len == 0)
+			if (word_len++ == 0)
 				start_word = i;
-			word_len++;
-		}
 		i++;
 	}
+	return (words);
 }
 
 static size_t	count_words(char const *s, char c)
