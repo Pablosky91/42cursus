@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:16:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/26 23:31:41 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:53:44 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ It is identical to strchr(), except it locates the last occurrence of c.
 */
 char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	size_t	i;
 
 	i = ft_strlen(s);
 	while (i >= 0)

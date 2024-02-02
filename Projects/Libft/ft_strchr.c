@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:15:57 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/26 23:32:02 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/02 16:52:49 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ The terminating null character is considered to be part of the string;
 */
 char	*ft_strchr(const char *s, int c)
 {
-	int		i;
+	size_t	i;
 	size_t	len;
 
 	i = 0;
