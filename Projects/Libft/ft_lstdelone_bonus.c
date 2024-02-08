@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:32:48 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/02 21:33:58 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:18:58 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ The memory of ’next’ must not be freed.
 */
 void	ft_lstdelone(t_list *lst, void (*del)(void*))
 {
-	return (0);
+	del(lst->content);
+	free(lst);
 }
