@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:38:20 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/08 20:13:34 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:03:26 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 	t_list	*new_list;
 	t_list	*node;
 
-	if (!lst || !f || !del)
-		return (0);
 	new_list = 0;
 	while (lst)
 	{

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:15:57 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/02 16:52:49 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:26:32 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ char	*ft_strchr(const char *s, int c)
 	len = ft_strlen(s);
 	while (i <= len)
 	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
+		if (s[i] == (char) c)
+			return ((char *) &s[i]);
 		i++;
 	}
 	return (0);

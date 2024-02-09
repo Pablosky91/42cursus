@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 20:56:30 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/26 23:15:23 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:18:27 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_memcmp(const void *s1, const void *s2, size_t n)
 	unsigned char	*s1_copy;
 	unsigned char	*s2_copy;
 
-	if (n == 0)
+	if (!n)
 		return (0);
 	i = 0;
 	s1_copy = (unsigned char *) s1;

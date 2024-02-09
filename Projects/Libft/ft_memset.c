@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 17:05:30 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/26 23:23:22 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:24:27 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	*ft_memset(void *s, int c, size_t n)
 	size_t			i;
 	unsigned char	*copy;
 
-	copy = (unsigned char *) s;
 	i = 0;
+	copy = (unsigned char *) s;
 	while (i < n)
 	{
 		copy[i] = c;

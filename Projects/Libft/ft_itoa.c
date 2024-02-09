@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:45:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/01 19:01:56 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:14:43 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,8 @@ static void	save_number(char *number, int n, int len)
 static int	nbrlen(int n)
 {
 	int	len;
-	int	i;
 
 	len = 1;
-	i = 0;
 	if (n < 0)
 		len++;
 	while (n >= 10 || n <= -10)

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 20:56:28 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/26 23:13:16 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:17:08 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	copy = (unsigned char *) s;
 	while (i < n)
 	{
-		if (copy[i] == (unsigned char)c)
-			return ((unsigned char *)&copy[i]);
+		if (copy[i] == (unsigned char) c)
+			return ((unsigned char *) &copy[i]);
 		i++;
 	}
 	return (0);

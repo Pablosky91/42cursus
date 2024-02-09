@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 18:59:51 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/26 23:31:07 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:28:18 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 	size_t	j;
 
 	if (needle[0] == '\0')
-		return ((char *)haystack);
+		return ((char *) haystack);
 	i = 0;
 	while (haystack[i] != '\0' && i < len)
 	{
@@ -32,7 +32,7 @@ char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 			&& needle[j] != '\0' && i + j < len)
 			j++;
 		if (needle[j] == '\0')
-			return ((char *)&haystack[i]);
+			return ((char *) &haystack[i]);
 		i++;
 	}
 	return (0);

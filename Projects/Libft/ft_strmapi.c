@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:45:20 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/01 20:35:47 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:27:56 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	i = 0;
 	while (s[i] != '\0')
 	{
-		copy[i] = (char)f(i, s[i]);
+		copy[i] = (char) f(i, s[i]);
 		i++;
 	}
 	return (copy);
