@@ -79,7 +79,4 @@ bonus: $(NAME) $(BONUS_OBJECTS)
 
 library: bonus clean
 
-exec: library
-	$(MAKE) -s -C ../Test_Libft exec fclean
-
-.PHONY = all clean fclean re bonus library exec
+.PHONY = all clean fclean re bonus library

@@ -35,8 +35,13 @@ fclean: clean
 
 re: fclean all
 
-exec: all
+library:
+	@$(MAKE) -C ../Libft library
+
+exec: library all
 	@clear
 	@./$(NAME)
+	@$(MAKE) -s fclean
+	@$(MAKE) -s -C ../Libft fclean
 
-.PHONY = all clean fclean re exec
+.PHONY = all clean fclean re library exec
