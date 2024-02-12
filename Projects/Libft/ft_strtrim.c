@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:45:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/01/31 17:59:03 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:51:12 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	is_in_set(char const c, char const *set)
 	size_t	i;
 
 	i = 0;
-	while (set[i] != '\0')
+	while (set[i])
 	{
 		if (c == set[i])
 			return (1);

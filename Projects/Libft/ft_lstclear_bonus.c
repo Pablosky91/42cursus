@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:34:52 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/08 18:35:55 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:28:21 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ void	ft_lstclear(t_list **lst, void (*del)(void *))
 	*lst = 0;
 }
 
-static void	lstdel_recursive(t_list *lst, void (*del)(void *))
+static void	lstdel_recursive(t_list *node, void (*del)(void *))
 {
-	if (!lst)
+	if (!node)
 		return ;
-	lstdel_recursive(lst->next, del);
-	ft_lstdelone(lst, del);
+	lstdel_recursive(node->next, del);
+	ft_lstdelone(node, del);
 }

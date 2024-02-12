@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/26 21:45:17 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/02 16:12:13 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:55:21 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	**copy_words(char **words, char const *s, char c)
 	num_word = 0;
 	while (i <= ft_strlen(s))
 	{
-		if ((s[i] == c || s[i] == '\0') && word_len != 0)
+		if ((s[i] == c || !s[i]) && word_len)
 		{
 			words[num_word] = ft_substr(s, start_word, word_len);
 			if (!words[num_word])
@@ -68,7 +68,7 @@ static char	**copy_words(char **words, char const *s, char c)
 			num_word++;
 		}
 		else if (s[i] != c)
-			if (word_len++ == 0)
+			if (!word_len++)
 				start_word = i;
 		i++;
 	}
@@ -84,7 +84,7 @@ static size_t	count_words(char const *s, char c)
 	count = 0;
 	is_start_word = 1;
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i])
 	{
 		if (s[i] == c && !is_start_word)
 			is_start_word = 1;

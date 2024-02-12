@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/09 17:46:05 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/12 19:51:18 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	main(void)
 	/*char **words = ft_split("\t\t\t\thello!\t\t\t\t", 9);
 	int i = 0;
 	printf("Split:\n");
-	while (words[i] != 0)
+	while (words[i])
 	{
 		printf("_%s_\n", words[i]);
 		i++;
