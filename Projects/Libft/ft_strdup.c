@@ -19,11 +19,9 @@ The pointer may subsequently be used as an argument to the function free(3).
 */
 char	*ft_strdup(const char *s1)
 {
-	int		i;
 	size_t	len;
 	char	*copy;
 
-	i = 0;
 	len = ft_strlen(s1) + 1;
 	copy = malloc((len) * sizeof(char));
 	if (!copy)
