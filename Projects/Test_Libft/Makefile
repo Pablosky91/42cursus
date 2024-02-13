@@ -25,7 +25,7 @@ $(NAME): $(OBJECTS)
 	$(CC) $(CFLAGS) $(C_INCLUDE) $(C_LIBRARY) -o $@ $^ 
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(C_INCLUDE) -c -o $@ $^
+	$(CC) $(CFLAGS) $(C_INCLUDE) -o $@ -c $^
 
 clean:
 	$(RM) $(OBJECTS)

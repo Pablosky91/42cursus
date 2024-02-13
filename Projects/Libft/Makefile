@@ -66,6 +66,9 @@ all: $(NAME)
 $(NAME): $(OBJECTS)
 	$(AR) $(AR_FLAGS) $(NAME) $(OBJECTS)
 
+%.o: %.c
+	$(CC) $(CFLAGS) -o $@ -c $^
+
 clean:
 	$(RM) $(OBJECTS) $(BONUS_OBJECTS)
 
@@ -74,9 +77,9 @@ fclean: clean
 
 re: fclean all
 
-bonus: $(NAME) $(BONUS_OBJECTS)
+bonus: $(BONUS_OBJECTS)
 	$(AR) $(AR_FLAGS) $(NAME) $(BONUS_OBJECTS)
 
-library: bonus clean
+library: all bonus clean
 
 .PHONY = all clean fclean re bonus library
