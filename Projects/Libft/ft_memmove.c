@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 20:57:48 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/09 17:23:30 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/16 22:28:02 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,18 @@ The two strings may overlap;
 */
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t	i;
+	size_t			i;
+	unsigned char	*dst_copy;
+	unsigned char	*src_copy;
 
-	i = 0;
 	if (dst <= src)
 		return (ft_memcpy(dst, src, len));
-	while (i < len)
+	i = 1;
+	dst_copy = (unsigned char *) dst;
+	src_copy = (unsigned char *) src;
+	while (i <= len)
 	{
-		ft_memcpy(&dst[len - i - 1], &src[len - i - 1], 1);
+		ft_memcpy(&dst_copy[len - i], &src_copy[len - i], 1);
 		i++;
 	}
 	return (dst);

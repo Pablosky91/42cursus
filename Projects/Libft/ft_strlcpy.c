@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 16:48:52 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/12 19:48:58 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/16 22:28:30 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 	else if (dstsize)
 	{
 		ft_memmove(dst, src, dstsize - 1);
-		ft_memset(&dst[dstsize - 1], '\0', 1);
+		ft_memset(&dst[dstsize - 1], 0, 1);
 	}
 	return (src_len);
 }
