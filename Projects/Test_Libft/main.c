@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 19:38:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/12 19:51:18 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/17 20:33:13 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,28 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdio.h>
+
+void print_node(void *node)
+{
+	printf("%s\n", (char *) node);
+}
+
+void	lists()
+{
+	t_list *list = 0;
+	char *str1 = ft_strdup("azul");
+	char *str2 = ft_strdup("rojo");
+	char *str3 = ft_strdup("verde");
+	t_list *node1 = ft_lstnew(str1);
+	t_list *node2 = ft_lstnew(str2);
+	t_list *node3 = ft_lstnew(str3);
+
+	ft_lstadd_front(&list, node1);
+	ft_lstadd_back(&list, node2);
+	ft_lstadd_front(&list, node3);
+	
+	ft_lstiter(list, print_node);
+}
 
 void	test_same_result(char *name, int (*mine)(int), int (*real)(int))
 {
@@ -54,6 +76,9 @@ int	main(void)
 	printf("\n\tMEMSET\n\n%s -> ", text1);
 	printf("%s\n%s -> ", ft_memset(text1, '_', 4), empty);
 	printf("%s\n", ft_memset(empty, '_', 4));*/
+	/*char str[] = "9223372036854775807";
+	printf("%d\n",	atoi(str));
+	printf("%d\n",	ft_atoi(str));*/
 /*	char	string[] = "Hello";
 	char	buffer1[50] = "Previous";
 	char	buffer2[50] = "Previous";
@@ -115,5 +140,6 @@ int	main(void)
 	}*/
 
 	//printf("%s", ft_itoa(0));
+	lists();
 	return (0);
 }
