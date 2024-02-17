@@ -6,11 +6,12 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 19:48:34 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/09 17:05:01 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/17 20:33:42 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 static int	is_space(char c);
 static int	is_operand(char c);
@@ -22,12 +23,14 @@ Converts the initial portion of the string
 */
 int	ft_atoi(const char *str)
 {
-	int	i;
-	int	nbr;
-	int	sign;
+	int				i;
+	long long int	nbr;
+	long long int	cpy;
+	int				sign;
 
 	i = 0;
 	nbr = 0;
+	cpy = 0;
 	sign = 1;
 	while (is_space(str[i]))
 		i++;
@@ -38,8 +41,10 @@ int	ft_atoi(const char *str)
 	}
 	while (is_number(str[i]) != -1)
 	{
-		nbr *= 10;
-		nbr += is_number(str[i]);
+		nbr = nbr * 10 + is_number(str[i]);
+		if (cpy > nbr)
+			return (((sign * -1) - 1) / 2);
+		cpy = nbr;
 		i++;
 	}
 	return (nbr * sign);
@@ -47,17 +52,12 @@ int	ft_atoi(const char *str)
 
 static int	is_space(char c)
 {
-	if (c == ' ')
-		return (1);
-	if (c == '\t')
-		return (1);
-	if (c == '\n')
-		return (1);
-	if (c == '\v')
-		return (1);
-	if (c == '\f')
-		return (1);
-	if (c == '\r')
+	if (c == ' '
+		|| c == '\t'
+		|| c == '\n'
+		|| c == '\v'
+		|| c == '\f'
+		|| c == '\r')
 		return (1);
 	return (0);
 }
