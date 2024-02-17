@@ -59,8 +59,11 @@ OBJECTS = $(SOURCES:.c=.o)
 
 BONUS_OBJECTS = $(BONUS_SOURCES:.c=.o)
 
+BONUS = .bonus
+
 #RULES
 
+a: all
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
@@ -69,17 +72,26 @@ $(NAME): $(OBJECTS)
 %.o: %.c
 	$(CC) $(CFLAGS) -o $@ -c $^
 
+c: clean
 clean:
-	$(RM) $(OBJECTS) $(BONUS_OBJECTS)
+	$(RM) $(OBJECTS) $(BONUS_OBJECTS) $(BONUS)
 
+f: fclean
 fclean: clean
 	$(RM) $(NAME)
 
 re: fclean all
 
-bonus: $(BONUS_OBJECTS)
+b: bonus
+bonus: $(BONUS)
+$(BONUS): $(BONUS_OBJECTS)
+	touch $(BONUS)
 	$(AR) $(AR_FLAGS) $(NAME) $(BONUS_OBJECTS)
 
+l: library
 library: all bonus clean
 
-.PHONY = all clean fclean re bonus library
+t:
+	ar -t libft.a
+
+.PHONY: all clean fclean re bonus library a b c f l t
