@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:34:52 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/12 19:28:21 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:24:38 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ Finally, the pointer to the list must be set to NULL.
 */
 void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
+	if (!lst || !del)
+		return ;
 	lstdel_recursive(*lst, del);
 	*lst = 0;
 }

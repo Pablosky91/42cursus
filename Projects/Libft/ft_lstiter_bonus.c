@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 21:36:19 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/08 18:40:42 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/21 14:26:56 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ Iterates the list ’lst’ and applies the function ’f’
 */
 void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
+	if (!lst || !f)
+		return ;
 	while (lst)
 	{
 		f(lst->content);
