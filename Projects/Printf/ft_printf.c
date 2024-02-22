@@ -14,18 +14,45 @@
 #include <stdio.h>
 #include "libft.h"
 
+int	print(char c)
+{
+	ft_putchar_fd(c, 1); //TODO define fd
+	return (1);
+}
+
+int	print_flag(char flag, va_list args)
+{
+	if (flag == 'c')
+		print(va_arg(args, int));
+	if (flag == 's')
+		print('s');
+	if (flag == 'p')
+		print('p');
+	if (flag == 'd' || flag == 'i')
+		print('d');
+	if (flag == 'u')
+		print('u');
+	if (flag == 'x')
+		print('x');
+	if (flag == 'X')
+		print('X');
+	if (flag == '%')
+		print('%');
+	return (1000);
+}
+
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
-	size_t	i;
-	size_t	written_chars;
+	int		i;
+	int		written_chars;
 
 	i = 0;
 	written_chars = 0;
 	va_start(args, format);
 	while (format[i])
 	{
-		if (format[i] == "%")
+		if (format[i] == '%')
 		{
 			i++;
 			written_chars += print_flag(format[i], args);
