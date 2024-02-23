@@ -15,6 +15,7 @@ LIBRARY_NAME = $(INCLUDE_PATH)/libft.a
 
 SOURCES =	ft_print_string.c\
 			ft_print.c\
+			ft_print_char.c\
 			ft_print_flag.c\
 			ft_printf.c\
 
