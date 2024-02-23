@@ -1,7 +1,6 @@
 #VARIABLES
 
 NAME = libftprintf.a
-LIBRARY_NAME = libft.a
 
 RM = rm -f
 
@@ -12,41 +11,37 @@ AR = ar
 AR_FLAGS = -r
 
 INCLUDE_PATH = libft
-C_INCLUDE = -I $(INCLUDE_PATH)
+LIBRARY_NAME = $(INCLUDE_PATH)/libft.a
 
-SOURCES = ft_printf.c
-
-BONUS_SOURCES =	\
+SOURCES =	ft_print_string.c\
+			ft_print.c\
+			ft_print_flag.c\
+			ft_printf.c\
 
 OBJECTS = $(SOURCES:.c=.o)
-
-BONUS_OBJECTS = $(BONUS_SOURCES:.c=.o)
 
 #RULES
 
 all: $(NAME)
 
 $(NAME): $(LIBRARY_NAME) $(OBJECTS)
-	cp $(INCLUDE_PATH)/$(LIBRARY_NAME) $(NAME)
+	cp $(LIBRARY_NAME) $(NAME)
 	$(AR) $(AR_FLAGS) $(NAME) $(OBJECTS)
 
+$(LIBRARY_NAME):
+	@$(MAKE) -C $(INCLUDE_PATH) all
+
 %.o: %.c
-	$(CC) $(CFLAGS) $(C_INCLUDE) -o $@ -c $^
+	$(CC) $(CFLAGS) -o $@ -c $^
 
 clean:
-	$(RM) $(OBJECTS) $(BONUS_OBJECTS)
+	$(RM) $(OBJECTS)
+	@$(MAKE) -C $(INCLUDE_PATH) clean
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:
+	$(RM) $(NAME) $(OBJECTS)
+	@$(MAKE) -C $(INCLUDE_PATH) fclean
 
 re: fclean all
 
-$(LIBRARY_NAME):
-	@$(MAKE) -C $(INCLUDE_PATH) library
-
-exec: all
-	@clear
-	@./$(NAME)
-	@$(MAKE) -s fclean
-
-.PHONY = all clean fclean re exec
+.PHONY: all clean fclean re

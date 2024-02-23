@@ -11,7 +11,7 @@ CFLAGS = -Wall -Wextra -Werror
 SOURCES = main.c
 OBJECTS = $(SOURCES:.c=.o)
 
-INCLUDE_PATH = $(OTHER_PATH)/libft
+INCLUDE_PATH = $(OTHER_PATH)
 C_INCLUDE = -I $(INCLUDE_PATH)
 
 LIBRARY_PATH = $(OTHER_PATH)
@@ -30,9 +30,11 @@ $(NAME): $(OBJECTS)
 
 clean:
 	$(RM) $(OBJECTS)
+	@$(MAKE) -C $(OTHER_PATH) clean
 
 fclean: clean
 	$(RM) $(NAME)
+	@$(MAKE) -C $(OTHER_PATH) fclean
 
 re: fclean all
 
@@ -42,7 +44,7 @@ library:
 exec: library all
 	@clear
 	@./$(NAME)
-	@$(MAKE) -s fclean
-	@$(MAKE) -s -C $(OTHER_PATH) fclean
+#	@$(MAKE) -s fclean
+#	@$(MAKE) -s -C $(OTHER_PATH) fclean
 
-.PHONY = all clean fclean re library exec
+.PHONY: all clean fclean re library exec

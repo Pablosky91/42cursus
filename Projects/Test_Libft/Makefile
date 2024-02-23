@@ -44,4 +44,4 @@ exec: library all
 	@$(MAKE) -s fclean
 	@$(MAKE) -s -C ../Libft fclean
 
-.PHONY = all clean fclean re library exec
+.PHONY: all clean fclean re library exec
