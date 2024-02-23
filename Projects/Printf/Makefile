@@ -13,11 +13,15 @@ AR_FLAGS = -r
 INCLUDE_PATH = libft
 LIBRARY_NAME = $(INCLUDE_PATH)/libft.a
 
-SOURCES =	ft_print_string.c\
-			ft_print.c\
-			ft_print_char.c\
+SOURCES =	ft_print_char.c\
 			ft_print_flag.c\
-			ft_printf.c\
+			ft_print_hexadecimal.c\
+			ft_print_int.c\
+			ft_print_pointer.c\
+			ft_print_string.c\
+			ft_print_unsigned_int.c\
+			ft_print.c\
+			ft_printf.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
