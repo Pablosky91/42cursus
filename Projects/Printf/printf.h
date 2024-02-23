@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   printf.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:12:24 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/23 18:50:43 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/02/23 18:14:16 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/02/23 18:51:02 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#ifndef PRINTF_H
+# define PRINTF_H
 
-int	ft_printf(const char *format, ...)
-{
-	va_list	args;
-	int		i;
-	int		written_chars;
+# include "libft/libft.h"
+#include <stdarg.h>
 
-	i = 0;
-	written_chars = 0;
-	va_start(args, format);
-	while (format[i])
-	{
-		if (format[i] == '%')
-		{
-			i++;
-			written_chars += ft_print_flag(format[i], args);
-		}
-		else
-			written_chars += ft_print(format[i]);
-		i++;
-	}
-	va_end(args);
-	return (written_chars);
-}
+int ft_print_string(char *str);
+int	ft_print(char c);
+int	ft_print_flag(char flag, va_list args);
+int	ft_printf(const char *format, ...);
+
+#endif
