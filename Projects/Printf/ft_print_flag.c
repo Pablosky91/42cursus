@@ -6,29 +6,29 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:50:23 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/23 19:04:50 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/24 00:23:27 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "printf.h"
+#include "ft_printf.h"
 
-int	 	ft_print_flag(char flag, va_list args)
+int	ft_print_flag(char flag, va_list args)
 {
 	if (flag == 'c')
-		ft_print(va_arg(args, int));
+		return (ft_print_char(va_arg(args, int)));
 	if (flag == 's')
-		ft_print_string(va_arg(args, char *));
+		return (ft_print_string(va_arg(args, char *)));
 	if (flag == 'p')
-		ft_print('p');
+		return (ft_print_pointer(va_arg(args, void *)));
 	if (flag == 'd' || flag == 'i')
-		ft_print('d');
+		return (ft_print_int(va_arg(args, int)));
 	if (flag == 'u')
-		ft_print('u');
+		return (ft_print_unsigned_int(va_arg(args, unsigned int)));
 	if (flag == 'x')
-		ft_print('x');
+		return (ft_print_hexadecimal(va_arg(args, unsigned int), IS_LOWER));
 	if (flag == 'X')
-		ft_print('X');
+		return (ft_print_hexadecimal(va_arg(args, unsigned int), IS_UPPER));
 	if (flag == '%')
-		ft_print('%');
-	return (1000);
+		return (ft_print_char(PRINTF_SPECIFIER));
+	return (0);
 }
