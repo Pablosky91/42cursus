@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:34:17 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/23 23:52:57 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/27 23:39:25 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	ft_print(char c)
 {
-	ft_putchar_fd(c, STDOUT);
+	write(STDOUT, &c, 1);
 	return (1);
 }
