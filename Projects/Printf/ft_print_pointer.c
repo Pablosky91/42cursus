@@ -6,14 +6,18 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:10:22 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/24 00:21:35 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/27 14:12:52 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_pointer(void *p)
+int	ft_print_pointer(size_t p)
 {
-	(void) p;
-	return (-1000);
+	int	count;
+
+	count = 0;
+	count += ft_print_string("0x");
+	count += ft_print_hexadecimal(p, HEX_LOWER);
+	return (count);
 }
