@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:14:16 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/28 02:42:45 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/28 02:47:16 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@
 
 int	ft_print_char(char c);
 int	ft_print_flag(char flag, va_list args);
-int	ft_print_hexadecimal(size_t hex, char *letter_case);
+int	ft_print_hexadecimal(long hex, char *letter_case);
 int	ft_print_int(int nbr);
-int	ft_print_pointer(size_t p);
+int	ft_print_pointer(long p);
 int	ft_print_string(char *str);
 int	ft_print_unsigned_int(unsigned int nbr);
 int	ft_print(char c);
