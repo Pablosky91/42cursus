@@ -6,14 +6,14 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:07:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/28 02:34:08 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/28 03:07:59 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdio.h>
 
-int	ft_print_hexadecimal(long hex, char *hex_case)
+int	ft_print_hexadecimal(size_t hex, char *hex_case)
 {
 	int	count;
 

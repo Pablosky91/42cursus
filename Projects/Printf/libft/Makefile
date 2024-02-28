@@ -27,7 +27,7 @@ SOURCES =		ft_atoi.c\
 				ft_lstlast.c\
 				ft_lstmap.c\
 				ft_lstnew.c\
-				ft_lstsize.c
+				ft_lstsize.c\
 				ft_memchr.c\
 				ft_memcmp.c\
 				ft_memcpy.c\
@@ -52,7 +52,7 @@ SOURCES =		ft_atoi.c\
 				ft_strtrim.c\
 				ft_substr.c\
 				ft_tolower.c\
-				ft_toupper.c\
+				ft_toupper.c
 
 OBJECTS = $(SOURCES:.c=.o)
 

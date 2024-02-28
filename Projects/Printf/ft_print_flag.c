@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:50:23 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/28 02:08:43 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/28 03:08:23 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_print_flag(char flag, va_list args)
 	else if (flag == 's')
 		return (ft_print_string(va_arg(args, char *)));
 	else if (flag == 'p')
-		return (ft_print_pointer(va_arg(args, long)));
+		return (ft_print_pointer(va_arg(args, size_t)));
 	else if (flag == 'd' || flag == 'i')
 		return (ft_print_int(va_arg(args, int)));
 	else if (flag == 'u')
