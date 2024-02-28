@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:44:11 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/24 00:24:49 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/02/28 02:38:27 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ int	main(void)
 	printf("%d %d\n\n", orig, mine);
 	////////////////////////////////////
 	format = ft_strdup("Address: %p\n");
-	orig = printf(format, (void *)&i);
-	mine = ft_printf(format, (void *)&i);
+	orig = printf(format, &i);
+	mine = ft_printf(format, &i);
 	printf("%d %d\n\n", orig, mine);
 	////////////////////////////////////
 	format = ft_strdup("Decimal integer: %d\n");
@@ -67,10 +67,8 @@ int	main(void)
 	mine = ft_printf(format, u);
 	printf("%d %d\n\n", orig, mine);
 	////////////////////////////////////
-	format = ft_strdup("Percent sign: %%\n");
-	orig = printf("%s", format);
-	mine = ft_printf("%s", format);
+	orig = printf("%%\n");
+	mine = ft_printf("%%\n");
 	printf("%d %d\n\n", orig, mine);
-
 	return (0);
 }
