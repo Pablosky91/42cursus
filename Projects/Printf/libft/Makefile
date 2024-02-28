@@ -8,7 +8,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 AR = ar
-AR_FLAGS = -r
+AR_FLAGS = -cr
 
 SOURCES =		ft_atoi.c\
 				ft_bzero.c\

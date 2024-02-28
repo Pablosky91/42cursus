@@ -8,7 +8,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 AR = ar
-AR_FLAGS = -r
+AR_FLAGS = -cr
 
 INCLUDE_PATH = libft
 LIBRARY_NAME = $(INCLUDE_PATH)/libft.a
