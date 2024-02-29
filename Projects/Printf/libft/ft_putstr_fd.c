@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:12:24 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/24 00:01:20 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/01/26 21:45:16 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/02/12 19:46:18 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+/*
+Outputs the string ’s’ to the given file descriptor.
+*/
+void	ft_putstr_fd(char *s, int fd)
 {
-	va_list	args;
-	int		i;
-	int		written_chars;
+	int	i;
 
 	i = 0;
-	written_chars = 0;
-	va_start(args, format);
-	while (format[i])
+	while (s[i])
 	{
-		if (format[i] == PRINTF_SPECIFIER)
-		{
-			i++;
-			written_chars += ft_print_flag(format[i], args);
-		}
-		else
-			written_chars += ft_print(format[i]);
+		ft_putchar_fd(s[i], fd);
 		i++;
 	}
-	va_end(args);
-	return (written_chars);
 }

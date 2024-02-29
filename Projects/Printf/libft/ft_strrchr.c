@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:12:24 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/24 00:01:20 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/01/25 16:16:01 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/02/09 17:28:26 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+/*
+It is identical to strchr(), except it locates the last occurrence of c.
+*/
+char	*ft_strrchr(const char *s, int c)
 {
-	va_list	args;
-	int		i;
-	int		written_chars;
+	size_t	i;
 
-	i = 0;
-	written_chars = 0;
-	va_start(args, format);
-	while (format[i])
+	i = ft_strlen(s) + 1;
+	while (i > 0)
 	{
-		if (format[i] == PRINTF_SPECIFIER)
-		{
-			i++;
-			written_chars += ft_print_flag(format[i], args);
-		}
-		else
-			written_chars += ft_print(format[i]);
-		i++;
+		i--;
+		if (s[i] == (char)c)
+			return ((char *) &s[i]);
 	}
-	va_end(args);
-	return (written_chars);
+	return (0);
 }

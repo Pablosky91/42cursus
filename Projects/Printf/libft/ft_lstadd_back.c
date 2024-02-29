@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:12:24 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/24 00:01:20 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/02/02 21:31:13 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/02/21 14:17:50 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+/*
+Adds the node ’new’ at the end of the list.
+*/
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	va_list	args;
-	int		i;
-	int		written_chars;
+	t_list	*last;
 
-	i = 0;
-	written_chars = 0;
-	va_start(args, format);
-	while (format[i])
-	{
-		if (format[i] == PRINTF_SPECIFIER)
-		{
-			i++;
-			written_chars += ft_print_flag(format[i], args);
-		}
-		else
-			written_chars += ft_print(format[i]);
-		i++;
-	}
-	va_end(args);
-	return (written_chars);
+	if (!lst || !new)
+		return ;
+	last = ft_lstlast(*lst);
+	if (!last)
+		ft_lstadd_front(lst, new);
+	else
+		last->next = new;
 }

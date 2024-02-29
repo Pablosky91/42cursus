@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:12:24 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/24 00:01:20 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/01/25 20:56:28 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/02/09 17:17:08 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+/*
+Locates the first occurrence of c (converted to an unsigned char) in string s.
+*/
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	va_list	args;
-	int		i;
-	int		written_chars;
+	size_t			i;
+	unsigned char	*copy;
 
 	i = 0;
-	written_chars = 0;
-	va_start(args, format);
-	while (format[i])
+	copy = (unsigned char *) s;
+	while (i < n)
 	{
-		if (format[i] == PRINTF_SPECIFIER)
-		{
-			i++;
-			written_chars += ft_print_flag(format[i], args);
-		}
-		else
-			written_chars += ft_print(format[i]);
+		if (copy[i] == (unsigned char) c)
+			return ((unsigned char *) &copy[i]);
 		i++;
 	}
-	va_end(args);
-	return (written_chars);
+	return (0);
 }

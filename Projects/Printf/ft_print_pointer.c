@@ -1,37 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_print_pointer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:12:24 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/24 00:01:20 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/02/24 00:10:22 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/02/28 03:08:11 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_print_pointer(size_t p)
 {
-	va_list	args;
-	int		i;
-	int		written_chars;
+	int	count;
 
-	i = 0;
-	written_chars = 0;
-	va_start(args, format);
-	while (format[i])
-	{
-		if (format[i] == PRINTF_SPECIFIER)
-		{
-			i++;
-			written_chars += ft_print_flag(format[i], args);
-		}
-		else
-			written_chars += ft_print(format[i]);
-		i++;
-	}
-	va_end(args);
-	return (written_chars);
+	count = 0;
+	count += ft_print_string("0x");
+	count += ft_print_hexadecimal(p, HEX_LOWER);
+	return (count);
 }

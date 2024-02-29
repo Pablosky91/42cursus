@@ -1,37 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:12:24 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/24 00:01:20 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/01/25 20:56:30 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/02/09 17:18:27 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+/*
+Compares byte string s1 against byte string s2. 
+Both strings are assumed to be n bytes long.
+*/
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	va_list	args;
-	int		i;
-	int		written_chars;
+	size_t			i;
+	unsigned char	*s1_copy;
+	unsigned char	*s2_copy;
 
+	if (!n)
+		return (0);
 	i = 0;
-	written_chars = 0;
-	va_start(args, format);
-	while (format[i])
-	{
-		if (format[i] == PRINTF_SPECIFIER)
-		{
-			i++;
-			written_chars += ft_print_flag(format[i], args);
-		}
-		else
-			written_chars += ft_print(format[i]);
+	s1_copy = (unsigned char *) s1;
+	s2_copy = (unsigned char *) s2;
+	while (s1_copy[i] == s2_copy[i] && i + 1 < n)
 		i++;
-	}
-	va_end(args);
-	return (written_chars);
+	return (s1_copy[i] - s2_copy[i]);
 }

@@ -1,46 +1,52 @@
 #VARIABLES
 
-NAME = test.out
+NAME = libftprintf.a
 
 RM = rm -f
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
-SOURCES = main.c
+AR = ar
+AR_FLAGS = -cr
+
+INCLUDE_PATH = libft
+LIBRARY_NAME = $(INCLUDE_PATH)/libft.a
+
+SOURCES =	ft_print_char.c\
+			ft_print_flag.c\
+			ft_print_hexadecimal.c\
+			ft_print_int.c\
+			ft_print_pointer.c\
+			ft_print_string.c\
+			ft_print_unsigned_int.c\
+			ft_print.c\
+			ft_printf.c
+
 OBJECTS = $(SOURCES:.c=.o)
-
-INCLUDE_PATH = ../Libft
-C_INCLUDE = -I $(INCLUDE_PATH)
-
-LIBRARY_PATH = ../Libft
-LIBRARY_NAME = ft
-C_LIBRARY = -L $(LIBRARY_PATH) -l $(LIBRARY_NAME)
 
 #RULES
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
-	$(CC) $(CFLAGS) $(C_INCLUDE) $(C_LIBRARY) -o $@ $^ 
+$(NAME): $(LIBRARY_NAME) $(OBJECTS)
+	cp $(LIBRARY_NAME) $(NAME)
+	$(AR) $(AR_FLAGS) $(NAME) $(OBJECTS)
+
+$(LIBRARY_NAME):
+	@$(MAKE) -C $(INCLUDE_PATH) all
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(C_INCLUDE) -o $@ -c $^
+	$(CC) $(CFLAGS) -o $@ -c $^
 
 clean:
 	$(RM) $(OBJECTS)
+	@$(MAKE) -C $(INCLUDE_PATH) clean
 
-fclean: clean
-	$(RM) $(NAME)
+fclean:
+	$(RM) $(NAME) $(OBJECTS)
+	@$(MAKE) -C $(INCLUDE_PATH) fclean
 
 re: fclean all
 
-library:
-	@$(MAKE) -C ../Libft library
-
-exec: all
-	@clear
-	@./$(NAME)
-	@$(MAKE) -s fclean
-
-.PHONY = all clean fclean re library exec
+.PHONY: all clean fclean re

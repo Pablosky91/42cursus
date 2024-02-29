@@ -1,37 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:12:24 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/24 00:01:20 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/01/25 16:15:57 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/02/09 17:26:32 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+/*
+Locates the first occurrence of c (converted to a char)
+	in the string pointed to by s.
+The terminating null character is considered to be part of the string;
+	therefore if c is '\0', the functions locate the terminating '\0'.
+*/
+char	*ft_strchr(const char *s, int c)
 {
-	va_list	args;
-	int		i;
-	int		written_chars;
+	size_t	i;
+	size_t	len;
 
 	i = 0;
-	written_chars = 0;
-	va_start(args, format);
-	while (format[i])
+	len = ft_strlen(s);
+	while (i <= len)
 	{
-		if (format[i] == PRINTF_SPECIFIER)
-		{
-			i++;
-			written_chars += ft_print_flag(format[i], args);
-		}
-		else
-			written_chars += ft_print(format[i]);
+		if (s[i] == (char) c)
+			return ((char *) &s[i]);
 		i++;
 	}
-	va_end(args);
-	return (written_chars);
+	return (0);
 }

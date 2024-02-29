@@ -1,37 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:12:24 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/24 00:01:20 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/01/12 12:51:26 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/01/26 23:13:33 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+/*
+Tests for an ASCII character, which is any character
+	between 0 and octal 0177 inclusive.
+*/
+int	ft_isascii(int c)
 {
-	va_list	args;
-	int		i;
-	int		written_chars;
-
-	i = 0;
-	written_chars = 0;
-	va_start(args, format);
-	while (format[i])
-	{
-		if (format[i] == PRINTF_SPECIFIER)
-		{
-			i++;
-			written_chars += ft_print_flag(format[i], args);
-		}
-		else
-			written_chars += ft_print(format[i]);
-		i++;
-	}
-	va_end(args);
-	return (written_chars);
+	return (c >= 0 && c <= 127);
 }

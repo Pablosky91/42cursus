@@ -1,37 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:12:24 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/24 00:01:20 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/02/02 21:36:19 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/02/21 14:26:56 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+/*
+Iterates the list ’lst’ and applies the function ’f’
+	on the content of each node.
+*/
+void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
-	va_list	args;
-	int		i;
-	int		written_chars;
-
-	i = 0;
-	written_chars = 0;
-	va_start(args, format);
-	while (format[i])
+	if (!lst || !f)
+		return ;
+	while (lst)
 	{
-		if (format[i] == PRINTF_SPECIFIER)
-		{
-			i++;
-			written_chars += ft_print_flag(format[i], args);
-		}
-		else
-			written_chars += ft_print(format[i]);
-		i++;
+		f(lst->content);
+		lst = lst->next;
 	}
-	va_end(args);
-	return (written_chars);
 }

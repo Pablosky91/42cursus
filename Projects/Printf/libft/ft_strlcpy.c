@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:12:24 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/24 00:01:20 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/01/19 16:48:52 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/02/16 22:28:30 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_printf(const char *format, ...)
+/*
+Copies up to dstsize - 1 characters from the string src to dst,
+	NUL-terminating the result if dstsize is not 0.
+*/
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
 {
-	va_list	args;
-	int		i;
-	int		written_chars;
+	size_t	src_len;
 
-	i = 0;
-	written_chars = 0;
-	va_start(args, format);
-	while (format[i])
+	src_len = ft_strlen(src);
+	if (src_len < dstsize)
+		ft_memmove(dst, src, src_len + 1);
+	else if (dstsize)
 	{
-		if (format[i] == PRINTF_SPECIFIER)
-		{
-			i++;
-			written_chars += ft_print_flag(format[i], args);
-		}
-		else
-			written_chars += ft_print(format[i]);
-		i++;
+		ft_memmove(dst, src, dstsize - 1);
+		ft_memset(&dst[dstsize - 1], 0, 1);
 	}
-	va_end(args);
-	return (written_chars);
+	return (src_len);
 }
