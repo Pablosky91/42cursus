@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:18 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/01 14:11:49 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/01 19:16:22 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,8 @@
 # endif
 
 char	*get_next_line(int fd);
+
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlen(const char *s);
 
 #endif
