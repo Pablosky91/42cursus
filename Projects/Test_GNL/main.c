@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:26:38 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/01 16:07:12 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/01 20:06:50 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 int	main(void)
 {
-	int fd = open("5shorts.txt", O_RDONLY);
+	int fd = open("3mediums.txt", O_RDONLY);
 	char *line;
 
-	printf("BUFFER: %d\n", BUFFER_SIZE);
-	printf("fd: %d\n", fd);
+	printf("BUFFER: %d\nfd: %d\n__________\n\n", BUFFER_SIZE, fd);
 	line = "";
 	while (line)
+	{
 		line = get_next_line(fd);
+		printf("MAINline: %s\n", line);
+	}
 	close(fd);
 	return (0);
 }

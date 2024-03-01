@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:18 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/01 19:16:22 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/01 20:45:46 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@
 
 char	*get_next_line(int fd);
 
-char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlen(const char *s);
+char	*gnl_strjoin(char *s1, char *s2, int len);
+int		gnl_strlen(char *s);
+int		ends_before(char *s, int len);
+char	*gnl_substr(char *s, unsigned int start, size_t len);
 
 #endif
