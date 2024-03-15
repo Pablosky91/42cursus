@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:09 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/15 04:09:41 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:15:33 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,16 @@ char	*gnl_strjoin(char *s1, char *s2, size_t len)
 	size_t		s2_len;
 	size_t		i;
 	size_t		j;
-	char	*join;
+	char		*join;
 
 	s2_len = gnl_strlen(s2);
-	if(!s1)
-		s1 = malloc(1 * sizeof(char));
 	if (!s1)
-		return (0);
+	{
+		s1 = malloc(1 * sizeof(char));
+		if (!s1)
+			return (0);
+		s1[0] = 0;
+	}
 	s1_len = gnl_strlen(s1);
 	i = 0;
 	j = 0;
@@ -92,6 +95,8 @@ char	*gnl_substr(char *s, size_t start, size_t len, int to_free)
 		i++;
 	}
 	sub[i] = 0;
+/* 	if (to_free)
+		printf("NULL terminated %s at pos %zu\n", sub, i); */
 	if (to_free)
 		free(s);
 	return (sub);

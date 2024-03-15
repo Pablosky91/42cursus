@@ -7,7 +7,7 @@ RM = rm -f
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror $(BUF_FLAG)
-
+#-fsanitize=address -O1 -fno-omit-frame-pointer -g 
 BUF =
 ifeq ($(BUF),)
  BUF_FLAG =
