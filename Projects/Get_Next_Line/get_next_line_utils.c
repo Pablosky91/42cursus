@@ -6,55 +6,58 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:09 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/01 21:07:25 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/15 04:09:41 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*gnl_strjoin(char *line, char *buffer, int len)
+char	*gnl_strjoin(char *s1, char *s2, size_t len)
 {
-	int		line_len;
-	int		buffer_len;
-	int		i;
-	int		j;
+	size_t		s1_len;
+	size_t		s2_len;
+	size_t		i;
+	size_t		j;
 	char	*join;
 
-	printf("JOINline: >%s<\n", line);
-	printf("JOINbuffer: >%s<\n", buffer);
-	buffer_len = gnl_strlen(buffer);
-	if(!line)
-		line = "";
-	line_len = gnl_strlen(line);
+	s2_len = gnl_strlen(s2);
+	if(!s1)
+		s1 = malloc(1 * sizeof(char));
+	if (!s1)
+		return (0);
+	s1_len = gnl_strlen(s1);
 	i = 0;
 	j = 0;
-	join = malloc((line_len + buffer_len + 1) * sizeof(char));
+	join = malloc((s1_len + s2_len + 1) * sizeof(char));
 	if (!join)
 		return (0);
-	while (line[i])
+	while (i < s1_len)
 	{
-		join[i] = line[i];
+		join[i] = s1[i];
 		i++;
 	}
-	while (buffer[j] && j < len)
-		join[i++] = buffer[j++];
+	while (s2[j] && j < len)
+		join[i++] = s2[j++];
 	join[i] = 0;
+	free(s1);
 	return (join);
 }
 
-int	gnl_strlen(char *s)
+size_t	gnl_strlen(char *s)
 {
-	int	i;
+	size_t	i;
 
+	if (!s)
+		return (0);
 	i = 0;
 	while (s[i])
 		i++;
 	return (i);
 }
 
-int	ends_before(char *s, int len)
+size_t	ends_before(char *s, size_t len)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (i <= len)
@@ -63,10 +66,10 @@ int	ends_before(char *s, int len)
 			return (i);
 		i++;
 	}
-	return (0);
+	return (-1);
 }
 
-char	*gnl_substr(char *s, unsigned int start, size_t len)
+char	*gnl_substr(char *s, size_t start, size_t len, int to_free)
 {
 	char	*sub;
 	size_t	s_len;
@@ -89,5 +92,7 @@ char	*gnl_substr(char *s, unsigned int start, size_t len)
 		i++;
 	}
 	sub[i] = 0;
+	if (to_free)
+		free(s);
 	return (sub);
 }
