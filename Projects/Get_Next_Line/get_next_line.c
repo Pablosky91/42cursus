@@ -6,13 +6,79 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:13 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/15 18:18:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/15 18:40:05 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
+
 char	*return_line(char **s)
+{
+	char	*line;
+	size_t	len;
+	size_t	ending;
+
+	if (!*s[0])
+		return (free(*s), NULL);
+	len = gnl_strlen(*s);
+	ending = ends_before(*s, len) + 1;
+	line = gnl_substr(*s, 0, ending, 0);
+	*s = gnl_substr(*s, ending, len, 1);
+	return (line);
+}
+
+char	*get_next_line(int fd)
+{
+	static char	*remaining = 0;
+	char		*buffer;
+	int			bytes_read;
+	int			last_pos;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	if (remaining)
+		//puede que aqui strlen falle si remaining no está NULL terminated
+		if (gnl_strlen(remaining) != ends_before(remaining, gnl_strlen(remaining)))
+			return (return_line(&remaining));
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+	{
+ 		if (remaining)
+			free(remaining); 
+		return (0);
+	}
+	last_pos = BUFFER_SIZE;
+	bytes_read = -2;
+	while (last_pos == BUFFER_SIZE && bytes_read != 0)
+	{
+		bytes_read = read(fd, buffer, BUFFER_SIZE);
+		if (bytes_read < 0)
+			return (free(remaining), free(buffer), NULL);
+		buffer[bytes_read] = 0;
+		remaining = gnl_strjoin(remaining, buffer, bytes_read);
+		last_pos = ends_before(buffer, gnl_strlen(remaining));
+
+	}
+	return (free(buffer), return_line(&remaining));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* char	*return_line(char **s)
 {
 	char	*line;
 	size_t	len;
@@ -67,9 +133,7 @@ char	*get_next_line(int fd)
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
 		{
-			free(remaining);
-			free(buffer);
-			return (0);
+			return (free(remaining), free(buffer), 0);
 		}
 		//if (buffer[bytes_read])
 		//	/////printf("c:%c\n", buffer[bytes_read]);
@@ -80,11 +144,10 @@ char	*get_next_line(int fd)
 		/////printf("remaining:>%s<\nbuffer:>%s<\n", remaining, buffer);
 		/////printf("br:%i\n", bytes_read);
 	}
-	free(buffer);
 	//line = gnl_substr(remaining, 0, ends_before(remaining, gnl_strlen(remaining)), 0);
 	//remaining = gnl_substr(remaining, ends_before(remaining, gnl_strlen(remaining)) + 1, gnl_strlen(remaining), 1);
-	return (return_line(&remaining));
-}
+	return (free(buffer), return_line(&remaining));
+} */
 
 
 
