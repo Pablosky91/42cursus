@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:13 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/15 18:40:05 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/20 12:36:26 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ char	*return_line(char **s)
 	size_t	ending;
 
 	if (!*s[0])
-		return (free(*s), NULL);
+	{
+		free(*s);
+		*s = 0;
+		return (0);
+	}
 	len = gnl_strlen(*s);
 	ending = ends_before(*s, len) + 1;
 	line = gnl_substr(*s, 0, ending, 0);
@@ -38,7 +42,6 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
 	if (remaining)
-		//puede que aqui strlen falle si remaining no está NULL terminated
 		if (gnl_strlen(remaining) != ends_before(remaining, gnl_strlen(remaining)))
 			return (return_line(&remaining));
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
@@ -54,9 +57,16 @@ char	*get_next_line(int fd)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
-			return (free(remaining), free(buffer), NULL);
+		{
+			free(remaining);
+			free(buffer);
+			remaining = 0;
+			buffer = 0;
+			return (0);
+		}
 		buffer[bytes_read] = 0;
 		remaining = gnl_strjoin(remaining, buffer, bytes_read);
+
 		last_pos = ends_before(buffer, gnl_strlen(remaining));
 
 	}
