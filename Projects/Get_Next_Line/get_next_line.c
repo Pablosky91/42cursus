@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:13 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/20 12:36:26 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/20 13:11:49 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ char	*return_line(char **s)
 		*s = 0;
 		return (0);
 	}
-	len = gnl_strlen(*s);
-	ending = ends_before(*s, len) + 1;
+	len = gnl_strlen(*s, 0);
+	ending = gnl_strlen(*s, 1) + 1;
 	line = gnl_substr(*s, 0, ending, 0);
 	*s = gnl_substr(*s, ending, len, 1);
 	return (line);
@@ -42,7 +42,7 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
 	if (remaining)
-		if (gnl_strlen(remaining) != ends_before(remaining, gnl_strlen(remaining)))
+		if (gnl_strlen(remaining, 0) != gnl_strlen(remaining, 1))
 			return (return_line(&remaining));
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
@@ -67,7 +67,7 @@ char	*get_next_line(int fd)
 		buffer[bytes_read] = 0;
 		remaining = gnl_strjoin(remaining, buffer, bytes_read);
 
-		last_pos = ends_before(buffer, gnl_strlen(remaining));
+		last_pos = gnl_strlen(buffer, 1);
 
 	}
 	return (free(buffer), return_line(&remaining));
