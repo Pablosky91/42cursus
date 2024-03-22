@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:26:38 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/15 03:40:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/21 16:17:51 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(void)
 	int fd = open("empty.txt", O_RDONLY);
 	char *line = "";
 
-	//printf("BUFFER: %d\nfd: %d\n__________\n\n", BUFFER_SIZE, fd);
+	printf("BUFFER: %d\nfd: %d\n__________\n\n", BUFFER_SIZE, fd);
 
 	while (line)
 	{
