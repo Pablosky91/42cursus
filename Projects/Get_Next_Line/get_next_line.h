@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:18 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/22 10:25:05 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/22 13:49:24 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ char	*free_and_null(char **s);
 char	*gnl_strjoin(char *s1, char *s2, size_t len);
 size_t	gnl_strlen(char *s, int len_line);
 char	*gnl_substr(char *s, size_t start, size_t len, int to_free);
-char	*init_empty_string(void);
+void	init_empty_string(char **s);
 
 #endif

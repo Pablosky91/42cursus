@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:09 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/22 10:44:11 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/22 18:36:52 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 char	*free_and_null(char **s)
 {
-	free(*s);
-	*s = 0;
+	if (*s)
+	{
+		free(*s);
+		*s = 0;
+	}
 	return (0);
 }
 
@@ -33,7 +36,7 @@ char	*gnl_strjoin(char *s1, char *s2, size_t len)
 	j = 0;
 	join = malloc((s1_len + s2_len + 1) * sizeof(char));
 	if (!join)
-		return (0);
+		return (free_and_null(&s1));
 	while (i < s1_len)
 	{
 		join[i] = s1[i];
@@ -76,7 +79,7 @@ char	*gnl_substr(char *s, size_t start, size_t len, int to_free)
 		sub_len = s_len - start + 1;
 	sub = malloc(sub_len * sizeof(char));
 	if (!sub)
-		return (0);
+		return (free_and_null(&s));
 	i = 0;
 	while (start < s_len && i + 1 < sub_len)
 	{
@@ -89,13 +92,12 @@ char	*gnl_substr(char *s, size_t start, size_t len, int to_free)
 	return (sub);
 }
 
-char	*init_empty_string(void)
+void	init_empty_string(char	**s)
 {
-	char	*s;
-
-	s = malloc(1 * sizeof(char));
-	if (!s)
-		return (0);
-	s[0] = 0;
-	return (s);
+	if (*s)
+		return ;
+	*s = malloc(1 * sizeof(char));
+	if (!*s)
+		return ;
+	*s[0] = 0;
 }
