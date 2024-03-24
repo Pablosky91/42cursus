@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:09 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/22 18:36:52 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/24 19:39:35 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ char	*gnl_strjoin(char *s1, char *s2, size_t len)
 	size_t		j;
 	char		*join;
 
-	s2_len = gnl_strlen(s2, 0);
-	s1_len = gnl_strlen(s1, 0);
+	s2_len = gnl_strlen(s2, WHOLE_LEN);
+	s1_len = gnl_strlen(s1, WHOLE_LEN);
 	i = 0;
 	j = 0;
 	join = malloc((s1_len + s2_len + 1) * sizeof(char));
@@ -71,7 +71,7 @@ char	*gnl_substr(char *s, size_t start, size_t len, int to_free)
 	size_t	sub_len;
 	size_t	i;
 
-	s_len = gnl_strlen(s, 0);
+	s_len = gnl_strlen(s, WHOLE_LEN);
 	sub_len = len + 1;
 	if (start > s_len)
 		sub_len = 1;

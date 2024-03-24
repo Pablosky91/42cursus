@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:18 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/22 13:49:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/24 19:40:51 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
+
+# define LINE_LEN 1
+# define WHOLE_LEN 0
+# define TO_FREE 1
+# define NOT_TO_FREE 0
 
 char	*get_next_line(int fd);
 
