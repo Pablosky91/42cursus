@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:09 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/24 19:39:35 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/24 19:54:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,17 @@ size_t	gnl_strlen(char *s, int len_line)
 	if (!s)
 		return (0);
 	i = 0;
-	while (s[i])
+	if (!len_line)
+		while (s[i])
+			i++;
+	else
 	{
-		if (len_line && s[i] == (char) '\n')
-			return (i);
-		i++;
+		while (s[i])
+		{
+			if (s[i] == (char) '\n')
+				return (i);
+			i++;
+		}
 	}
 	return (i);
 }
