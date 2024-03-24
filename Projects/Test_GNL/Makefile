@@ -7,7 +7,6 @@ RM = rm -f
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror $(BUF_FLAG)
-#-fsanitize=address -O1 -fno-omit-frame-pointer -g 
 BUF =
 ifeq ($(BUF),)
  BUF_FLAG =
@@ -19,8 +18,8 @@ SOURCES = main.c
 OBJECTS = $(SOURCES:.c=.o)
 
 GNL_SRC =	$(addprefix $(OTHER_PATH)/,\
-			get_next_line.c\
-			get_next_line_utils.c)
+			get_next_line_bonus.c\
+			get_next_line_utils_bonus.c)
 GNL_OBJ = $(GNL_SRC:.c=.o)
 
 INCLUDE_PATH = $(OTHER_PATH)
