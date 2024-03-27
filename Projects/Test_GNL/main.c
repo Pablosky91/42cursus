@@ -6,20 +6,20 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 12:26:38 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/03/24 20:23:47 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/03/25 11:04:35 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 //#include <string.h>
 
-void leaks()
+void	leaks()
 {
 	printf("\n\n\tLEAKS:\n");
 	system("leaks test.out");
 }
 
-void read_lines (int fd, int num_lines)
+void	read_lines(int fd, int num_lines)
 {
 	char *line = "";
 	int	i = 0;
