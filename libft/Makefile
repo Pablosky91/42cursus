@@ -6,9 +6,18 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 16:43:04 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/05/02 21:43:59 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/05/06 11:56:00 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+#COLOURS
+
+RED = \033[31m
+GREEN = \033[32m
+YELLOW = \033[33m
+BLUE = \033[34m
+
+RESET = \033[0m
 
 #VARIABLES
 
@@ -92,19 +101,22 @@ OBJECTS = $(SOURCES:.c=.o)
 a: all
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
+$(NAME): msg_all_start $(OBJECTS) 
 	$(AR) $(AR_FLAGS) $(NAME) $(OBJECTS)
+	@$(MAKE) -s msg_all_end
 
 %.o: %.c
 	$(CC) $(CFLAGS) -I . -o $@ -c $^
 
 c: clean
-clean:
+clean: msg_clean_start
 	$(RM) $(OBJECTS)
+	@$(MAKE) -s msg_clean_end
 
 f: fclean
-fclean: clean
+fclean: msg_fclean_start clean
 	$(RM) $(NAME)
+	@$(MAKE) -s msg_fclean_end
 
 re: fclean all
 
@@ -115,3 +127,22 @@ t:
 	ar -t $(NAME)
 
 .PHONY: all clean fclean re library a c f l t
+#MESSAGES
+
+msg_all_start:
+	@echo "$(YELLOW)Starting library compilation$(RESET)"
+
+msg_all_end:
+	@echo "$(GREEN)Library compilation complete$(RESET)"
+
+msg_clean_start:
+	@echo "$(YELLOW)Cleaning library objects$(RESET)"
+
+msg_clean_end:
+	@echo "$(GREEN)Library objects cleaned$(RESET)"
+
+msg_fclean_start:
+	@echo "$(YELLOW)Cleaning library$(RESET)"
+
+msg_fclean_end:
+	@echo "$(GREEN)Library cleaned$(RESET)"
