@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/05/06 15:55:58 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/05/07 23:31:38 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,11 @@ LIBFT_FLAG = -L $(LIBFT_PATH) -l ft
 RM = rm -f
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = #-Wall -Wextra -Werror
 
-SOURCES =	push_swap.c
+SOURCES =	push_swap.c\
+			show_stacks.c\
+			movements.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -43,9 +45,8 @@ MAKEFLAGS = --no-print-directory
 a: all
 all: $(NAME)
 
-$(NAME): msg_all_start $(LIBFT) $(OBJECTS)
+$(NAME): $(LIBFT) $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) -o $(NAME)
-	@$(MAKE) msg_all_end
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
@@ -65,26 +66,17 @@ fclean: msg_fclean_start
 	@$(MAKE) -C $(LIBFT_PATH) fclean
 	@$(MAKE) msg_fclean_end
 
+r: re
 re: fclean all
-
-l: library
-library:
-	@$(MAKE) -C $(LIBFT_PATH) library
 
 e: exec
 exec: all
 #	@clear
 	@./$(NAME)
 
-.PHONY: all clean fclean re library a c f l t
+.PHONY: all clean fclean re exec a c f r e msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
 
 #MESSAGES
-
-msg_all_start:
-	@echo "$(YELLOW)Starting push_swap compilation$(RESET)"
-
-msg_all_end:
-	@echo "$(GREEN)Push_swap compilation complete$(RESET)"
 
 msg_clean_start:
 	@echo "$(YELLOW)Cleaning push_swap objects$(RED)"

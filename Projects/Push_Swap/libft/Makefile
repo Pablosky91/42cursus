@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 16:43:04 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/05/06 15:55:35 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/05/07 23:32:51 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -120,15 +120,10 @@ fclean: msg_fclean_start
 	$(RM) $(OBJECTS) $(NAME)
 	@$(MAKE) msg_fclean_end
 
+r: re
 re: fclean all
 
-l: library
-library: all clean
-
-t:
-	ar -t $(NAME)
-
-.PHONY: all clean fclean re library a c f l t
+.PHONY: all clean fclean re a c f r msg_all_start msg_all_end msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
 
 #MESSAGES
 
