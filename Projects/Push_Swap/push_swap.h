@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/06 19:46:42 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/05/07 22:06:14 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,11 @@
 
 # include "libft.h"
 
-typedef struct s_stacks
+typedef struct s_stack
 {
-	t_list	*stack_a;
-	t_list	*stack_b;
-}	t_stacks;
+	int				content;
+	struct s_stack	*next;
+}	t_stack;
 
 typedef enum e_move
 {
@@ -36,7 +36,7 @@ typedef enum e_move
 	rrr
 }	t_move;
 
-void	show_stacks(t_stacks stacks);
-void	moves(t_stacks stacks, t_move move);
+void	show_stacks(t_stack *stack_a, t_stack *stack_b);
+void	moves(t_stack **stack_a, t_stack **stack_b, t_move move);
 
 #endif

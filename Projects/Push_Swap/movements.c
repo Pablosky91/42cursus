@@ -6,100 +6,103 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:40:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/06 21:56:47 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/05/07 22:03:28 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	move_swap(t_list **stack);
-static void	move_push(t_list *from, t_list *to);
-static void	move_rotate(t_list *stack);
-static void	move_reverse_rotate(t_list *stack);
+static void	swap(t_stack **stack);
+static void	push(t_stack **from, t_stack **to);
+static void	rotate(t_stack **stack);
+static void	rev_rotate(t_stack **stack);
 
-void	moves(t_stacks stacks, t_move move)
+void	moves(t_stack **stack_a, t_stack **stack_b, t_move move)
 {
-//	ft_printf ("mov: %i\n", stacks.stack_a->content);
+	if (move == sa)
+		return (ft_printf("sa\n"), swap(stack_a));
+	else if (move == sb)
+		return (ft_printf("sb\n"), swap(stack_b));
+	else if (move == ss)
+		return (ft_printf("ss\n"), swap(stack_a), swap(stack_b));
+	else if (move == pa)
+		return (ft_printf("pa\n"), push(stack_b, stack_a));
+	else if (move == pb)
+		return (ft_printf("pb\n"), push(stack_a, stack_b));
+	else if (move == ra)
+		return (ft_printf("ra\n"), rotate(stack_a));
+	else if (move == rb)
+		return (ft_printf("rb\n"), rotate(stack_b));
+	else if (move == rr)
+		return (ft_printf("rr\n"), rotate(stack_a), rotate(stack_b));
+	else if (move == rra)
+		return (ft_printf("rra\n"), rev_rotate(stack_a));
+	else if (move == rrb)
+		return (ft_printf("rrb\n"), rev_rotate(stack_b));
+	else if (move == rrr)
+		return (ft_printf("rrr\n"), rev_rotate(stack_a), rev_rotate(stack_b));
+}
 
-	if(move == sa)
-		move_swap(stacks.stack_a);
-	/*else if(move == sb)
-		move_swap(stacks.stack_b);
-	else if(move == ss)
+//TODO protect maybe
+static void	swap(t_stack **stack)
+{
+	t_stack	*first;
+	t_stack	*second;
+
+	first = *stack;
+	second = first->next;
+	first->next = second->next;
+	second->next = first;
+	*stack = second;
+}
+
+//TODO protect maybe
+static void	push(t_stack **from, t_stack **to)
+{
+	t_stack	*from_first;
+	t_stack	*from_second;
+	t_stack	*to_first;
+
+	from_first = *from;
+	from_second = from_first->next;
+	to_first = *to;
+	from_first->next = to_first;
+	*from = from_second;
+	*to = from_first;
+}
+
+//TODO protect maybe
+static void	rotate(t_stack **stack)
+{
+	t_stack	*first;
+	t_stack	*second;
+	t_stack	*last;
+
+	first = *stack;
+	second = first->next;
+	last = first;
+	while (last->next)
+		last = last->next;
+	first->next = last->next;
+	last->next = first;
+	*stack = second;
+}
+
+//TODO protect maybe
+static void	rev_rotate(t_stack **stack)
+{
+	t_stack	*first;
+	t_stack	*penultimate;
+	t_stack	*last;
+
+	first = *stack;
+	last = first;
+	while (last->next)
 	{
-		move_swap(stacks.stack_a);
-		move_swap(stacks.stack_b);
-	}*/
-	else if(move == pa)
-		move_push(stacks.stack_b, stacks.stack_a);
-	else if(move == pb)
-		move_push(stacks.stack_a, stacks.stack_b);
-	else if(move == ra)
-		move_rotate(stacks.stack_a);
-	else if(move == rb)
-		move_rotate(stacks.stack_b);
-	else if(move == rr)
-	{
-		move_rotate(stacks.stack_a);
-		move_rotate(stacks.stack_b);
+		penultimate = last;
+		last = last->next;
 	}
-	else if(move == rra)
-		move_reverse_rotate(stacks.stack_a);
-	else if(move == rrb)
-		move_reverse_rotate(stacks.stack_b);
-	else if(move == rrr)
-	{
-		move_reverse_rotate(stacks.stack_a);
-		move_reverse_rotate(stacks.stack_b);
-	}
-}
-
-static void	move_swap(t_list **stack)
-{
-	t_list	*aux;
-
-	aux = ft_lstnew((*stack)->next);
-	ft_printf("aux: %i\n", (aux)->content);
-	aux->next = *stack;
-	(*stack)->next = aux;
-}
-
-static void	move_push(t_list *from, t_list *to)
-{
-//	ft_printf ("to: %i\n", (int)(to->content));
-//	ft_lstadd_front(to, ft_lstnew(from->content));
-//	*from = *from->next;
-	//to->content = (void *)9;
-	/* t_stacks stacks;
-	stacks.stack_a = to;
-	stacks.stack_b = from;
-	show_stacks(stacks); */
-
-
-//F T
-//g h
-
-//g F
-//  T
-//  h
-
-	ft_printf("pa:\n");
-	t_list *aux = from;
-	ft_printf("aux: %i\n", (aux)->content);
-	ft_printf("to: %i\n", to->content);
-	*from = *from->next;
-	ft_printf("aux: %i\n", (aux)->content);
-  	(aux)->next = to;
-	to = aux; 
-//	ft_lstadd_front(&to, aux);
-}
-
-static void	move_rotate(t_list *stack)
-{
-	
-}
-
-static void	move_reverse_rotate(t_list *stack)
-{
-	
+	penultimate->next = last->next;
+	last->next = first;
+	*stack = last;
 }
