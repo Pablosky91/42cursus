@@ -6,13 +6,13 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 16:53:27 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/07 22:06:25 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/05/08 00:24:33 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void show_stacks(t_stack *stack_a, t_stack *stack_b)
+void	show_stacks(t_stack *stack_a, t_stack *stack_b)
 {
 	ft_printf("a b\n");
 	while (stack_a || stack_b)

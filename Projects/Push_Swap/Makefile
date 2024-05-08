@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/05/07 23:31:38 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/05/08 18:31:44 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,10 +71,15 @@ re: fclean all
 
 e: exec
 exec: all
-#	@clear
-	@./$(NAME)
+	@clear
+	@./$(NAME) 6 5 "4 a 2" 1
 
-.PHONY: all clean fclean re exec a c f r e msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
+l: leaks
+leaks: all
+	@clear
+	valgrind --leak-check=full ./$(NAME) 4 3 2 1
+
+.PHONY: all clean fclean re exec leaks a c f r e l msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
 
 #MESSAGES
 
