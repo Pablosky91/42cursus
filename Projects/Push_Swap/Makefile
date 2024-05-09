@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/05/08 18:31:44 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/05/09 11:23:09 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ LIBFT_FLAG = -L $(LIBFT_PATH) -l ft
 RM = rm -f
 
 CC = gcc
-CFLAGS = #-Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 SOURCES =	push_swap.c\
 			show_stacks.c\
@@ -72,7 +72,7 @@ re: fclean all
 e: exec
 exec: all
 	@clear
-	@./$(NAME) 6 5 "4 a 2" 1
+	@./$(NAME) 4 3 2 1
 
 l: leaks
 leaks: all

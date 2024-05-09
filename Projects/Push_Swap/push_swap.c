@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/08 18:53:42 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/05/09 11:23:00 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,30 @@ int	read_data(t_stack **stack, int argc, char **argv)
 		while (split[j])
 		{
 			if(!ps_add_back(stack, ft_atoi(split[j])))
-				return (0);
+				return (free(split[j]), free(split), 0);
+			free(split[j]);
 			j++;
 		}
+		free(split);
 		i++;
 	}
 	return (1);
 }
 
-void error()
+void error(t_stack **stack_a)
 {
+	t_stack	*aux;
+	t_stack	*copy;
+
+	aux = *stack_a;
+	while (aux->next)
+	{
+		copy = aux;
+		aux = aux->next;
+		free(copy);
+	}
+	free(aux);
 	write(2, "Error\n", 6);
-	//TODO free
 	exit(42);
 }
 
@@ -110,7 +122,7 @@ int	main(int argc, char **argv)
 	stack_a = 0;
 	stack_b = 0;
 	if(!read_data(&stack_a, argc, argv))
-		error();
+		error(&stack_a);
 	//show_stacks(stack_a, stack_b);
 
 
@@ -125,7 +137,11 @@ int	main(int argc, char **argv)
 	//if (!create_mockup_stack(&stack_b, 5, 6, 7, 8))
 	//	return (ft_printf("Error\n"), 42);
 	show_stacks(stack_a, stack_b);
-	
+	moves(&stack_a, &stack_b, pb);
+	show_stacks(stack_a, stack_b);
+	moves(&stack_a, &stack_b, pa);
+	show_stacks(stack_a, stack_b);
+	error(&stack_a);
 	/* moves(&stack_a, &stack_b, pb);
 	show_stacks(stack_a, stack_b);
 
