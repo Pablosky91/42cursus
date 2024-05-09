@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/09 18:55:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/05/09 20:09:01 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "libft.h"
+# include "limits.h"
 
 typedef struct s_stack
 {
