@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:40:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/08 00:24:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:12:26 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,13 @@ void	moves(t_stack **stack_a, t_stack **stack_b, t_move move)
 		return (ft_printf("rrr\n"), rev_rotate(stack_a), rev_rotate(stack_b));
 }
 
-//TODO protect maybe
 static void	swap(t_stack **stack)
 {
 	t_stack	*first;
 	t_stack	*second;
 
+	if (!(*stack) || !(*stack)->next)
+		return ;
 	first = *stack;
 	second = first->next;
 	first->next = second->next;
@@ -56,13 +57,14 @@ static void	swap(t_stack **stack)
 	*stack = second;
 }
 
-//TODO protect maybe
 static void	push(t_stack **from, t_stack **to)
 {
 	t_stack	*from_first;
 	t_stack	*from_second;
 	t_stack	*to_first;
 
+	if (!*from)
+		return ;
 	from_first = *from;
 	from_second = from_first->next;
 	to_first = *to;
@@ -71,13 +73,14 @@ static void	push(t_stack **from, t_stack **to)
 	*to = from_first;
 }
 
-//TODO protect maybe
 static void	rotate(t_stack **stack)
 {
 	t_stack	*first;
 	t_stack	*second;
 	t_stack	*last;
 
+	if (!(*stack) || !(*stack)->next)
+		return ;
 	first = *stack;
 	second = first->next;
 	last = first;
@@ -88,13 +91,14 @@ static void	rotate(t_stack **stack)
 	*stack = second;
 }
 
-//TODO protect maybe
 static void	rev_rotate(t_stack **stack)
 {
 	t_stack	*first;
 	t_stack	*penultimate;
 	t_stack	*last;
 
+	if (!(*stack) || !(*stack)->next)
+		return ;
 	first = *stack;
 	last = first;
 	while (last->next)

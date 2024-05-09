@@ -6,11 +6,10 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/09 11:23:00 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/05/09 17:14:50 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//TODO: protect movements
 //TODO: check leaks
 
 #include "push_swap.h"
@@ -34,8 +33,10 @@ int	ps_add_back(t_stack **lst, int content)
 	t_stack	*aux;
 	t_stack	*new_node;
 
+	if (!lst)
+		return (0);
 	new_node = ps_new(content);
-	if (!lst || !new_node)
+	if (!new_node)
 		return (0);
 	aux = *lst;
 	if (!*lst)
@@ -45,11 +46,11 @@ int	ps_add_back(t_stack **lst, int content)
 		while (aux->next)
 		{
 			if (aux->content == content)
-				return (0);
+				return (free(new_node), 0);
 			aux = aux->next;
 		}
 		if (aux->content == content)
-			return (0);
+			return (free(new_node), 0);
 		aux->next = new_node;
 	}
 	return (1);
@@ -97,19 +98,26 @@ int	read_data(t_stack **stack, int argc, char **argv)
 	return (1);
 }
 
-void error(t_stack **stack_a)
+void free_stack(t_stack **stack)
 {
 	t_stack	*aux;
 	t_stack	*copy;
 
-	aux = *stack_a;
-	while (aux->next)
+	aux = *stack;
+/* 	if (!aux)
+		return ; */
+	while (aux)
 	{
 		copy = aux;
 		aux = aux->next;
 		free(copy);
 	}
 	free(aux);
+}
+
+void error(t_stack **stack)
+{
+	free_stack(stack);
 	write(2, "Error\n", 6);
 	exit(42);
 }
@@ -123,42 +131,22 @@ int	main(int argc, char **argv)
 	stack_b = 0;
 	if(!read_data(&stack_a, argc, argv))
 		error(&stack_a);
-	//show_stacks(stack_a, stack_b);
-
-
-
-
-
-
-
-
-	// if (!create_mockup_stack(&stack_a, 1, 2, 3, 4))
-	//	return (ft_printf("Error\n"), 42);
-	//if (!create_mockup_stack(&stack_b, 5, 6, 7, 8))
-	//	return (ft_printf("Error\n"), 42);
-	show_stacks(stack_a, stack_b);
-	moves(&stack_a, &stack_b, pb);
-	show_stacks(stack_a, stack_b);
-	moves(&stack_a, &stack_b, pa);
-	show_stacks(stack_a, stack_b);
-	error(&stack_a);
-	/* moves(&stack_a, &stack_b, pb);
 	show_stacks(stack_a, stack_b);
 
-	moves(&stack_a, &stack_b, pb);
-	show_stacks(stack_a, stack_b);
-	
-	moves(&stack_a, &stack_b, pa);
-	show_stacks(stack_a, stack_b);
-	
-	moves(&stack_a, &stack_b, rr);
-	show_stacks(stack_a, stack_b);
+
 
 	moves(&stack_a, &stack_b, sa);
 	show_stacks(stack_a, stack_b);
+	moves(&stack_a, &stack_b, sa);
+	show_stacks(stack_a, stack_b);
+	moves(&stack_a, &stack_b, sa);
+	show_stacks(stack_a, stack_b);
+	moves(&stack_a, &stack_b, sa);
 
-	moves(&stack_a, &stack_b, rrb);
-	show_stacks(stack_a, stack_b); */
 
+
+
+
+	free_stack(&stack_a);
 	return (0);
 }
