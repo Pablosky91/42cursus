@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show_stacks.c                                      :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 16:53:27 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/09 11:12:02 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/05/09 18:48:53 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/05/09 18:56:35 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	show_stacks(t_stack *stack_a, t_stack *stack_b)
+//TODO better atoi
+int	read_data(t_stack **stack, int argc, char **argv)
 {
-	ft_printf("a b\n---\n");
-	while (stack_a || stack_b)
+	int		i;
+	int		j;
+	char	**split;
+
+	i = 1;
+	while (i < argc)
 	{
-		if (stack_a)
+		split = ft_split(argv[i], ' ');
+		j = 0;
+		while (split[j])
 		{
-			ft_printf("%i ", stack_a->content);
-			stack_a = stack_a->next;
+			if (!ps_add_back(stack, ft_atoi(split[j])))
+				return (free(split[j]), free(split), 0);
+			free(split[j]);
+			j++;
 		}
-		else
-			ft_printf("  ");
-		if (stack_b)
-		{
-			ft_printf("%i\n", stack_b->content);
-			stack_b = stack_b->next;
-		}
-		else
-			ft_printf("\n");
+		free(split);
+		i++;
 	}
-	ft_printf("---\n\n");
+	return (1);
 }

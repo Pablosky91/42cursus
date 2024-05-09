@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/05/09 17:12:55 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/05/09 18:55:03 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,7 @@ RM = rm -f
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
-SOURCES =	push_swap.c\
-			show_stacks.c\
+SOURCES =	parse.c\
 			movements.c
 
 OBJECTS = $(SOURCES:.c=.o)
@@ -72,12 +71,12 @@ re: fclean all
 e: exec
 exec: all
 	@clear
-	@./$(NAME) 1 2 2
+	@./$(NAME) 1 2 3
 
 l: leaks
 leaks: all
 	@clear
-	valgrind --leak-check=full ./$(NAME) 4 3 2 1
+	valgrind --leak-check=full ./$(NAME) 1 3 2
 
 #MESSAGES
 

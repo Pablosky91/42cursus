@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/09 17:14:50 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/05/09 18:58:30 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,44 @@
 
 #include "push_swap.h"
 
+static t_stack	*ps_new(int content);
+static int		ps_add_back(t_stack **lst, int content);
+static void		free_stack(t_stack **stack);
+static void		error(t_stack **stack);
+
+int	main(int argc, char **argv)
+{
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+
+	stack_a = 0;
+	stack_b = 0;
+	if (!read_data(&stack_a, argc, argv))
+		error(&stack_a);
+
+
+
+
+	show_stacks(stack_a, stack_b);
+	moves(&stack_a, &stack_b, sa);
+	show_stacks(stack_a, stack_b);
+	moves(&stack_a, &stack_b, sa);
+	show_stacks(stack_a, stack_b);
+	moves(&stack_a, &stack_b, sa);
+	show_stacks(stack_a, stack_b);
+	moves(&stack_a, &stack_b, sa);
+
+
+
+
+
+	free_stack(&stack_a);
+	return (0);
+}
+
 //static t_stacks	*create_mockup_stacks(t_stacks	*stacks);
 
-t_stack	*ps_new(int content)
+static t_stack	*ps_new(int content)
 {
 	t_stack	*node;
 
@@ -27,8 +62,9 @@ t_stack	*ps_new(int content)
 	node->next = 0;
 	return (node);
 }
-//if !lst, lst = 0
-int	ps_add_back(t_stack **lst, int content)
+
+//TODO maybe if !lst, lst = 0
+static int	ps_add_back(t_stack **lst, int content)
 {
 	t_stack	*aux;
 	t_stack	*new_node;
@@ -56,11 +92,8 @@ int	ps_add_back(t_stack **lst, int content)
 	return (1);
 }
 
-
-
-
-
-int	create_mockup_stack(t_stack **stack, int num1, int num2, int num3, int num4)
+//TODO delete
+int	create_mockup_stack(t_stack **stack, int num1, int num2, int num3)
 {
 	if (!ps_add_back(stack, num1))
 		return (0);
@@ -68,85 +101,50 @@ int	create_mockup_stack(t_stack **stack, int num1, int num2, int num3, int num4)
 		return (0);
 	if (!ps_add_back(stack, num3))
 		return (0);
-	if (!ps_add_back(stack, num4))
-		return (0);
 	return (1);
 }
 
-//TODO better atoi
-int	read_data(t_stack **stack, int argc, char **argv)
+//TODO delete
+void	show_stacks(t_stack *stack_a, t_stack *stack_b)
 {
-	int		i;
-	int		j;
-	char	**split;
-
-	i = 1;
-	while (i < argc)
+	ft_printf("a b\n---\n");
+	while (stack_a || stack_b)
 	{
-		split = ft_split(argv[i], ' ');
-		j = 0;
-		while (split[j])
+		if (stack_a)
 		{
-			if(!ps_add_back(stack, ft_atoi(split[j])))
-				return (free(split[j]), free(split), 0);
-			free(split[j]);
-			j++;
+			ft_printf("%i ", stack_a->content);
+			stack_a = stack_a->next;
 		}
-		free(split);
-		i++;
+		else
+			ft_printf("  ");
+		if (stack_b)
+		{
+			ft_printf("%i\n", stack_b->content);
+			stack_b = stack_b->next;
+		}
+		else
+			ft_printf("\n");
 	}
-	return (1);
+	ft_printf("---\n\n");
 }
 
-void free_stack(t_stack **stack)
+static void	free_stack(t_stack **stack)
 {
 	t_stack	*aux;
 	t_stack	*copy;
 
 	aux = *stack;
-/* 	if (!aux)
-		return ; */
 	while (aux)
 	{
 		copy = aux;
 		aux = aux->next;
 		free(copy);
 	}
-	free(aux);
 }
 
-void error(t_stack **stack)
+static void	error(t_stack **stack)
 {
 	free_stack(stack);
 	write(2, "Error\n", 6);
 	exit(42);
-}
-
-int	main(int argc, char **argv)
-{
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-
-	stack_a = 0;
-	stack_b = 0;
-	if(!read_data(&stack_a, argc, argv))
-		error(&stack_a);
-	show_stacks(stack_a, stack_b);
-
-
-
-	moves(&stack_a, &stack_b, sa);
-	show_stacks(stack_a, stack_b);
-	moves(&stack_a, &stack_b, sa);
-	show_stacks(stack_a, stack_b);
-	moves(&stack_a, &stack_b, sa);
-	show_stacks(stack_a, stack_b);
-	moves(&stack_a, &stack_b, sa);
-
-
-
-
-
-	free_stack(&stack_a);
-	return (0);
 }
