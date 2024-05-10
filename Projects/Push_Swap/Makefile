@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/05/09 20:07:41 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/05/10 15:42:33 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 
 SOURCES =	push_swap.c\
+			algorithm.c\
 			parse.c\
 			movements.c
 
@@ -71,8 +72,19 @@ re: fclean all
 
 e: exec
 exec: all
-	@clear
-	@./$(NAME) 
+	clear
+	@./$(NAME) 1 2 3
+	@echo "-------"
+	@./$(NAME) 1 3 2
+	@echo "-------"
+	@./$(NAME) 2 1 3
+	@echo "-------"
+	@./$(NAME) 2 3 1
+	@echo "-------"
+	@./$(NAME) 3 1 2
+	@echo "-------"
+	@./$(NAME) 3 2 1
+	@echo "-------"
 
 l: leaks
 leaks: all

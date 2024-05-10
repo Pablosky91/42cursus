@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/09 19:12:38 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:43:43 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,18 +67,20 @@ int	main(int argc, char **argv)
 
 
 	show_stacks(stack_a, stack_b);
+	sort(&stack_a, &stack_b);
+	show_stacks(stack_a, stack_b);
 	/* moves(&stack_a, &stack_b, sa);
 	show_stacks(stack_a, stack_b);
 	moves(&stack_a, &stack_b, sa);
 	show_stacks(stack_a, stack_b);
 	moves(&stack_a, &stack_b, sa);
 	show_stacks(stack_a, stack_b);
-	moves(&stack_a, &stack_b, sa);
+	moves(&stack_a, &stack_b, sa); */
 
 
 
 
-	free_stack(&stack_a); */
+	free_stack(&stack_a);
 	return (0);
 }
 

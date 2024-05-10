@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/09 20:09:01 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/05/10 15:18:30 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ typedef enum e_move
 
 void	moves(t_stack **stack_a, t_stack **stack_b, t_move move);
 int		read_data(t_stack **stack, int argc, char **argv);
+void	sort(t_stack **stack_a, t_stack **stack_b);
 
 #endif
