@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/10 15:43:43 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/05/13 21:23:59 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,5 @@ static void	error(t_stack **stack)
 {
 	free_stack(stack);
 	write(2, "Error\n", 6);
-	exit(42);
+	exit(1);
 }

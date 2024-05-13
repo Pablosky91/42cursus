@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/10 15:18:30 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/05/13 21:41:56 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ typedef struct s_stack
 
 typedef enum e_move
 {
-	sa,
-	sb,
-	ss,
-	pa,
-	pb,
-	ra,
-	rb,
-	rr,
-	rra,
-	rrb,
-	rrr
+	sa = 0,
+	sb = 1,
+	ss = 2,
+	pa = 3,
+	pb = 4,
+	ra = 5,
+	rb = 6,
+	rr = 7,
+	rra = 8,
+	rrb = 9,
+	rrr = 10
 }	t_move;
 
 void	moves(t_stack **stack_a, t_stack **stack_b, t_move move);

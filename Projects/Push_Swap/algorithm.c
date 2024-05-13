@@ -6,48 +6,52 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/10 15:38:02 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/05/13 21:50:32 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_three(t_stack **stack)
-{
-	t_stack	*first;
-	t_stack	*second;
-	t_stack	*third;
-
-	if (!(*stack) || !(*stack)->next || !(*stack)->next->next
-		|| (*stack)->next->next->next)
-		return ;
-	first = *stack;
-	second = first->next;
-	third = second->next;
-	if (first->content < second->content && second->content > third->content
-		&& first->content < third->content)
-		return (moves(stack, 0, sa), moves(stack, 0, ra));
-	if (first->content > second->content && second->content < third->content
-		&& first->content < third->content)
-		return (moves(stack, 0, sa));
-	if (first->content < second->content && second->content > third->content
-		&& first->content > third->content)
-		return (moves(stack, 0, rra));
-	if (first->content > second->content && second->content < third->content
-		&& first->content > third->content)
-		return (moves(stack, 0, ra));
-	if (first->content > second->content && second->content > third->content)
-		return (moves(stack, 0, sa), moves(stack, 0, rra));
-}
-
-void	sort(t_stack **stack_a, t_stack **stack_b)
-{
-	(void) stack_b;
-	sort_three(stack_a);
-}
 // 1 2 3 -> done
 // 1 3 2 -> sa ra
 // 2 1 3 -> sa
 // 2 3 1 -> rra
 // 3 1 2 -> ra
 // 3 2 1 -> sa rra
+//sorts the three items in stack_a
+void	sort_three(t_stack **stk_a, t_stack **stk_b, int is_b)
+{
+	t_stack	**stack;
+	int		first;
+	int		second;
+	int		third;
+
+	stack = stk_a;
+	if (is_b)
+		stack = stk_b;
+	if (!(*stack) || !(*stack)->next || !(*stack)->next->next
+		|| (*stack)->next->next->next)
+		return ;
+	first = (*stack)->content;
+	second = (*stack)->next->content;
+	third = (*stack)->next->next->content;
+	if (first < second && second > third && first < third)
+		return (moves(stk_a, stk_b, sa + is_b), moves(stk_a, stk_b, ra + is_b));
+	if (first > second && second < third && first < third)
+		return (moves(stk_a, stk_b, sa + is_b));
+	if (first < second && second > third && first > third)
+		return (moves(stk_a, stk_b, rra + is_b));
+	if (first > second && second < third && first > third)
+		return (moves(stk_a, stk_b, ra + is_b));
+	if (first > second && second > third)
+		return (moves(stk_a, stk_b, sa + is_b),
+			moves(stk_a, stk_b, rra + is_b));
+}
+
+void	sort(t_stack **stack_a, t_stack **stack_b)
+{
+	moves(stack_a, stack_b, pb);
+	moves(stack_a, stack_b, pb);
+	moves(stack_a, stack_b, pb);
+	sort_three(stack_a, stack_b, 1);
+}
