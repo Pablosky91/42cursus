@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 16:43:04 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/05/07 23:33:28 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/05/13 20:59:08 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ RESET = \033[0m
 
 NAME = libft.a
 
-RM = rm -f
+RM = rm -rf
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
@@ -94,7 +94,9 @@ SOURCES =	$(addprefix gnl/,\
 				ft_print.c\
 				ft_printf.c)
 
-OBJECTS = $(SOURCES:.c=.o)
+OBJ_DIR = obj/
+ALL_OBJ_DIR = $(OBJ_DIR) $(addprefix $(OBJ_DIR), gnl original original/is original/lst original/mem original/other original/put original/str printf)
+OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 
 MAKEFLAGS = --no-print-directory
 
@@ -107,17 +109,20 @@ $(NAME): msg_all_start $(OBJECTS)
 	$(AR) $(AR_FLAGS) $(NAME) $(OBJECTS)
 	@$(MAKE) msg_all_end
 
-%.o: %.c
+$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $^ -I . -o $@
+
+$(OBJ_DIR):
+	mkdir $(ALL_OBJ_DIR)
 
 c: clean
 clean: msg_clean_start
-	$(RM) $(OBJECTS)
+	$(RM) $(OBJ_DIR)
 	@$(MAKE) msg_clean_end
 
 f: fclean
 fclean: msg_fclean_start
-	$(RM) $(OBJECTS) $(NAME)
+	$(RM) $(OBJ_DIR) $(NAME)
 	@$(MAKE) msg_fclean_end
 
 r: re
@@ -144,3 +149,4 @@ msg_fclean_start:
 
 msg_fclean_end:
 	@echo "$(GREEN)Library cleaned$(RESET)"
+	

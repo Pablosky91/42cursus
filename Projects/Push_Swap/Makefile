@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/05/10 15:42:33 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/05/13 20:57:24 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,17 +27,18 @@ LIBFT_PATH = libft
 LIBFT = $(LIBFT_PATH)/libft.a
 LIBFT_FLAG = -L $(LIBFT_PATH) -l ft
 
-RM = rm -f
+RM = rm -rf
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 SOURCES =	push_swap.c\
 			algorithm.c\
 			parse.c\
 			movements.c
 
-OBJECTS = $(SOURCES:.c=.o)
+OBJ_DIR = obj/
+OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 
 MAKEFLAGS = --no-print-directory
 
@@ -52,18 +53,21 @@ $(NAME): $(LIBFT) $(OBJECTS)
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
 
-%.o: %.c
+$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $^ $(LIBFT_FLAG) -I $(LIBFT_PATH) -o $@
+
+$(OBJ_DIR):
+	mkdir $(OBJ_DIR)
 
 c: clean
 clean: msg_clean_start
-	$(RM) $(OBJECTS)
+	$(RM) $(OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_PATH) clean
 	@$(MAKE) msg_clean_end
 
 f: fclean
 fclean: msg_fclean_start
-	$(RM) $(OBJECTS) $(NAME)
+	$(RM) $(OBJ_DIR) $(NAME)
 	@$(MAKE) -C $(LIBFT_PATH) fclean
 	@$(MAKE) msg_fclean_end
 
