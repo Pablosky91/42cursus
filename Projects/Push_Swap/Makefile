@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/05/13 20:57:24 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/05/30 20:54:27 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,10 @@ LIBFT = $(LIBFT_PATH)/libft.a
 LIBFT_FLAG = -L $(LIBFT_PATH) -l ft
 
 RM = rm -rf
+OUT = out
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = #-Wall -Wextra -Werror -g3 -fsanitize=address
 
 SOURCES =	push_swap.c\
 			algorithm.c\
@@ -41,6 +42,10 @@ OBJ_DIR = obj/
 OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 
 MAKEFLAGS = --no-print-directory
+
+ARG = 3 2 1
+N = 3
+REPEAT = 10
 
 #RULES
 
@@ -76,24 +81,44 @@ re: fclean all
 
 e: exec
 exec: all
-	clear
-	@./$(NAME) 1 2 3
-	@echo "-------"
-	@./$(NAME) 1 3 2
-	@echo "-------"
-	@./$(NAME) 2 1 3
-	@echo "-------"
-	@./$(NAME) 2 3 1
-	@echo "-------"
-	@./$(NAME) 3 1 2
-	@echo "-------"
-	@./$(NAME) 3 2 1
-	@echo "-------"
-
-l: leaks
-leaks: all
 	@clear
-	valgrind --leak-check=full ./$(NAME) 1 3 2
+	@./$(NAME) $(ARG) > $(OUT)
+	@cat $(OUT)
+	@echo "$(YELLOW)$$(cat $(OUT) | wc -l) move/s$(RESET)"
+	@echo "(Change arguments with ARG)"
+	@$(RM) $(OUT)
+#	@echo "-------"
+#	@./$(NAME) 1 2 3
+#	@echo "-------"
+#	@./$(NAME) 1 3 2
+#	@echo "-------"
+#	@./$(NAME) 2 1 3
+#	@echo "-------"
+#	@./$(NAME) 2 3 1
+#	@echo "-------"
+#	@./$(NAME) 3 1 2
+#	@echo "-------"
+#	@./$(NAME) 3 2 1
+#	@echo "-------"
+
+l: loop
+loop:
+	@clear
+	@for i in $$(seq $(REPEAT)); do ./$(NAME) $$(seq 1000 | sort -R | tail -$(N)) | wc -l >> $(OUT); done
+	@echo "$(YELLOW)Max: $$(sort $(OUT) | tail -1) move/s$(RESET)"
+	@echo "Test in $(REPEAT) tries with $(N) random numbers"
+	@echo "(Change times looped with REPEAT)"
+	@echo "(Change number of arguments with N)"
+	@$(RM) $(OUT)
+#l: leaks
+#leaks: all
+#	@clear
+#	valgrind --leak-check=full ./$(NAME) 1 3 2
+
+n: norminette
+norminette:
+	@echo "norminette | grep Error\n"
+	@if norminette | grep -q "Error"; then norminette | grep "Error" | sed 's/Error:/  Error:/'; else echo "$(GREEN)Everything OK!$(RESET)"; fi
 
 #MESSAGES
 
@@ -109,4 +134,4 @@ msg_fclean_start:
 msg_fclean_end:
 	@echo "$(GREEN)Push_swap cleaned$(RESET)"
 
-.PHONY: all clean fclean re exec leaks a c f r e l msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
+.PHONY: all clean fclean re exec loop norminette a c f r e l n msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
