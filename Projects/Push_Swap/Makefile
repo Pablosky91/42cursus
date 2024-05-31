@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/05/30 20:54:27 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/05/31 15:29:02 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -102,7 +102,7 @@ exec: all
 #	@echo "-------"
 
 l: loop
-loop:
+loop: all
 	@clear
 	@for i in $$(seq $(REPEAT)); do ./$(NAME) $$(seq 1000 | sort -R | tail -$(N)) | wc -l >> $(OUT); done
 	@echo "$(YELLOW)Max: $$(sort $(OUT) | tail -1) move/s$(RESET)"
@@ -117,8 +117,8 @@ loop:
 
 n: norminette
 norminette:
-	@echo "norminette | grep Error\n"
-	@if norminette | grep -q "Error"; then norminette | grep "Error" | sed 's/Error:/  Error:/'; else echo "$(GREEN)Everything OK!$(RESET)"; fi
+	@echo "norminette | grep Error"
+	@if norminette | grep -q "Error"; then echo "\n$(RED)$$(norminette | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
 
 #MESSAGES
 
