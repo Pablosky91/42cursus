@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/05/31 15:29:02 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/06/11 18:33:30 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,21 @@ OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 
 MAKEFLAGS = --no-print-directory
 
-ARG = 3 2 1
+#AB
+#CD
+
+#A->B:2 mid
+#A->C:1 high
+#A->D:3 low
+
+#B->A:4 high
+#B->C:5 mid
+#B->D:6 low
+
+#D->B:7
+#C->A:8
+
+ARG = 17 14 3 2 16 4 20 9 27 23 8 24 15 11 21 22 10 7 18 19 12 1 26 13 5 25 6
 N = 3
 REPEAT = 10
 
