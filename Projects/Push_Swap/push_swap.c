@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/06/11 18:45:43 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/06/18 18:55:02 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,14 @@ void	show_stacks(t_stack *stack_a, t_stack *stack_b)
 	{
 		if (stack_a)
 		{
-			ft_printf("%i ", stack_a->content);
+			ft_printf("%i ", stack_a->index);
 			stack_a = stack_a->next;
 		}
 		else
 			ft_printf("  ");
 		if (stack_b)
 		{
-			ft_printf("%i\n", stack_b->content);
+			ft_printf("%i\n", stack_b->index);
 			stack_b = stack_b->next;
 		}
 		else
@@ -115,7 +115,7 @@ int	main(int argc, char **argv)
 
 //high 4, mid 5, low 6
 //high 1, mid 2, low 3
-	move(&stack_a, &stack_b, 2);
+	/* move(&stack_a, &stack_b, 2);
 	move(&stack_a, &stack_b, 2);
 	move(&stack_a, &stack_b, 3);
 	move(&stack_a, &stack_b, 3);
@@ -197,7 +197,7 @@ int	main(int argc, char **argv)
 	move(&stack_a, &stack_b, 4);
 	move(&stack_a, &stack_b, 5);
 	move(&stack_a, &stack_b, 4);
-	show_stacks(stack_a, stack_b);
+	show_stacks(stack_a, stack_b); */
 
 
 

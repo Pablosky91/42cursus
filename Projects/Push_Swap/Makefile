@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/06/11 18:33:30 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/06/18 18:57:09 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,7 @@ re: fclean all
 e: exec
 exec: all
 	@clear
-	@./$(NAME) $(ARG) > $(OUT)
+	@-./$(NAME) $(ARG) > $(OUT)
 	@cat $(OUT)
 	@echo "$(YELLOW)$$(cat $(OUT) | wc -l) move/s$(RESET)"
 	@echo "(Change arguments with ARG)"

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:48:53 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/09 20:08:54 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:00:35 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ static t_stack	*ps_new(int content)
 	if (!node)
 		return (0);
 	node->content = content;
+	node->index = 0;
 	node->next = 0;
 	return (node);
 }
@@ -88,6 +89,7 @@ static t_stack	*ps_new(int content)
 static int	ps_add_back(t_stack **lst, int content)
 {
 	t_stack	*aux;
+	t_stack	*prev;
 	t_stack	*new_node;
 
 	if (!lst)
@@ -95,20 +97,22 @@ static int	ps_add_back(t_stack **lst, int content)
 	new_node = ps_new(content);
 	if (!new_node)
 		return (0);
-	aux = *lst;
 	if (!*lst)
-		*lst = new_node;
-	else
+		return (*lst = new_node, 1);
+	aux = *lst;
+	while (aux)
 	{
-		while (aux->next)
-		{
-			if (aux->content == content)
-				return (free(new_node), 0);
-			aux = aux->next;
-		}
-		if (aux->content == content)
+		if (aux->content < content)
+			new_node->index++;
+		else if (aux->content > content)
+			aux->index++;
+		else
 			return (free(new_node), 0);
-		aux->next = new_node;
+		prev = aux;
+		aux = aux->next;
 	}
+	prev->next = new_node;
 	return (1);
 }
+
+// 6 4 2 3 5 1
