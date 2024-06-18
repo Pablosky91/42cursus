@@ -6,17 +6,17 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:48:53 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/06/18 19:00:35 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:21:22 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static t_stack	*ps_new(int content);
-static int		ps_add_back(t_stack **lst, int content);
-static int		better_atoi(char *str, int *num);
+static bool		ps_add_back(t_stack **lst, int content);
+static bool		better_atoi(char *str, int *num);
 
-int	read_data(t_stack **stack, int argc, char **argv)
+bool	read_data(t_stack **stack, int argc, char **argv)
 {
 	int		i;
 	int		j;
@@ -31,19 +31,19 @@ int	read_data(t_stack **stack, int argc, char **argv)
 		while (split[j])
 		{
 			if (!better_atoi(split[j], &num))
-				return (free(split[j]), free(split), 0);
+				return (free(split[j]), free(split), false);
 			if (!ps_add_back(stack, num))
-				return (free(split[j]), free(split), 0);
+				return (free(split[j]), free(split), false);
 			free(split[j]);
 			j++;
 		}
 		free(split);
 		i++;
 	}
-	return (1);
+	return (true);
 }
 
-static int	better_atoi(char *str, int *num)
+static bool	better_atoi(char *str, int *num)
 {
 	long	result;
 	int		i;
@@ -57,19 +57,19 @@ static int	better_atoi(char *str, int *num)
 		if (str[i] == '-')
 			sign = -1;
 		if (!str[i + 1])
-			return (0);
+			return (false);
 		i++;
 	}
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return (0);
+			return (false);
 		result = result * 10 + str[i++] - '0';
 	}
 	if (result * sign < INT_MIN || result * sign > INT_MAX)
-		return (0);
+		return (false);
 	*num = result * sign;
-	return (1);
+	return (true);
 }
 
 static t_stack	*ps_new(int content)
@@ -86,19 +86,19 @@ static t_stack	*ps_new(int content)
 }
 
 //TODO maybe if !lst, lst = 0
-static int	ps_add_back(t_stack **lst, int content)
+static bool	ps_add_back(t_stack **lst, int content)
 {
 	t_stack	*aux;
 	t_stack	*prev;
 	t_stack	*new_node;
 
 	if (!lst)
-		return (0);
+		return (false);
 	new_node = ps_new(content);
 	if (!new_node)
-		return (0);
+		return (false);
 	if (!*lst)
-		return (*lst = new_node, 1);
+		return (*lst = new_node, true);
 	aux = *lst;
 	while (aux)
 	{
@@ -107,12 +107,12 @@ static int	ps_add_back(t_stack **lst, int content)
 		else if (aux->content > content)
 			aux->index++;
 		else
-			return (free(new_node), 0);
+			return (free(new_node), false);
 		prev = aux;
 		aux = aux->next;
 	}
 	prev->next = new_node;
-	return (1);
+	return (true);
 }
 
 // 6 4 2 3 5 1
