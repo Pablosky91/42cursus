@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/06/18 18:57:09 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/06/22 00:40:16 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ RM = rm -rf
 OUT = out
 
 CC = gcc
-CFLAGS = #-Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -g3# -Wall -Wextra -Werror -fsanitize=address
 
 SOURCES =	push_swap.c\
 			algorithm.c\
