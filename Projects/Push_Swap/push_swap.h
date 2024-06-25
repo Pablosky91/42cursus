@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/06/18 19:59:54 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/06/25 23:02:53 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,34 @@ typedef struct s_stack
 	int				content;
 	unsigned int	index;
 	struct s_stack	*next;
+	struct s_stack	*prev;
 }	t_stack;
+
+typedef struct s_data
+{
+	t_stack			*top_a;
+	t_stack			*bot_a;
+	t_stack			*top_b;
+	t_stack			*bot_b;
+	unsigned int	size;
+}	t_data;
+
+typedef enum e_location
+{
+	top_a = 0,
+	bot_a = 1,
+	top_b = 2,
+	bot_b = 3
+}	t_location;
+
+typedef struct s_half
+{
+	t_location	location;
+	int			size;
+	int			min;
+	int			mid;//compare <= (min+max)/2
+	int			max;
+}	t_half;
 
 typedef enum e_move
 {
@@ -39,8 +66,8 @@ typedef enum e_move
 	rrr = 10
 }	t_move;
 
-void	moves(t_stack **stack_a, t_stack **stack_b, t_move move);
-bool	read_data(t_stack **stack, int argc, char **argv);
-void	sort(t_stack **stack_a, t_stack **stack_b);
+void	moves(t_data *data, t_move move);
+bool	read_data(t_data *data, int argc, char **argv);
+void	sort(t_data *data);
 
 #endif

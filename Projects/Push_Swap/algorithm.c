@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/06/18 19:14:18 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/06/25 22:54:59 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,54 +19,54 @@
 // 3 1 2 -> ra
 // 3 2 1 -> sa rra
 //sorts the three items in stack_a
-void	sort_three(t_stack **stk_a, t_stack **stk_b, bool is_b)
+void	sort_three(t_data *data, bool is_b)
 {
-	t_stack	**stack;
+	t_stack	*stack;
 	int		first;
 	int		second;
 	int		third;
 
-	stack = stk_a;
+	stack = data->top_a;
 	if (is_b)
-		stack = stk_b;
-	if (!(*stack) || !(*stack)->next || !(*stack)->next->next
-		|| (*stack)->next->next->next)
+		stack = data->top_b;
+	if (!stack || !stack->next || !stack->next->next
+		|| stack->next->next->next)
 		return ;
-	first = (*stack)->content;
-	second = (*stack)->next->content;
-	third = (*stack)->next->next->content;
+	first = stack->content;
+	second = stack->next->content;
+	third = stack->next->next->content;
 	if (first < second && second > third && first < third)
-		return (moves(stk_a, stk_b, sa + is_b), moves(stk_a, stk_b, ra + is_b));
+		return (moves(data, sa + is_b), moves(data, ra + is_b));
 	if (first > second && second < third && first < third)
-		return (moves(stk_a, stk_b, sa + is_b));
+		return (moves(data, sa + is_b));
 	if (first < second && second > third && first > third)
-		return (moves(stk_a, stk_b, rra + is_b));
+		return (moves(data, rra + is_b));
 	if (first > second && second < third && first > third)
-		return (moves(stk_a, stk_b, ra + is_b));
+		return (moves(data, ra + is_b));
 	if (first > second && second > third)
-		return (moves(stk_a, stk_b, sa + is_b),
-			moves(stk_a, stk_b, rra + is_b));
+		return (moves(data, sa + is_b),
+			moves(data, rra + is_b));
 }
 
-void	sort_two(t_stack **stk_a, t_stack **stk_b, bool is_b)
+void	sort_two(t_data *data, bool is_b)
 {
-	t_stack	**stack;
+	t_stack	*stack;
 	int		first;
 	int		second;
 
-	stack = stk_a;
+	stack = data->top_a;
 	if (is_b)
-		stack = stk_b;
-	if (!(*stack) || !(*stack)->next || (*stack)->next->next)
+		stack = data->top_b;
+	if (!stack || !stack->next || stack->next->next)
 		return ;
-	first = (*stack)->content;
-	second = (*stack)->next->content;
+	first = stack->content;
+	second = stack->next->content;
 	if (first > second)
-		moves(stk_a, stk_b, sa + is_b);
+		moves(data, sa + is_b);
 }
 
-void	sort(t_stack **stack_a, t_stack **stack_b)
+void	sort(t_data *data)
 {
-	sort_two(stack_a, stack_b, false);
-	sort_three(stack_a, stack_b, false);
+	sort_two(data, false);
+	sort_three(data, false);
 }

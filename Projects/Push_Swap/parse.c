@@ -6,17 +6,17 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:48:53 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/06/18 19:21:22 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/06/25 23:03:21 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static t_stack	*ps_new(int content);
-static bool		ps_add_back(t_stack **lst, int content);
+static bool		ps_add_back(t_data *data, int content);
 static bool		better_atoi(char *str, int *num);
 
-bool	read_data(t_stack **stack, int argc, char **argv)
+bool	read_data(t_data *data, int argc, char **argv)
 {
 	int		i;
 	int		j;
@@ -32,8 +32,9 @@ bool	read_data(t_stack **stack, int argc, char **argv)
 		{
 			if (!better_atoi(split[j], &num))
 				return (free(split[j]), free(split), false);
-			if (!ps_add_back(stack, num))
+			if (!ps_add_back(data, num))
 				return (free(split[j]), free(split), false);
+				data->size++;
 			free(split[j]);
 			j++;
 		}
@@ -82,24 +83,26 @@ static t_stack	*ps_new(int content)
 	node->content = content;
 	node->index = 0;
 	node->next = 0;
+	node->prev = 0;
 	return (node);
 }
 
 //TODO maybe if !lst, lst = 0
-static bool	ps_add_back(t_stack **lst, int content)
+static bool	ps_add_back(t_data *data, int content)
 {
 	t_stack	*aux;
 	t_stack	*prev;
 	t_stack	*new_node;
 
-	if (!lst)
-		return (false);
+	/* if (!data->top_a)
+		return (false); */
 	new_node = ps_new(content);
 	if (!new_node)
 		return (false);
-	if (!*lst)
-		return (*lst = new_node, true);
-	aux = *lst;
+	if (!data->top_a)
+		return (data->top_a = new_node, data->bot_a = new_node, true);
+	aux = data->top_a;
+	prev = 0;
 	while (aux)
 	{
 		if (aux->content < content)
@@ -112,6 +115,8 @@ static bool	ps_add_back(t_stack **lst, int content)
 		aux = aux->next;
 	}
 	prev->next = new_node;
+	new_node->prev = prev;
+	data->bot_a = new_node;
 	return (true);
 }
 
