@@ -3,7 +3,10 @@ First time:
   3 numbers: always 8 moves
   5 numbers: always 16 moves
   100 numbers: always 842 moves
-  500 numbers: always 5600 moves
+  500 numbers: always 5.600 moves
+  1.000 numbers: 12.370 moves
+  10.000 numbers: 161.414 moves
+  100.000 numbers: 2.004.196 moves
 ______________________________
 enum TOP_A BOT_A TOP_B BOT_B
 structure: list of numbers, position, size, min, max, (calc mid)

@@ -6,37 +6,38 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/06/28 20:56:50 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/06/28 22:14:28 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-//TODO content index 2 3
-// 1 2 3 -> done
-// 1 3 2 -> sa ra
-// 2 1 3 -> sa
-// 2 3 1 -> rra
-// 3 1 2 -> ra
-// 3 2 1 -> sa rra
-//sorts the three items in stack_a
-//TODO remove is_b and the check for 3 numbers
+/*
+Sorts the three items in a stack.
+If is_b is false, the stack to sort is stack_a.
+If is_b is true, the stack to sort is stack_b.
+Movements:
+0 1 2 -> done
+0 2 1 -> swap rotate
+1 0 2 -> swap
+1 2 0 -> reverse rotate
+2 0 1 -> rotate
+2 1 0 -> swap reverse rotate
+*/
 void	sort_three(t_data *data, bool is_b)
 {
-	t_stack	*stack;
-	int		first;
-	int		second;
-	int		third;
+	t_stack			*stack;
+	unsigned int	first;
+	unsigned int	second;
+	unsigned int	third;
 
-	stack = data->top_a;
 	if (is_b)
 		stack = data->top_b;
-	if (!stack || !stack->next || !stack->next->next
-		|| stack->next->next->next)
-		return ;
-	first = stack->content;
-	second = stack->next->content;
-	third = stack->next->next->content;
+	else
+		stack = data->top_a;
+	first = stack->index;
+	second = stack->next->index;
+	third = stack->next->next->index;
 	if (first < second && second > third && first < third)
 		return (moves(data, sa + is_b), moves(data, ra + is_b));
 	if (first > second && second < third && first < third)
@@ -46,29 +47,68 @@ void	sort_three(t_data *data, bool is_b)
 	if (first > second && second < third && first > third)
 		return (moves(data, ra + is_b));
 	if (first > second && second > third)
-		return (moves(data, sa + is_b),
-			moves(data, rra + is_b));
+		return (moves(data, sa + is_b), moves(data, rra + is_b));
 }
-
-//TODO remove is_b and the check for 2 numbers
+/*
+Sorts the three items in a stack.
+If is_b is false, the stack to sort is stack_a.
+If is_b is true, the stack to sort is stack_b.
+Movements:
+0 1 -> done
+1 0 -> swap
+*/
 void	sort_two(t_data *data, bool is_b)
 {
-	t_stack	*stack;
-	int		first;
-	int		second;
+	t_stack			*stack;
+	unsigned int	first;
+	unsigned int	second;
 
-	stack = data->top_a;
 	if (is_b)
 		stack = data->top_b;
-	if (!stack || !stack->next || stack->next->next)
-		return ;
-	first = stack->content;
-	second = stack->next->content;
+	else
+		stack = data->top_a;
+	first = stack->index;
+	second = stack->next->index;
 	if (first > second)
 		moves(data, sa + is_b);
 }
+//TODO sort stack b descending
+/*
+Sorts 4, 5 or 6 numbers.
+Moves all but the 3 greatest to stack_b.
+Sorts both stacks.
+Pushes stack_b to stack_a.
+*/
+void	sort_few(t_data *data)
+{
+	unsigned int	pivot;
+	unsigned int	moved;
 
-void move_from_to(t_data *data, t_location from, bool is_min)
+	pivot = data->size - 3;
+	moved = 0;
+	while (moved < pivot)
+	{
+		if (data->top_a->index < pivot)
+		{
+			moves(data, pb);
+			moved++;
+		}
+		else
+			moves(data, ra);
+	}
+	sort_three(data, false);
+	if (pivot == 2)
+		sort_two(data, true);
+	else if (pivot == 3)
+		sort_three(data, true);
+	while (moved > 0)
+	{
+		moves(data, pa);
+		moved--;
+	}
+}
+
+void	move_from_to(t_data *data, t_location from, bool is_min)
 {
 	if (from == top_a && !is_min)
 		return (moves(data, ra));
@@ -121,7 +161,7 @@ void	recursive(t_data *data, t_half *half)
 {
 	unsigned int	i;
 	t_stack			*aux;
-	
+
 	if (half->size <= 1 && half->location != top_a)
 		return (move_from_to(data, half->location, top_a));
 	else if (half->size <= 1)
@@ -139,7 +179,7 @@ void	recursive(t_data *data, t_half *half)
 		else if (half->location == bot_b)
 			aux = data->bot_b;
 		move_from_to(data, half->location, aux->index <= half->mid_num);
-		show_stacks(data);
+		//show_stacks(data);
 		i++;
 	}
 	recursive(data, half->max_half);
@@ -151,12 +191,13 @@ void	recursive(t_data *data, t_half *half)
 void	sort(t_data *data)
 {
 	t_half	*half;
-	if(data->size == 2)
+
+	if (data->size == 2)
 		return (sort_two(data, false));
-	if(data->size == 3)
+	if (data->size == 3)
 		return (sort_three(data, false));
-/* 	if(data->size == 5)
-		return (sort_five(data, false)); */
+	if (data->size >= 4 && data->size <= 6)
+		return (sort_few(data));
 	half = malloc(sizeof(t_half));
 	half->location = top_a;
 	half->size = data->size;

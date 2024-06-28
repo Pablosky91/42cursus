@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/06/28 20:58:06 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/06/28 21:41:24 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -122,8 +122,8 @@ exec: all
 l: loop
 loop: all
 	@clear
-	@for i in $$(seq $(REPEAT)); do ./$(NAME) $$(seq 1000 | sort -R | tail -$(N)) | wc -l >> $(OUT); done
-	@echo "$(YELLOW)Max: $$(sort $(OUT) | tail -1) move/s$(RESET)"
+	@for i in $$(seq $(REPEAT)); do ./$(NAME) $$(seq 100000 | sort -R | tail -$(N)) | wc -l >> $(OUT); done
+	@echo "$(YELLOW)Max: $$(sort -n $(OUT) | tail -1) move/s$(RESET)"
 	@echo "Test in $(REPEAT) tries with $(N) random numbers"
 	@echo "(Change times looped with REPEAT)"
 	@echo "(Change number of arguments with N)"

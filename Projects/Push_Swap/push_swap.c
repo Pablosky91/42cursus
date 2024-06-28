@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/06/28 20:56:15 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/06/28 21:58:02 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 static void		free_data(t_data *data);
 static void		error(t_data *data);
-
 
 //TODO delete
 void	show_stacks(t_data *data)
@@ -86,6 +85,7 @@ void	show_stacks(t_data *data)
 int	main(int argc, char **argv)
 {
 	t_data	*data = malloc(sizeof(t_data));
+	
 	data->top_a = 0;
 	data->bot_a = 0;
 	data->top_b = 0;
