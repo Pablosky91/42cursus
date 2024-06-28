@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/06/25 23:02:53 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/06/28 20:31:51 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_stack
 	struct s_stack	*prev;
 }	t_stack;
 
+//TODO same names as locations
 typedef struct s_data
 {
 	t_stack			*top_a;
@@ -44,11 +45,13 @@ typedef enum e_location
 
 typedef struct s_half
 {
-	t_location	location;
-	int			size;
-	int			min;
-	int			mid;//compare <= (min+max)/2
-	int			max;
+	t_location			location;
+	unsigned int		size;
+	unsigned int		min_num;
+	unsigned int		mid_num;
+	unsigned int		max_num;
+	struct s_half		*min_half;
+	struct s_half		*max_half;
 }	t_half;
 
 typedef enum e_move
@@ -65,6 +68,9 @@ typedef enum e_move
 	rrb = 9,
 	rrr = 10
 }	t_move;
+
+//TODO delete
+void	show_stacks(t_data *data);
 
 void	moves(t_data *data, t_move move);
 bool	read_data(t_data *data, int argc, char **argv);

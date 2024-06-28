@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/06/25 23:05:56 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/06/28 20:56:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,11 @@
 static void		free_data(t_data *data);
 static void		error(t_data *data);
 
-//TODO delete
-/* int	create_mockup_stack(t_stack **stack, int num1, int num2, int num3)
-{
-	if (!ps_add_back(stack, num1))
-		return (0);
-	if (!ps_add_back(stack, num2))
-		return (0);
-	if (!ps_add_back(stack, num3))
-		return (0);
-	return (1);
-} */
 
 //TODO delete
 void	show_stacks(t_data *data)
 {
-	t_stack	*aux1 = data->top_a;
+	/* t_stack	*aux1 = data->top_a;
 	t_stack	*aux2 = data->bot_a;
 	t_stack	*aux3 = data->top_b;
 	t_stack	*aux4 = data->bot_b;
@@ -69,133 +58,29 @@ void	show_stacks(t_data *data)
 		else
 			ft_printf("\t|\n");
 	}
-	ft_printf("\\-------------------------------/\n\n");
-}
+	ft_printf("\\-------------------------------/\n\n"); */
+	t_stack	*aux_a = data->top_a;
+	t_stack	*aux_b = data->top_b;
 
-//TODO delete
-void	move_3WQS(t_stack **stack_a, t_stack **stack_b, int kase)
-{
-/* 	switch (kase)
+	ft_printf("._______________.\n|   a\t|   b\t|\n|-------+-------|\n");
+	while (aux_a || aux_b)
 	{
-	case 1:
-		moves(stack_a, stack_b, ra);
-		break;
-	case 2:
-		moves(stack_a, stack_b, pb);
-		break;
-	case 3:
-		moves(stack_a, stack_b, pb);
-		moves(stack_a, stack_b, rb);
-		break;
-	case 4:
-		moves(stack_a, stack_b, pa);
-		break;
-	case 5:
-		moves(stack_a, stack_b, pa);
-		moves(stack_a, stack_b, ra);
-		break;
-	case 6:
-		moves(stack_a, stack_b, rb);
-		break;
-	case 7:
-		moves(stack_a, stack_b, rrb);
-		break;
-	case 8:
-		moves(stack_a, stack_b, rra);
-		break;
-	} */
-	//printf("\n");
-	//show_stacks(*stack_a, *stack_b);
-}
-
-//TODO delete
-void	test_3WQS()
-{
-//high 4, mid 5, low 6
-//high 1, mid 2, low 3
-	/* move_3WQS(&stack_a, &stack_b, 2);
-	move_3WQS(&stack_a, &stack_b, 2);
-	move_3WQS(&stack_a, &stack_b, 3);
-	move_3WQS(&stack_a, &stack_b, 3);
-	move_3WQS(&stack_a, &stack_b, 2);
-	move_3WQS(&stack_a, &stack_b, 3);
-	move_3WQS(&stack_a, &stack_b, 1);
-	move_3WQS(&stack_a, &stack_b, 3);
-	move_3WQS(&stack_a, &stack_b, 1);
-	move_3WQS(&stack_a, &stack_b, 1);
-	move_3WQS(&stack_a, &stack_b, 3);
-	move_3WQS(&stack_a, &stack_b, 1);
-	move_3WQS(&stack_a, &stack_b, 2);
-	move_3WQS(&stack_a, &stack_b, 2);
-	move_3WQS(&stack_a, &stack_b, 1);
-	move_3WQS(&stack_a, &stack_b, 1);
-	move_3WQS(&stack_a, &stack_b, 2);
-	move_3WQS(&stack_a, &stack_b, 3);
-	move_3WQS(&stack_a, &stack_b, 2);
-	move_3WQS(&stack_a, &stack_b, 1);
-	move_3WQS(&stack_a, &stack_b, 2);
-	move_3WQS(&stack_a, &stack_b, 3);
-	move_3WQS(&stack_a, &stack_b, 1);
-	move_3WQS(&stack_a, &stack_b, 2);
-	move_3WQS(&stack_a, &stack_b, 3);
-	move_3WQS(&stack_a, &stack_b, 1);
-	move_3WQS(&stack_a, &stack_b, 3);
-	show_stacks(stack_a, stack_b);
-//group 1
-	move_3WQS(&stack_a, &stack_b, 3);
-	move_3WQS(&stack_a, &stack_b, 1);
-	move_3WQS(&stack_a, &stack_b, 2);
-	move_3WQS(&stack_a, &stack_b, 2);
-	move_3WQS(&stack_a, &stack_b, 3);
-	move_3WQS(&stack_a, &stack_b, 2);
-	move_3WQS(&stack_a, &stack_b, 3);
-	move_3WQS(&stack_a, &stack_b, 1);
-	move_3WQS(&stack_a, &stack_b, 1);
-	show_stacks(stack_a, stack_b);
-//group 1-1 (25 26 27)
-	move_3WQS(&stack_a, &stack_b, 1);
-	move_3WQS(&stack_a, &stack_b, 2);
-	move_3WQS(&stack_a, &stack_b, 3);
-	show_stacks(stack_a, stack_b);
-//retrieve group 1-1
-	move_3WQS(&stack_a, &stack_b, 8);//nada
-	move_3WQS(&stack_a, &stack_b, 4);
-	move_3WQS(&stack_a, &stack_b, 7);
-	move_3WQS(&stack_a, &stack_b, 4);
-	show_stacks(stack_a, stack_b);
-//group 1-2 (22 23 24)
-	move_3WQS(&stack_a, &stack_b, 6);
-	move_3WQS(&stack_a, &stack_b, 4);
-	move_3WQS(&stack_a, &stack_b, 5);
-	show_stacks(stack_a, stack_b);
-//retrieve group 1-2
-	move_3WQS(&stack_a, &stack_b, 8);
-	move_3WQS(&stack_a, &stack_b, 7);
-	move_3WQS(&stack_a, &stack_b, 4);
-	show_stacks(stack_a, stack_b);
-//group 1-3 (19 20 21)
-	move_3WQS(&stack_a, &stack_b, 7);
-	move_3WQS(&stack_a, &stack_b, 7);
-	move_3WQS(&stack_a, &stack_b, 4);
-	move_3WQS(&stack_a, &stack_b, 7);
-	move_3WQS(&stack_a, &stack_b, 5);
-	show_stacks(stack_a, stack_b);
-//retrieve group 1-3
-	move_3WQS(&stack_a, &stack_b, 8);
-	move_3WQS(&stack_a, &stack_b, 4);
-	show_stacks(stack_a, stack_b);
-
-//group 2
-	move_3WQS(&stack_a, &stack_b, 5);
-	move_3WQS(&stack_a, &stack_b, 6);
-	move_3WQS(&stack_a, &stack_b, 4);
-	move_3WQS(&stack_a, &stack_b, 6);
-	move_3WQS(&stack_a, &stack_b, 6);
-	move_3WQS(&stack_a, &stack_b, 5);
-	move_3WQS(&stack_a, &stack_b, 4);
-	move_3WQS(&stack_a, &stack_b, 5);
-	move_3WQS(&stack_a, &stack_b, 4);
-	show_stacks(stack_a, stack_b); */
+		if (aux_a)
+		{
+			ft_printf("| %i\t|", aux_a->index);
+			aux_a = aux_a->next;
+		}
+		else
+			ft_printf("|\t|");
+		if (aux_b)
+		{
+			ft_printf(" %i\t|\n", aux_b->index);
+			aux_b = aux_b->next;
+		}
+		else
+			ft_printf("\t|\n");
+	}
+	ft_printf("\\---------------/\n\n");
 }
 
 int	main(int argc, char **argv)

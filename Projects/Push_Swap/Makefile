@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/06/22 00:40:16 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/06/28 20:58:06 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,6 +93,10 @@ fclean: msg_fclean_start
 r: re
 re: fclean all
 
+o: once
+once: all
+	@./$(NAME) $$(seq 1000 | sort -R | tail -$(N))
+
 e: exec
 exec: all
 	@clear
@@ -148,4 +152,4 @@ msg_fclean_start:
 msg_fclean_end:
 	@echo "$(GREEN)Push_swap cleaned$(RESET)"
 
-.PHONY: all clean fclean re exec loop norminette a c f r e l n msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
+.PHONY: all clean fclean re once exec loop norminette a c f r o e l n msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end

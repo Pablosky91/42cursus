@@ -1,3 +1,10 @@
+First time:
+  2 numbers: always 4 moves
+  3 numbers: always 8 moves
+  5 numbers: always 16 moves
+  100 numbers: always 842 moves
+  500 numbers: always 5600 moves
+______________________________
 enum TOP_A BOT_A TOP_B BOT_B
 structure: list of numbers, position, size, min, max, (calc mid)
 is really bot? maybe compare size to actual stack size
@@ -14,42 +21,64 @@ BOT_A ->		max to TOP_A ( rra  )		mid to TOP_B ( rra  pb )		min to BOT_B (rra pb 
 TOP_B ->		max to TOP_A (  pa  )		mid to BOT_A (  pb  ra )		min to BOT_B (    rb   ) avg 1.7 (1/4)
 BOT_B ->		max to TOP_A (rrb pa)		mid to BOT_A (rrb pa ra)		min to TOP_B (   rrb   ) avg 2   (1/4)
 
+______________________________
+EXAMPLES OF DIVISIONS
+10 11 12 13
+size 4
+min 10
+mid 12
+max 14
 
-2-way 500
-250
-125
-63
-32
-16
-8
-4
-2
-1
+10 11
+size 2
+min 10
+mid 10
+max 11
 
-3-way 500
-167
-56
-19
-7
-3
-1
-
-2-way 100
-50
-25
-13
-7
-4
-2
-
-3-way 100
-34
-12
-4
-2
+12 13
+size 2
+min 12
+mid 12
+max 13
 
 
+10 11 12 13 14
+size 5
+min 10
+mid 12
+max 15
 
+10 11 12
+size 3
+min 10
+mid 11
+max 12
+
+13 14
+size 2
+min 13
+mid 13
+max 14
+
+
+x ... y
+size y - x + 1
+min x
+mid (y + x) / 2
+max y
+
+x ... z
+size (y - x) / 2 + 1
+min x
+mid 
+max (y + x) / 2
+
+w ... y
+size (y - x + 1) / 2
+min (y + x) / 2 + 1
+mid 
+max y
+______________________________
 
 v
 8
@@ -120,13 +149,7 @@ v
 7
 8
 
-
-
-
-
-
-
-
+______________________________
 
 v
 2
@@ -236,11 +259,11 @@ v
 4 3
 6 2
 ^
-8 
-9 
-A 
-B 
-C 
-D 
-E 
-F 
+8
+9
+A
+B
+C
+D
+E
+F
