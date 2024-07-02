@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/02 21:42:32 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/02 23:29:19 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,13 +187,14 @@ void	recursive(t_data *data, t_half *half)
 {
 	unsigned int	i;
 	t_stack			*aux;
-		//is bottom top?
+
+	//is bottom top?
 	if (half->location == bot_a && half->size == data->size_a)
 		half->location = top_a;
 	else if (half->location == bot_b && half->size == data->size_b)
 		half->location = top_b;
-	//ft_printf("%i %i-%i\n", half->location, half->min_num, half->max_num);
-	//show_stacks(data);
+
+	//simplify max
 	i = 0;
 	if (half->location == top_a)
 	{
@@ -202,12 +203,11 @@ void	recursive(t_data *data, t_half *half)
 			i++;
 			aux = aux->next;
 		}
-		while (aux && aux->index == half->max_num)
+		while (aux && half->size > 0 && aux->index == half->max_num)
 		{
 			aux = aux->prev;
 			half->max_num--;
 			half->size--;
-			//ft_printf("-ta\n");
 		}
 	}
 	if (half->location == bot_a)
@@ -218,9 +218,6 @@ void	recursive(t_data *data, t_half *half)
 			aux = aux->prev;
 			half->max_num--;
 			half->size--;
-			//ft_printf("-ba\n");
-			//moves(data, rra);
-			//show_stacks(data);
 			move_from_to(data, bot_a, false);
 		}
 	}
@@ -232,9 +229,6 @@ void	recursive(t_data *data, t_half *half)
 			aux = aux->next;
 			half->max_num--;
 			half->size--;
-			//ft_printf("-tb\n");
-			//moves(data, pa);
-			//show_stacks(data);
 			move_from_to(data, top_b, false);
 		}
 	}
@@ -246,53 +240,74 @@ void	recursive(t_data *data, t_half *half)
 			aux = aux->prev;
 			half->max_num--;
 			half->size--;
-			//ft_printf("-bb\n");
-			//moves(data, rrb);
-			//moves(data, pa);
-			//show_stacks(data);
 			move_from_to(data, bot_b, false);
 		}
 	}
 
-
+	//simplify min
+/* 	int n_mins = 0;
+	if (half->location == top_a)
+	{
+		aux = data->top_a;
+		while (aux && half->size > 0 && aux->index == half->min_num)
+		{
+			aux = aux->next;
+			half->min_num++;
+			half->size--;
+			n_mins++;
+			printf("min\n");
+			move_from_to(data, top_a, true);
+		}
+	} */
 
 
 
 
 	
-
+	if (half->size == 0)
+	{}
 	//base case 1
-	else if (half->size <= 1 && half->location != top_a)
-		return (move_from_to(data, half->location, top_a));
-	half->mid_num = (half->min_num + half->max_num) / 2;
-	if (half->size <= 1)
-		return ;
-	//base case 2
-	if (half->size == 2)
-		return (base_case_2(data, half));
-	//base case 3
-	if (half->size == 3)
-		base_case_3(data, half);
-	i = 0;
-	halve(half);
-	while (i < half->size)
+	else if (half->size == 1)
 	{
-		if (half->location == top_a)
-			aux = data->top_a;
-		else if (half->location == bot_a)
-			aux = data->bot_a;
-		else if (half->location == top_b)
-			aux = data->top_b;
-		else if (half->location == bot_b)
-			aux = data->bot_b;
-		move_from_to(data, half->location, aux->index <= half->mid_num);
-		//show_stacks(data);
-		i++;
+		if (half->location != top_a)
+			move_from_to(data, half->location, top_a);
 	}
-	recursive(data, half->max_half);
-	free(half->max_half);
-	recursive(data, half->min_half);
-	free(half->min_half);
+	//base case 2
+	else if (half->size == 2)
+		base_case_2(data, half);
+	//base case 3
+	/* if (half->size == 3)
+		base_case_3(data, half); */
+	else
+	{	
+		i = 0;
+		half->mid_num = (half->min_num + half->max_num) / 2;
+		halve(half);
+		while (i < half->size)
+		{
+			if (half->location == top_a)
+				aux = data->top_a;
+			else if (half->location == bot_a)
+				aux = data->bot_a;
+			else if (half->location == top_b)
+				aux = data->top_b;
+			else if (half->location == bot_b)
+				aux = data->bot_b;
+			move_from_to(data, half->location, aux->index <= half->mid_num);
+			//show_stacks(data);
+			i++;
+		}
+		recursive(data, half->max_half);
+		free(half->max_half);
+		recursive(data, half->min_half);
+		free(half->min_half);
+	}
+/* 	printf(" %i\n", n_mins);
+	while (n_mins >= 0)
+	{
+		move_from_to(data, top_b, false);
+		n_mins--;
+	} */
 }
 
 void	sort(t_data *data)
