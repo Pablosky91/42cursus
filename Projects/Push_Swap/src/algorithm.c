@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/06/28 22:14:28 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/02 16:59:40 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	sort_few(t_data *data)
 	unsigned int	pivot;
 	unsigned int	moved;
 
-	pivot = data->size - 3;
+	pivot = data->size_a - 3;
 	moved = 0;
 	while (moved < pivot)
 	{
@@ -162,6 +162,12 @@ void	recursive(t_data *data, t_half *half)
 	unsigned int	i;
 	t_stack			*aux;
 
+	//is bottom top?
+	if (half->location == bot_a && half->size == data->size_a)
+		half->location = top_a;
+	else if (half->location == bot_b && half->size == data->size_b)
+		half->location = top_b;
+	//base case 1
 	if (half->size <= 1 && half->location != top_a)
 		return (move_from_to(data, half->location, top_a));
 	else if (half->size <= 1)
@@ -192,18 +198,18 @@ void	sort(t_data *data)
 {
 	t_half	*half;
 
-	if (data->size == 2)
+	/* if (data->size_a == 2)
 		return (sort_two(data, false));
-	if (data->size == 3)
+	if (data->size_a == 3)
 		return (sort_three(data, false));
-	if (data->size >= 4 && data->size <= 6)
-		return (sort_few(data));
+	if (data->size_a >= 4 && data->size_a <= 6)
+		return (sort_few(data)); */
 	half = malloc(sizeof(t_half));
 	half->location = top_a;
-	half->size = data->size;
+	half->size = data->size_a;
 	half->min_num = 0;
-	half->max_num = data->size - 1;
-	half->mid_num = (data->size - 1) / 2;
+	half->max_num = data->size_a - 1;
+	half->mid_num = (data->size_a - 1) / 2;
 	recursive(data, half);
 	free(half);
 }

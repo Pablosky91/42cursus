@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:40:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/06/25 22:59:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/02 16:22:41 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,23 @@ void	moves(t_data *data, t_move move)
 	else if (move == ss)
 		return (ft_printf("ss\n"), swap(&data->top_a, &data->bot_a), swap(&data->top_b, &data->bot_b));
 	else if (move == pa)
+	{
+		if (data->size_b > 0)
+		{
+			data->size_a++;
+			data->size_b--;
+		}
 		return (ft_printf("pa\n"), push(&data->top_b, &data->bot_b, &data->top_a, &data->bot_a));
+	}
 	else if (move == pb)
+	{
+		if (data->size_a > 0)
+		{
+			data->size_a--;
+			data->size_b++;
+		}
 		return (ft_printf("pb\n"), push(&data->top_a, &data->bot_a, &data->top_b, &data->bot_b));
+	}
 	else if (move == ra)
 		return (ft_printf("ra\n"), rotate(&data->top_a, &data->bot_a));
 	else if (move == rb)

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/06/28 21:58:02 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:00:00 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	main(int argc, char **argv)
 	data->bot_a = 0;
 	data->top_b = 0;
 	data->bot_b = 0;
-	data->size = 0;
+	data->size_a = 0;
 	if (!read_data(data, argc, argv))
 		error(data);
 

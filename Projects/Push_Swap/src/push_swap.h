@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/06/28 20:31:51 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/02 16:00:24 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ typedef struct s_data
 	t_stack			*bot_a;
 	t_stack			*top_b;
 	t_stack			*bot_b;
-	unsigned int	size;
+	unsigned int	size_a;
+	unsigned int	size_b;
 }	t_data;
 
 typedef enum e_location
