@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/02 16:00:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/02 17:41:55 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,18 @@ typedef struct s_half
 
 typedef enum e_move
 {
-	sa = 0,
-	sb = 1,
-	ss = 2,
-	pa = 3,
-	pb = 4,
-	ra = 5,
-	rb = 6,
-	rr = 7,
-	rra = 8,
-	rrb = 9,
-	rrr = 10
+	no = 0,
+	sa = 1,
+	sb = 2,
+	ss = 3,
+	pa = 4,
+	pb = 5,
+	ra = 6,
+	rb = 7,
+	rr = 8,
+	rra = 9,
+	rrb = 10,
+	rrr = 11
 }	t_move;
 
 //TODO delete

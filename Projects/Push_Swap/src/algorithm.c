@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/02 16:59:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/02 18:57:21 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,31 @@ void	halve(t_half *half)
 	half->max_half->mid_num = half->max_half->max_num - half->max_half->size / 2;
 }
 
+void	base_case_2(t_data *data, t_half *half)
+{
+	const t_move	top_a_10[] = {sa, no};
+	const t_move	bot_a_01[] = {rra, rra, sa, no};
+	const t_move	top_b_01[] = {sb, pa, pa, no};
+	const t_move	bot_b_01[] = {rrb, rrb, pa, pa, no};
+	t_move			*aux;
+
+	if (half->location == top_a)
+		aux = (t_move *)top_a_10;
+	else if (half->location == bot_a)
+		aux = (t_move *)bot_a_01;
+	else if (half->location == top_b)
+		aux = (t_move *)top_b_01;
+	else if (half->location == bot_b)
+		aux = (t_move *)bot_b_01;
+	while (*aux)
+		moves(data, *aux++);
+}
+
+void	base_case_3(t_data *data, t_half *half)
+{
+	
+}
+
 		//system("clear");
 		//show_stacks(data);
 		//sleep(1);
@@ -172,6 +197,12 @@ void	recursive(t_data *data, t_half *half)
 		return (move_from_to(data, half->location, top_a));
 	else if (half->size <= 1)
 		return ;
+	//base case 2
+	/* if (half->size == 2)
+		return (base_case_2(data, half)); */
+	//base case 3
+	if (half->size == 3)
+		base_case_3(data, half);
 	i = 0;
 	halve(half);
 	while (i < half->size)
