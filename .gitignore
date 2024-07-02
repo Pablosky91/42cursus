@@ -3,5 +3,6 @@
 **/*.a
 **/.*
 *.pdf
+ignore
 
 push_swap

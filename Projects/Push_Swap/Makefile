@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/06/28 21:41:24 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/07/02 15:54:03 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,29 +33,19 @@ OUT = out
 CC = gcc
 CFLAGS = -g3# -Wall -Wextra -Werror -fsanitize=address
 
+SRC_DIR = src/
 SOURCES =	push_swap.c\
 			algorithm.c\
 			parse.c\
 			movements.c
 
 OBJ_DIR = obj/
-OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
+OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
+
+SOURCES := $(addprefix $(SRC_DIR), $(SOURCES))
 
 MAKEFLAGS = --no-print-directory
 
-#AB
-#CD
-
-#A->B:2 mid
-#A->C:1 high
-#A->D:3 low
-
-#B->A:4 high
-#B->C:5 mid
-#B->D:6 low
-
-#D->B:7
-#C->A:8
 
 ARG = 17 14 3 2 16 4 20 9 27 23 8 24 15 11 21 22 10 7 18 19 12 1 26 13 5 25 6
 N = 3
@@ -72,7 +62,7 @@ $(NAME): $(LIBFT) $(OBJECTS)
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
 
-$(OBJ_DIR)%.o: %.c | $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $^ $(LIBFT_FLAG) -I $(LIBFT_PATH) -o $@
 
 $(OBJ_DIR):
@@ -105,19 +95,6 @@ exec: all
 	@echo "$(YELLOW)$$(cat $(OUT) | wc -l) move/s$(RESET)"
 	@echo "(Change arguments with ARG)"
 	@$(RM) $(OUT)
-#	@echo "-------"
-#	@./$(NAME) 1 2 3
-#	@echo "-------"
-#	@./$(NAME) 1 3 2
-#	@echo "-------"
-#	@./$(NAME) 2 1 3
-#	@echo "-------"
-#	@./$(NAME) 2 3 1
-#	@echo "-------"
-#	@./$(NAME) 3 1 2
-#	@echo "-------"
-#	@./$(NAME) 3 2 1
-#	@echo "-------"
 
 l: loop
 loop: all
