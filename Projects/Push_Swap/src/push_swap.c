@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/02 17:00:00 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/02 22:03:01 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,25 @@ void	show_stacks(t_data *data)
 	t_stack	*aux_a = data->top_a;
 	t_stack	*aux_b = data->top_b;
 
-	ft_printf("._______________.\n|   a\t|   b\t|\n|-------+-------|\n");
+	ft_printf("╭───────╥───────╮\n│   a\t║   b\t│\n╞═══════╬═══════╡\n");
 	while (aux_a || aux_b)
 	{
 		if (aux_a)
 		{
-			ft_printf("| %i\t|", aux_a->index);
+			ft_printf("│ %i\t║", aux_a->index);
 			aux_a = aux_a->next;
 		}
 		else
-			ft_printf("|\t|");
+			ft_printf("│\t║");
 		if (aux_b)
 		{
-			ft_printf(" %i\t|\n", aux_b->index);
+			ft_printf(" %i\t│\n", aux_b->index);
 			aux_b = aux_b->next;
 		}
 		else
-			ft_printf("\t|\n");
+			ft_printf("\t│\n");
 	}
-	ft_printf("\\---------------/\n\n");
+	ft_printf("╰───────╨───────╯\n");
 }
 
 int	main(int argc, char **argv)

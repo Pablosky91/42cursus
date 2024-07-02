@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/02 21:41:41 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/02 21:42:32 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,7 +253,6 @@ void	recursive(t_data *data, t_half *half)
 			move_from_to(data, bot_b, false);
 		}
 	}
-	half->mid_num = (half->min_num + half->max_num) / 2;
 
 
 
@@ -265,6 +264,7 @@ void	recursive(t_data *data, t_half *half)
 	//base case 1
 	else if (half->size <= 1 && half->location != top_a)
 		return (move_from_to(data, half->location, top_a));
+	half->mid_num = (half->min_num + half->max_num) / 2;
 	if (half->size <= 1)
 		return ;
 	//base case 2
