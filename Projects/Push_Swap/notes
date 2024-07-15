@@ -17,6 +17,16 @@ Bottom is Top:
   1.000 numbers: 11.869 moves
   10.000 numbers: 156.414 moves
   100.000 numbers: 1.954.196 moves
+
+Simplify Max/Min + Case Bases 2/3
+  2 numbers (1000 tries): max 1 move
+  3 numbers (1000 tries): max 5 moves
+  5 numbers (1000 tries): max 12 moves
+  100 numbers (1000 tries): max 692 moves
+  500 numbers (100 tries): max 4.771 moves
+  1.000 numbers (100 tries): max 10.671 moves
+  10.000 numbers (10 tries): max 143.752 moves
+  100.000 numbers: 1.819.389 moves
 ______________________________
 enum TOP_A BOT_A TOP_B BOT_B
 structure: list of numbers, position, size, min, max, (calc mid)
@@ -33,7 +43,26 @@ TOP_A ->		max to BOT_A (  ra  )		mid to TOP_B (    pb   )		min to BOT_B (  pb rb
 BOT_A ->		max to TOP_A ( rra  )		mid to TOP_B ( rra  pb )		min to BOT_B (rra pb rb) avg 2   (1/4)
 TOP_B ->		max to TOP_A (  pa  )		mid to BOT_A (  pb  ra )		min to BOT_B (    rb   ) avg 1.7 (1/4)
 BOT_B ->		max to TOP_A (rrb pa)		mid to BOT_A (rrb pa ra)		min to TOP_B (   rrb   ) avg 2   (1/4)
+______________________________
+How to check all 3 size base cases
+if (half->size == 6 && half->location == bot_a) bottom_to_top(data, half);
+make e ARG="11 10 9   8 7 6   5 4 3   0 1 2"
+bot_a_012
+top_b_012
+top_a_210
+bot_b_012
 
+make e ARG="11 9 10   8 6 7   5 3 4   1 0 2"
+bot_a_102
+top_b_102
+top_a_201
+bot_b_102
+
+make e ARG="10 11 9   7 8 6   4 5 3   0 2 1"
+bot_a_021
+top_b_021
+top_a_120
+bot_b_021
 ______________________________
 EXAMPLES OF DIVISIONS
 10 11 12 13

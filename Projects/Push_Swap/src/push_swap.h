@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/02 17:41:55 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/15 14:36:42 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ typedef enum e_location
 
 typedef struct s_half
 {
-	t_location			location;
-	unsigned int		size;
-	unsigned int		min_num;
-	unsigned int		mid_num;
-	unsigned int		max_num;
-	struct s_half		*min_half;
-	struct s_half		*max_half;
+	t_location		location;
+	unsigned int	size;
+	unsigned int	min_num;
+	unsigned int	mid_num;
+	unsigned int	max_num;
+	struct s_half	*min_half;
+	struct s_half	*max_half;
 }	t_half;
 
 typedef enum e_move

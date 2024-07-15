@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/05 23:21:09 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/15 21:04:38 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,48 +220,95 @@ void	halve(t_half *half)
 void	base_case_2(t_data *data, t_half *half)
 {
 	const t_move	top_a_10[] = {sa, no};
-	const t_move	bot_a_01[] = {rra, rra, sa, no};
+	const t_move	bot_a_10[] = {rra, rra, sa, no};
 	const t_move	top_b_01[] = {sb, pa, pa, no};
-	const t_move	bot_b_01[] = {rrb, rrb, pa, pa, no};
+	const t_move	bot_b_10[] = {rrb, rrb, pa, pa, no};
 	t_move			*aux;
 
 	if (half->location == top_a)
 		aux = (t_move *)top_a_10;
 	else if (half->location == bot_a)
-		aux = (t_move *)bot_a_01;
+		aux = (t_move *)bot_a_10;
 	else if (half->location == top_b)
 		aux = (t_move *)top_b_01;
 	else if (half->location == bot_b)
-		aux = (t_move *)bot_b_01;
+		aux = (t_move *)bot_b_10;
 	while (*aux)
 		moves(data, *aux++);
 }
 
 void	base_case_3(t_data *data, t_half *half)
 {
-	(void) data;
-	(void) half;
+	const t_move	top_a_120[] = {pb, sa, pa, sa, no};
+	const t_move	top_a_201[] = {sa, pb, sa, pa, no};
+	const t_move	top_a_210[] = {sa, pb, sa, pa, sa, no};
+
+	const t_move	bot_a_021[] = {rra, rra, sa, rra, sa, no};
+	const t_move	bot_a_102[] = {rra, rra, pb, rra, sa, pa, no};
+	const t_move	bot_a_012[] = {rra, pb, rra, rra, sa, pa, no};
+
+	const t_move	top_b_021[] = {pa, pa, sa, pa, sa, no};
+	const t_move	top_b_102[] = {pa, sb, pa, sa, pa, no};
+	const t_move	top_b_012[] = {sb, pa, sb, pa, sa, pa, no};
+
+	const t_move	bot_b_021[] = {rrb, rrb, pa, rrb, pa, pa, no};
+	const t_move	bot_b_102[] = {rrb, rrb, sb, rrb, pa, pa, pa, no};
+	const t_move	bot_b_012[] = {rrb, rrb, rrb, pa, pa, pa, no};
+	t_move			*aux;
+
+	if (half->location == top_a)
+	{
+		if (get_first_stack(half, data)->index < get_first_stack(half, data)->next->index)
+			aux = (t_move *)top_a_120;
+		else if (get_first_stack(half, data)->next->index < get_first_stack(half, data)->next->next->index)
+			aux = (t_move *)top_a_201;
+		else
+			aux = (t_move *)top_a_210;
+	}
+	else if (half->location == bot_a)
+	{
+		if (get_first_stack(half, data)->index > get_first_stack(half, data)->prev->index)
+			aux = (t_move *)bot_a_102;
+		else if (get_first_stack(half, data)->prev->index > get_first_stack(half, data)->prev->prev->index)
+			aux = (t_move *)bot_a_021;
+		else
+			aux = (t_move *)bot_a_012;
+	}
+	else if (half->location == top_b)
+	{
+		if (get_first_stack(half, data)->index > get_first_stack(half, data)->next->index)
+			aux = (t_move *)top_b_102;
+		else if (get_first_stack(half, data)->next->index > get_first_stack(half, data)->next->next->index)
+			aux = (t_move *)top_b_021;
+		else
+			aux = (t_move *)top_b_012;
+	}
+	else if (half->location == bot_b)
+	{
+		if (get_first_stack(half, data)->index > get_first_stack(half, data)->prev->index)
+			aux = (t_move *)bot_b_102;
+		else if (get_first_stack(half, data)->prev->index > get_first_stack(half, data)->prev->prev->index)
+			aux = (t_move *)bot_b_021;
+		else
+			aux = (t_move *)bot_b_012;
+	}
+
+	while (*aux)
+		moves(data, *aux++);
 }
 
-		//system("clear");
-		//show_stacks(data);
-		//sleep(1);
-		/* if (half->location == top_a || half->location == top_b)
-			aux = aux->next;
-		else
-			aux = aux->prev; */
-void	recursive(t_data *data, t_half *half)
+void	bottom_to_top(t_data *data, t_half *half)
 {
-	unsigned int	i;
-	t_stack			*aux;
-
-	//is bottom top?
 	if (half->location == bot_a && half->size == data->size_a)
 		half->location = top_a;
 	else if (half->location == bot_b && half->size == data->size_b)
 		half->location = top_b;
+}
 
-	//simplify max
+void	simplify_max(t_data *data, t_half *half)
+{
+	t_stack	*aux;
+
 	aux = get_first_stack(half, data);
 	if (half->location == top_a)
 		while (stack_forward(&aux, half, data))
@@ -277,12 +324,38 @@ void	recursive(t_data *data, t_half *half)
 		if (half->location != top_a)
 			move_from_to(data, half->location, false);
 	}
-	//end simplify max
-	
-	
-	//simplify min
-/* 	int n_mins = 0;
-	if (half->location == top_a)
+}
+/*
+TOP_A -> first move to TOP_B, then to TOP_A
+BOT_A -> then to TOP_A
+TOP_B -> then to TOP_A
+BOT_B -> then to TOP_A
+*/
+unsigned int	simplify_min(t_data *data, t_half *half)
+{
+	t_stack	*aux;
+
+	unsigned int n_mins = 0;
+
+	aux = get_first_stack(half, data);
+	if (half->location != top_a)
+		while (stack_forward(&aux, half, data))
+			;
+
+	while (aux && half->size > 0 && aux->index == half->min_num)
+	{
+		if (half->location != top_a)
+			stack_backward(&aux, half);
+		else
+			stack_forward(&aux, half, data);
+		half->min_num++;
+		half->size--;
+		n_mins++;
+		if (half->location == top_a)
+			moves(data, pb);
+			//move_from_to(data, half->location, false);
+	}
+	/* if (half->location == top_a)
 	{
 		aux = data->top_a;
 		while (aux && half->size > 0 && aux->index == half->min_num)
@@ -293,10 +366,23 @@ void	recursive(t_data *data, t_half *half)
 			n_mins++;
 			printf("min\n");
 			move_from_to(data, top_a, true);
-		}
-	} */
+		} */
+	return n_mins;
+}
 
+		/*system("clear");
+		show_stacks(data);
+		sleep(1);*/
+void	recursive(t_data *data, t_half *half)
+{
+	unsigned int	i;
+	unsigned int	n_mins;
+	t_stack			*aux;
 
+	bottom_to_top(data, half);
+	simplify_max(data, half);
+	//TODO check if size == 0?
+	n_mins = simplify_min(data, half);
 
 	//base case 1
 	if (half->size == 1 && half->location != top_a)
@@ -307,8 +393,8 @@ void	recursive(t_data *data, t_half *half)
 	else if (half->size == 2)
 		base_case_2(data, half);
 	//base case 3
-	/* if (half->size == 3)
-		base_case_3(data, half); */
+	else if (half->size == 3)
+		base_case_3(data, half);
 	else
 	{
 		i = 0;
@@ -327,12 +413,14 @@ void	recursive(t_data *data, t_half *half)
 		free(half->min_half);
 		// TODO maybe just free(half); here instead
 	}
-/* 	printf(" %i\n", n_mins);
-	while (n_mins >= 0)
+// 	ft_printf("    %i\n", n_mins);
+	while (n_mins > 0)
 	{
-		move_from_to(data, top_b, false);
+		if (half->location == top_a)
+			half->location = top_b;
+		move_from_to(data, half->location, false);
 		n_mins--;
-	} */
+	}
 }
 
 void	sort(t_data *data)
