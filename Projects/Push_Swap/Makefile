@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/07/02 22:33:13 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/07/16 17:40:14 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,10 @@ SRC_DIR = src/
 SOURCES =	push_swap.c\
 			algorithm.c\
 			parse.c\
-			movements.c
+			movements.c\
+			base_cases.c\
+			get_stack.c\
+			simplify.c
 
 OBJ_DIR = obj/
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))

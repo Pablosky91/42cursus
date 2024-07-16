@@ -6,12 +6,12 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:48:53 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/02 16:00:11 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/16 15:07:54 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
+//TODO  ./checker_linux "" 1 | ./push_swap "" 1
 static t_stack	*ps_new(int content);
 static bool		ps_add_back(t_data *data, int content);
 static bool		better_atoi(char *str, int *num);

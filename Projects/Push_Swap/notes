@@ -44,6 +44,47 @@ BOT_A ->		max to TOP_A ( rra  )		mid to TOP_B ( rra  pb )		min to BOT_B (rra pb 
 TOP_B ->		max to TOP_A (  pa  )		mid to BOT_A (  pb  ra )		min to BOT_B (    rb   ) avg 1.7 (1/4)
 BOT_B ->		max to TOP_A (rrb pa)		mid to BOT_A (rrb pa ra)		min to TOP_B (   rrb   ) avg 2   (1/4)
 ______________________________
+
+100			x
+x				x
+
+x				50
+50			x
+
+25 25			25
+x					25
+
+13 13			12 12 12
+13 13			12
+
+7 7 6 6 6 6			6 6 6 6 6
+7 7							6 6 6
+
+4 4 3 3 3 3 3 3 3 3					3 3 3 3 3 3 3 3 3 3 3
+4 4 3 3 3 3									3 3 3 3 3
+
+______________________________
+100.000 numbers, 1.819.033 instructions     || 500 - 4617             || 100 - 661
+
+ra rb   combos					0												0											0
+rb ra   combos					1277										8											2
+rra rrb combos					0												0											0
+rrb rra combos					0												0											0
+
+ra rra combos						4294										19										3
+rra ra combos						737											1											1
+rb rrb combos						283											2											0
+rrb rb combos						4												0											0
+
+sa sb   combos					1674										8											2
+sb sa   combos					0												0											0
+
+sa sa   combos					0												0											0
+sb sb   combos					0												0											0
+
+pa pb   combos					3434										26										2
+pb pa   combos					128											0											1
+______________________________
 How to check all 3 size base cases
 if (half->size == 6 && half->location == bot_a) bottom_to_top(data, half);
 make e ARG="11 10 9   8 7 6   5 4 3   0 1 2"

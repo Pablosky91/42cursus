@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/15 14:36:42 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:28:21 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_half
 	t_location		location;
 	unsigned int	size;
 	unsigned int	min_num;
-	unsigned int	mid_num;
 	unsigned int	max_num;
 	struct s_half	*min_half;
 	struct s_half	*max_half;
@@ -77,5 +76,19 @@ void	show_stacks(t_data *data);
 void	moves(t_data *data, t_move move);
 bool	read_data(t_data *data, int argc, char **argv);
 void	sort(t_data *data);
+
+void	base_case_2(t_data *data, t_half *half);
+void	base_case_3(t_data *data, t_half *half);
+
+void	bottom_to_top(t_data *data, t_half *half);
+void	simplify_max(t_data *data, t_half *half);
+unsigned int	simplify_min(t_data *data, t_half *half);
+
+t_stack	*get_first_stack(t_half *half, t_data *data);
+bool	stack_forward(t_stack **stack, t_half *half, t_data *data);
+bool	stack_backward(t_stack **stack, t_half *half);
+
+
+
 
 #endif

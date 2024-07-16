@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/02 22:03:01 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:42:06 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,44 +20,6 @@ static void		error(t_data *data);
 //TODO delete
 void	show_stacks(t_data *data)
 {
-	/* t_stack	*aux1 = data->top_a;
-	t_stack	*aux2 = data->bot_a;
-	t_stack	*aux3 = data->top_b;
-	t_stack	*aux4 = data->bot_b;
-
-	ft_printf("._______________________________.\n| top a\t| bot a\t| top b\t| bot b\t|\n|-------+-------++------+-------|\n");
-	while (aux1 || aux2 || aux3 || aux4)
-	{
-		if (aux1)
-		{
-			ft_printf("| %i\t|", aux1->index);
-			aux1 = aux1->next;
-		}
-		else
-			ft_printf("|\t|");
-		if (aux2)
-		{
-			ft_printf(" %i\t||", aux2->index);
-			aux2 = aux2->prev;
-		}
-		else
-			ft_printf("\t||");
-		if (aux3)
-		{
-			ft_printf(" %i\t|", aux3->index);
-			aux3 = aux3->next;
-		}
-		else
-			ft_printf("\t|");
-		if (aux4)
-		{
-			ft_printf(" %i\t|\n", aux4->index);
-			aux4 = aux4->prev;
-		}
-		else
-			ft_printf("\t|\n");
-	}
-	ft_printf("\\-------------------------------/\n\n"); */
 	t_stack	*aux_a = data->top_a;
 	t_stack	*aux_b = data->top_b;
 
@@ -97,9 +59,9 @@ int	main(int argc, char **argv)
 
 
 
-	show_stacks(data);
+	//show_stacks(data);
 	sort(data);
-	show_stacks(data);
+	//show_stacks(data);
 
 
 
