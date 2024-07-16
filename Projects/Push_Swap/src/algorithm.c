@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/16 17:35:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/16 23:32:59 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ void	sort_three(t_data *data, bool is_b)
 	second = stack->next->index;
 	third = stack->next->next->index;
 	if (first < second && second > third && first < third)
-		return (moves(data, sa + is_b), moves(data, ra + is_b));
+		return (move(data, sa + is_b), move(data, ra + is_b));
 	if (first > second && second < third && first < third)
-		return (moves(data, sa + is_b));
+		return (move(data, sa + is_b));
 	if (first < second && second > third && first > third)
-		return (moves(data, rra + is_b));
+		return (move(data, rra + is_b));
 	if (first > second && second < third && first > third)
-		return (moves(data, ra + is_b));
+		return (move(data, ra + is_b));
 	if (first > second && second > third)
-		return (moves(data, sa + is_b), moves(data, rra + is_b));
+		return (move(data, sa + is_b), move(data, rra + is_b));
 }
 
 /*
@@ -71,7 +71,7 @@ void	sort_two(t_data *data, bool is_b)
 	first = stack->index;
 	second = stack->next->index;
 	if (first > second)
-		moves(data, sa + is_b);
+		move(data, sa + is_b);
 }
 
 //TODO sort stack b descending
@@ -92,11 +92,11 @@ void	sort_few(t_data *data)
 	{
 		if (data->top_a->index < pivot)
 		{
-			moves(data, pb);
+			move(data, pb);
 			moved++;
 		}
 		else
-			moves(data, ra);
+			move(data, ra);
 	}
 	sort_three(data, false);
 	if (pivot == 2)
@@ -105,7 +105,7 @@ void	sort_few(t_data *data)
 		sort_three(data, true);
 	while (moved > 0)
 	{
-		moves(data, pa);
+		move(data, pa);
 		moved--;
 	}
 }
@@ -113,21 +113,21 @@ void	sort_few(t_data *data)
 void	move_from_to(t_data *data, t_location from, bool is_min)
 {
 	if (from == top_a && !is_min)
-		return (moves(data, ra));
+		return (move(data, ra));
 	if (from == top_a && is_min)
-		return (moves(data, pb));
+		return (move(data, pb));
 	if (from == bot_a && !is_min)
-		return (moves(data, rra));
+		return (move(data, rra));
 	if (from == bot_a && is_min)
-		return (moves(data, rra), moves(data, pb));
+		return (move(data, rra), move(data, pb));
 	if (from == top_b && !is_min)
-		return (moves(data, pa));
+		return (move(data, pa));
 	if (from == top_b && is_min)
-		return (moves(data, rb));
+		return (move(data, rb));
 	if (from == bot_b && !is_min)
-		return (moves(data, rrb), moves(data, pa));
+		return (move(data, rrb), move(data, pa));
 	if (from == bot_b && is_min)
-		return (moves(data, rrb));
+		return (move(data, rrb));
 }
 
 void	halve(t_half *half)

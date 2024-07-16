@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:15:18 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/16 17:23:50 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:57:31 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ unsigned int	simplify_min(t_data *data, t_half *half)
 		half->size--;
 		n_mins++;
 		if (half->location == top_a)
-			moves(data, pb);
+			move(data, pb);
 	}
 	return (n_mins);
 }

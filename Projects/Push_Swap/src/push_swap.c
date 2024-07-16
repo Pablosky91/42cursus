@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/16 17:42:06 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/16 23:33:40 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	main(int argc, char **argv)
 	data->top_b = 0;
 	data->bot_b = 0;
 	data->size_a = 0;
+	data->move_list_first = 0;
+	data->move_list_last = 0;
 	if (!read_data(data, argc, argv))
 		error(data);
 
@@ -63,8 +65,7 @@ int	main(int argc, char **argv)
 	sort(data);
 	//show_stacks(data);
 
-
-
+	print_moves(data);
 	free_data(data);
 	return (0);
 }
@@ -72,15 +73,24 @@ int	main(int argc, char **argv)
 
 static void	free_data(t_data *data)
 {
-	t_stack	*aux;
-	t_stack	*copy;
+	t_stack		*aux_stack;
+	t_stack		*copy_stack;
+	t_move_list	*aux_move;
+	t_move_list	*copy_move;
 
-	aux = data->top_a;
-	while (aux)
+	aux_stack = data->top_a;
+	while (aux_stack)
 	{
-		copy = aux;
-		aux = aux->next;
-		free(copy);
+		copy_stack = aux_stack;
+		aux_stack = aux_stack->next;
+		free(copy_stack);
+	}
+	aux_move = data->move_list_first;
+	while (aux_move)
+	{
+		copy_move = aux_move;
+		aux_move = aux_move->next;
+		free(copy_move);
 	}
 	free(data);
 }

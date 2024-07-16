@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/07/16 17:40:14 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/07/16 23:32:36 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,8 @@ SOURCES =	push_swap.c\
 			movements.c\
 			base_cases.c\
 			get_stack.c\
-			simplify.c
+			simplify.c\
+			instructions.c
 
 OBJ_DIR = obj/
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:15:16 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/16 17:16:10 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/16 17:57:22 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	base_case_2(t_data *data, t_half *half)
 	else if (half->location == bot_b)
 		aux = (t_move *)bot_b_10;
 	while (*aux)
-		moves(data, *aux++);
+		move(data, *aux++);
 }
 
 void	base_case_3(t_data *data, t_half *half)
@@ -89,5 +89,5 @@ void	base_case_3(t_data *data, t_half *half)
 	}
 
 	while (*aux)
-		moves(data, *aux++);
+		move(data, *aux++);
 }

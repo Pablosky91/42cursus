@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:40:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/02 16:22:41 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/16 23:11:02 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,44 +17,46 @@ static void	push(t_stack **from, t_stack **from_bottom, t_stack **to, t_stack **
 static void	rotate(t_stack **top, t_stack **bot);
 static void	rev_rotate(t_stack **top, t_stack **bot);
 
-void	moves(t_data *data, t_move move)
+void	execute_move(t_data *data, t_move move)
 {
 	if (move == sa)
-		return (ft_printf("sa\n"), swap(&data->top_a, &data->bot_a));
+		return (swap(&data->top_a, &data->bot_a));
 	else if (move == sb)
-		return (ft_printf("sb\n"), swap(&data->top_b, &data->bot_b));
+		return (swap(&data->top_b, &data->bot_b));
 	else if (move == ss)
-		return (ft_printf("ss\n"), swap(&data->top_a, &data->bot_a), swap(&data->top_b, &data->bot_b));
+		return (swap(&data->top_a, &data->bot_a), swap(&data->top_b, &data->bot_b));
 	else if (move == pa)
-	{
-		if (data->size_b > 0)
-		{
-			data->size_a++;
-			data->size_b--;
-		}
-		return (ft_printf("pa\n"), push(&data->top_b, &data->bot_b, &data->top_a, &data->bot_a));
-	}
+		return (push(&data->top_b, &data->bot_b, &data->top_a, &data->bot_a));
 	else if (move == pb)
-	{
-		if (data->size_a > 0)
-		{
-			data->size_a--;
-			data->size_b++;
-		}
-		return (ft_printf("pb\n"), push(&data->top_a, &data->bot_a, &data->top_b, &data->bot_b));
-	}
+		return (push(&data->top_a, &data->bot_a, &data->top_b, &data->bot_b));
 	else if (move == ra)
-		return (ft_printf("ra\n"), rotate(&data->top_a, &data->bot_a));
+		return (rotate(&data->top_a, &data->bot_a));
 	else if (move == rb)
-		return (ft_printf("rb\n"), rotate(&data->top_b, &data->bot_b));
+		return (rotate(&data->top_b, &data->bot_b));
 	else if (move == rr)
-		return (ft_printf("rr\n"), rotate(&data->top_a, &data->bot_a), rotate(&data->top_b, &data->bot_b));
+		return (rotate(&data->top_a, &data->bot_a), rotate(&data->top_b, &data->bot_b));
 	else if (move == rra)
-		return (ft_printf("rra\n"), rev_rotate(&data->top_a, &data->bot_a));
+		return (rev_rotate(&data->top_a, &data->bot_a));
 	else if (move == rrb)
-		return (ft_printf("rrb\n"), rev_rotate(&data->top_b, &data->bot_b));
+		return (rev_rotate(&data->top_b, &data->bot_b));
 	else if (move == rrr)
-		return (ft_printf("rrr\n"), rev_rotate(&data->top_a, &data->bot_a), rev_rotate(&data->top_b, &data->bot_b));
+		return (rev_rotate(&data->top_a, &data->bot_a), rev_rotate(&data->top_b, &data->bot_b));
+}
+
+void	move(t_data *data, t_move move)
+{
+	if (move == pa && data->size_b > 0)
+	{
+		data->size_a++;
+		data->size_b--;
+	}
+	else if (move == pb && data->size_a > 0)
+	{
+		data->size_a--;
+		data->size_b++;
+	}
+	execute_move(data, move);
+	save_move(data, move);
 }
 
 static void	swap(t_stack **top, t_stack **bot)
