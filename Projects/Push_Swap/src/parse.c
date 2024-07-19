@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:48:53 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 19:43:59 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/19 20:28:26 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,9 @@ static t_stack	*ps_new(int content);
 static bool		ps_add_back(t_data *data, int content);
 static bool		better_atoi(char *str, int *num);
 
+/*
+TODO description
+*/
 bool	read_data(t_data *data, int argc, char **argv)
 {
 	int		i;
@@ -26,8 +29,9 @@ bool	read_data(t_data *data, int argc, char **argv)
 	i = 1;
 	while (i < argc)
 	{
-		split = ft_split(argv[i], ' ');
-		j = 0;
+		split = ((j = 0), ft_split(argv[i], ' '));
+		if (!split[0])
+			return (free(split), false);
 		while (split[j])
 		{
 			if (!better_atoi(split[j], &num))
@@ -44,6 +48,9 @@ bool	read_data(t_data *data, int argc, char **argv)
 	return (true);
 }
 
+/*
+TODO description
+*/
 static bool	better_atoi(char *str, int *num)
 {
 	long	result;
@@ -73,6 +80,9 @@ static bool	better_atoi(char *str, int *num)
 	return (true);
 }
 
+/*
+TODO description
+*/
 static t_stack	*ps_new(int content)
 {
 	t_stack	*node;
@@ -87,6 +97,9 @@ static t_stack	*ps_new(int content)
 	return (node);
 }
 
+/*
+TODO description
+*/
 static bool	ps_add_back(t_data *data, int content)
 {
 	t_stack	*aux;
@@ -98,7 +111,7 @@ static bool	ps_add_back(t_data *data, int content)
 		return (false);
 	if (!data->top_a)
 		return (data->top_a = new_node, data->bot_a = new_node, true);
-	aux = (prev = 0, data->top_a);
+	aux = ((prev = 0), data->top_a);
 	while (aux)
 	{
 		if (aux->content < content)

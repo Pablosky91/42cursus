@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 21:23:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 09:14:59 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/19 20:31:32 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 static void	printf_repeat(char *string, int repeat);
 static char	*get_string_move(t_move move);
 
+/*
+TODO description
+*/
 void	save_move(t_data *data, t_move move)
 {
 	t_move_list	*node;
@@ -44,6 +47,9 @@ void	save_move(t_data *data, t_move move)
 	}
 }
 
+/*
+Prints the whole list of moves to the standard output.
+*/
 void	print_moves(t_data *data)
 {
 	t_move_list	*list;
@@ -56,15 +62,21 @@ void	print_moves(t_data *data)
 	}
 }
 
-static void	printf_repeat(char *string, int repeat)
+/*
+Prints to the standard output the given string the given times.
+*/
+static void	printf_repeat(char *string, int times)
 {
-	while (repeat > 0)
+	while (times > 0)
 	{
 		ft_printf("%s", string);
-		repeat--;
+		times--;
 	}
 }
 
+/*
+Translates a t_move into a string.
+*/
 static char	*get_string_move(t_move move)
 {
 	if (move == sa)

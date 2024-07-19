@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 19:38:42 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/19 20:26:57 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 static void	divide(t_data *data, t_half *half);
 static void	conquer(t_data *data, t_half *half);
 
+/*
+TODO description
+*/
 void	sort(t_data *data)
 {
 	t_half	*half;
@@ -32,6 +35,29 @@ void	sort(t_data *data)
 }
 
 //TODO which file?
+/*
+TODO description
+*/
+void	move(t_data *data, t_move move)
+{
+	if (move == pa && data->size_b > 0)
+	{
+		data->size_a++;
+		data->size_b--;
+	}
+	else if (move == pb && data->size_a > 0)
+	{
+		data->size_a--;
+		data->size_b++;
+	}
+	execute_move(data, move);
+	save_move(data, move);
+}
+
+//TODO which file?
+/*
+TODO description
+*/
 void	move_from_to(t_data *data, t_location from, bool is_min)
 {
 	if (from == top_a && !is_min)
@@ -52,6 +78,9 @@ void	move_from_to(t_data *data, t_location from, bool is_min)
 		return (move(data, rrb));
 }
 
+/*
+TODO description
+*/
 static void	divide(t_data *data, t_half *half)
 {
 	unsigned int	i;
@@ -81,6 +110,9 @@ static void	divide(t_data *data, t_half *half)
 	}
 }
 
+/*
+TODO description
+*/
 static void	conquer(t_data *data, t_half *half)
 {
 	unsigned int	n_mins;
@@ -91,9 +123,9 @@ static void	conquer(t_data *data, t_half *half)
 	if (half->size == 0 || half->size == 1)
 		;
 	else if (half->size == 2)
-		base_case_2(data, half);
+		base_case_two(data, half);
 	else if (half->size == 3)
-		base_case_3(data, half);
+		base_case_three(data, half);
 	else
 	{
 		divide(data, half);

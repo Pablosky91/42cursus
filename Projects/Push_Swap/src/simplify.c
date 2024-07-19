@@ -6,12 +6,15 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:15:18 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 19:35:32 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/19 20:28:36 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+/*
+TODO description
+*/
 void	bottom_to_top(t_data *data, t_half *half)
 {
 	if (half->location == bot_a && half->size == data->size_a)
@@ -20,6 +23,9 @@ void	bottom_to_top(t_data *data, t_half *half)
 		half->location = top_b;
 }
 
+/*
+TODO description
+*/
 void	simplify_max(t_data *data, t_half *half)
 {
 	t_stack	*aux;
@@ -41,6 +47,9 @@ void	simplify_max(t_data *data, t_half *half)
 	}
 }
 
+/*
+TODO description
+*/
 unsigned int	simplify_min_before(t_data *data, t_half *half)
 {
 	t_stack			*aux;
@@ -66,6 +75,9 @@ unsigned int	simplify_min_before(t_data *data, t_half *half)
 	return (n_mins);
 }
 
+/*
+TODO description
+*/
 void	simplify_min_after(t_data *data, t_half *half, unsigned int n_mins)
 {
 	while (n_mins > 0)

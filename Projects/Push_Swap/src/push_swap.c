@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 19:40:12 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/19 21:01:00 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,9 @@ void	show_stacks(t_data *data)
 
 int	main(int argc, char **argv)
 {
-	t_data	*data = malloc(sizeof(t_data));
+	t_data	*data;
 
+	data = malloc(sizeof(t_data));
 	data->top_a = 0;
 	data->bot_a = 0;
 	data->top_b = 0;
@@ -60,29 +61,12 @@ int	main(int argc, char **argv)
 	move(data, no);
 	if (!read_data(data, argc, argv))
 		error(data);
-
-
-	//show_stacks(data);
 	sort(data);
-	//show_stacks(data);
-
-/* 	move(data, pb);
-	move(data, ra);
-	move(data, rb);
-	move(data, rrb);
-	move(data, rra);
-	move(data, pa);
-
-	print_moves(data);
-	ft_printf("___\n"); */
 	cut_moves(data);
 	print_moves(data);
-
-
 	free_data(data);
 	return (0);
 }
-
 
 static void	free_data(t_data *data)
 {

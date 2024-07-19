@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 19:34:54 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/19 20:26:57 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,30 +81,46 @@ typedef struct s_half
 }	t_half;
 
 //TODO delete
-void	show_stacks(t_data *data);
+void			show_stacks(t_data *data);
 
-void	move(t_data *data, t_move move);
-bool	read_data(t_data *data, int argc, char **argv);
-void	sort(t_data *data);
-void	move_from_to(t_data *data, t_location from, bool is_min);
+//ALGORITHM
+void			sort(t_data *data);
+void			move(t_data *data, t_move move);
+void			move_from_to(t_data *data, t_location from, bool is_min);
 
-void	sort_three(t_data *data);
-void	sort_two(t_data *data);
+//BASE_CASES
+void			base_case_two(t_data *data, t_half *half);
+void			base_case_three(t_data *data, t_half *half);
 
-void	base_case_2(t_data *data, t_half *half);
-void	base_case_3(t_data *data, t_half *half);
+//CUT_MOVES
+void			cut_moves(t_data *data);
 
-void	bottom_to_top(t_data *data, t_half *half);
-void	simplify_max(t_data *data, t_half *half);
+//FEW_CASES
+void			sort_two(t_data *data);
+void			sort_three(t_data *data);
+
+//GET_STACK
+t_stack			*get_first_stack(t_data *data, t_half *half);
+bool			stack_forward(t_stack **stack, t_data *data, t_half *half);
+bool			stack_backward(t_stack **stack, t_half *half);
+
+//INSTRUCTIONS
+void			save_move(t_data *data, t_move move);
+void			print_moves(t_data *data);
+
+//MOVEMENTS
+void			execute_move(t_data *data, t_move move);
+
+//PARSE
+bool			read_data(t_data *data, int argc, char **argv);
+
+//PUSH_SWAP ¿?
+
+//SIMPLIFY
+void			bottom_to_top(t_data *data, t_half *half);
+void			simplify_max(t_data *data, t_half *half);
 unsigned int	simplify_min_before(t_data *data, t_half *half);
-void	simplify_min_after(t_data *data, t_half *half, unsigned int n_mins);
-
-t_stack	*get_first_stack(t_data *data, t_half *half);
-bool	stack_forward(t_stack **stack, t_data *data, t_half *half);
-bool	stack_backward(t_stack **stack, t_half *half);
-
-void	save_move(t_data *data, t_move move);
-void	print_moves(t_data *data);
-void	cut_moves(t_data *data);
+void			simplify_min_after(t_data *data, t_half *half,
+					unsigned int n_mins);
 
 #endif

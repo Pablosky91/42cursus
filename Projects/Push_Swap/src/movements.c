@@ -6,17 +6,21 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:40:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/16 23:11:02 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/19 20:28:16 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static void	swap(t_stack **stack, t_stack **bot);
-static void	push(t_stack **from, t_stack **from_bottom, t_stack **to, t_stack **to_bottom);
+static void	push(t_stack **from, t_stack **from_bottom,
+				t_stack **to, t_stack **to_bottom);
 static void	rotate(t_stack **top, t_stack **bot);
-static void	rev_rotate(t_stack **top, t_stack **bot);
+static void	reverse_rotate(t_stack **top, t_stack **bot);
 
+/*
+TODO description
+*/
 void	execute_move(t_data *data, t_move move)
 {
 	if (move == sa)
@@ -24,7 +28,8 @@ void	execute_move(t_data *data, t_move move)
 	else if (move == sb)
 		return (swap(&data->top_b, &data->bot_b));
 	else if (move == ss)
-		return (swap(&data->top_a, &data->bot_a), swap(&data->top_b, &data->bot_b));
+		return (swap(&data->top_a, &data->bot_a),
+			swap(&data->top_b, &data->bot_b));
 	else if (move == pa)
 		return (push(&data->top_b, &data->bot_b, &data->top_a, &data->bot_a));
 	else if (move == pb)
@@ -34,31 +39,20 @@ void	execute_move(t_data *data, t_move move)
 	else if (move == rb)
 		return (rotate(&data->top_b, &data->bot_b));
 	else if (move == rr)
-		return (rotate(&data->top_a, &data->bot_a), rotate(&data->top_b, &data->bot_b));
+		return (rotate(&data->top_a, &data->bot_a),
+			rotate(&data->top_b, &data->bot_b));
 	else if (move == rra)
-		return (rev_rotate(&data->top_a, &data->bot_a));
+		return (reverse_rotate(&data->top_a, &data->bot_a));
 	else if (move == rrb)
-		return (rev_rotate(&data->top_b, &data->bot_b));
+		return (reverse_rotate(&data->top_b, &data->bot_b));
 	else if (move == rrr)
-		return (rev_rotate(&data->top_a, &data->bot_a), rev_rotate(&data->top_b, &data->bot_b));
+		return (reverse_rotate(&data->top_a, &data->bot_a),
+			reverse_rotate(&data->top_b, &data->bot_b));
 }
 
-void	move(t_data *data, t_move move)
-{
-	if (move == pa && data->size_b > 0)
-	{
-		data->size_a++;
-		data->size_b--;
-	}
-	else if (move == pb && data->size_a > 0)
-	{
-		data->size_a--;
-		data->size_b++;
-	}
-	execute_move(data, move);
-	save_move(data, move);
-}
-
+/*
+TODO description
+*/
 static void	swap(t_stack **top, t_stack **bot)
 {
 	t_stack	*first;
@@ -81,7 +75,11 @@ static void	swap(t_stack **top, t_stack **bot)
 	*top = second;
 }
 
-static void	push(t_stack **from, t_stack **from_bottom, t_stack **to, t_stack **to_bottom)
+/*
+TODO description
+*/
+static void	push(t_stack **from, t_stack **from_bottom,
+				t_stack **to, t_stack **to_bottom)
 {
 	t_stack	*from_first;
 	t_stack	*from_second;
@@ -105,6 +103,9 @@ static void	push(t_stack **from, t_stack **from_bottom, t_stack **to, t_stack **
 	*to = from_first;
 }
 
+/*
+TODO description
+*/
 static void	rotate(t_stack **top, t_stack **bot)
 {
 	t_stack	*first;
@@ -124,7 +125,10 @@ static void	rotate(t_stack **top, t_stack **bot)
 	*bot = first;
 }
 
-static void	rev_rotate(t_stack **top, t_stack **bot)
+/*
+TODO description
+*/
+static void	reverse_rotate(t_stack **top, t_stack **bot)
 {
 	t_stack	*first;
 	t_stack	*penultimate;

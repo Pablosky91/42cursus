@@ -6,14 +6,14 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:13:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 19:17:00 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/19 20:26:11 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*
-Sorts the three items in a stack_a.
+Sorts the two items in a stack_a.
 Movements:
 0 1 -> done
 1 0 -> swap
