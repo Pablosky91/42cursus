@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:18:30 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/16 17:22:05 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/19 19:34:54 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 /*
 Returns the first stack of the given half->location
 */
-t_stack	*get_first_stack(t_half *half, t_data *data)
+t_stack	*get_first_stack(t_data *data, t_half *half)
 {
 	t_stack	*stack;
 
@@ -37,13 +37,13 @@ If the stack is null, it initialises to the first stack.
 If the stack were to exit the half, the stack is replaced by null.
 Returns true if the next/prev stack still is the same half.
 */
-bool	stack_forward(t_stack **stack, t_half *half, t_data *data)
+bool	stack_forward(t_stack **stack, t_data *data, t_half *half)
 {
 	t_stack	*aux;
 
 	aux = 0;
 	if (!(*stack))
-		*stack = get_first_stack(half, data);
+		*stack = get_first_stack(data, half);
 	else if (half->location == top_a || half->location == top_b)
 		*stack = (*stack)->next;
 	else

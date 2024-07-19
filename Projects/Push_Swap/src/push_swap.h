@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/16 23:34:38 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/19 19:34:54 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef enum e_location
 typedef struct s_move_list
 {
 	t_move				move;
-	unsigned int		quantity;
+	int					quantity;
 	struct s_move_list	*next;
 	struct s_move_list	*prev;
 }	t_move_list;
@@ -88,18 +88,23 @@ bool	read_data(t_data *data, int argc, char **argv);
 void	sort(t_data *data);
 void	move_from_to(t_data *data, t_location from, bool is_min);
 
+void	sort_three(t_data *data);
+void	sort_two(t_data *data);
+
 void	base_case_2(t_data *data, t_half *half);
 void	base_case_3(t_data *data, t_half *half);
 
 void	bottom_to_top(t_data *data, t_half *half);
 void	simplify_max(t_data *data, t_half *half);
-unsigned int	simplify_min(t_data *data, t_half *half);
+unsigned int	simplify_min_before(t_data *data, t_half *half);
+void	simplify_min_after(t_data *data, t_half *half, unsigned int n_mins);
 
-t_stack	*get_first_stack(t_half *half, t_data *data);
-bool	stack_forward(t_stack **stack, t_half *half, t_data *data);
+t_stack	*get_first_stack(t_data *data, t_half *half);
+bool	stack_forward(t_stack **stack, t_data *data, t_half *half);
 bool	stack_backward(t_stack **stack, t_half *half);
 
 void	save_move(t_data *data, t_move move);
 void	print_moves(t_data *data);
+void	cut_moves(t_data *data);
 
 #endif

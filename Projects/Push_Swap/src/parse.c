@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:48:53 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/16 15:07:54 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/19 19:43:59 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,22 +87,18 @@ static t_stack	*ps_new(int content)
 	return (node);
 }
 
-//TODO maybe if !lst, lst = 0
 static bool	ps_add_back(t_data *data, int content)
 {
 	t_stack	*aux;
 	t_stack	*prev;
 	t_stack	*new_node;
 
-	/* if (!data->top_a)
-		return (false); */
 	new_node = ps_new(content);
 	if (!new_node)
 		return (false);
 	if (!data->top_a)
 		return (data->top_a = new_node, data->bot_a = new_node, true);
-	aux = data->top_a;
-	prev = 0;
+	aux = (prev = 0, data->top_a);
 	while (aux)
 	{
 		if (aux->content < content)
@@ -119,5 +115,3 @@ static bool	ps_add_back(t_data *data, int content)
 	data->bot_a = new_node;
 	return (true);
 }
-
-// 6 4 2 3 5 1

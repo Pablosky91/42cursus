@@ -27,6 +27,16 @@ Simplify Max/Min + Case Bases 2/3
   1.000 numbers (100 tries): max 10.671 moves
   10.000 numbers (10 tries): max 143.752 moves
   100.000 numbers: 1.819.389 moves
+
+Operations cleanup
+  2 numbers (1000 tries): max 1 move
+  3 numbers (1000 tries): max 5 moves
+  5 numbers (1000 tries): max 11 moves
+  100 numbers (1000 tries): max 678 moves
+  500 numbers (100 tries): max 4.614 moves
+  1.000 numbers (100 tries): max 10.313 moves
+  10.000 numbers (10 tries): max 141.063 moves
+  100.000 numbers: 1.793.237 moves
 ______________________________
 enum TOP_A BOT_A TOP_B BOT_B
 structure: list of numbers, position, size, min, max, (calc mid)

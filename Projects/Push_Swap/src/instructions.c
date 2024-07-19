@@ -6,13 +6,13 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 21:23:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/16 23:39:05 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/19 09:14:59 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	printf_repeat(char *string, unsigned int repeat);
+static void	printf_repeat(char *string, int repeat);
 static char	*get_string_move(t_move move);
 
 void	save_move(t_data *data, t_move move)
@@ -56,7 +56,7 @@ void	print_moves(t_data *data)
 	}
 }
 
-static void	printf_repeat(char *string, unsigned int repeat)
+static void	printf_repeat(char *string, int repeat)
 {
 	while (repeat > 0)
 	{
