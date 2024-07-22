@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 08:41:51 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 21:02:49 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/22 18:08:36 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	delete_node(t_move_list *node);
 static int	get_lower(int a, int b);
 
 /*
-TODO description
+Checks for optimizations or redundant instructions in the solution.
 */
 void	cut_moves(t_data *data)
 {

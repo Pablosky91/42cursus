@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   few_cases.c                                        :+:      :+:    :+:   */
+/*   sort_few.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:13:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 20:26:11 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/22 20:30:04 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 /*
-Sorts the two items in a stack_a.
-Movements:
+Sorts the two items in stack_a.
+Moves:
 0 1 -> done
 1 0 -> swap
 */
@@ -31,7 +31,7 @@ void	sort_two(t_data *data)
 
 /*
 Sorts the three items in stack_a.
-Movements:
+Moves:
 0 1 2 -> done
 0 2 1 -> swap, rotate
 1 0 2 -> swap

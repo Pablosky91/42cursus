@@ -6,17 +6,37 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/22 17:02:15 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/22 21:28:04 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+	//INCLUDE LIBRARIES//
+
 # include "libft.h"
 # include <limits.h>
 # include <stdbool.h>
 
+	//ENUMS//
+
+/*
+Each of the possible locations of the stacks.
+They are top and bottom for stacks a and b.
+*/
+typedef enum e_location
+{
+	top_a = 0,
+	bot_a = 1,
+	top_b = 2,
+	bot_b = 3
+}	t_location;
+
+/*
+Each of the possible moves.
+An extra move "no", used to null-terminate arrays.
+*/
 typedef enum e_move
 {
 	no = 0,
@@ -33,14 +53,25 @@ typedef enum e_move
 	rrr = 11
 }	t_move;
 
-typedef enum e_location
-{
-	top_a = 0,
-	bot_a = 1,
-	top_b = 2,
-	bot_b = 3
-}	t_location;
+	//STRUCTS//
 
+/*
+Node of the stack of numbers.
+Contains the number provided by the user and the index of its final position.
+Points to the next and previous nodes.
+*/
+typedef struct s_node
+{
+	int				content;
+	unsigned int	index;
+	struct s_node	*next;
+	struct s_node	*prev;
+}	t_node;
+
+/*
+Node of a list of instructions.
+Contains the type of move and the consecutive quantity there are.
+*/
 typedef struct s_move_list
 {
 	t_move				move;
@@ -49,27 +80,12 @@ typedef struct s_move_list
 	struct s_move_list	*prev;
 }	t_move_list;
 
-typedef struct s_stack
-{
-	int				content;
-	unsigned int	index;
-	struct s_stack	*next;
-	struct s_stack	*prev;
-}	t_stack;
-
-//TODO same names as locations
-typedef struct s_data
-{
-	t_stack			*top_a;
-	t_stack			*bot_a;
-	t_stack			*top_b;
-	t_stack			*bot_b;
-	unsigned int	size_a;
-	unsigned int	size_b;
-	t_move_list		*move_list_first;
-	t_move_list		*move_list_last;
-}	t_data;
-
+/*
+Chunk of a stack to be divided and sorted.
+Contains its location and size, as well as its minimum and maximum numbers.
+It also contains a reference to two new halfs,
+	one for the lower numbers and the other for the higher ones.
+*/
 typedef struct s_half
 {
 	t_location		location;
@@ -80,47 +96,73 @@ typedef struct s_half
 	struct s_half	*max_half;
 }	t_half;
 
+/*
+The data for all the program.
+Contains the first and last node of each stack, as well as their size.
+It also contains the first and last instruction of he solution.
+*/
+typedef struct s_data
+{
+	t_node			*top_a;
+	t_node			*bot_a;
+	t_node			*top_b;
+	t_node			*bot_b;
+	unsigned int	size_a;
+	unsigned int	size_b;
+	t_move_list		*move_list_first;
+	t_move_list		*move_list_last;
+}	t_data;
+
+	//FUNCTIONS//
+
 //TODO delete
 void			show_stacks(t_data *data);
 
-//ALGORITHM
+	//ALGORITHM.C//
+
 void			sort(t_data *data);
 void			move(t_data *data, t_move move);
 void			move_from_to(t_data *data, t_location from, bool is_min);
 
-//BASE_CASES
+	//BASE_CASES.C//
+
 void			base_case_two(t_data *data, t_half *half, t_move *aux);
 void			base_case_three(t_data *data, t_half *half);
 
-//CUT_MOVES
+	//CUT_MOVES.C//
+
 void			cut_moves(t_data *data);
 
-//FEW_CASES
-void			sort_two(t_data *data);
-void			sort_three(t_data *data);
+	//EXECUTE_MOVE.C//
 
-//GET_STACK
-t_stack			*get_first_stack(t_data *data, t_half *half);
-bool			stack_forward(t_stack **stack, t_data *data, t_half *half);
-bool			stack_backward(t_stack **stack, t_half *half);
+void			execute_move(t_data *data, t_move move);
 
-//INSTRUCTIONS
+	//GET_NODE.C//
+
+t_node			*get_first_node(t_data *data, t_half *half);
+bool			node_forward(t_node **node, t_data *data, t_half *half);
+bool			node_backward(t_node **node, t_half *half);
+
+	//INSTRUCTIONS.C//
+
 void			save_move(t_data *data, t_move move);
 void			print_moves(t_data *data);
 
-//MOVEMENTS
-void			execute_move(t_data *data, t_move move);
+	//PARSE.C//
 
-//PARSE
 bool			read_data(t_data *data, int argc, char **argv);
 
-//PUSH_SWAP ¿?
+	//SIMPLIFY.C//
 
-//SIMPLIFY
 void			bottom_to_top(t_data *data, t_half *half);
 void			simplify_max(t_data *data, t_half *half);
 unsigned int	simplify_min_before(t_data *data, t_half *half);
 void			simplify_min_after(t_data *data, t_half *half,
 					unsigned int n_mins);
+
+	//SORT_FEW.C//
+
+void			sort_two(t_data *data);
+void			sort_three(t_data *data);
 
 #endif

@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   movements.c                                        :+:      :+:    :+:   */
+/*   execute_move.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:40:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 20:28:16 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:23:39 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	swap(t_stack **stack, t_stack **bot);
-static void	push(t_stack **from, t_stack **from_bottom,
-				t_stack **to, t_stack **to_bottom);
-static void	rotate(t_stack **top, t_stack **bot);
-static void	reverse_rotate(t_stack **top, t_stack **bot);
+static void	swap(t_node **node, t_node **bot);
+static void	push(t_node **from, t_node **from_bottom,
+				t_node **to, t_node **to_bottom);
+static void	rotate(t_node **top, t_node **bot);
+static void	reverse_rotate(t_node **top, t_node **bot);
 
 /*
-TODO description
+Updates the placement of the nodes executing the given move.
 */
 void	execute_move(t_data *data, t_move move)
 {
@@ -51,13 +51,13 @@ void	execute_move(t_data *data, t_move move)
 }
 
 /*
-TODO description
+Executes the swap move.
 */
-static void	swap(t_stack **top, t_stack **bot)
+static void	swap(t_node **top, t_node **bot)
 {
-	t_stack	*first;
-	t_stack	*second;
-	t_stack	*third;
+	t_node	*first;
+	t_node	*second;
+	t_node	*third;
 
 	if (!(*top) || !(*top)->next)
 		return ;
@@ -76,14 +76,14 @@ static void	swap(t_stack **top, t_stack **bot)
 }
 
 /*
-TODO description
+Executes the push move.
 */
-static void	push(t_stack **from, t_stack **from_bottom,
-				t_stack **to, t_stack **to_bottom)
+static void	push(t_node **from, t_node **from_bottom,
+				t_node **to, t_node **to_bottom)
 {
-	t_stack	*from_first;
-	t_stack	*from_second;
-	t_stack	*to_first;
+	t_node	*from_first;
+	t_node	*from_second;
+	t_node	*to_first;
 
 	if (!*from)
 		return ;
@@ -104,13 +104,13 @@ static void	push(t_stack **from, t_stack **from_bottom,
 }
 
 /*
-TODO description
+Executes the rotate move.
 */
-static void	rotate(t_stack **top, t_stack **bot)
+static void	rotate(t_node **top, t_node **bot)
 {
-	t_stack	*first;
-	t_stack	*second;
-	t_stack	*last;
+	t_node	*first;
+	t_node	*second;
+	t_node	*last;
 
 	if (!(*top) || !(*top)->next)
 		return ;
@@ -126,13 +126,13 @@ static void	rotate(t_stack **top, t_stack **bot)
 }
 
 /*
-TODO description
+Executes the reverse_rotate move.
 */
-static void	reverse_rotate(t_stack **top, t_stack **bot)
+static void	reverse_rotate(t_node **top, t_node **bot)
 {
-	t_stack	*first;
-	t_stack	*penultimate;
-	t_stack	*last;
+	t_node	*first;
+	t_node	*penultimate;
+	t_node	*last;
 
 	if (!(*top) || !(*top)->next)
 		return ;

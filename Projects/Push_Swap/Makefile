@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/07/19 19:20:26 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/07/22 20:56:56 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,16 +34,16 @@ CC = gcc
 CFLAGS = -g3 -Wall -Wextra -Werror -fsanitize=address
 
 SRC_DIR = src/
-SOURCES =	push_swap.c\
-			algorithm.c\
-			parse.c\
-			movements.c\
+SOURCES =	algorithm.c\
 			base_cases.c\
-			get_stack.c\
-			simplify.c\
-			instructions.c\
 			cut_moves.c\
-			few_cases.c
+			execute_move.c\
+			get_node.c\
+			instructions.c\
+			parse.c\
+			push_swap.c\
+			simplify.c\
+			sort_few.c
 
 OBJ_DIR = obj/
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))

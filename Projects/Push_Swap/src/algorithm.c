@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/22 17:01:47 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/22 20:47:54 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static void	divide(t_data *data, t_half *half);
 static void	conquer(t_data *data, t_half *half);
 
 /*
-TODO description
+Sorts all the nodes in stack_a.
+Divides the nodes in two halfs and sorts both of them.
 */
 void	sort(t_data *data)
 {
@@ -34,9 +35,9 @@ void	sort(t_data *data)
 	conquer(data, half);
 }
 
-//TODO which file?
 /*
-TODO description
+Executes the given move and saves it in the list.
+Updates the size of the stacks.
 */
 void	move(t_data *data, t_move move)
 {
@@ -54,9 +55,8 @@ void	move(t_data *data, t_move move)
 	save_move(data, move);
 }
 
-//TODO which file?
 /*
-TODO description
+Moves a node from the given location to the corresponding location.
 */
 void	move_from_to(t_data *data, t_location from, bool is_min)
 {
@@ -79,7 +79,8 @@ void	move_from_to(t_data *data, t_location from, bool is_min)
 }
 
 /*
-TODO description
+Divides the given half in two halfs.
+One half is for the lower numbers and the other for the higher ones.
 */
 static void	divide(t_data *data, t_half *half)
 {
@@ -88,14 +89,7 @@ static void	divide(t_data *data, t_half *half)
 	i = 0;
 	half->min_half = malloc(sizeof(t_half));
 	half->max_half = malloc(sizeof(t_half));
-	if (half->location != top_a)
-		half->max_half->location = top_a;
-	else
-		half->max_half->location = bot_a;
-	if (half->location != top_b)
-		half->min_half->location = top_b;
-	else
-		half->min_half->location = bot_b;
+
 	half->min_half->size = (half->size + 1) / 2;
 	half->min_half->min_num = half->min_num;
 	half->min_half->max_num = half->min_num + half->min_half->size - 1;
@@ -104,14 +98,15 @@ static void	divide(t_data *data, t_half *half)
 	half->max_half->max_num = half->max_num;
 	while (i < half->size)
 	{
-		move_from_to(data, half->location, get_first_stack(data, half)->index
+		move_from_to(data, half->location, get_first_node(data, half)->index
 			<= (half->min_num + half->max_num) / 2);
 		i++;
 	}
 }
 
 /*
-TODO description
+Recursive function that divides the half until it is too little.
+When the half is size 2 or 3, it sorts them directly to top_a.
 */
 static void	conquer(t_data *data, t_half *half)
 {

@@ -6,18 +6,18 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:48:53 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 20:28:26 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/22 20:32:59 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-//TODO  ./checker_linux "" 1 | ./push_swap "" 1
-static t_stack	*ps_new(int content);
+static t_node	*ps_new(int content);
 static bool		ps_add_back(t_data *data, int content);
 static bool		better_atoi(char *str, int *num);
 
 /*
-TODO description
+Parses the arguments of the program to be nodes of a double linked list.
+Returns false if it encounters any error
 */
 bool	read_data(t_data *data, int argc, char **argv)
 {
@@ -49,7 +49,8 @@ bool	read_data(t_data *data, int argc, char **argv)
 }
 
 /*
-TODO description
+Saves the integer value of the given string to the given integer.
+Returns false if it encounters any error.
 */
 static bool	better_atoi(char *str, int *num)
 {
@@ -81,13 +82,13 @@ static bool	better_atoi(char *str, int *num)
 }
 
 /*
-TODO description
+Creates and returns a new node.
 */
-static t_stack	*ps_new(int content)
+static t_node	*ps_new(int content)
 {
-	t_stack	*node;
+	t_node	*node;
 
-	node = malloc(sizeof(t_stack));
+	node = malloc(sizeof(t_node));
 	if (!node)
 		return (0);
 	node->content = content;
@@ -98,13 +99,14 @@ static t_stack	*ps_new(int content)
 }
 
 /*
-TODO description
+Adds a new node with the given content.
+Returns false if there is already a node with the given content.
 */
 static bool	ps_add_back(t_data *data, int content)
 {
-	t_stack	*aux;
-	t_stack	*prev;
-	t_stack	*new_node;
+	t_node	*aux;
+	t_node	*prev;
+	t_node	*new_node;
 
 	new_node = ps_new(content);
 	if (!new_node)

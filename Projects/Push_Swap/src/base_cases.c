@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:15:16 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/22 17:28:00 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/22 19:23:39 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ static void	base_case_three_top_b(t_data *data, t_half *half);
 static void	base_case_three_bot_b(t_data *data, t_half *half);
 
 /*
-TODO description
+Base case for the recursive function conquer.
+Places the two numbers in the given half to top_a.
 */
 void	base_case_two(t_data *data, t_half *half, t_move *aux)
 {
@@ -43,7 +44,8 @@ void	base_case_two(t_data *data, t_half *half, t_move *aux)
 }
 
 /*
-TODO description
+Base case for the recursive function conquer.
+Places the three numbers in the given half to top_a.
 */
 void	base_case_three(t_data *data, t_half *half)
 {
@@ -54,11 +56,11 @@ void	base_case_three(t_data *data, t_half *half)
 
 	if (half->location == top_a)
 	{
-		if (get_first_stack(data, half)->index
-			< get_first_stack(data, half)->next->index)
+		if (get_first_node(data, half)->index
+			< get_first_node(data, half)->next->index)
 			aux = (t_move *)top_a_120;
-		else if (get_first_stack(data, half)->next->index
-			< get_first_stack(data, half)->next->next->index)
+		else if (get_first_node(data, half)->next->index
+			< get_first_node(data, half)->next->next->index)
 			aux = (t_move *)top_a_201;
 		else
 			aux = (t_move *)top_a_210;
@@ -74,7 +76,7 @@ void	base_case_three(t_data *data, t_half *half)
 }
 
 /*
-TODO description
+Particular case of base_case_three where the given half is in the bot_a location.
 */
 void	base_case_three_bot_a(t_data *data, t_half *half)
 {
@@ -83,11 +85,11 @@ void	base_case_three_bot_a(t_data *data, t_half *half)
 	const t_move	bot_a_012[] = {rra, pb, rra, rra, sa, pa, no};
 	t_move			*aux;
 
-	if (get_first_stack(data, half)->index
-		> get_first_stack(data, half)->prev->index)
+	if (get_first_node(data, half)->index
+		> get_first_node(data, half)->prev->index)
 		aux = (t_move *)bot_a_102;
-	else if (get_first_stack(data, half)->prev->index
-		> get_first_stack(data, half)->prev->prev->index)
+	else if (get_first_node(data, half)->prev->index
+		> get_first_node(data, half)->prev->prev->index)
 		aux = (t_move *)bot_a_021;
 	else
 		aux = (t_move *)bot_a_012;
@@ -96,7 +98,7 @@ void	base_case_three_bot_a(t_data *data, t_half *half)
 }
 
 /*
-TODO description
+Particular case of base_case_three where the given half is in the top_b location.
 */
 void	base_case_three_top_b(t_data *data, t_half *half)
 {
@@ -106,11 +108,11 @@ void	base_case_three_top_b(t_data *data, t_half *half)
 	const t_move	top_b_012_y[] = {pa, sb, pa, sa, pa, sa, no};
 	t_move			*aux;
 
-	if (get_first_stack(data, half)->index
-		> get_first_stack(data, half)->next->index)
+	if (get_first_node(data, half)->index
+		> get_first_node(data, half)->next->index)
 		aux = (t_move *)top_b_102;
-	else if (get_first_stack(data, half)->next->index
-		> get_first_stack(data, half)->next->next->index)
+	else if (get_first_node(data, half)->next->index
+		> get_first_node(data, half)->next->next->index)
 		aux = (t_move *)top_b_021;
 	else if (data->move_list_last->move == sa
 		|| data->move_list_last->move == sb)
@@ -122,7 +124,7 @@ void	base_case_three_top_b(t_data *data, t_half *half)
 }
 
 /*
-TODO description
+Particular case of base_case_three where the given half is in the bot_b location.
 */
 void	base_case_three_bot_b(t_data *data, t_half *half)
 {
@@ -131,11 +133,11 @@ void	base_case_three_bot_b(t_data *data, t_half *half)
 	const t_move	bot_b_012[] = {rrb, rrb, rrb, pa, pa, pa, no};
 	t_move			*aux;
 
-	if (get_first_stack(data, half)->index
-		> get_first_stack(data, half)->prev->index)
+	if (get_first_node(data, half)->index
+		> get_first_node(data, half)->prev->index)
 		aux = (t_move *)bot_b_102;
-	else if (get_first_stack(data, half)->prev->index
-		> get_first_stack(data, half)->prev->prev->index)
+	else if (get_first_node(data, half)->prev->index
+		> get_first_node(data, half)->prev->prev->index)
 		aux = (t_move *)bot_b_021;
 	else
 		aux = (t_move *)bot_b_012;

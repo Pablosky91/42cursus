@@ -6,22 +6,21 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 21:01:00 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/22 20:50:38 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void		free_data(t_data *data);
-static void		error(t_data *data);
-
-//TODO make static functions
+static void	initialize(t_data *data);
+static void	free_data(t_data *data);
+static void	error(t_data *data);
 
 //TODO delete
 void	show_stacks(t_data *data)
 {
-	t_stack	*aux_a;
-	t_stack	*aux_b;
+	t_node	*aux_a;
+	t_node	*aux_b;
 
 	aux_a = ((aux_b = data->top_b), data->top_a);
 	ft_printf("╭───────╥───────╮\n│   a\t║   b\t│\n╞═══════╬═══════╡\n");
@@ -45,10 +44,11 @@ void	show_stacks(t_data *data)
 	ft_printf("╰───────╨───────╯\n");
 }
 
-int	main(int argc, char **argv)
+/*
+Initializes the data structure.
+*/
+static void	initialize(t_data *data)
 {
-	t_data	*data;
-
 	data = malloc(sizeof(t_data));
 	data->top_a = 0;
 	data->bot_a = 0;
@@ -59,6 +59,13 @@ int	main(int argc, char **argv)
 	data->move_list_first = 0;
 	data->move_list_last = 0;
 	move(data, no);
+}
+
+int	main(int argc, char **argv)
+{
+	t_data	*data;
+
+	initialize(data);
 	if (!read_data(data, argc, argv))
 		error(data);
 	sort(data);
@@ -68,19 +75,22 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
+/*
+Frees all allocated memory.
+*/
 static void	free_data(t_data *data)
 {
-	t_stack		*aux_stack;
-	t_stack		*copy_stack;
+	t_node		*aux_node;
+	t_node		*copy_node;
 	t_move_list	*aux_move;
 	t_move_list	*copy_move;
 
-	aux_stack = data->top_a;
-	while (aux_stack)
+	aux_node = data->top_a;
+	while (aux_node)
 	{
-		copy_stack = aux_stack;
-		aux_stack = aux_stack->next;
-		free(copy_stack);
+		copy_node = aux_node;
+		aux_node = aux_node->next;
+		free(copy_node);
 	}
 	aux_move = data->move_list_first;
 	while (aux_move)
@@ -92,6 +102,9 @@ static void	free_data(t_data *data)
 	free(data);
 }
 
+/*
+Prints "Error" to the standard error.
+*/
 static void	error(t_data *data)
 {
 	free_data(data);
