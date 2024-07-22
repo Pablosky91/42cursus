@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 20:26:57 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/22 17:02:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void			move(t_data *data, t_move move);
 void			move_from_to(t_data *data, t_location from, bool is_min);
 
 //BASE_CASES
-void			base_case_two(t_data *data, t_half *half);
+void			base_case_two(t_data *data, t_half *half, t_move *aux);
 void			base_case_three(t_data *data, t_half *half);
 
 //CUT_MOVES

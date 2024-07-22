@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/19 20:26:57 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/22 17:01:47 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ static void	conquer(t_data *data, t_half *half)
 	if (half->size == 0 || half->size == 1)
 		;
 	else if (half->size == 2)
-		base_case_two(data, half);
+		base_case_two(data, half, NULL);
 	else if (half->size == 3)
 		base_case_three(data, half);
 	else
