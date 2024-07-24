@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 21:23:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/24 19:38:13 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:11:09 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*get_string_move(t_move move);
 /*
 Saves the move as an instruction of the solution.
 */
-t_error	save_move(t_data *data, t_move move)
+bool	save_move(t_data *data, t_move move)
 {
 	t_move_list	*node;
 
@@ -26,12 +26,9 @@ t_error	save_move(t_data *data, t_move move)
 		data->move_list_last->quantity++;
 	else
 	{
-		if (move == sa)//TODO aqui
-			node = 0;
-		else
-			node = malloc(sizeof(t_move_list));
+		node = malloc(sizeof(t_move_list));
 		if (!node)
-			return (malloc_error);
+			return (provoke_error(data, malloc_error));
 		node->move = move;
 		node->quantity = 1;
 		node->next = 0;
@@ -39,16 +36,15 @@ t_error	save_move(t_data *data, t_move move)
 		{
 			node->prev = 0;
 			data->move_list_first = node;
-			data->move_list_last = node;
 		}
 		else
 		{
 			node->prev = data->move_list_last;
 			data->move_list_last->next = node;
-			data->move_list_last = node;
 		}
+		data->move_list_last = node;
 	}
-	return (success);
+	return (!data->error_code);
 }
 
 /*

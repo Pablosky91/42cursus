@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/24 19:07:03 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:18:45 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,62 +123,65 @@ typedef struct s_data
 	unsigned int	size_b;
 	t_move_list		*move_list_first;
 	t_move_list		*move_list_last;
+	t_error			error_code;
 }	t_data;
 
 	//FUNCTIONS//
 
 //TODO delete
-void			show_stacks(t_data *data);
+void	show_stacks(t_data *data);
 
 	//ALGORITHM.C//
 
-t_error			sort(t_data *data);
-t_error			move(t_data *data, t_move move);
-t_error			move_from_to(t_data *data, t_location from, bool is_min);
+bool	sort(t_data *data);
+bool	move(t_data *data, t_move move);
+bool	move_from_to(t_data *data, t_location from, bool is_min);
 
 	//BASE_CASES.C//
 
-t_error			base_case_two(t_data *data, t_half *half, t_move *aux);
-t_error			base_case_three(t_data *data, t_half *half);
+bool	base_case_two(t_data *data, t_half *half, t_move *aux);
+bool	base_case_three(t_data *data, t_half *half);
 
 	//CUT_MOVES.C//
 
-void			cut_moves(t_data *data);
+void	cut_moves(t_data *data);
+
+	//ERROR.C//
+
+void	error(t_data *data);
+bool	provoke_error(t_data *data, t_error error_code);
+void	free_data(t_data *data);
 
 	//EXECUTE_MOVE.C//
 
-void			execute_move(t_data *data, t_move move);
+void	execute_move(t_data *data, t_move move);
 
 	//GET_NODE.C//
 
-t_node			*get_first_node(t_data *data, t_half *half);
-bool			node_forward(t_node **node, t_data *data, t_half *half);
-bool			node_backward(t_node **node, t_half *half);
+t_node	*get_first_node(t_data *data, t_half *half);
+bool	node_forward(t_node **node, t_data *data, t_half *half);
+bool	node_backward(t_node **node, t_half *half);
 
 	//INSTRUCTIONS.C//
 
-t_error			save_move(t_data *data, t_move move);
-void			print_moves(t_data *data);
+bool	save_move(t_data *data, t_move move);
+void	print_moves(t_data *data);
 
 	//PARSE.C//
 
-t_error			read_data(t_data *data, int argc, char **argv);
-
-	//PUSH_SWAP.C//
-
-void			error(t_data *data, t_error error);
+bool	read_data(t_data *data, int argc, char **argv);
 
 	//SIMPLIFY.C//
 
-void			bottom_to_top(t_data *data, t_half *half);
-t_error			simplify_max(t_data *data, t_half *half);
-t_error	simplify_min_before(t_data *data, t_half *half, unsigned int *n_mins);
-t_error			simplify_min_after(t_data *data, t_half *half,
-					unsigned int n_mins);
+void	bottom_to_top(t_data *data, t_half *half);
+bool	simplify_max(t_data *data, t_half *half);
+bool	simplify_min_before(t_data *data, t_half *half, unsigned int *n_mins);
+bool	simplify_min_after(t_data *data, t_half *half,
+			unsigned int n_mins);
 
 	//SORT_FEW.C//
 
-t_error			sort_two(t_data *data);
-t_error			sort_three(t_data *data);
+bool	sort_two(t_data *data);
+bool	sort_three(t_data *data);
 
 #endif

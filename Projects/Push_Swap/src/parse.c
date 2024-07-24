@@ -6,27 +6,26 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:48:53 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/24 16:43:38 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:03:40 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+static bool		better_atoi(t_data *data, char *str, int *num);
 static t_node	*ps_new(int content);
-static t_error		ps_add_back(t_data *data, int content);
-static t_error		better_atoi(char *str, int *num);
+static bool		ps_add_back(t_data *data, int content);
 
 /*
 Parses the arguments of the program to be nodes of a double linked list.
-Returns false if it encounters any error
+Returns false if it encounters any error.
 */
-t_error	read_data(t_data *data, int argc, char **argv)
+bool	read_data(t_data *data, int argc, char **argv)
 {
 	int		i;
 	int		j;
 	int		num;
 	char	**split;
-	t_error	error_code;
 
 	i = 1;
 	while (i < argc)
@@ -36,10 +35,10 @@ t_error	read_data(t_data *data, int argc, char **argv)
 			return (free(split), malloc_error);
 		while (split[j])
 		{
-			if ((error_code = better_atoi(split[j], &num)))
-				return (free(split[j]), free(split), error_code);
-			if ((error_code = ps_add_back(data, num)))
-				return (free(split[j]), free(split), error_code);
+			if (!better_atoi(data, split[j], &num))
+				return (free(split[j]), free(split), false);
+			if (!ps_add_back(data, num))
+				return (free(split[j]), free(split), false);
 			data->size_a++;
 			free(split[j]);
 			j++;
@@ -47,14 +46,14 @@ t_error	read_data(t_data *data, int argc, char **argv)
 		free(split);
 		i++;
 	}
-	return (success);
+	return (!data->error_code);
 }
 
 /*
 Saves the integer value of the given string to the given integer.
 Returns false if it encounters any error.
 */
-static t_error	better_atoi(char *str, int *num)
+static bool	better_atoi(t_data *data, char *str, int *num)
 {
 	long	result;
 	int		i;
@@ -68,19 +67,19 @@ static t_error	better_atoi(char *str, int *num)
 		if (str[i] == '-')
 			sign = -1;
 		if (!str[i + 1])
-			return (not_an_integer);
+			return (provoke_error(data, not_an_integer));
 		i++;
 	}
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return (not_an_integer);
+			return (provoke_error(data, not_an_integer));
 		result = result * 10 + str[i++] - '0';
 	}
 	if (result * sign < INT_MIN || result * sign > INT_MAX)
-		return (not_range_integer);
+		return (provoke_error(data, not_range_integer));
 	*num = result * sign;
-	return (success);
+	return (!data->error_code);
 }
 
 /*
@@ -104,7 +103,7 @@ static t_node	*ps_new(int content)
 Adds a new node with the given content.
 Returns false if there is already a node with the given content.
 */
-static t_error	ps_add_back(t_data *data, int content)
+static bool	ps_add_back(t_data *data, int content)
 {
 	t_node	*aux;
 	t_node	*prev;
@@ -112,9 +111,9 @@ static t_error	ps_add_back(t_data *data, int content)
 
 	new_node = ps_new(content);
 	if (!new_node)
-		return (malloc_error);
+		return (provoke_error(data, malloc_error));
 	if (!data->top_a)
-		return (data->top_a = new_node, data->bot_a = new_node, success);
+		return (data->top_a = new_node, data->bot_a = new_node, true);
 	aux = ((prev = 0), data->top_a);
 	while (aux)
 	{
@@ -123,12 +122,12 @@ static t_error	ps_add_back(t_data *data, int content)
 		else if (aux->content > content)
 			aux->index++;
 		else
-			return (free(new_node), duplicate_number);
+			return (free(new_node), provoke_error(data, duplicate_number));
 		prev = aux;
 		aux = aux->next;
 	}
 	prev->next = new_node;
 	new_node->prev = prev;
 	data->bot_a = new_node;
-	return (success);
+	return (!data->error_code);
 }

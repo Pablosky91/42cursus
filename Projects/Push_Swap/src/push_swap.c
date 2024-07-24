@@ -6,14 +6,13 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/24 19:24:13 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/24 21:19:51 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static t_error	initialize(t_data *data);
-static void	free_data(t_data *data);
+static bool	initialize(t_data *data);
 
 //TODO delete
 void	show_stacks(t_data *data)
@@ -43,10 +42,29 @@ void	show_stacks(t_data *data)
 	ft_printf("╰───────╨───────╯\n");
 }
 
+int	main(int argc, char **argv)
+{
+	t_data	*data;
+
+	data = malloc(sizeof (t_data));
+	if (!data)
+		error(data);
+	if (!initialize(data))
+		error(data);
+	if (!read_data(data, argc, argv))
+		error(data);
+	if (!sort(data))
+		error(data);
+	cut_moves(data);
+	print_moves(data);
+	free_data(data);
+	return (0);
+}
+
 /*
 Initializes the data structure.
 */
-static t_error	initialize(t_data *data)
+static bool	initialize(t_data *data)
 {
 	data->top_a = 0;
 	data->bot_a = 0;
@@ -56,71 +74,6 @@ static t_error	initialize(t_data *data)
 	data->size_b = 0;
 	data->move_list_first = 0;
 	data->move_list_last = 0;
+	data->error_code = success;
 	return (move(data, no));
-}
-
-int	main(int argc, char **argv)
-{
-	t_data	*data;
-	t_error	error_code;
-
-	data = malloc(sizeof (t_data));
-	if (!data)
-		error(data, malloc_error);
-	if ((error_code = initialize(data)))
-		error(data, error_code);
-	if ((error_code = read_data(data, argc, argv)))
-		error(data, error_code);
-	if ((error_code = sort(data)))
-		error(data, error_code);
-	cut_moves(data);
-	print_moves(data);
-	free_data(data);
-	return (0);
-}
-
-/*
-Frees all allocated memory.
-*/
-static void	free_data(t_data *data)
-{
-	t_node		*aux_node;
-	t_node		*copy_node;
-	t_move_list	*aux_move;
-	t_move_list	*copy_move;
-
-	if (!data)
-		return ;
-	aux_node = data->top_a;
-	while (aux_node)
-	{
-		copy_node = aux_node;
-		aux_node = aux_node->next;
-		free(copy_node);
-	}
-	aux_node = data->top_b;
-	while (aux_node)
-	{
-		copy_node = aux_node;
-		aux_node = aux_node->next;
-		free(copy_node);
-	}
-	aux_move = data->move_list_first;
-	while (aux_move)
-	{
-		copy_move = aux_move;
-		aux_move = aux_move->next;
-		free(copy_move);
-	}
-	free(data);
-}
-
-/*
-Prints "Error" to the standard error.
-*/
-void	error(t_data *data, t_error error_code)
-{
-	free_data(data);
-	write(2, "Error\n", 6);
-	exit(error_code);
 }
