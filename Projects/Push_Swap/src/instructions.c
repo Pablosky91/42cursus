@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 21:23:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/24 15:27:13 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:38:13 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*get_string_move(t_move move);
 /*
 Saves the move as an instruction of the solution.
 */
-void	save_move(t_data *data, t_move move)
+t_error	save_move(t_data *data, t_move move)
 {
 	t_move_list	*node;
 
@@ -26,9 +26,12 @@ void	save_move(t_data *data, t_move move)
 		data->move_list_last->quantity++;
 	else
 	{
-		node = malloc(sizeof(t_move_list));
+		if (move == sa)//TODO aqui
+			node = 0;
+		else
+			node = malloc(sizeof(t_move_list));
 		if (!node)
-			error(data);//TODO alloc protect
+			return (malloc_error);
 		node->move = move;
 		node->quantity = 1;
 		node->next = 0;
@@ -45,6 +48,7 @@ void	save_move(t_data *data, t_move move)
 			data->move_list_last = node;
 		}
 	}
+	return (success);
 }
 
 /*

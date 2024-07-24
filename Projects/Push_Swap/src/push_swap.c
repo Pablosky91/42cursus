@@ -6,13 +6,13 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/24 15:49:50 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/24 19:24:13 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	initialize(t_data *data);
+static t_error	initialize(t_data *data);
 static void	free_data(t_data *data);
 
 //TODO delete
@@ -46,7 +46,7 @@ void	show_stacks(t_data *data)
 /*
 Initializes the data structure.
 */
-static void	initialize(t_data *data)
+static t_error	initialize(t_data *data)
 {
 	data->top_a = 0;
 	data->bot_a = 0;
@@ -56,21 +56,23 @@ static void	initialize(t_data *data)
 	data->size_b = 0;
 	data->move_list_first = 0;
 	data->move_list_last = 0;
-	move(data, no);
+	return (move(data, no));
 }
 
 int	main(int argc, char **argv)
 {
 	t_data	*data;
+	t_error	error_code;
 
 	data = malloc(sizeof (t_data));
 	if (!data)
-		error(data);
-	initialize(data);
-	if (!read_data(data, argc, argv))
-		error(data);
-	if (!sort(data))
-		error(data);
+		error(data, malloc_error);
+	if ((error_code = initialize(data)))
+		error(data, error_code);
+	if ((error_code = read_data(data, argc, argv)))
+		error(data, error_code);
+	if ((error_code = sort(data)))
+		error(data, error_code);
 	cut_moves(data);
 	print_moves(data);
 	free_data(data);
@@ -116,9 +118,9 @@ static void	free_data(t_data *data)
 /*
 Prints "Error" to the standard error.
 */
-void	error(t_data *data)
+void	error(t_data *data, t_error error_code)
 {
 	free_data(data);
 	write(2, "Error\n", 6);
-	exit(1);
+	exit(error_code);
 }
