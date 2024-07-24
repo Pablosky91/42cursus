@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/22 21:28:04 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/23 21:18:13 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ void			show_stacks(t_data *data);
 
 	//ALGORITHM.C//
 
-void			sort(t_data *data);
+bool			sort(t_data *data);
 void			move(t_data *data, t_move move);
 void			move_from_to(t_data *data, t_location from, bool is_min);
 
@@ -151,6 +151,10 @@ void			print_moves(t_data *data);
 	//PARSE.C//
 
 bool			read_data(t_data *data, int argc, char **argv);
+
+	//PUSH_SWAP.C//
+
+void			error(t_data *data);
 
 	//SIMPLIFY.C//
 

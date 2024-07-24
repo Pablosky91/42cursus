@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 21:23:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/22 18:10:44 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/24 15:27:13 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	save_move(t_data *data, t_move move)
 	{
 		node = malloc(sizeof(t_move_list));
 		if (!node)
-			return ;
+			error(data);//TODO alloc protect
 		node->move = move;
 		node->quantity = 1;
 		node->next = 0;
