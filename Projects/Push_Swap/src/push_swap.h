@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/24 21:18:45 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/25 21:11:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,7 +139,7 @@ bool	move_from_to(t_data *data, t_location from, bool is_min);
 
 	//BASE_CASES.C//
 
-bool	base_case_two(t_data *data, t_half *half, t_move *aux);
+bool	base_case_two(t_data *data, t_half *half, t_move *result);
 bool	base_case_three(t_data *data, t_half *half);
 
 	//CUT_MOVES.C//

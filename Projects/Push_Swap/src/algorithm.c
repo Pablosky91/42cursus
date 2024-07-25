@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/24 21:04:54 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/25 21:24:51 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,15 @@ bool	sort(t_data *data)
 {
 	t_half	*half;
 
+	if (data->size_a < 2)
+		return (true);
 	if (data->size_a == 2)
 		return (sort_two(data));
 	if (data->size_a == 3)
 		return (sort_three(data));
 	half = malloc(sizeof(t_half));
 	if (!half)
-		return (false);
+		return (provoke_error(data, malloc_error));
 	half->location = top_a;
 	half->size = data->size_a;
 	half->min_num = 0;

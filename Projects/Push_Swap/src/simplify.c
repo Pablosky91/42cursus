@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:15:18 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/24 20:50:03 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/25 21:56:51 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,19 +32,19 @@ The size of the half is diminished.
 bool	simplify_max(t_data *data, t_half *half)
 {
 	bool	ok;
-	t_node	*aux;
+	t_node	*iter;
 
 	ok = true;
-	aux = get_first_node(data, half);
+	iter = get_first_node(data, half);
 	if (half->location == top_a)
-		while (node_forward(&aux, data, half))
+		while (node_forward(&iter, data, half))
 			;
-	while (aux && half->size > 0 && aux->index == half->max_num && ok)
+	while (iter && half->size > 0 && iter->index == half->max_num && ok)
 	{
 		if (half->location == top_a)
-			node_backward(&aux, half);
+			node_backward(&iter, half);
 		else
-			node_forward(&aux, data, half);
+			node_forward(&iter, data, half);
 		half->max_num--;
 		half->size--;
 		if (half->location != top_a)
@@ -61,20 +61,20 @@ The size of the half is diminished.
 bool	simplify_min_before(t_data *data, t_half *half, unsigned int	*n_mins)
 {
 	bool	ok;
-	t_node	*aux;
+	t_node	*iter;
 
 	ok = true;
 	*n_mins = 0;
-	aux = get_first_node(data, half);
+	iter = get_first_node(data, half);
 	if (half->location != top_a)
-		while (node_forward(&aux, data, half))
+		while (node_forward(&iter, data, half))
 			;
-	while (aux && half->size > 0 && aux->index == half->min_num && ok)
+	while (iter && half->size > 0 && iter->index == half->min_num && ok)
 	{
 		if (half->location != top_a)
-			node_backward(&aux, half);
+			node_backward(&iter, half);
 		else
-			node_forward(&aux, data, half);
+			node_forward(&iter, data, half);
 		half->min_num++;
 		half->size--;
 		(*n_mins)++;

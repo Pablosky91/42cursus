@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:13:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/24 21:42:35 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/25 21:06:24 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,17 @@ Frees all allocated memory.
 */
 void	free_data(t_data *data)
 {
-	t_move_list	*aux_move;
-	t_move_list	*copy_move;
+	t_move_list	*iter;
+	t_move_list	*copy;
 
 	free_stack(data->top_a);
 	free_stack(data->top_b);
-	aux_move = data->move_list_first;
-	while (aux_move)
+	iter = data->move_list_first;
+	while (iter)
 	{
-		copy_move = aux_move;
-		aux_move = aux_move->next;
-		free(copy_move);
+		copy = iter;
+		iter = iter->next;
+		free(copy);
 	}
 	free(data);
 }
