@@ -6,34 +6,32 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/07/25 21:57:47 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/07/29 11:32:17 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-#COLOURS
+#GENERAL VARIABLES
 
-RED := \033[31m
-GREEN := \033[32m
-YELLOW := \033[33m
-BLUE := \033[34m
+MAKEFLAGS := --no-print-directory
 
-RESET := \033[0m
-
-#VARIABLES
+RM := rm -rf
+MKDIR := mkdir -p
 
 NAME := push_swap
+BONUS_NAME := checker
 
 LIBFT_PATH := libft
 LIBFT := $(LIBFT_PATH)/libft.a
 LIBFT_FLAG := -L $(LIBFT_PATH) -l ft
 
-RM := rm -rf
-OUT := out
-
 CC := gcc
 CFLAGS := -g3 -Wall -Wextra -Werror -fsanitize=address
 
+#FILES
+
 SRC_DIR := src/
+OBJ_DIR := obj/
+
 SOURCES :=	\
 			algorithm.c\
 			base_cases.c\
@@ -47,14 +45,41 @@ SOURCES :=	\
 			simplify.c\
 			sort_few.c\
 
-OBJ_DIR := obj/
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
-
 SOURCES := $(addprefix $(SRC_DIR), $(SOURCES))
 
-MAKEFLAGS := --no-print-directory
+#BONUS FILES
+
+BONUS_SRC_DIR := $(SRC_DIR)bonus/
+BONUS_OBJ_DIR := $(OBJ_DIR)bonus/
+
+BONUS_SOURCES := \
+				checker.c\
+
+BONUS_REGULAR_SOURCES := \
+				execute_move.c\
+
+BONUS_OBJECTS := $(addprefix $(BONUS_OBJ_DIR), $(BONUS_SOURCES:.c=.o))
+BONUS_SOURCES := $(addprefix $(BONUS_SRC_DIR), $(BONUS_SOURCES))
+
+BONUS_REGULAR_OBJECTS := $(addprefix $(OBJ_DIR), $(BONUS_REGULAR_SOURCES:.c=.o))
+BONUS_REGULAR_SOURCES := $(addprefix $(SRC_DIR), $(BONUS_REGULAR_SOURCES))
+
+BONUS_OBJECTS += $(BONUS_REGULAR_OBJECTS)
+BONUS_SOURCES += $(BONUS_REGULAR_SOURCES)
+
+#COLOURS
+
+RED := \033[31m
+GREEN := \033[32m
+YELLOW := \033[33m
+BLUE := \033[34m
+
+RESET := \033[0m
 
 #EXTRA VARIABLES
+
+OUT := out
 
 VALGRIND_DIR := valgrind/
 
@@ -77,7 +102,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $^ $(LIBFT_FLAG) -I $(LIBFT_PATH) -o $@
 
 $(OBJ_DIR):
-	mkdir $(OBJ_DIR)
+	$(MKDIR) $(OBJ_DIR)
 
 c: clean
 clean: msg_clean_start
@@ -94,7 +119,27 @@ fclean: msg_fclean_start
 r: re
 re: fclean all
 
+#BONUS RULES
+
+b:bonus
+bonus: $(BONUS_NAME)
+
+$(BONUS_NAME): $(LIBFT) $(BONUS_OBJECTS)
+	echo $(BONUS_OBJECTS)
+	$(CC) $(CFLAGS) $(BONUS_OBJECTS) $(LIBFT_FLAG) -o $(BONUS_NAME)
+
+$(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c | $(BONUS_OBJ_DIR)
+	$(CC) $(CFLAGS) -c $^ $(LIBFT_FLAG) -I $(LIBFT_PATH) -o $@
+
+$(BONUS_OBJ_DIR):
+	$(MKDIR) $(BONUS_OBJ_DIR)
+
 #EXTRA RULES
+
+reb: fclean bonus
+
+be: bonus
+	@./$(BONUS_NAME)
 
 o: once
 once: all
@@ -136,7 +181,7 @@ valgrind: fclean $(LIBFT) $(OBJECTS) | $(VALGRIND_DIR)
 	@$(MAKE) fclean
 
 $(VALGRIND_DIR):
-	mkdir $(VALGRIND_DIR)
+	$(MKDIR) $(VALGRIND_DIR)
 
 last_valgrind:
 	@cat $(VALGRIND_DIR)$$(ls valgrind | tail -1)
@@ -158,4 +203,6 @@ msg_fclean_start:
 msg_fclean_end:
 	@echo "$(GREEN)Push_swap cleaned$(RESET)"
 
-.PHONY: all clean fclean re once exec loop norminette normi valgrind last_valgrind clean_valgrind a c f r o e l n v msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
+#PHONY
+
+.PHONY: all clean fclean re bonus be reb once exec loop norminette normi valgrind last_valgrind clean_valgrind a c f r b o e l n v msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
