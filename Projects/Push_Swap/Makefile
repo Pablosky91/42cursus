@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/07/29 11:32:17 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/07/29 22:13:44 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,10 +54,12 @@ BONUS_SRC_DIR := $(SRC_DIR)bonus/
 BONUS_OBJ_DIR := $(OBJ_DIR)bonus/
 
 BONUS_SOURCES := \
-				checker.c\
+				checker_bonus.c\
 
 BONUS_REGULAR_SOURCES := \
+				error.c\
 				execute_move.c\
+				parse.c\
 
 BONUS_OBJECTS := $(addprefix $(BONUS_OBJ_DIR), $(BONUS_SOURCES:.c=.o))
 BONUS_SOURCES := $(addprefix $(BONUS_SRC_DIR), $(BONUS_SOURCES))
@@ -112,7 +114,7 @@ clean: msg_clean_start
 
 f: fclean
 fclean: msg_fclean_start
-	$(RM) $(OBJ_DIR) $(NAME)
+	$(RM) $(OBJ_DIR) $(NAME) $(BONUS_NAME)
 	@$(MAKE) -C $(LIBFT_PATH) fclean
 	@$(MAKE) msg_fclean_end
 
@@ -125,7 +127,6 @@ b:bonus
 bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(LIBFT) $(BONUS_OBJECTS)
-	echo $(BONUS_OBJECTS)
 	$(CC) $(CFLAGS) $(BONUS_OBJECTS) $(LIBFT_FLAG) -o $(BONUS_NAME)
 
 $(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c | $(BONUS_OBJ_DIR)
@@ -139,7 +140,7 @@ $(BONUS_OBJ_DIR):
 reb: fclean bonus
 
 be: bonus
-	@./$(BONUS_NAME)
+	@./$(BONUS_NAME) $(ARG)
 
 o: once
 once: all

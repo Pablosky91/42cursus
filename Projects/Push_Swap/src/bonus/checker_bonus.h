@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   checker_bonus.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/29 10:24:35 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 11:28:43 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/07/29 10:24:48 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/07/29 21:44:17 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker.h"
+#ifndef CHECKER_BONUS_H
+# define CHECKER_BONUS_H
 
-int	main(void)
-{
-	t_data	data;
+	//INCLUDE LIBRARIES//
 
-	data.size_a = 1;
-	ft_printf("%i", data.size_a);
-	return (0);
-}
+# include "../push_swap.h"
+
+	//MACROS//
+
+# define OK_MESSAGE "OK"
+# define KO_MESSAGE "KO"
+
+#endif
