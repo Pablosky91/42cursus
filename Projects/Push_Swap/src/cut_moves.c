@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 08:41:51 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/25 21:50:53 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:31:21 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static bool			are_neutral(t_move_list *node, int lower);
 static bool			are_combinable(t_move_list *node, int lower);
 static t_move_list	*try_delete_node(t_move_list *node);
-static int			get_lower(int a, int b);
 
 /*
 Checks for optimizations or redundant instructions in the solution.
@@ -38,7 +37,7 @@ void	cut_moves(t_data *data)
 		}
 		if (iter->next)
 		{
-			lower = get_lower(iter->quantity, iter->next->quantity);
+			lower = ft_get_min(iter->quantity, iter->next->quantity);
 			go_back = are_neutral(iter, lower);
 			go_back = go_back || are_combinable(iter, lower);
 		}
@@ -95,18 +94,18 @@ static bool	are_combinable(t_move_list *node, int lower)
 	if ((node->move == sa && node->next->move == sb)
 		|| (node->move == sb && node->next->move == sa))
 		combo = ss;
-	if (combo != no && node->quantity == lower)
+	if (combo && node->quantity == lower)
 	{
 		node->move = combo;
 		node->next->quantity -= lower;
 		try_delete_node(node->next);
 	}
-	else if (combo != no)
+	else if (combo)
 	{
 		node->quantity -= lower;
 		node->next->move = combo;
 	}
-	return (combo != no);
+	return (combo);
 }
 
 /*
@@ -119,7 +118,7 @@ static t_move_list	*try_delete_node(t_move_list *node)
 	t_move_list	*prev;
 
 	prev = node->prev;
-	if (node->quantity <= 0)
+	if (!node->quantity)
 	{
 		prev->next = node->next;
 		if (node->next)
@@ -127,14 +126,4 @@ static t_move_list	*try_delete_node(t_move_list *node)
 		free(node);
 	}
 	return (prev);
-}
-
-/*
-Returns the lower of the two given numbers.
-*/
-static int	get_lower(int a, int b)
-{
-	if (a < b)
-		return (a);
-	return (b);
 }

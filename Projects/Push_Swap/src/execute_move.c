@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:40:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/22 19:23:39 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:03:37 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	swap(t_node **top, t_node **bot)
 	first->next = second->next;
 	first->prev = second;
 	second->next = first;
-	second->prev = 0;
+	second->prev = NULL;
 	if (third)
 		third->prev = first;
 	else
@@ -92,9 +92,9 @@ static void	push(t_node **from, t_node **from_bottom,
 	to_first = *to;
 	from_first->next = to_first;
 	if (from_second)
-		from_second->prev = 0;
+		from_second->prev = NULL;
 	else
-		*from_bottom = 0;
+		*from_bottom = NULL;
 	if (to_first)
 		to_first->prev = from_first;
 	else
@@ -117,9 +117,9 @@ static void	rotate(t_node **top, t_node **bot)
 	first = *top;
 	second = first->next;
 	last = *bot;
-	first->next = 0;
+	first->next = NULL;
 	first->prev = last;
-	second->prev = 0;
+	second->prev = NULL;
 	last->next = first;
 	*top = second;
 	*bot = first;
@@ -140,9 +140,9 @@ static void	reverse_rotate(t_node **top, t_node **bot)
 	last = *bot;
 	penultimate = last->prev;
 	first->prev = last;
-	penultimate->next = 0;
+	penultimate->next = NULL;
 	last->next = first;
-	last->prev = 0;
+	last->prev = NULL;
 	*top = last;
 	*bot = penultimate;
 }

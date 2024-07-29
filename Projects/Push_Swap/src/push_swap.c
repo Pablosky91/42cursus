@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/25 21:40:51 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:05:30 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 	cut_moves(data);
 	print_moves(data);
 	free_data(data);
-	return (0);
+	return (success);
 }
 
 /*
@@ -67,14 +67,14 @@ static bool	initialize(t_data **data)
 	*data = malloc(sizeof (t_data));
 	if (!*data)
 		return (false);
-	(*data)->top_a = 0;
-	(*data)->bot_a = 0;
-	(*data)->top_b = 0;
-	(*data)->bot_b = 0;
+	(*data)->top_a = NULL;
+	(*data)->bot_a = NULL;
+	(*data)->top_b = NULL;
+	(*data)->bot_b = NULL;
 	(*data)->size_a = 0;
 	(*data)->size_b = 0;
-	(*data)->move_list_first = 0;
-	(*data)->move_list_last = 0;
+	(*data)->move_list_first = NULL;
+	(*data)->move_list_last = NULL;
 	(*data)->error_code = success;
 	return (move(*data, no));
 }

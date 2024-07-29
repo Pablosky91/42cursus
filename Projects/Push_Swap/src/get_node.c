@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:24:49 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/25 21:52:55 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:04:09 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ bool	node_forward(t_node **node, t_data *data, t_half *half)
 {
 	t_node	*aux;
 
-	aux = 0;
+	aux = NULL;
 	if (!*node)
 		*node = get_first_node(data, half);
 	else if (half->location == top_a || half->location == top_b)
@@ -50,7 +50,7 @@ bool	node_forward(t_node **node, t_data *data, t_half *half)
 		*node = (*node)->prev;
 	if (*node
 		&& ((*node)->index < half->min_num || (*node)->index > half->max_num))
-		*node = 0;
+		*node = NULL;
 	if (*node && (half->location == top_a || half->location == top_b))
 		aux = (*node)->next;
 	else if (*node)
@@ -67,7 +67,7 @@ bool	node_backward(t_node **node, t_half *half)
 {
 	t_node	*aux;
 
-	aux = 0;
+	aux = NULL;
 	if (half->location == top_a || half->location == top_b)
 		*node = (*node)->prev;
 	else

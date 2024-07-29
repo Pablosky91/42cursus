@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/25 21:11:15 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:23:55 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@
 
 # include "libft.h"
 # include <limits.h>
-# include <stdbool.h>
+
+	//MACROS//
+
+# define ERROR_MESSAGE "Error"
 
 	//ENUMS//
 
@@ -30,7 +33,8 @@ typedef enum e_error
 	malloc_error = 1,
 	duplicate_number = 2,
 	not_an_integer = 3,
-	not_range_integer = 4
+	not_range_integer = 4,
+	not_a_move = 5
 }	t_error;
 
 /*
@@ -75,7 +79,7 @@ Points to the next and previous nodes.
 typedef struct s_node
 {
 	int				content;
-	unsigned int	index;
+	__u_int			index;
 	struct s_node	*next;
 	struct s_node	*prev;
 }	t_node;
@@ -101,9 +105,9 @@ It also contains a reference to two new halfs,
 typedef struct s_half
 {
 	t_location		location;
-	unsigned int	size;
-	unsigned int	min_num;
-	unsigned int	max_num;
+	__u_int			size;
+	__u_int			min_num;
+	__u_int			max_num;
 	struct s_half	*min_half;
 	struct s_half	*max_half;
 }	t_half;
@@ -119,8 +123,8 @@ typedef struct s_data
 	t_node			*bot_a;
 	t_node			*top_b;
 	t_node			*bot_b;
-	unsigned int	size_a;
-	unsigned int	size_b;
+	__u_int			size_a;
+	__u_int			size_b;
 	t_move_list		*move_list_first;
 	t_move_list		*move_list_last;
 	t_error			error_code;
@@ -175,9 +179,8 @@ bool	read_data(t_data *data, int argc, char **argv);
 
 void	bottom_to_top(t_data *data, t_half *half);
 bool	simplify_max(t_data *data, t_half *half);
-bool	simplify_min_before(t_data *data, t_half *half, unsigned int *n_mins);
-bool	simplify_min_after(t_data *data, t_half *half,
-			unsigned int n_mins);
+bool	simplify_min_before(t_data *data, t_half *half, __u_int *n_mins);
+bool	simplify_min_after(t_data *data, t_half *half, __u_int n_mins);
 
 	//SORT_FEW.C//
 

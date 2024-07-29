@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 21:23:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/24 21:11:09 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:04:37 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ bool	save_move(t_data *data, t_move move)
 			return (provoke_error(data, malloc_error));
 		node->move = move;
 		node->quantity = 1;
-		node->next = 0;
+		node->next = NULL;
 		if (!data->move_list_last)
 		{
-			node->prev = 0;
+			node->prev = NULL;
 			data->move_list_first = node;
 		}
 		else
@@ -67,7 +67,7 @@ Prints to the standard output the given string the given times.
 */
 static void	printf_repeat(char *string, int times)
 {
-	while (times > 0)
+	while (times)
 	{
 		ft_printf("%s", string);
 		times--;
@@ -75,7 +75,7 @@ static void	printf_repeat(char *string, int times)
 }
 
 /*
-Returns a t_move as a string.
+Returns the given t_move as a string.
 */
 static char	*get_string_move(t_move move)
 {

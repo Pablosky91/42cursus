@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:13:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/24 20:55:41 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/29 21:58:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ Moves:
 */
 bool	sort_two(t_data *data)
 {
-	unsigned int	first;
-	unsigned int	second;
+	__u_int	first;
+	__u_int	second;
 
 	first = data->top_a->index;
 	second = data->top_a->next->index;
@@ -42,9 +42,9 @@ Moves:
 */
 bool	sort_three(t_data *data)
 {
-	unsigned int	first;
-	unsigned int	second;
-	unsigned int	third;
+	__u_int	first;
+	__u_int	second;
+	__u_int	third;
 
 	first = data->top_a->index;
 	second = data->top_a->next->index;

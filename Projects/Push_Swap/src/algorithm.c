@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/25 21:24:51 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:02:10 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ One half is for the lower numbers and the other for the higher ones.
 */
 static bool	divide(t_data *data, t_half *half)
 {
-	unsigned int	i;
+	__u_int	i;
 
 	half->min_half = malloc(sizeof(t_half));
 	if (!half->min_half)
@@ -124,7 +124,7 @@ When the half is size 2 or 3, it sorts them directly to top_a.
 */
 static bool	conquer(t_data *data, t_half *half)
 {
-	unsigned int	n_mins;
+	__u_int	n_mins;
 
 	bottom_to_top(data, half);
 	if (simplify_max(data, half))

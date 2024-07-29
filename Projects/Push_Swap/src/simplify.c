@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:15:18 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/25 21:56:51 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:06:26 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ Calculates how many nodes can be left out of the recursion.
 	and then be directly sorted.
 The size of the half is diminished.
 */
-bool	simplify_min_before(t_data *data, t_half *half, unsigned int	*n_mins)
+bool	simplify_min_before(t_data *data, t_half *half, __u_int	*n_mins)
 {
 	bool	ok;
 	t_node	*iter;
@@ -87,12 +87,12 @@ bool	simplify_min_before(t_data *data, t_half *half, unsigned int	*n_mins)
 /*
 Moves the given number of nodes from the given half to top_a.
 */
-bool	simplify_min_after(t_data *data, t_half *half, unsigned int n_mins)
+bool	simplify_min_after(t_data *data, t_half *half, __u_int n_mins)
 {
 	bool	ok;
 
 	ok = true;
-	while (n_mins > 0 && ok)
+	while (n_mins && ok)
 	{
 		if (half->location == top_a)
 			half->location = top_b;

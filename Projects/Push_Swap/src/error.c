@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:13:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/25 21:06:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/29 21:47:40 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	error(t_data *data)
 		error_code = data->error_code;
 		free_data(data);
 	}
-	write(2, "Error\n", 6);
+	ft_putendl_fd(ERROR_MESSAGE, STDERR_FILENO);
 	exit(error_code);
 }
 

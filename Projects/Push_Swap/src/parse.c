@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:48:53 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/25 21:09:12 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:05:12 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ static t_node	*ps_new(int content)
 
 	node = malloc(sizeof(t_node));
 	if (!node)
-		return (0);
+		return (NULL);
 	node->content = content;
 	node->index = 0;
-	node->next = 0;
-	node->prev = 0;
+	node->next = NULL;
+	node->prev = NULL;
 	return (node);
 }
 
