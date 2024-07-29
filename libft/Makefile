@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 16:43:04 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/05/13 20:59:08 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/07/29 22:22:01 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,12 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar
 AR_FLAGS = -r
 
-SOURCES =	$(addprefix gnl/,\
+SOURCES =	\
+			$(addprefix extra/,\
+				ft_get_max.c\
+				ft_get_min.c\
+				ft_str_equals.c)\
+			$(addprefix gnl/,\
 				get_next_line_utils.c\
 				get_next_line.c)\
 			$(addprefix original/is/,\
@@ -95,7 +100,7 @@ SOURCES =	$(addprefix gnl/,\
 				ft_printf.c)
 
 OBJ_DIR = obj/
-ALL_OBJ_DIR = $(OBJ_DIR) $(addprefix $(OBJ_DIR), gnl original original/is original/lst original/mem original/other original/put original/str printf)
+ALL_OBJ_DIR = $(addprefix $(OBJ_DIR), gnl extra original/is original/lst original/mem original/other original/put original/str printf)
 OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 
 MAKEFLAGS = --no-print-directory
@@ -113,7 +118,7 @@ $(OBJ_DIR)%.o: %.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $^ -I . -o $@
 
 $(OBJ_DIR):
-	mkdir $(ALL_OBJ_DIR)
+	mkdir -p $(ALL_OBJ_DIR)
 
 c: clean
 clean: msg_clean_start

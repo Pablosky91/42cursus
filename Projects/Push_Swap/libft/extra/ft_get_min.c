@@ -1,19 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   ft_get_min.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 18:34:17 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 21:50:28 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/07/29 19:10:17 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/07/29 21:12:40 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_print(char c)
+/*
+Returns the lower of the two given numbers.
+*/
+int	ft_get_min(int a, int b)
 {
-	ft_putchar_fd(c, STDOUT_FILENO);
-	return (1);
+	if (a < b)
+		return (a);
+	return (b);
 }

@@ -1,19 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   ft_str_equals.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 18:34:17 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 21:50:28 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/07/29 19:09:55 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/07/29 21:17:47 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-int	ft_print(char c)
+/*
+Returns whether the two given strings are equal.
+*/
+bool	ft_str_equals(char *s1, char *s2)
 {
-	ft_putchar_fd(c, STDOUT_FILENO);
-	return (1);
+	return (!ft_strncmp(s1, s2, ft_get_max(ft_strlen(s1), ft_strlen(s2))));
 }

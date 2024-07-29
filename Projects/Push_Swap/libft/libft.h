@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 21:03:15 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/02 21:39:52 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:20:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
+
+# include "extra/extra.h"
 
 # include "gnl/get_next_line.h"
 

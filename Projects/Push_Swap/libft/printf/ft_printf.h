@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:14:16 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/02 21:39:18 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/07/29 21:50:38 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "libft.h"
 
-# define STDOUT 1
 # define HEX_UPPER "0123456789ABCDEF"
 # define HEX_LOWER "0123456789abcdef"
 # define PRINT_NULL "(null)"
