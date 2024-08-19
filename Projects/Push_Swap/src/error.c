@@ -32,7 +32,7 @@ void	error(t_data *data)
 }
 
 /*
-Marks the type of error
+Marks the type of error.
 */
 bool	provoke_error(t_data *data, t_error error_code)
 {

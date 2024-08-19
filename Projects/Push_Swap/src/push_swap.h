@@ -99,7 +99,7 @@ typedef struct s_move_list
 /*
 Chunk of a stack to be divided and sorted.
 Contains its location and size, as well as its minimum and maximum numbers.
-It also contains a reference to two new halfs,
+It also contains pointers to two new halfs,
 	one for the lower numbers and the other for the higher ones.
 */
 typedef struct s_half
@@ -115,7 +115,7 @@ typedef struct s_half
 /*
 The data for all the program.
 Contains the first and last node of each stack, as well as their size.
-It also contains the first and last instruction of he solution.
+It also contains the first and last instruction of the solution.
 */
 typedef struct s_data
 {
