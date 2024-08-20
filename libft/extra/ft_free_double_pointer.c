@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extra.h                                            :+:      :+:    :+:   */
+/*   ft_free_double_pointer.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/29 19:15:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/20 21:39:26 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/08/20 21:38:15 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/08/20 21:39:45 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXTRA_H
-# define EXTRA_H
+#include "libft.h"
 
-# include "libft.h"
+/*
+Frees the double pointer and each of their pointers.
+Always returns false.
+*/
+bool	ft_free_double_pointer(void **double_pointer)
+{
+	__u_int i;
 
-bool	ft_free_double_pointer(void **double_pointer);
-int		ft_get_max(int a, int b);
-int		ft_get_min(int a, int b);
-bool	ft_str_equals(char *s1, char *s2);
-
-#endif
+	i = 0;
+	while (double_pointer[i])
+		free(double_pointer[i++]);
+	free(double_pointer);
+	return (false);
+}

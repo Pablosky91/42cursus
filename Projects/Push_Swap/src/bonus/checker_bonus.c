@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:24:35 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 22:05:55 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:40:53 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int argc, char **argv)
 {
 	t_data	*data;
 
+	if (argc < 2)
+		return (success);
 	if (!initialize(&data))
 		error(data);
 	if (!read_data(data, argc, argv))
