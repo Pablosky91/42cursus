@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:48:53 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/20 21:41:07 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/08/20 22:09:33 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ bool	read_data(t_data *data, int argc, char **argv)
 			if (!ps_add_back(data, num))
 				return (ft_free_double_pointer((void **)split));
 			data->size_a++;
+			j++;
 		}
+		ft_free_double_pointer((void **)split);
 	}
 	return (!data->error_code);
 }
