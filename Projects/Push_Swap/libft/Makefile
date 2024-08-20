@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 16:43:04 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/07/29 22:22:01 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/08/20 18:39:41 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 
 AR = ar
-AR_FLAGS = -r
+AR_FLAGS = -rc
 
 SOURCES =	\
 			$(addprefix extra/,\
@@ -107,51 +107,56 @@ MAKEFLAGS = --no-print-directory
 
 #RULES
 
-a: all
 all: $(NAME)
 
 $(NAME): msg_all_start $(OBJECTS)
+	@$(MAKE) tab
 	$(AR) $(AR_FLAGS) $(NAME) $(OBJECTS)
 	@$(MAKE) msg_all_end
 
 $(OBJ_DIR)%.o: %.c | $(OBJ_DIR)
+	@$(MAKE) tab
 	$(CC) $(CFLAGS) -c $^ -I . -o $@
 
 $(OBJ_DIR):
+	@$(MAKE) tab
 	mkdir -p $(ALL_OBJ_DIR)
 
-c: clean
 clean: msg_clean_start
+	@$(MAKE) tab
 	$(RM) $(OBJ_DIR)
 	@$(MAKE) msg_clean_end
 
-f: fclean
 fclean: msg_fclean_start
+	@$(MAKE) tab
 	$(RM) $(OBJ_DIR) $(NAME)
 	@$(MAKE) msg_fclean_end
 
-r: re
 re: fclean all
-
-.PHONY: all clean fclean re a c f r msg_all_start msg_all_end msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
 
 #MESSAGES
 
-msg_all_start:
+tab:
+	@echo -n "  "
+
+msg_all_start: tab
 	@echo "$(YELLOW)Starting library compilation$(BLUE)"
 
-msg_all_end:
+msg_all_end: tab
 	@echo "$(GREEN)Library compilation complete$(RESET)"
 
-msg_clean_start:
+msg_clean_start: tab
 	@echo "$(YELLOW)Cleaning library objects$(RED)"
 
-msg_clean_end:
+msg_clean_end: tab
 	@echo "$(GREEN)Library objects cleaned$(RESET)"
 
-msg_fclean_start:
+msg_fclean_start: tab
 	@echo "$(YELLOW)Cleaning library$(RED)"
 
-msg_fclean_end:
+msg_fclean_end: tab
 	@echo "$(GREEN)Library cleaned$(RESET)"
-	
+
+#PHONY
+
+.PHONY: all clean fclean re tab msg_all_start msg_all_end msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
