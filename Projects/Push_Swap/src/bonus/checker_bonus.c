@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:24:35 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/20 18:40:53 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/08/22 20:52:08 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ Initializes the data structure.
 */
 static bool	initialize(t_data **data)
 {
-	*data = malloc(sizeof (t_data));
+	*data = malloc(sizeof(t_data));
 	if (!*data)
 		return (false);
 	(*data)->top_a = NULL;
