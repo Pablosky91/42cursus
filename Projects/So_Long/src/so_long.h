@@ -22,7 +22,9 @@ typedef enum e_cell
 {
 	wall = 0,
 	floor = 1,
-	player = 2
+	player = 2,
+	coin = 3,
+	home = 4
 }	t_cell;
 
 typedef enum e_direction
@@ -36,14 +38,23 @@ typedef enum e_direction
 
 	//STRUCTS//
 
+typedef struct s_player
+{
+	mlx_image_t	*still;
+	mlx_image_t	*up;
+	mlx_image_t	*left;
+	mlx_image_t	*down;
+	mlx_image_t	*right;
+	t_direction	player_movement;
+}	t_player;
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
 	__u_int		map_width;
 	__u_int		map_height;
 	t_cell		**map;
-	mlx_image_t	*player;
-	t_direction	player_movement;
+	t_player	*player;
 }	t_game;
 
 #endif
