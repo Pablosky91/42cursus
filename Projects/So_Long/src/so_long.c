@@ -5,14 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 16:59:27 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/22 23:37:57 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/08/22 8:59:27 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/08/26 15:27:27 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
 static const int IMG_SIZE = 128;
+static const int SPEED = 12;
 
 static void	my_hook(void* param)
 {
@@ -20,35 +21,35 @@ static void	my_hook(void* param)
 
 	if (game->player->player_movement == up)
 	{
-		game->player->still->instances[0].y -=16;
-		game->player->up->instances[0].y -=16;
-		game->player->left->instances[0].y -=16;
-		game->player->down->instances[0].y -=16;
-		game->player->right->instances[0].y -=16;
+		game->player->still->instances[0].y -= SPEED;
+		game->player->up->instances[0].y -= SPEED;
+		game->player->left->instances[0].y -= SPEED;
+		game->player->down->instances[0].y -= SPEED;
+		game->player->right->instances[0].y -= SPEED;
 	}
 	if (game->player->player_movement == left)
 	{
-		game->player->still->instances[0].x -=16;
-		game->player->up->instances[0].x -=16;
-		game->player->left->instances[0].x -=16;
-		game->player->down->instances[0].x -=16;
-		game->player->right->instances[0].x -=16;
+		game->player->still->instances[0].x -= SPEED;
+		game->player->up->instances[0].x -= SPEED;
+		game->player->left->instances[0].x -= SPEED;
+		game->player->down->instances[0].x -= SPEED;
+		game->player->right->instances[0].x -= SPEED;
 	}
 	if (game->player->player_movement == down)
 	{
-		game->player->still->instances[0].y +=16;
-		game->player->up->instances[0].y +=16;
-		game->player->left->instances[0].y +=16;
-		game->player->down->instances[0].y +=16;
-		game->player->right->instances[0].y +=16;
+		game->player->still->instances[0].y += SPEED;
+		game->player->up->instances[0].y += SPEED;
+		game->player->left->instances[0].y += SPEED;
+		game->player->down->instances[0].y += SPEED;
+		game->player->right->instances[0].y += SPEED;
 	}
 	if (game->player->player_movement == right)
 	{
-		game->player->still->instances[0].x +=16;
-		game->player->up->instances[0].x +=16;
-		game->player->left->instances[0].x +=16;
-		game->player->down->instances[0].x +=16;
-		game->player->right->instances[0].x +=16;
+		game->player->still->instances[0].x += SPEED;
+		game->player->up->instances[0].x += SPEED;
+		game->player->left->instances[0].x += SPEED;
+		game->player->down->instances[0].x += SPEED;
+		game->player->right->instances[0].x += SPEED;
 	}
 }
 
@@ -99,7 +100,11 @@ void	create_map(t_game *game)
 			if (i == 0 || i == game->map_height - 1 || j == 0 || j == game->map_width - 1)
 				game->map[i][j] = wall;
 			else if (i == 1 && j == 1)
+			{
 				game->map[i][j] = player;
+				game->initial_pos->row = i;
+				game->initial_pos->col = j;
+			}
 			else if (i == game->map_height - 2 && j == game->map_width - 2)
 				game->map[i][j] = home;
 			else if (i == game->map_height / 2 && j == game->map_width / 2)
@@ -150,6 +155,7 @@ static void init(t_game **game)
 	while (i < (*game)->map_height)
 		(*game)->map[i++] = malloc(sizeof(t_cell *) * (*game)->map_width);
 	(*game)->player = malloc(sizeof(t_player));
+	(*game)->initial_pos = malloc(sizeof(t_position));
 }
 
 static void	free_game(t_game *game)
@@ -161,6 +167,7 @@ static void	free_game(t_game *game)
 		free(game->map[i++]);
 	free(game->map);
 	free(game->player);
+	free(game->initial_pos);
 	free(game);
 }
 
@@ -250,11 +257,14 @@ int	main(void)
 	create_map(game);
 	show_map(game);
 
-	print_map(game);
+	//print_map(game);
+	valid_path(game);
 
+/*
 	mlx_loop_hook(game->mlx, my_hook, game);
 	mlx_key_hook(game->mlx, &my_key_hook, game);
 	mlx_loop(game->mlx);
+	*/
 	free_game(game);
 	return (0);
 }
