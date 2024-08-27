@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:45:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/26 20:36:20 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:18:39 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool	is_same_node(t_position_node *node_1, t_position_node *node_2)
 bool	is_node_repeated(t_path_checker *checker, t_position_node *node)
 {
 	t_position_node	*iter;
-	
+
 	iter = checker->head;
 	while (iter)
 	{
@@ -125,7 +125,7 @@ t_position	*get_position_slide(t_game *game, t_position *position , t_direction 
 	return (create_pos(row, col));
 }
 
-bool	recursive(t_game *game, t_path_checker *checker)
+/*bool	recursive(t_game *game, t_path_checker *checker)
 {
 	t_position_node	*current_node = checker->tail;
 	t_position	*pos_aux;
@@ -133,7 +133,7 @@ bool	recursive(t_game *game, t_path_checker *checker)
 	
 	pos_aux = get_position_slide(game, current_node->position, up);
 	node_aux = create_node(pos_aux);
-	print_pos(pos_aux);
+	print_pos(current_node->position);
 	printf(" N -> ");
 	print_pos(pos_aux);
 	if (is_node_repeated(checker, node_aux))
@@ -154,7 +154,7 @@ bool	recursive(t_game *game, t_path_checker *checker)
 
 	pos_aux = get_position_slide(game, current_node->position, left);
 	node_aux = create_node(pos_aux);
-	print_pos(pos_aux);
+	print_pos(current_node->position);
 	printf(" W -> ");
 	print_pos(pos_aux);
 	if (is_node_repeated(checker, node_aux))
@@ -175,7 +175,7 @@ bool	recursive(t_game *game, t_path_checker *checker)
 
 	pos_aux = get_position_slide(game, current_node->position, down);
 	node_aux = create_node(pos_aux);
-	print_pos(pos_aux);
+	print_pos(current_node->position);
 	printf(" S -> ");
 	print_pos(pos_aux);
 	if (is_node_repeated(checker, node_aux))
@@ -196,7 +196,7 @@ bool	recursive(t_game *game, t_path_checker *checker)
 
 	pos_aux = get_position_slide(game, current_node->position, right);
 	node_aux = create_node(pos_aux);
-	print_pos(pos_aux);
+	print_pos(current_node->position);
 	printf(" E -> ");
 	print_pos(pos_aux);
 	if (is_node_repeated(checker, node_aux))
@@ -215,6 +215,80 @@ bool	recursive(t_game *game, t_path_checker *checker)
 			return (true);
 	}
 	return (false);
+} */
+
+t_cell	get_cell_by(t_game *game, t_position	position, t_direction direction)
+{
+	if (direction == up)
+		position.row--;
+	if (direction == left)
+		position.col--;
+	if (direction == down)
+		position.row++;
+	if (direction == right)
+		position.col++;
+	return (game->map[position.row][position.col]);
+}
+
+bool recursive(t_game *game, t_path_checker *checker)
+{
+	t_direction	direction;
+	t_position_node	*start;
+	t_position_node	*new_node;
+
+	direction = 1;
+	start = checker->tail;
+	//new_node = *start;
+	while(direction <= 4)
+	{
+		//printf("start %i, %i\n",start->position->row, start->position->col);
+		new_node = create_node(create_pos(start->position->row, start->position->col));
+		/* new_node.position->row = start->position->row;
+		new_node.position->col = start->position->col;
+		new_node.next = NULL; */
+		printf("pos: ");
+		print_pos(new_node->position);
+		printf(" dir: %i\n", direction);
+		while(get_cell_by(game, *new_node->position, direction) != wall)
+		{
+			if (direction == up)
+				new_node->position->row--;
+			else if (direction == left)
+				new_node->position->col--;
+			else if (direction == down)
+				new_node->position->row++;
+			else if (direction == right)
+				new_node->position->col++;
+			/* printf("going %i to ", direction);
+			print_pos(new_node->position);
+			printf("\n"); */
+			//check here for coins, exit and enemies
+			if (game->map[new_node->position->row][new_node->position->col] == home)
+				return (true);
+		}
+		
+		if (!is_node_repeated(checker, new_node))
+		{
+			printf("adding ");
+			print_pos(new_node->position);
+			printf("\n\n");
+			add_node(checker, new_node);
+			if (recursive(game, checker))
+			{
+				/* free(new_node->position);
+				free(new_node); */
+				return (true);
+			}
+		}
+		
+		direction++;
+	}
+	printf("closing ");
+	print_pos(start->position);
+	printf("\n\n");
+	/* free(new_node->position);
+	free(new_node); */
+	return (false);
 }
 
 bool	valid_path(t_game *game)
@@ -225,33 +299,10 @@ bool	valid_path(t_game *game)
 	checker->head = NULL;
 	checker->tail = NULL;
 
+	printf("ini: %i %i\n", game->initial_pos->row, game->initial_pos->col);
 	add_node(checker, create_node(create_pos(game->initial_pos->row, game->initial_pos->col)));
 	printf("Valid: %i\n", recursive(game, checker));
 	print_path(checker);
 
-/* 	add_node(checker, create_pos(game->initial_pos->row, game->initial_pos->col));
-	printf("repeated: %i\n", is_node_repeated(checker, checker->tail));
-	print_path(checker);
-	if (is_node_repeated(checker, checker->tail))
-		return (free_checker(checker), false);
-
-	add_node(checker, create_pos(2, 3));
-	printf("repeated: %i\n", is_node_repeated(checker, checker->tail));
-	print_path(checker);
-	if (is_node_repeated(checker, checker->tail))
-		return (free_checker(checker), false);
-
-	add_node(checker, create_pos(5, 8));
-	printf("repeated: %i\n", is_node_repeated(checker, checker->tail));
-	print_path(checker);
-	if (is_node_repeated(checker, checker->tail))
-		return (free_checker(checker), false);
-
-	add_node(checker, create_pos(13, 21));
-	printf("repeated: %i\n", is_node_repeated(checker, checker->tail));
-	print_path(checker);
-	if (is_node_repeated(checker, checker->tail))
-		return (free_checker(checker), false); */
-
-	free_checker(checker);
+	//free_checker(checker);
 }

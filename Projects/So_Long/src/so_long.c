@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 8:59:27 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/26 15:27:27 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/08/27 12:39:12 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	create_map(t_game *game)
 				game->initial_pos->row = i;
 				game->initial_pos->col = j;
 			}
-			else if (i == game->map_height - 2 && j == game->map_width - 2)
+			else if (i == /* game->map_height - */ 2 && j == /* game->map_width - */ 2)
 				game->map[i][j] = home;
 			else if (i == game->map_height / 2 && j == game->map_width / 2)
 				game->map[i][j] = coin;
@@ -114,7 +114,7 @@ void	create_map(t_game *game)
 			else if (i == game->map_height - 2 && j == game->map_width / 2 - 1)
 				game->map[i][j] = wall;
 			else
-				game->map[i][j] = floor;
+				game->map[i][j] = ice;
 		}
 	}
 }
@@ -133,7 +133,7 @@ void	show_map(t_game *game)
 				ft_printf("C");
 			else if(game->map[i][j] == home)
 				ft_printf("E");
-			else if(game->map[i][j] == floor)
+			else if(game->map[i][j] == ice)
 				ft_printf(" ");
 			if (j == game->map_width - 1)
 				ft_printf("\n");
@@ -148,9 +148,9 @@ static void init(t_game **game)
 
 	i = 0;
 	*game = malloc(sizeof(t_game));
-	(*game)->map_width = 12;
+	(*game)->map_width = 10;
 	(*game)->map_height = 8;
-	(*game)->mlx = mlx_init((*game)->map_width * IMG_SIZE, (*game)->map_height * IMG_SIZE, "So Long", true);
+	(*game)->mlx = NULL;//mlx_init((*game)->map_width * IMG_SIZE, (*game)->map_height * IMG_SIZE, "So Long", true);
 	(*game)->map = malloc(sizeof(t_cell *) * (*game)->map_height);
 	while (i < (*game)->map_height)
 		(*game)->map[i++] = malloc(sizeof(t_cell *) * (*game)->map_width);
@@ -255,16 +255,21 @@ int	main(void)
 
 	init(&game);
 	create_map(game);
+	//read_map(game);
 	show_map(game);
 
 	//print_map(game);
 	valid_path(game);
+
+	printf("%f\n", sin(1));
+	
+	
 
 /*
 	mlx_loop_hook(game->mlx, my_hook, game);
 	mlx_key_hook(game->mlx, &my_key_hook, game);
 	mlx_loop(game->mlx);
 	*/
-	free_game(game);
+//	free_game(game);
 	return (0);
 }

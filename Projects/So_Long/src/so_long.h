@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/26 17:59:03 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:28:45 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_H
 
 # include "libft.h"
+# include "math.h"
 # include "MLX42.h"
 
 	//ENUMS//
@@ -21,7 +22,7 @@
 typedef enum e_cell
 {
 	wall = 0,
-	floor = 1,
+	ice = 1,
 	player = 2,
 	coin = 3,
 	home = 4
@@ -78,6 +79,9 @@ typedef struct s_game
 
 	//FUNCTIONS
 
+void	read_map(t_game *game);
 bool	valid_path(t_game *game);
+
+t_position	*create_pos(__u_int row, __u_int col);
 
 #endif
