@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/08/26 15:49:05 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/08/28 22:50:28 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC_DIR := src/
 OBJ_DIR := obj/
 
 SOURCES :=	\
+			read_map.c\
 			so_long.c\
 			valid_path.c\
 
@@ -76,6 +77,8 @@ BLUE := \033[34m
 RESET := \033[0m
 
 #EXTRA VARIABLES
+
+MAP := maps/valid_medium.ber
 
 OUT := out
 
@@ -143,7 +146,7 @@ be: bonus
 e: exec
 exec: all
 	@clear
-	@-./$(NAME)
+	@-./$(NAME) $(MAP)
 
 n: norminette
 norminette:
@@ -154,8 +157,8 @@ normi:
 
 #until there's something better: make v CFLAGS=
 v: valgrind
-valgrind: fclean $(LIBFT) $(OBJECTS) | $(VALGRIND_DIR)
-	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) -o $(NAME)
+valgrind: fclean $(LIBFT) $(MLX_NAME) $(OBJECTS) | $(VALGRIND_DIR)
+	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(NAME)
 	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ././$(NAME) $(ARG)
 	@echo "$(BLUE) $$(grep "ERROR SUMMARY" $(VALGRIND_DIR)/$$(ls valgrind | tail -1))"
 	@$(MAKE) fclean
