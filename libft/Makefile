@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 16:43:04 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/08/20 21:39:41 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/08/29 18:00:32 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ AR_FLAGS = -rc
 
 SOURCES =	\
 			$(addprefix extra/,\
+				ft_count_char.c\
 				ft_free_double_pointer.c\
 				ft_get_max.c\
 				ft_get_min.c\

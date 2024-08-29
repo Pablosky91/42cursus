@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/29 15:42:28 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/08/29 17:41:56 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ typedef enum e_cell
 {
 	wall = 0,
 	ice = 1,
-	player = 2,
-	coin = 3,
+	penguin = 2,
+	fish = 3,
 	home = 4
 }	t_cell;
 
@@ -48,6 +48,7 @@ typedef struct s_position
 typedef struct s_status_node
 {
 	t_position				*position;
+	bool					*fishes;
 	struct s_status_node	*next;
 }	t_status_node;
 
@@ -57,23 +58,39 @@ typedef struct s_path_checker
 	t_status_node	*tail;
 }	t_path_checker;
 
-typedef struct s_player
+typedef struct s_penguin
 {
 	mlx_image_t	*still;
 	mlx_image_t	*up;
 	mlx_image_t	*left;
 	mlx_image_t	*down;
 	mlx_image_t	*right;
-	t_direction	player_movement;
-}	t_player;
+	t_direction	facing;
+}	t_penguin;
+
+typedef struct s_map
+{
+	__u_int	width;
+	__u_int	height;
+	t_cell	**cells;
+}	t_map;
+
+typedef struct s_fish
+{
+	mlx_image_t	*alive;
+	mlx_image_t	*dead;
+	__u_int		id;
+	t_position	*position;
+	bool		collected;
+}	t_fish;
 
 typedef struct s_game
 {
 	mlx_t		*mlx;
-	__u_int		map_width;
-	__u_int		map_height;
-	t_cell		**map;
-	t_player	*player;
+	t_map		*map;
+	t_penguin	*penguin;
+	t_fish		**fishes;
+	__u_int		quantity_fishes;
 	t_position	*initial_pos;
 }	t_game;
 

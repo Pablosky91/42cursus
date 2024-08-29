@@ -1,28 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_game.c                                        :+:      :+:    :+:   */
+/*   ft_count_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/29 15:41:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/29 17:13:59 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/08/29 16:58:30 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/08/29 16:58:54 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "libft.h"
 
-void	free_game(t_game *game)
+size_t	ft_count_char(char *s, int c)
 {
-	__u_int i = 0;
+	size_t	i;
+	size_t	len;
+	size_t	count;
 
-	while (game->fishes[i])
-		free(game->fishes[i++]->position);
-
-	ft_free_double_pointer((void **) game->map->cells);
-	ft_free_double_pointer((void **) game->fishes);
-	free(game->map);
-	free(game->penguin);
-	free(game->initial_pos);
-	free(game);
+	i = 0;
+	len = ft_strlen(s);
+	count = 0;
+	while (i <= len)
+	{
+		if (s[i] == (char) c)
+			count++;
+		i++;
+	}
+	return (count);
 }
