@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:46:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/29 17:41:26 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:08:53 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	read_map(t_game *game, char *path)
 				game->map->cells[row][col] = fish;
 				game->fishes[fish_id] = malloc(sizeof(t_fish));
 				game->fishes[fish_id]->collected = false;
-				game->fishes[fish_id]->id = fish_id;
+				game->fishes[fish_id]->id = fish_id + 1;
 				game->fishes[fish_id]->position = malloc(sizeof(t_position));
 				game->fishes[fish_id]->position->row = row;
 				game->fishes[fish_id]->position->col = col;

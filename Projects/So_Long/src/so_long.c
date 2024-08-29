@@ -16,9 +16,11 @@ static void init(t_game **game);
 
 void	create_map(t_game *game)
 {
-	game->map->height = 12;
-	game->map->width = 20;
+	game->map->height = 7;
+	game->map->width = 9;
 	game->map->cells = ft_calloc(sizeof(t_cell *), game->map->height + 1);
+	game->quantity_fishes = 2;
+	game->fishes = ft_calloc(game->quantity_fishes + 1, sizeof(t_fish *));
 	for(int i = 0; i < game->map->height; i++)
 	{
 		game->map->cells[i] = malloc(sizeof(t_cell) * game->map->width);
@@ -32,10 +34,28 @@ void	create_map(t_game *game)
 				game->initial_pos->row = i;
 				game->initial_pos->col = j;
 			}
-			else if (i == game->map->height - 2 && j == game->map->width - 2)
+			else if (i == game->map->height - 3 && j == game->map->width - 2)
 				game->map->cells[i][j] = home;
-			else if (i == game->map->height / 2 && j == game->map->width / 2)
+			else if (i == 5 && j == 7)
+			{
 				game->map->cells[i][j] = fish;
+				game->fishes[0] = malloc(sizeof(t_fish));
+				game->fishes[0]->collected = false;
+				game->fishes[0]->id = 1;
+				game->fishes[0]->position = malloc(sizeof(t_position));
+				game->fishes[0]->position->row = i;
+				game->fishes[0]->position->col = j;
+			}
+			else if (i == game->map->height / 2 && j == game->map->width / 2)
+			{
+				game->map->cells[i][j] = fish;
+				game->fishes[1] = malloc(sizeof(t_fish));
+				game->fishes[1]->collected = false;
+				game->fishes[1]->id = 2;
+				game->fishes[1]->position = malloc(sizeof(t_position));
+				game->fishes[1]->position->row = i;
+				game->fishes[1]->position->col = j;
+			}
 			else if (i == 1 && j == game->map->width / 2)
 				game->map->cells[i][j] = wall;
 			else if (i == game->map->height - 2 && j == game->map->width / 2 - 1)
@@ -95,10 +115,12 @@ int	main(int argc, char **argv)
 	read_map(game, argv[1]);
 	show_map(game);
 
-	//valid_path(game);
-
 	for (int i = 0; game->fishes[i]; i++)
-		printf("Fish %i: {%i, %i}\n", i, game->fishes[i]->position->row, game->fishes[i]->position->col);
+		ft_printf("Fish %i: {%i, %i}\n", game->fishes[i]->id, game->fishes[i]->position->row, game->fishes[i]->position->col);
+	ft_printf("\n");
+
+	valid_path(game);
+
 
 
 	print_map(game);

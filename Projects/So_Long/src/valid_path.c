@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:45:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/29 16:30:00 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:11:30 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	free_status(t_status_node *status)
 {
 	status->next = NULL;
 	free(status->position);
+	free(status->fishes);
 	free(status);
 }
 
@@ -34,43 +35,70 @@ void	free_checker(t_path_checker *checker)
 	free(checker);
 }
 
-void	print_pos(t_position *position)
-{
-	ft_printf("{%i, %i}", position->row, position->col);
-}
-
-void	print_path(t_path_checker	*checker)
+void	print_path(t_game *game, t_path_checker	*checker)
 {
 	t_status_node	*node;
+	__u_int			iter;
 	
 	ft_printf("\n");
 	node = checker->head;
 	while (node != 0)
 	{
-		print_pos(node->position);
-		ft_printf("\n");
+		iter = 0;
+		ft_printf("{%i:%i}\t[", node->position->row, node->position->col);
+		ft_printf("%i", node->fishes[iter]);
+		iter++;
+		while (iter < game->quantity_fishes)
+		{
+			ft_printf(" %i", node->fishes[iter]);
+			iter++;
+		}
+		ft_printf("]\n");
 		node = node->next;
 	}
 	printf("\n");
 }
 
-bool	is_same_status(t_status_node *status_1, t_status_node *status_2)
+__u_int	get_id_fish(t_game *game, t_position position)
 {
+	__u_int	iter;
+
+	iter = 0;
+	while (game->fishes[iter])
+	{
+		if (game->fishes[iter]->position->row == position.row && game->fishes[iter]->position->col == position.col)
+			return (game->fishes[iter]->id);
+		iter++;
+	}
+	return (0);
+}
+
+bool	is_same_status(t_game *game, t_status_node *status_1, t_status_node *status_2)
+{
+	__u_int	iter;
+
+	iter = 0;
 	if (status_1->position->row != status_2->position->row)
 		return (false);
 	if (status_1->position->col != status_2->position->col)
 		return (false);
+	while (iter < game->quantity_fishes)
+	{
+		if (status_1->fishes[iter] != status_2->fishes[iter])
+		return (false);
+		iter++;
+	}
 	return (true);
 }
 
-bool	is_node_repeated(t_path_checker *checker, t_status_node *node)
+bool	is_node_repeated(t_game *game, t_path_checker *checker, t_status_node *node)
 {
 	t_status_node	*iter;
 
 	iter = checker->head;
 	while (iter)
 	{
-		if (is_same_status(iter, node))
+		if (is_same_status(game, iter, node))
 			return (true);
 		iter = iter->next;
 	}
@@ -86,13 +114,33 @@ t_position	*create_pos(__u_int row, __u_int col)
 	position->col = col;
 }
 
-t_status_node	*create_node(t_position *position)
+t_status_node	*create_node(t_game *game, t_position *position)
 {
 	t_status_node	*node;
 
 	node = malloc(sizeof(t_status_node));
 	node->position = position;
+	node->fishes = ft_calloc(game->quantity_fishes, sizeof(bool));
 	node->next = NULL;
+}
+
+t_status_node	*copy_node(t_game *game, t_status_node *node)
+{
+	t_status_node	*copy;
+	__u_int	iter;
+
+	iter = 0;
+
+	copy = malloc(sizeof(t_status_node));
+	copy->position = create_pos(node->position->row, node->position->col);
+	copy->fishes = ft_calloc(game->quantity_fishes, sizeof(bool));
+	while (iter < game->quantity_fishes)
+	{
+		copy->fishes[iter] = node->fishes[iter];
+		iter++;
+	}
+	copy->next = NULL;
+	return (copy);
 }
 
 void	add_node(t_path_checker *checker, t_status_node	*node)
@@ -157,7 +205,7 @@ bool recursive(t_game *game, t_path_checker *checker)
 	while(direction <= 4)
 	{
 
-		new_node = create_node(create_pos(start->position->row, start->position->col));
+		new_node = copy_node(game, start);
 		while(get_cell_by(game, *new_node->position, direction) != wall)
 		{
 			if (direction == up)
@@ -170,15 +218,70 @@ bool recursive(t_game *game, t_path_checker *checker)
 				new_node->position->col++;
 			//check here for fishes, exit and enemies
 			if (game->map->cells[new_node->position->row][new_node->position->col] == home)
-				return (true);
+			{
+				bool all_collected = true;
+				int i = 0;
+				while (i < game->quantity_fishes)
+				{
+					if (!new_node->fishes[i])
+						all_collected = false;
+					i++;
+				}
+				if (all_collected)
+				{
+					free_status(new_node);
+					return (true);
+				}
+			}
+			if (game->map->cells[new_node->position->row][new_node->position->col] == fish)
+			{
+				new_node->fishes[get_id_fish(game, *(new_node->position)) - 1] = true;
+				//ft_printf("fishy from %i %i going %i\n", start->position->row, start->position->col, direction);
+			}
 		}
 		
-		if (!is_node_repeated(checker, new_node))
+		
+		int iter = 0;
+		ft_printf("start from {%i:%i}   [", start->position->row, start->position->col);
+		
+		ft_printf("%i", start->fishes[iter]);
+		iter++;
+		while (iter < game->quantity_fishes)
 		{
+			ft_printf(" %i", start->fishes[iter]);
+			iter++;
+		}
+		
+		ft_printf("] going %i,\t", direction);
+
+		ft_printf("{%i:%i}\t[", new_node->position->row, new_node->position->col);
+
+		iter = 0;
+		ft_printf("%i", new_node->fishes[iter]);
+		iter++;
+		while (iter < game->quantity_fishes)
+		{
+			ft_printf(" %i", new_node->fishes[iter]);
+			iter++;
+		}
+		ft_printf("]");
+
+		
+		if (!is_node_repeated(game, checker, new_node))
+		{
+			ft_printf(" -> good\n");
 			add_node(checker, new_node);
 			if (recursive(game, checker))
 				return (true);
 		}
+		else
+		{
+			free_status(new_node);
+			ft_printf(" ->  bad\n");
+		}
+		
+		
+
 		
 		direction++;
 	}
@@ -253,12 +356,10 @@ bool	valid_path(t_game *game)
 	checker->head->position = malloc(sizeof(t_position));
 	*(checker->head->position) = *(game->initial_pos); */
 	//same as
-	//add_node(checker, create_node(create_pos(game->initial_pos->row, game->initial_pos->col)));
+	add_node(checker, create_node(game, create_pos(game->initial_pos->row, game->initial_pos->col)));
+	printf("Valid: %i\n", recursive(game, checker));
 
-	//printf("Valid: %i\n", recursive(game, checker));
-
-
-	
-	print_path(checker);
+	ft_printf("Path:\n");
+	print_path(game, checker);
 	free_checker(checker);
 }
