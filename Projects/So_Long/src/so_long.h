@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/28 22:20:33 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/08/29 15:42:28 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ typedef struct s_position
 	__u_int	col;
 }	t_position;
 
-typedef struct s_position_node
+typedef struct s_status_node
 {
 	t_position				*position;
-	struct s_position_node	*next;
+	struct s_status_node	*next;
 }	t_status_node;
 
 typedef struct s_path_checker
@@ -79,8 +79,15 @@ typedef struct s_game
 
 	//FUNCTIONS
 
+void	free_game(t_game *game);
+
 void	read_map(t_game *game, char *path);
 bool	valid_path(t_game *game);
+
+void	my_loop_hook(void* param);
+void	my_key_hook(mlx_key_data_t keydata, void* param);
+void	print_map(t_game *game);
+
 
 t_position	*create_pos(__u_int row, __u_int col);
 

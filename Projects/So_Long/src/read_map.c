@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:46:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/28 21:28:41 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/08/29 13:10:32 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,12 +95,12 @@ void	read_map(t_game *game, char *path)
 	buffer = malloc(sizeof(char));
 	get_size_map(game, path);
 	fd = open(path, O_RDONLY);
-	game->map = malloc(sizeof(t_cell *) * game->map_height);
+	game->map = ft_calloc(game->map_height + 1, sizeof(t_cell *));
 	row = 0;
 	while (row < game->map_height)
 	{
 		col = 0;
-		game->map[row] = malloc(sizeof(t_cell *) * game->map_width);
+		game->map[row] = ft_calloc(game->map_width + 1, sizeof(t_cell));
 		while (col < game->map_width)
 		{
 			read(fd, buffer, 1);

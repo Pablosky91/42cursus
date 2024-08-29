@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_double_pointer.c                           :+:      :+:    :+:   */
+/*   free_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/20 21:38:15 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/29 12:35:29 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/08/29 15:41:01 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/08/29 15:42:02 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "so_long.h"
 
-/*
-Frees the double pointer and each of their pointers.
-Always returns false.
-*/
-bool	ft_free_double_pointer(void **double_pointer)
+void	free_game(t_game *game)
 {
-	__u_int	i;
-
-	i = 0;
-	while (double_pointer[i])
-		free(double_pointer[i++]);
-	free(double_pointer);
-	return (false);
+	ft_free_double_pointer((void **) game->map);
+	free(game->player);
+	free(game->initial_pos);
+	free(game);
 }
