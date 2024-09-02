@@ -91,9 +91,6 @@ void	show_map(t_game *game)
 
 static void	init(t_game **game)
 {
-	__u_int	i;
-
-	i = 0;
 	*game = malloc(sizeof(t_game));
 	(*game)->mlx = NULL;
 	(*game)->map = malloc(sizeof(t_map));
@@ -104,18 +101,24 @@ static void	init(t_game **game)
 	(*game)->initial_pos = malloc(sizeof(t_position));
 }
 
-
 int	main(int argc, char **argv)
 {
+	/* int32_t	width = 5, height = 7;
+	mlx_get_monitor_size(0, &width, &height);
+	ft_printf("w: %i, h: %i\n", width, height); */
 	t_game	*game;
-
+	if (argc != 2)
+	{
+		ft_printf("Error\nThe program has to take as parameter a map description file ending with the .ber extension\n");
+		exit(1);
+	}
 	init(&game);
-
+	
 	//create_map(game);
 	read_map(game, argv[1]);
 	show_map(game);
 
-	valid_path(game);
+	printf("Valid: %i\n", valid_path(game));
 
 
 

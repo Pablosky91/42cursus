@@ -6,55 +6,22 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:32:14 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/02 12:07:15 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/02 20:24:37 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-static const int	IMG_SIZE = 128;
-static const int	SPEED = 12;
+static const int	IMG_SIZE = 100;
+static int	SPEED = 5;
 
-void	my_loop_hook(void *param)
+t_cell	get_cell_at(t_game *game, int32_t x, int32_t y)
 {
-	t_game	*game;
-
-	game = param;
-	if (game->penguin->facing == NORTH)
-	{
-		game->penguin->still->instances[0].y -= SPEED;
-		game->penguin->north->instances[0].y -= SPEED;
-		game->penguin->west->instances[0].y -= SPEED;
-		game->penguin->south->instances[0].y -= SPEED;
-		game->penguin->east->instances[0].y -= SPEED;
-	}
-	if (game->penguin->facing == WEST)
-	{
-		game->penguin->still->instances[0].x -= SPEED;
-		game->penguin->north->instances[0].x -= SPEED;
-		game->penguin->west->instances[0].x -= SPEED;
-		game->penguin->south->instances[0].x -= SPEED;
-		game->penguin->east->instances[0].x -= SPEED;
-	}
-	if (game->penguin->facing == SOUTH)
-	{
-		game->penguin->still->instances[0].y += SPEED;
-		game->penguin->north->instances[0].y += SPEED;
-		game->penguin->west->instances[0].y += SPEED;
-		game->penguin->south->instances[0].y += SPEED;
-		game->penguin->east->instances[0].y += SPEED;
-	}
-	if (game->penguin->facing == EAST)
-	{
-		game->penguin->still->instances[0].x += SPEED;
-		game->penguin->north->instances[0].x += SPEED;
-		game->penguin->west->instances[0].x += SPEED;
-		game->penguin->south->instances[0].x += SPEED;
-		game->penguin->east->instances[0].x += SPEED;
-	}
+	printf ("%i %i -> %i %i -> %i\n", y, x, y/IMG_SIZE, x/IMG_SIZE, game->map->cells[y / IMG_SIZE][x / IMG_SIZE]);
+	return (game->map->cells[y / IMG_SIZE][x / IMG_SIZE]);
 }
 
-void	move_penguin(t_game *game, t_direction direction)
+void	start_penguin_movement(t_game *game, t_direction direction)
 {
 	game->penguin->still->enabled = false;
 	game->penguin->north->enabled = false;
@@ -74,31 +41,97 @@ void	move_penguin(t_game *game, t_direction direction)
 	game->penguin->facing = direction;
 }
 
+
+
+
+void	move_img(t_game *game, mlx_image_t *img, t_direction direction)
+{
+	if (direction == NORTH)
+	{
+		if (get_cell_at(game, img->instances[0].x, img->instances[0].y - SPEED) == WALL)
+			start_penguin_movement(game, STILL);
+		else
+			img->instances[0].y -= SPEED;
+	}
+	else if (direction == WEST)
+	{
+		if (get_cell_at(game, img->instances[0].x -SPEED, img->instances[0].y) == WALL)
+			start_penguin_movement(game, STILL);
+		else
+			img->instances[0].x -= SPEED;
+	}
+	else if (direction == SOUTH)
+	{
+		if (get_cell_at(game, img->instances[0].x, img->instances[0].y + SPEED + IMG_SIZE - 1) == WALL)
+		{
+			
+			start_penguin_movement(game, STILL);
+		}
+		else
+			img->instances[0].y += SPEED;
+	}
+	else if (direction == EAST)
+	{
+		if (get_cell_at(game, img->instances[0].x + SPEED + IMG_SIZE - 1, img->instances[0].y) == WALL)
+			start_penguin_movement(game, STILL);
+		else
+			img->instances[0].x += SPEED;
+	}
+}
+
+
+
+void	my_loop_hook(void *param)
+{
+	t_game	*game;
+
+	game = param;
+	move_img(game, game->penguin->still, game->penguin->facing);
+	move_img(game, game->penguin->north, game->penguin->facing);
+	move_img(game, game->penguin->west, game->penguin->facing);
+	move_img(game, game->penguin->south, game->penguin->facing);
+	move_img(game, game->penguin->east, game->penguin->facing);
+	//static int frame = 0;
+	//ft_printf("Frame: %i\n", frame++);
+	//mlx_put_string(game->mlx, ft_strjoin("Frame: ", ft_itoa(frame)), 50, 50);
+}
+
 void	my_key_hook(mlx_key_data_t keydata, void *param)
 {
 	t_game	*game;
 
 	game = param;
-	if (keydata.action != MLX_PRESS)
-		return ;
-	if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP)
-		move_penguin(game, NORTH);
-	else if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_LEFT)
-		move_penguin(game, WEST);
-	else if (keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN)
-		move_penguin(game, SOUTH);
-	else if (keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT)
-		move_penguin(game, EAST);
-	else if (keydata.key == MLX_KEY_ESCAPE && !game->penguin->facing)
+	if (keydata.key == MLX_KEY_ESCAPE)
 	{
 		free_game(game);
 		exit(0);
 	}
+	if (keydata.key == MLX_KEY_KP_ADD && keydata.action == MLX_PRESS)
+		SPEED++;
+	if (keydata.key == MLX_KEY_KP_SUBTRACT && keydata.action == MLX_PRESS)
+		SPEED--;
+	if (keydata.key == MLX_KEY_SPACE)//TODO remove space
+		start_penguin_movement(game, STILL);
+	if (keydata.action != MLX_PRESS || game->penguin->facing != STILL)
+		return ;
+	if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP)
+		start_penguin_movement(game, NORTH);
+	else if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_LEFT)
+		start_penguin_movement(game, WEST);
+	else if (keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN)
+		start_penguin_movement(game, SOUTH);
+	else if (keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT)
+		start_penguin_movement(game, EAST);
 	else if (keydata.key == MLX_KEY_ESCAPE)
-		move_penguin(game, STILL);
+	{
+		free_game(game);
+		exit(0);
+	}
+	if (keydata.key == MLX_KEY_SPACE)
+		start_penguin_movement(game, STILL);
 }
 
-void	create_image(mlx_t *mlx, mlx_image_t **img, char *path, __u_int	row, __u_int	col)
+void	create_image(mlx_t *mlx, mlx_image_t **img, char *path, int row, int col)
 {
 	mlx_texture_t	*texture;
 
@@ -112,9 +145,9 @@ void	create_image(mlx_t *mlx, mlx_image_t **img, char *path, __u_int	row, __u_in
 
 void	print_map(t_game *game)
 {
-	__u_int			row;
-	__u_int			col;
-	mlx_image_t		*img;
+	int			row;
+	int			col;
+	mlx_image_t	*img;
 
 	game->mlx = mlx_init(game->map->width * IMG_SIZE, game->map->height * IMG_SIZE, "So Long", false);
 

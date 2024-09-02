@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:46:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/02 12:02:01 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/02 16:16:38 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ size_t	ft_count_char(char *s, int c)
 
 void	get_size_map(t_game *game, char *path)
 {
-	char		*line;
-	__u_int		length;
-	int			fd;
+	char	*line;
+	int		length;
+	int		fd;
 
 	fd = open(path, O_RDONLY);
 	game->map->height = 0;
@@ -61,10 +61,10 @@ void	get_size_map(t_game *game, char *path)
 void	read_map(t_game *game, char *path)
 {
 	char	*buffer;
-	__u_int	row;
-	__u_int	col;
+	int		row;
+	int		col;
 	int		fd;
-	__u_int	fish_id;
+	int		fish_id;
 
 	buffer = malloc(sizeof(char));
 	get_size_map(game, path);
@@ -97,7 +97,7 @@ void	read_map(t_game *game, char *path)
 				game->map->cells[row][col] = FISH;
 				game->fishes[fish_id] = malloc(sizeof(t_fish));
 				game->fishes[fish_id]->collected = false;
-				game->fishes[fish_id]->id = fish_id + 1;
+				game->fishes[fish_id]->id = fish_id;
 				game->fishes[fish_id]->position = malloc(sizeof(t_position));
 				game->fishes[fish_id]->position->row = row;
 				game->fishes[fish_id]->position->col = col;

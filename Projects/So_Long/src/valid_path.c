@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:45:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/02 12:04:04 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/02 17:01:20 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	free_checker(t_path_checker *checker)
 void	print_path(t_game *game, t_path_checker	*checker)
 {
 	t_status_node	*node;
-	__u_int			iter;
+	int				iter;
 
 	ft_printf("\n");
 	node = checker->head;
@@ -59,9 +59,9 @@ void	print_path(t_game *game, t_path_checker	*checker)
 	printf("\n");
 }
 
-__u_int	get_id_fish(t_game *game, t_position position)
+int	get_id_fish(t_game *game, t_position position)
 {
-	__u_int	iter;
+	int	iter;
 
 	iter = 0;
 	while (game->fishes[iter])
@@ -75,7 +75,7 @@ __u_int	get_id_fish(t_game *game, t_position position)
 
 bool	is_same_status(t_game *game, t_status_node *status_1, t_status_node *status_2)
 {
-	__u_int	iter;
+	int	iter;
 
 	iter = 0;
 	if (status_1->position->row != status_2->position->row)
@@ -105,13 +105,14 @@ bool	is_node_repeated(t_game *game, t_path_checker *checker, t_status_node *node
 	return (false);
 }
 
-t_position	*create_pos(__u_int row, __u_int col)
+t_position	*create_pos(int row, int col)
 {
 	t_position	*position;
 
 	position = malloc(sizeof(t_position));
 	position->row = row;
 	position->col = col;
+	return (position);
 }
 
 t_status_node	*create_node(t_game *game, t_position *position)
@@ -122,12 +123,13 @@ t_status_node	*create_node(t_game *game, t_position *position)
 	node->position = position;
 	node->fishes = ft_calloc(game->quantity_fishes, sizeof(bool));
 	node->next = NULL;
+	return (node);
 }
 
 t_status_node	*copy_node(t_game *game, t_status_node *node)
 {
 	t_status_node	*copy;
-	__u_int			iter;
+	int				iter;
 
 	iter = 0;
 	copy = malloc(sizeof(t_status_node));
@@ -166,7 +168,7 @@ t_cell	get_cell_by(t_game *game, t_position	position, t_direction direction)
 
 bool	recursive(t_game *game, t_path_checker *checker)
 {
-	__u_int			i;
+	int				i;
 	bool			all_collected;
 	t_direction		direction;
 	t_status_node	*new_node;
@@ -208,7 +210,7 @@ bool	recursive(t_game *game, t_path_checker *checker)
 			}
 			//fish
 			if (game->map->cells[new_node->position->row][new_node->position->col] == FISH)
-				new_node->fishes[get_id_fish(game, *(new_node->position)) - 1] = true;
+				new_node->fishes[get_id_fish(game, *(new_node->position))] = true;
 		}
 		if (!is_node_repeated(game, checker, new_node))
 		{
