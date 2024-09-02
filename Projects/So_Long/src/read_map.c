@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:46:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/29 18:08:53 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/02 12:02:01 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void	get_size_map(t_game *game, char *path)
 			ft_printf("different sized rows\n");
 		//TODO error size rows
 		game->quantity_fishes += ft_count_char(line, 'C');
-		//ft_printf((line, 'C'));
 		game->map->width = length;
 		game->map->height++;
 		free(line);
@@ -62,10 +61,10 @@ void	get_size_map(t_game *game, char *path)
 void	read_map(t_game *game, char *path)
 {
 	char	*buffer;
-	__u_int row;
-	__u_int col;
-	int fd;
-	__u_int fish_id = 0;
+	__u_int	row;
+	__u_int	col;
+	int		fd;
+	__u_int	fish_id;
 
 	buffer = malloc(sizeof(char));
 	get_size_map(game, path);
@@ -73,6 +72,7 @@ void	read_map(t_game *game, char *path)
 	game->map->cells = ft_calloc(game->map->height + 1, sizeof(t_cell *));
 	game->fishes = ft_calloc(game->quantity_fishes + 1, sizeof(t_fish *));
 	row = 0;
+	fish_id = 0;
 	while (row < game->map->height)
 	{
 		col = 0;
@@ -81,20 +81,20 @@ void	read_map(t_game *game, char *path)
 		{
 			read(fd, buffer, 1);
 			if (buffer[0] == '1')
-				game->map->cells[row][col] = wall;
+				game->map->cells[row][col] = WALL;
 			else if (buffer[0] == '0')
-				game->map->cells[row][col] = ice;
+				game->map->cells[row][col] = ICE;
 			else if (buffer[0] == 'P')
 			{
-				game->map->cells[row][col] = penguin;
+				game->map->cells[row][col] = PENGUIN;
 				game->initial_pos->row = row;
 				game->initial_pos->col = col;
 			}
 			else if (buffer[0] == 'E')
-				game->map->cells[row][col] = home;
+				game->map->cells[row][col] = HOME;
 			else if (buffer[0] == 'C')
 			{
-				game->map->cells[row][col] = fish;
+				game->map->cells[row][col] = FISH;
 				game->fishes[fish_id] = malloc(sizeof(t_fish));
 				game->fishes[fish_id]->collected = false;
 				game->fishes[fish_id]->id = fish_id + 1;

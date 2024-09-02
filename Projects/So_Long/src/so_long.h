@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/29 17:41:56 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/02 12:07:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@
 
 typedef enum e_cell
 {
-	wall = 0,
-	ice = 1,
-	penguin = 2,
-	fish = 3,
-	home = 4
+	WALL = 0,
+	ICE = 1,
+	PENGUIN = 2,
+	FISH = 3,
+	HOME = 4
 }	t_cell;
 
 typedef enum e_direction
 {
-	still = 0,
-	up = 1,
-	left = 2,
-	down = 3,
-	right = 4
+	STILL = 0,
+	NORTH = 1,
+	WEST = 2,
+	SOUTH = 3,
+	EAST = 4
 }	t_direction;
 
 	//STRUCTS//
@@ -53,7 +53,7 @@ typedef struct s_status_node
 }	t_status_node;
 
 typedef struct s_path_checker
-{ 
+{
 	t_status_node	*head;
 	t_status_node	*tail;
 }	t_path_checker;
@@ -61,10 +61,10 @@ typedef struct s_path_checker
 typedef struct s_penguin
 {
 	mlx_image_t	*still;
-	mlx_image_t	*up;
-	mlx_image_t	*left;
-	mlx_image_t	*down;
-	mlx_image_t	*right;
+	mlx_image_t	*north;
+	mlx_image_t	*west;
+	mlx_image_t	*south;
+	mlx_image_t	*east;
 	t_direction	facing;
 }	t_penguin;
 
@@ -96,14 +96,14 @@ typedef struct s_game
 
 	//FUNCTIONS
 
-void	free_game(t_game *game);
+void		free_game(t_game *game);
 
-void	read_map(t_game *game, char *path);
-bool	valid_path(t_game *game);
+void		read_map(t_game *game, char *path);
+bool		valid_path(t_game *game);
 
-void	my_loop_hook(void* param);
-void	my_key_hook(mlx_key_data_t keydata, void* param);
-void	print_map(t_game *game);
+void		my_loop_hook(void *param);
+void		my_key_hook(mlx_key_data_t keydata, void *param);
+void		print_map(t_game *game);
 
 
 t_position	*create_pos(__u_int row, __u_int col);
