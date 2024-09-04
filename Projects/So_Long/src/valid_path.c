@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:45:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/02 17:01:20 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:13:25 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	get_id_fish(t_game *game, t_position position)
 			return (game->fishes[iter]->id);
 		iter++;
 	}
-	return (0);
+	return (-1);
 }
 
 bool	is_same_status(t_game *game, t_status_node *status_1, t_status_node *status_2)

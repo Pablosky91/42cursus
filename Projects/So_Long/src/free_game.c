@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:41:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/02 16:14:22 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/04 16:05:10 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	free_game(t_game *game)
 	free(game->mlx);
 	free(game->map);
 	free(game->penguin);
+	free(game->home);
 	free(game->initial_pos);
 	free(game);
 }

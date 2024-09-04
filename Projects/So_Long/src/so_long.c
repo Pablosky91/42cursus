@@ -97,8 +97,11 @@ static void	init(t_game **game)
 	(*game)->penguin = malloc(sizeof(t_penguin));
 	(*game)->penguin->facing = STILL;
 	(*game)->fishes = NULL;
+	(*game)->home = malloc(sizeof(t_home));
 	(*game)->quantity_fishes = 0;
+	(*game)->collected_fishes = 0;
 	(*game)->initial_pos = malloc(sizeof(t_position));
+	(*game)->moves = 0;
 }
 
 int	main(int argc, char **argv)
@@ -116,9 +119,9 @@ int	main(int argc, char **argv)
 	
 	//create_map(game);
 	read_map(game, argv[1]);
-	show_map(game);
-
-	printf("Valid: %i\n", valid_path(game));
+	//show_map(game);
+	valid_path(game);
+	//printf("Valid: %i\n", valid_path(game));
 
 
 

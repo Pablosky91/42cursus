@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/02 16:15:59 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/04 18:20:31 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ typedef struct s_penguin
 	mlx_image_t	*south;
 	mlx_image_t	*east;
 	t_direction	facing;
+	int32_t		x;
+	int32_t		y;
 }	t_penguin;
 
 typedef struct s_map
@@ -84,14 +86,23 @@ typedef struct s_fish
 	bool		collected;
 }	t_fish;
 
+typedef struct s_home
+{
+	mlx_image_t	*open;
+	mlx_image_t	*closed;
+}	t_home;
+
 typedef struct s_game
 {
 	mlx_t		*mlx;
 	t_map		*map;
 	t_penguin	*penguin;
 	t_fish		**fishes;
+	t_home		*home;
 	int			quantity_fishes;
+	int			collected_fishes;
 	t_position	*initial_pos;
+	int			moves;
 }	t_game;
 
 	//FUNCTIONS
@@ -107,5 +118,9 @@ void		print_map(t_game *game);
 
 
 t_position	*create_pos(int row, int col);
+
+int	get_id_fish(t_game *game, t_position position);
+
+t_cell	get_cell_by(t_game *game, t_position	position, t_direction direction);
 
 #endif
