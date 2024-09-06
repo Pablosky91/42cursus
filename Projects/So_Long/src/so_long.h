@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/04 18:20:31 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/06 21:40:55 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,9 @@ void		valid_path(t_game *game);
 
 void		my_loop_hook(void *param);
 void		my_key_hook(mlx_key_data_t keydata, void *param);
+void 		my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param);
+
+void 		my_cursor_hook(double x_pos, double y_pos, void* param);
 void		print_map(t_game *game);
 void		error_game(t_game *game, t_error error);
 

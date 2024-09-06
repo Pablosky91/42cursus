@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:32:14 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/04 20:27:00 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/06 22:24:24 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	move_penguin(t_game *game)
 	}
 	else if (game->penguin->facing == WEST)
 	{
-		if (get_cell_at(game, game->penguin->x -SPEED, game->penguin->y) == WALL)
+		if (get_cell_at(game, game->penguin->x - SPEED, game->penguin->y) == WALL)
 		{
 			game->penguin->x = game->penguin->x / IMG_SIZE * IMG_SIZE;
 			game->penguin->facing = STILL;
@@ -117,8 +117,9 @@ void	move_penguin(t_game *game)
 
 void	collect_fish(t_game *game)
 {
-	int id_fish = get_id_fish(game, pixels_to_position(game->penguin->x, game->penguin->y));
+	int	id_fish;
 
+	id_fish = get_id_fish(game, pixels_to_position(game->penguin->x, game->penguin->y));
 	if (id_fish != -1 && !game->fishes[id_fish]->collected)
 	{
 		game->fishes[id_fish]->alive->enabled = false;
@@ -179,8 +180,38 @@ void	my_key_hook(mlx_key_data_t keydata, void *param)
 		game->penguin->facing = SOUTH;
 	else if (keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT)
 		game->penguin->facing = EAST;
-	if(get_cell_by(game, pixels_to_position(game->penguin->x, game->penguin->y), game->penguin->facing) != WALL)
+	if (get_cell_by(game, pixels_to_position(game->penguin->x, game->penguin->y), game->penguin->facing) != WALL)
 		ft_printf("Moves: %i\n", ++game->moves);
+}
+
+void my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param)
+{
+	t_game	*game;
+
+	game = param;
+	int32_t	x;
+	int32_t	y;
+	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
+	{
+		mlx_get_mouse_pos(game->mlx, &x, &y);
+		ft_printf("click in %i %i\n", x, y);
+	}
+}
+
+void my_cursor_hook(double x_pos, double y_pos, void* param)
+{
+	t_game	*game;
+	int		x;
+	int		y;
+
+	game = param;
+	x = x_pos;
+	y = y_pos;
+	printf("1moving cursor to %i %i\n", x, y);
+	if (x > game->mlx->width / 2)
+		mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/cursor_right.png")));
+	else
+		mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/cursor_left.png")));
 }
 
 void	create_image(mlx_t *mlx, mlx_image_t **img, char *path, int row, int col)
@@ -201,7 +232,14 @@ void	print_map(t_game *game)
 	int			col;
 	mlx_image_t	*img;
 	int id_fish = 0;
+	//mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	//mlx_set_setting(MLX_MAXIMIZED, true);
 	game->mlx = mlx_init(game->map->width * IMG_SIZE, game->map->height * IMG_SIZE, "So Long", false);
+	//mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
+	//mlx_set_cursor(game->mlx, mlx_create_std_cursor(MLX_CURSOR_CROSSHAIR));
+	//mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/penguin.png")));
+	mlx_set_icon(game->mlx, mlx_load_png("textures/penguin.png"));
+	
 
 	row = 0;
 	while (row < game->map->height)
@@ -246,7 +284,7 @@ void	print_map(t_game *game)
 				game->penguin->east->enabled = false;
 				game->penguin->east->instances[0].z = 3;
 			}
-			
+
 			//fish
 			if (game->map->cells[row][col] == FISH)
 			{

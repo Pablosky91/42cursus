@@ -114,26 +114,18 @@ int	main(int argc, char **argv)
 	mlx_get_monitor_size(0, &width, &height);
 	ft_printf("w: %i, h: %i\n", width, height); */
 	t_game	*game;
-	if (argc != 2)
-	{
-		ft_printf("Error\nThe program has to take as parameter a map description file ending with the .ber extension\n");
-		exit(1);
-	}
+
+	if (argc < 2)
+		error_game(game, NO_ARGUMENT);
 	init(&game);
-	
-	//create_map(game);
 	read_map(game, argv[1]);
-	//show_map(game);
 	valid_path(game);
-	//printf("Valid: %i\n", valid_path(game));
-
-
-
 	print_map(game);
 	mlx_loop_hook(game->mlx, &my_loop_hook, game);
 	mlx_key_hook(game->mlx, &my_key_hook, game);
+	mlx_mouse_hook(game->mlx, &my_mouse_hook, game);
+	mlx_cursor_hook(game->mlx, &my_cursor_hook, game);
 	mlx_loop(game->mlx);
-
 	free_game(game);
 	return (0);
 }
