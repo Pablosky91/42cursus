@@ -94,13 +94,17 @@ static void	init(t_game **game)
 	*game = malloc(sizeof(t_game));
 	(*game)->mlx = NULL;
 	(*game)->map = malloc(sizeof(t_map));
+	(*game)->map->cells = NULL;
+	(*game)->map->width = 0;
+	(*game)->map->height = 0;
 	(*game)->penguin = malloc(sizeof(t_penguin));
 	(*game)->penguin->facing = STILL;
 	(*game)->fishes = NULL;
 	(*game)->home = malloc(sizeof(t_home));
+	(*game)->home->exists = false;
 	(*game)->quantity_fishes = 0;
 	(*game)->collected_fishes = 0;
-	(*game)->initial_pos = malloc(sizeof(t_position));
+	(*game)->initial_pos = NULL;
 	(*game)->moves = 0;
 }
 

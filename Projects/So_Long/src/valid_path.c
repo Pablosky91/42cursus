@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:45:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/04 16:13:25 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/06 16:03:49 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ bool	recursive(t_game *game, t_path_checker *checker)
 	return (false);
 }
 
-bool	valid_path(t_game *game)
+void	valid_path(t_game *game)
 {
 	t_path_checker	*checker;
 	bool			valid;
@@ -236,5 +236,6 @@ bool	valid_path(t_game *game)
 	add_node(checker, create_node(game, create_pos(game->initial_pos->row, game->initial_pos->col)));
 	valid = recursive(game, checker);
 	free_checker(checker);
-	return (valid);
+	if (!valid)
+		error_game(game, NO_VALID_PATH);
 }

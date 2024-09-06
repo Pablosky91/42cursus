@@ -6,55 +6,106 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:46:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/02 16:16:38 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/06 19:37:26 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-size_t	ft_count_char(char *s, int c)
+int	open_map(t_game *game, char *path)
 {
-	size_t	i;
-	size_t	len;
-	size_t	count;
+	int	fd;
 
-	i = 0;
-	len = ft_strlen(s);
-	count = 0;
-	while (i <= len)
-	{
-		if (s[i] == (char) c)
-			count++;
-		i++;
-	}
-	return (count);
+	fd = open(path, O_RDWR);
+	if (errno == ENOENT)
+		error_game(game, INEXISTENT_FILE);
+	else if (errno == EISDIR)
+		error_game(game, FILE_IS_DIRECTORY);
+	else if (errno == EACCES)
+		error_game(game, FILE_NO_PERMISSION);
+	return (fd);
 }
-
-void	get_size_map(t_game *game, char *path)
+/*
+Gets width, height and number of fishes
+*/
+void	get_info_map(t_game *game, char *path)
 {
 	char	*line;
 	int		length;
 	int		fd;
 
-	fd = open(path, O_RDONLY);
-	game->map->height = 0;
-	game->map->width = 0;
+	fd = open_map(game, path);
 	line = get_next_line(fd);
+	if (!line)
+		error_game(game, NOT_SURROUNDED);
+	game->map->width = ft_strlen(line);
+	if (line[ft_strlen(line) - 1] == '\n')
+		game->map->width--;
 	while (line)
 	{
 		length = ft_strlen(line);
-		if (line[length - 1] == '\n')
-			length--;
-		if (game->map->width && length != game->map->width)
-			ft_printf("different sized rows\n");
-		//TODO error size rows
-		game->quantity_fishes += ft_count_char(line, 'C');
-		game->map->width = length;
+		if ((line[length - 1] != '\n' || length - 1 != game->map->width)
+			&& (line[length - 1] == '\n' || length != game->map->width))
+			error_game(game, NOT_RECTANGULAR);
+		game->quantity_fishes += ft_count_char(line, FISH_CHAR);
 		game->map->height++;
 		free(line);
 		line = get_next_line(fd);
 	}
+	if (game->quantity_fishes == 0)
+		error_game(game, NO_COIN);
 	close(fd);
+}
+
+void	auxiliary_penguin(t_game *game, int row, int col)
+{
+	if (game->initial_pos)
+		error_game(game, NO_PLAYER);
+	game->initial_pos = malloc(sizeof(t_position));
+	game->initial_pos->row = row;
+	game->initial_pos->col = col;
+	game->map->cells[row][col] = PENGUIN;
+}
+
+void	auxiliary_home(t_game *game, int row, int col)
+{
+	if (game->home->exists)
+		error_game(game, NO_EXIT);
+	game->map->cells[row][col] = HOME;
+	game->home->exists = true;
+}
+
+void	auxiliary_fish(t_game *game, int row, int col)
+{
+	static int fish_id = 0;
+
+	game->map->cells[row][col] = FISH;
+	game->fishes[fish_id] = malloc(sizeof(t_fish));
+	game->fishes[fish_id]->collected = false;
+	game->fishes[fish_id]->id = fish_id;
+	game->fishes[fish_id]->position = malloc(sizeof(t_position));
+	game->fishes[fish_id]->position->row = row;
+	game->fishes[fish_id]->position->col = col;
+	fish_id++;
+}
+
+void	auxiliary(t_game *game, char byte, int row, int col)
+{
+
+	if ((row == 0 || col == 0 || row == game->map->height - 1 || col == game->map->width - 1) && byte != WALL_CHAR)
+		error_game(game, NOT_SURROUNDED);
+	if (byte == WALL_CHAR)
+		game->map->cells[row][col] = WALL;
+	else if (byte == ICE_CHAR)
+		game->map->cells[row][col] = ICE;
+	else if (byte == PENGUIN_CHAR)
+		auxiliary_penguin(game, row, col);
+	else if (byte == HOME_CHAR)
+		auxiliary_home(game, row, col);
+	else if (byte == FISH_CHAR)
+		auxiliary_fish(game, row, col);
+	else
+		error_game(game, OTHER_CHARACTERS);
 }
 
 //TODO test with empty or small file
@@ -64,15 +115,15 @@ void	read_map(t_game *game, char *path)
 	int		row;
 	int		col;
 	int		fd;
-	int		fish_id;
+	//int		fish_id;
 
 	buffer = malloc(sizeof(char));
-	get_size_map(game, path);
-	fd = open(path, O_RDONLY);
+	get_info_map(game, path);
+	fd = open_map(game, path);
 	game->map->cells = ft_calloc(game->map->height + 1, sizeof(t_cell *));
 	game->fishes = ft_calloc(game->quantity_fishes + 1, sizeof(t_fish *));
 	row = 0;
-	fish_id = 0;
+	//fish_id = 0;
 	while (row < game->map->height)
 	{
 		col = 0;
@@ -80,33 +131,15 @@ void	read_map(t_game *game, char *path)
 		while (col < game->map->width)
 		{
 			read(fd, buffer, 1);
-			if (buffer[0] == '1')
-				game->map->cells[row][col] = WALL;
-			else if (buffer[0] == '0')
-				game->map->cells[row][col] = ICE;
-			else if (buffer[0] == 'P')
-			{
-				game->map->cells[row][col] = PENGUIN;
-				game->initial_pos->row = row;
-				game->initial_pos->col = col;
-			}
-			else if (buffer[0] == 'E')
-				game->map->cells[row][col] = HOME;
-			else if (buffer[0] == 'C')
-			{
-				game->map->cells[row][col] = FISH;
-				game->fishes[fish_id] = malloc(sizeof(t_fish));
-				game->fishes[fish_id]->collected = false;
-				game->fishes[fish_id]->id = fish_id;
-				game->fishes[fish_id]->position = malloc(sizeof(t_position));
-				game->fishes[fish_id]->position->row = row;
-				game->fishes[fish_id]->position->col = col;
-				fish_id++;
-			}
+			auxiliary(game, buffer[0], row, col);
 			col++;
 		}
 		read(fd, buffer, 1);
 		row++;
 	}
 	free(buffer);
+	if (!game->initial_pos)
+		error_game(game, NO_PLAYER);
+	if (!game->home->exists)
+		error_game(game, NO_EXIT);
 }

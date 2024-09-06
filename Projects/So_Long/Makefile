@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/08/29 15:41:44 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/09/06 22:02:07 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,7 @@ SRC_DIR := src/
 OBJ_DIR := obj/
 
 SOURCES :=	\
+			error_game.c\
 			free_game.c\
 			mlx_stuff.c\
 			read_map.c\
@@ -80,7 +81,7 @@ RESET := \033[0m
 
 #EXTRA VARIABLES
 
-MAP := maps/valid_medium.ber
+MAP := maps/medium.ber
 
 OUT := out
 
@@ -149,6 +150,8 @@ e: exec
 exec: all
 	@clear
 	@-./$(NAME) $(MAP)
+
+rexec: re exec
 
 n: norminette
 norminette:

@@ -13,11 +13,38 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
+# include <errno.h>
 # include "libft.h"
 # include "math.h"
 # include "MLX42.h"
 
+	//MACROS//
+
+# define WALL_CHAR '1'
+# define ICE_CHAR '0'
+# define PENGUIN_CHAR 'P'
+# define FISH_CHAR 'C'
+# define HOME_CHAR 'E'
+
 	//ENUMS//
+
+typedef enum e_error
+{
+	OK = 0,
+	NO_ARGUMENT,
+	MALLOC,
+	INEXISTENT_FILE,
+	FILE_IS_DIRECTORY,
+	FILE_NO_PERMISSION,
+	INVALID_EXTENSION,
+	NOT_RECTANGULAR,
+	NOT_SURROUNDED,
+	OTHER_CHARACTERS,
+	NO_COIN,
+	NO_PLAYER,
+	NO_EXIT,
+	NO_VALID_PATH
+}	t_error;
 
 typedef enum e_cell
 {
@@ -90,6 +117,7 @@ typedef struct s_home
 {
 	mlx_image_t	*open;
 	mlx_image_t	*closed;
+	bool		exists;
 }	t_home;
 
 typedef struct s_game
@@ -110,12 +138,12 @@ typedef struct s_game
 void		free_game(t_game *game);
 
 void		read_map(t_game *game, char *path);
-bool		valid_path(t_game *game);
+void		valid_path(t_game *game);
 
 void		my_loop_hook(void *param);
 void		my_key_hook(mlx_key_data_t keydata, void *param);
 void		print_map(t_game *game);
-
+void		error_game(t_game *game, t_error error);
 
 t_position	*create_pos(int row, int col);
 
