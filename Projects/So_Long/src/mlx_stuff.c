@@ -172,6 +172,29 @@ void	enter_home(t_game *game)
 		exit_game(game, OK);
 }
 
+void	retry(t_game *game)
+{
+	int	id_fish;
+
+	game->penguin->y = game->initial_pos->row * IMG_SIZE;
+	game->penguin->x = game->initial_pos->col * IMG_SIZE;
+	game->penguin->facing = STILL;
+	id_fish = 0;
+
+	while (id_fish < game->quantity_fishes)
+	{
+		game->fishes[id_fish]->alive->enabled = true;
+		game->fishes[id_fish]->dead->enabled = false;
+		game->fishes[id_fish]->collected = false;
+		id_fish++;
+	}
+	game->collected_fishes = 0;
+	game->home->closed->enabled = true;
+	game->home->open->enabled = false;
+	game->moves = 0;
+	ft_printf("---------\n");
+}
+
 void	my_loop_hook(void *param)
 {
 	t_game	*game;
@@ -196,6 +219,8 @@ void	my_key_hook(mlx_key_data_t keydata, void *param)
 		SPEED++;
 	if (keydata.key == MLX_KEY_KP_SUBTRACT && keydata.action != MLX_RELEASE && SPEED > 1)
 		SPEED--;
+	if (keydata.key == MLX_KEY_R && keydata.action == MLX_PRESS && game->moves != 0)
+		retry(game);
 	if (keydata.action != MLX_PRESS || game->penguin->facing != STILL)
 		return ;
 	if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP)
@@ -300,8 +325,8 @@ void	print_map(t_game *game)
 				create_image(game->mlx, &img, "textures/wall.png", row, col, 2, true);
 			if (game->map->cells[row][col] == PENGUIN)
 			{
-				game->penguin->x = col * IMG_SIZE;
 				game->penguin->y = row * IMG_SIZE;
+				game->penguin->x = col * IMG_SIZE;
 				create_image(game->mlx, &(game->penguin->still), "textures/penguin.png", row, col, 3, true);
 				create_image(game->mlx, &(game->penguin->north), "textures/slide_up.png", row, col, 3, false);
 				create_image(game->mlx, &(game->penguin->west), "textures/slide_left.png", row, col, 3, false);
