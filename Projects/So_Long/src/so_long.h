@@ -135,23 +135,21 @@ typedef struct s_game
 
 	//FUNCTIONS
 
+void		exit_game(t_game *game, t_error error);
 void		free_game(t_game *game);
 
 void		read_map(t_game *game, char *path);
 void		valid_path(t_game *game);
 
-void		my_loop_hook(void *param);
-void		my_key_hook(mlx_key_data_t keydata, void *param);
-void 		my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param);
-
 void 		my_cursor_hook(double x_pos, double y_pos, void* param);
+void		my_key_hook(mlx_key_data_t keydata, void *param);
+void		my_loop_hook(void *param);
+void 		my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param);
+void		my_scroll_hook(double xdelta, double ydelta, void* param);
 void		print_map(t_game *game);
-void		error_game(t_game *game, t_error error);
 
 t_position	*create_pos(int row, int col);
-
-int	get_id_fish(t_game *game, t_position position);
-
-t_cell	get_cell_by(t_game *game, t_position	position, t_direction direction);
+t_cell		get_cell_by(t_game *game, t_position	position, t_direction direction);
+int			get_id_fish(t_game *game, t_position position);
 
 #endif

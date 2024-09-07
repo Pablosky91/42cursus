@@ -237,5 +237,5 @@ void	valid_path(t_game *game)
 	valid = recursive(game, checker);
 	free_checker(checker);
 	if (!valid)
-		error_game(game, NO_VALID_PATH);
+		exit_game(game, NO_VALID_PATH);
 }

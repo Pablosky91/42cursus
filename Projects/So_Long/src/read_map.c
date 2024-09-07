@@ -18,11 +18,11 @@ int	open_map(t_game *game, char *path)
 
 	fd = open(path, O_RDWR);
 	if (errno == ENOENT)
-		error_game(game, INEXISTENT_FILE);
+		exit_game(game, INEXISTENT_FILE);
 	else if (errno == EISDIR)
-		error_game(game, FILE_IS_DIRECTORY);
+		exit_game(game, FILE_IS_DIRECTORY);
 	else if (errno == EACCES)
-		error_game(game, FILE_NO_PERMISSION);
+		exit_game(game, FILE_NO_PERMISSION);
 	return (fd);
 }
 /*
@@ -37,7 +37,7 @@ void	get_info_map(t_game *game, char *path)
 	fd = open_map(game, path);
 	line = get_next_line(fd);
 	if (!line)
-		error_game(game, NOT_SURROUNDED);
+		exit_game(game, NOT_SURROUNDED);
 	game->map->width = ft_strlen(line);
 	if (line[ft_strlen(line) - 1] == '\n')
 		game->map->width--;
@@ -46,21 +46,21 @@ void	get_info_map(t_game *game, char *path)
 		length = ft_strlen(line);
 		if ((line[length - 1] != '\n' || length - 1 != game->map->width)
 			&& (line[length - 1] == '\n' || length != game->map->width))
-			error_game(game, NOT_RECTANGULAR);
+			exit_game(game, NOT_RECTANGULAR);
 		game->quantity_fishes += ft_count_char(line, FISH_CHAR);
 		game->map->height++;
 		free(line);
 		line = get_next_line(fd);
 	}
 	if (game->quantity_fishes == 0)
-		error_game(game, NO_COIN);
+		exit_game(game, NO_COIN);
 	close(fd);
 }
 
 void	auxiliary_penguin(t_game *game, int row, int col)
 {
 	if (game->initial_pos)
-		error_game(game, NO_PLAYER);
+		exit_game(game, NO_PLAYER);
 	game->initial_pos = malloc(sizeof(t_position));
 	game->initial_pos->row = row;
 	game->initial_pos->col = col;
@@ -70,7 +70,7 @@ void	auxiliary_penguin(t_game *game, int row, int col)
 void	auxiliary_home(t_game *game, int row, int col)
 {
 	if (game->home->exists)
-		error_game(game, NO_EXIT);
+		exit_game(game, NO_EXIT);
 	game->map->cells[row][col] = HOME;
 	game->home->exists = true;
 }
@@ -93,7 +93,7 @@ void	auxiliary(t_game *game, char byte, int row, int col)
 {
 
 	if ((row == 0 || col == 0 || row == game->map->height - 1 || col == game->map->width - 1) && byte != WALL_CHAR)
-		error_game(game, NOT_SURROUNDED);
+		exit_game(game, NOT_SURROUNDED);
 	if (byte == WALL_CHAR)
 		game->map->cells[row][col] = WALL;
 	else if (byte == ICE_CHAR)
@@ -105,7 +105,7 @@ void	auxiliary(t_game *game, char byte, int row, int col)
 	else if (byte == FISH_CHAR)
 		auxiliary_fish(game, row, col);
 	else
-		error_game(game, OTHER_CHARACTERS);
+		exit_game(game, OTHER_CHARACTERS);
 }
 
 //TODO test with empty or small file
@@ -139,7 +139,7 @@ void	read_map(t_game *game, char *path)
 	}
 	free(buffer);
 	if (!game->initial_pos)
-		error_game(game, NO_PLAYER);
+		exit_game(game, NO_PLAYER);
 	if (!game->home->exists)
-		error_game(game, NO_EXIT);
+		exit_game(game, NO_EXIT);
 }

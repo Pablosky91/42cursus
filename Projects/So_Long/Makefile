@@ -42,7 +42,7 @@ SRC_DIR := src/
 OBJ_DIR := obj/
 
 SOURCES :=	\
-			error_game.c\
+			exit_game.c\
 			free_game.c\
 			mlx_stuff.c\
 			read_map.c\

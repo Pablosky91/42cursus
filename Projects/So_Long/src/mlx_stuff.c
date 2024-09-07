@@ -15,6 +15,30 @@
 static const int	IMG_SIZE = 100;
 static int	SPEED = 10;
 
+t_direction direction_from_to(int32_t from_x, int32_t from_y, int32_t to_x, int32_t to_y)
+{
+	int32_t	x;
+	int32_t	y;
+
+	x = to_x - from_x;
+	y = to_y - from_y;
+	//TODO abs
+	if (y < 0 && abs(x) < abs(y))
+		return (NORTH);
+	else if (x < 0 && abs(x) > abs(y))
+		return (WEST);
+	else if (y > 0 && abs(x) < abs(y))
+		return (SOUTH);
+	else
+		return (EAST);
+}
+
+void center_of_position(t_position *position, int32_t *x, int32_t *y)
+{
+	*y = IMG_SIZE * (position->row + 0.5);
+	*x = IMG_SIZE * (position->col + 0.5);
+}
+
 t_position	pixels_to_position(int32_t x, int32_t y)
 {
 	t_position	position;
@@ -27,8 +51,16 @@ t_position	pixels_to_position(int32_t x, int32_t y)
 
 t_cell	get_cell_at(t_game *game, int32_t x, int32_t y)
 {
-	//ft_printf ("%i %i -> %i %i -> %i\n", y, x, y/IMG_SIZE, x/IMG_SIZE, game->map->cells[y / IMG_SIZE][x / IMG_SIZE]);
 	return (game->map->cells[y / IMG_SIZE][x / IMG_SIZE]);
+}
+
+void	start_movement(t_game *game, t_direction direction)
+{
+	if (game->penguin->facing != STILL)
+		return ;
+	game->penguin->facing = direction;
+	if (get_cell_by(game, pixels_to_position(game->penguin->x, game->penguin->y), game->penguin->facing) != WALL)
+		ft_printf("Moves: %i\n", ++game->moves);
 }
 
 void	show_penguin(t_game *game)
@@ -137,10 +169,7 @@ void	collect_fish(t_game *game)
 void	enter_home(t_game *game)
 {
 	if (game->collected_fishes == game->quantity_fishes && get_cell_at(game, game->penguin->x, game->penguin->y) == HOME)
-	{
-		free_game(game);
-		exit(0);
-	}
+		exit_game(game, OK);
 }
 
 void	my_loop_hook(void *param)
@@ -162,59 +191,76 @@ void	my_key_hook(mlx_key_data_t keydata, void *param)
 
 	game = param;
 	if (keydata.key == MLX_KEY_ESCAPE)
-	{
-		free_game(game);
-		exit(0);
-	}
-	if (keydata.key == MLX_KEY_KP_ADD && keydata.action == MLX_PRESS)
+		exit_game(game, OK);
+	if (keydata.key == MLX_KEY_KP_ADD && keydata.action != MLX_RELEASE && SPEED < IMG_SIZE - 1)
 		SPEED++;
-	if (keydata.key == MLX_KEY_KP_SUBTRACT && keydata.action == MLX_PRESS)
+	if (keydata.key == MLX_KEY_KP_SUBTRACT && keydata.action != MLX_RELEASE && SPEED > 1)
 		SPEED--;
 	if (keydata.action != MLX_PRESS || game->penguin->facing != STILL)
 		return ;
 	if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP)
-		game->penguin->facing = NORTH;
+		start_movement(game, NORTH);
 	else if (keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_LEFT)
-		game->penguin->facing = WEST;
+		start_movement(game, WEST);
 	else if (keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN)
-		game->penguin->facing = SOUTH;
+		start_movement(game, SOUTH);
 	else if (keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT)
-		game->penguin->facing = EAST;
-	if (get_cell_by(game, pixels_to_position(game->penguin->x, game->penguin->y), game->penguin->facing) != WALL)
-		ft_printf("Moves: %i\n", ++game->moves);
+		start_movement(game, EAST);
 }
 
-void my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param)
+void	my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param)
 {
 	t_game	*game;
 
 	game = param;
 	int32_t	x;
 	int32_t	y;
-	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS)
+	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS && game->penguin->facing == STILL)
 	{
 		mlx_get_mouse_pos(game->mlx, &x, &y);
-		ft_printf("click in %i %i\n", x, y);
+		start_movement(game, direction_from_to(game->penguin->x + IMG_SIZE / 2, game->penguin->y + IMG_SIZE / 2, x, y));
 	}
 }
 
-void my_cursor_hook(double x_pos, double y_pos, void* param)
+void	my_cursor_hook(double x_pos, double y_pos, void* param)
 {
-	t_game	*game;
-	int		x;
-	int		y;
+	t_game		*game;
+	int32_t		x;
+	int32_t		y;
+	t_direction	direction;
 
 	game = param;
 	x = x_pos;
 	y = y_pos;
-	printf("1moving cursor to %i %i\n", x, y);
-	if (x > game->mlx->width / 2)
-		mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/cursor_right.png")));
-	else
+	direction = direction_from_to(game->penguin->x + IMG_SIZE / 2, game->penguin->y + IMG_SIZE / 2, x, y);
+	if (direction == NORTH)
+		mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/cursor_up.png")));
+	else if (direction == WEST)
 		mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/cursor_left.png")));
+	else if (direction == SOUTH)
+		mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/cursor_down.png")));
+	else if (direction == EAST)
+		mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/cursor_right.png")));
 }
 
-void	create_image(mlx_t *mlx, mlx_image_t **img, char *path, int row, int col)
+void	my_scroll_hook(double xdelta, double ydelta, void* param)
+{
+	t_game	*game;
+
+	game = param;
+	if (game->penguin->facing != STILL)
+		return ;
+	if (ydelta > 0)
+		start_movement(game, NORTH);
+	else if (xdelta < 0)
+		start_movement(game, WEST);
+	else if (ydelta < 0)
+		start_movement(game, SOUTH);
+	else
+		start_movement(game, EAST);
+}
+
+void	create_image(mlx_t *mlx, mlx_image_t **img, char *path, int row, int col, int layer, bool enabled)
 {
 	mlx_texture_t	*texture;
 
@@ -224,6 +270,8 @@ void	create_image(mlx_t *mlx, mlx_image_t **img, char *path, int row, int col)
 	mlx_delete_texture(texture);
 	mlx_resize_image(*img, IMG_SIZE, IMG_SIZE);
 	mlx_image_to_window(mlx, *img, col * IMG_SIZE, row * IMG_SIZE);
+	mlx_set_instance_depth(&((*img)->instances[0]), layer);
+	(*img)->enabled = enabled;
 }
 
 void	print_map(t_game *game)
@@ -247,69 +295,30 @@ void	print_map(t_game *game)
 		col = 0;
 		while (col < game->map->width)
 		{
-			//ice
-			create_image(game->mlx, &img, "textures/ice.png", row, col);
-			img->instances[0].z = 1;
-
-
-			//wall
+			create_image(game->mlx, &img, "textures/ice.png", row, col, 1, true);
 			if (game->map->cells[row][col] == WALL)
-			{
-				create_image(game->mlx, &img, "textures/wall.png", row, col);
-				img->instances[0].z = 2;
-			}
-
-			//penguin
+				create_image(game->mlx, &img, "textures/wall.png", row, col, 2, true);
 			if (game->map->cells[row][col] == PENGUIN)
 			{
 				game->penguin->x = col * IMG_SIZE;
 				game->penguin->y = row * IMG_SIZE;
-
-				create_image(game->mlx, &(game->penguin->still), "textures/penguin.png", row, col);
-				game->penguin->still->instances[0].z = 3;
-
-				create_image(game->mlx, &(game->penguin->north), "textures/slide_up.png", row, col);
-				game->penguin->north->enabled = false;
-				game->penguin->north->instances[0].z = 3;
-
-				create_image(game->mlx, &(game->penguin->west), "textures/slide_left.png", row, col);
-				game->penguin->west->enabled = false;
-				game->penguin->west->instances[0].z = 3;
-
-				create_image(game->mlx, &(game->penguin->south), "textures/slide_down.png", row, col);
-				game->penguin->south->enabled = false;
-				game->penguin->south->instances[0].z = 3;
-
-				create_image(game->mlx, &(game->penguin->east), "textures/slide_right.png", row, col);
-				game->penguin->east->enabled = false;
-				game->penguin->east->instances[0].z = 3;
+				create_image(game->mlx, &(game->penguin->still), "textures/penguin.png", row, col, 3, true);
+				create_image(game->mlx, &(game->penguin->north), "textures/slide_up.png", row, col, 3, false);
+				create_image(game->mlx, &(game->penguin->west), "textures/slide_left.png", row, col, 3, false);
+				create_image(game->mlx, &(game->penguin->south), "textures/slide_down.png", row, col, 3 ,false);
+				create_image(game->mlx, &(game->penguin->east), "textures/slide_right.png", row, col, 3, false);
 			}
-
-			//fish
 			if (game->map->cells[row][col] == FISH)
 			{
-				create_image(game->mlx, &(game->fishes[id_fish]->alive), "textures/fish.png", row, col);
-				game->fishes[id_fish]->alive->enabled = true;
-				game->fishes[id_fish]->alive->instances[0].z = 2;
-
-				create_image(game->mlx, &(game->fishes[id_fish]->dead), "textures/bones.png", row, col);
-				game->fishes[id_fish]->dead->enabled = false;
-				game->fishes[id_fish]->dead->instances[0].z = 2;
-
+				create_image(game->mlx, &(game->fishes[id_fish]->alive), "textures/fish.png", row, col, 2, true);
+				create_image(game->mlx, &(game->fishes[id_fish]->dead), "textures/bones.png", row, col, 2, false);
 				id_fish++;
 			}
-
-			//exit
 			if (game->map->cells[row][col] == HOME)
 			{
-				create_image(game->mlx, &(game->home->closed), "textures/home_closed.png", row, col);
-				game->home->closed->instances[0].z = 2;
-
-				create_image(game->mlx, &(game->home->open), "textures/home_open.png", row, col);
-				game->home->open->enabled = false;
-				game->home->open->instances[0].z = 2;
+				create_image(game->mlx, &(game->home->closed), "textures/home_closed.png", row, col, 2, true);
+				create_image(game->mlx, &(game->home->open), "textures/home_open.png", row, col, 2, false);
 			}
-
 			col++;
 		}
 		row++;

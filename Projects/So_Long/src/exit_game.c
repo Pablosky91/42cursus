@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_game.c                                       :+:      :+:    :+:   */
+/*   exit_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -42,7 +42,7 @@ void	message_error(t_error error)
 		ft_printf("Error\nThe map must have a valid path\n");
 }
 
-void	error_game(t_game *game, t_error error)
+void	exit_game(t_game *game, t_error error)
 {
 	message_error(error);
 	free_game(game);

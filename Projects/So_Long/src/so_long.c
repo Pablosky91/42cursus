@@ -116,7 +116,7 @@ int	main(int argc, char **argv)
 	t_game	*game;
 
 	if (argc < 2)
-		error_game(game, NO_ARGUMENT);
+		exit_game(game, NO_ARGUMENT);
 	init(&game);
 	read_map(game, argv[1]);
 	valid_path(game);
@@ -125,6 +125,7 @@ int	main(int argc, char **argv)
 	mlx_key_hook(game->mlx, &my_key_hook, game);
 	mlx_mouse_hook(game->mlx, &my_mouse_hook, game);
 	mlx_cursor_hook(game->mlx, &my_cursor_hook, game);
+	mlx_scroll_hook(game->mlx, &my_scroll_hook, game);
 	mlx_loop(game->mlx);
 	free_game(game);
 	return (0);
