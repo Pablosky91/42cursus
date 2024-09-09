@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:32:14 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/06 22:24:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/09 21:03:11 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,24 @@
 static const int	IMG_SIZE = 100;
 static int	SPEED = 10;
 
-t_direction direction_from_to(int32_t from_x, int32_t from_y, int32_t to_x, int32_t to_y)
+t_direction	direction_from_to(int32_t from_x, int32_t from_y, int32_t to_x, int32_t to_y)
 {
-	int32_t	x;
-	int32_t	y;
+	double	x;
+	double	y;
 
 	x = to_x - from_x;
 	y = to_y - from_y;
-	//TODO abs
-	if (y < 0 && abs(x) < abs(y))
+	if (y < 0 && fabs(x) < fabs(y))
 		return (NORTH);
-	else if (x < 0 && abs(x) > abs(y))
+	else if (x < 0 && fabs(x) > fabs(y))
 		return (WEST);
-	else if (y > 0 && abs(x) < abs(y))
+	else if (y > 0 && fabs(x) < fabs(y))
 		return (SOUTH);
 	else
 		return (EAST);
 }
 
-void center_of_position(t_position *position, int32_t *x, int32_t *y)
+void	center_of_position(t_position *position, int32_t *x, int32_t *y)
 {
 	*y = IMG_SIZE * (position->row + 0.5);
 	*x = IMG_SIZE * (position->col + 0.5);
@@ -233,13 +232,15 @@ void	my_key_hook(mlx_key_data_t keydata, void *param)
 		start_movement(game, EAST);
 }
 
+/*
 void	my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param)
 {
 	t_game	*game;
-
-	game = param;
 	int32_t	x;
 	int32_t	y;
+
+	game = param;
+	(void) mods;
 	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS && game->penguin->facing == STILL)
 	{
 		mlx_get_mouse_pos(game->mlx, &x, &y);
@@ -247,7 +248,7 @@ void	my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, voi
 	}
 }
 
-void	my_cursor_hook(double x_pos, double y_pos, void* param)
+void	my_cursor_hook(double x_pos, double y_pos, void *param)
 {
 	t_game		*game;
 	int32_t		x;
@@ -268,22 +269,23 @@ void	my_cursor_hook(double x_pos, double y_pos, void* param)
 		mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/cursor_right.png")));
 }
 
-void	my_scroll_hook(double xdelta, double ydelta, void* param)
+void	my_scroll_hook(double x_delta, double y_delta, void *param)
 {
 	t_game	*game;
 
 	game = param;
 	if (game->penguin->facing != STILL)
 		return ;
-	if (ydelta > 0)
+	if (y_delta > 0)
 		start_movement(game, NORTH);
-	else if (xdelta < 0)
+	else if (x_delta > 0)
 		start_movement(game, WEST);
-	else if (ydelta < 0)
+	else if (y_delta < 0)
 		start_movement(game, SOUTH);
 	else
 		start_movement(game, EAST);
 }
+*/
 
 void	create_image(mlx_t *mlx, mlx_image_t **img, char *path, int row, int col, int layer, bool enabled)
 {
@@ -308,11 +310,9 @@ void	print_map(t_game *game)
 	//mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	//mlx_set_setting(MLX_MAXIMIZED, true);
 	game->mlx = mlx_init(game->map->width * IMG_SIZE, game->map->height * IMG_SIZE, "So Long", false);
-	//mlx_set_cursor_mode(game->mlx, MLX_MOUSE_HIDDEN);
-	//mlx_set_cursor(game->mlx, mlx_create_std_cursor(MLX_CURSOR_CROSSHAIR));
-	//mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/penguin.png")));
-	mlx_set_icon(game->mlx, mlx_load_png("textures/penguin.png"));
-	
+	mlx_texture_t	*texture = mlx_load_png("textures/penguin.png");
+	mlx_set_icon(game->mlx, texture);
+	mlx_delete_texture(texture);
 
 	row = 0;
 	while (row < game->map->height)
@@ -330,7 +330,7 @@ void	print_map(t_game *game)
 				create_image(game->mlx, &(game->penguin->still), "textures/penguin.png", row, col, 3, true);
 				create_image(game->mlx, &(game->penguin->north), "textures/slide_up.png", row, col, 3, false);
 				create_image(game->mlx, &(game->penguin->west), "textures/slide_left.png", row, col, 3, false);
-				create_image(game->mlx, &(game->penguin->south), "textures/slide_down.png", row, col, 3 ,false);
+				create_image(game->mlx, &(game->penguin->south), "textures/slide_down.png", row, col, 3, false);
 				create_image(game->mlx, &(game->penguin->east), "textures/slide_right.png", row, col, 3, false);
 			}
 			if (game->map->cells[row][col] == FISH)

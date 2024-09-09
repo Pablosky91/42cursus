@@ -115,18 +115,17 @@ int	main(int argc, char **argv)
 	ft_printf("w: %i, h: %i\n", width, height); */
 	t_game	*game;
 
+	game = NULL;
 	if (argc < 2)
 		exit_game(game, NO_ARGUMENT);
 	init(&game);
 	read_map(game, argv[1]);
-	valid_path(game);
 	print_map(game);
 	mlx_loop_hook(game->mlx, &my_loop_hook, game);
 	mlx_key_hook(game->mlx, &my_key_hook, game);
-	mlx_mouse_hook(game->mlx, &my_mouse_hook, game);
-	mlx_cursor_hook(game->mlx, &my_cursor_hook, game);
-	mlx_scroll_hook(game->mlx, &my_scroll_hook, game);
+	// mlx_mouse_hook(game->mlx, &my_mouse_hook, game);
+	// mlx_cursor_hook(game->mlx, &my_cursor_hook, game);
+	// mlx_scroll_hook(game->mlx, &my_scroll_hook, game);
 	mlx_loop(game->mlx);
-	free_game(game);
 	return (0);
 }

@@ -16,7 +16,7 @@ void	message_error(t_error error)
 {
 	if (error == NO_ARGUMENT)
 		ft_printf("Error\nThe program takes as parameter a map description file\n");
-	else if (error == MALLOC)
+	else if (error == NO_ALLOCATION)
 		ft_printf("Error\nCannot allocate memory\n");
 	else if (error == INEXISTENT_FILE)
 		ft_printf("Error\nNo such file\n");

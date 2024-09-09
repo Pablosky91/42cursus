@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/06 21:40:55 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/09 20:29:19 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@
 # define FISH_CHAR 'C'
 # define HOME_CHAR 'E'
 
+# define MAP_EXTENSION ".ber"
+# define PATH_SEPARATOR '/'
+
 	//ENUMS//
 
 typedef enum e_error
 {
 	OK = 0,
 	NO_ARGUMENT,
-	MALLOC,
+	NO_ALLOCATION,
 	INEXISTENT_FILE,
 	FILE_IS_DIRECTORY,
 	FILE_NO_PERMISSION,
@@ -99,9 +102,9 @@ typedef struct s_penguin
 
 typedef struct s_map
 {
+	t_cell	**cells;
 	int		width;
 	int		height;
-	t_cell	**cells;
 }	t_map;
 
 typedef struct s_fish
@@ -141,11 +144,11 @@ void		free_game(t_game *game);
 void		read_map(t_game *game, char *path);
 void		valid_path(t_game *game);
 
-void 		my_cursor_hook(double x_pos, double y_pos, void* param);
+void		my_cursor_hook(double x_pos, double y_pos, void *param);
 void		my_key_hook(mlx_key_data_t keydata, void *param);
 void		my_loop_hook(void *param);
-void 		my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param);
-void		my_scroll_hook(double xdelta, double ydelta, void* param);
+void		my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param);
+void		my_scroll_hook(double x_delta, double y_delta, void *param);
 void		print_map(t_game *game);
 
 t_position	*create_pos(int row, int col);

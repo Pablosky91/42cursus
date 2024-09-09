@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/09/06 22:02:07 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/09/09 22:06:43 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -152,6 +152,55 @@ exec: all
 	@-./$(NAME) $(MAP)
 
 rexec: re exec
+
+error: all
+	chmod 000 maps/invalid/change_permissions.ber
+	@echo
+	-./$(NAME) maps/invalid/directory.ber
+	@echo
+	-./$(NAME) maps/invalid/.ber
+	@echo
+	-./$(NAME) maps/invalid/no_extension
+	@echo
+	-./$(NAME) maps/invalid/change_permissions.ber
+	@echo
+	-./$(NAME) maps/invalid/no_collectibles.ber
+	@echo
+	-./$(NAME) maps/invalid/no_exit.ber
+	@echo
+	-./$(NAME) maps/invalid/no_file.ber
+	@echo
+	-./$(NAME) maps/invalid/no_path.ber
+	@echo
+	-./$(NAME) maps/invalid/no_starting_position.ber
+	@echo
+	-./$(NAME) maps/invalid/not_rectangular1.ber
+	@echo
+	-./$(NAME) maps/invalid/not_rectangular2.ber
+	@echo
+	-./$(NAME) maps/invalid/not_surrounded.ber
+	@echo
+	-./$(NAME) maps/invalid/other_characters.ber
+	@echo
+	-./$(NAME) maps/invalid/other_extension.txt.ber
+	@echo
+	-./$(NAME) maps/invalid/two_exits.ber
+	@echo
+	-./$(NAME) maps/invalid/two_starting_positions.ber
+	@echo
+
+levels: all
+	@echo
+	-./$(NAME) maps/level00.ber
+	@echo
+	-./$(NAME) maps/level01.ber
+	@echo
+	-./$(NAME) maps/level02.ber
+	@echo
+	-./$(NAME) maps/level03.ber
+	@echo
+	-./$(NAME) maps/level04.ber
+	@echo
 
 n: norminette
 norminette:
