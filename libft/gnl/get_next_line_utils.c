@@ -6,13 +6,13 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:09 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/02 21:33:48 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:45:27 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*free_and_null(char **s)
+char	*gnl_free_and_null(char **s)
 {
 	if (*s)
 	{
@@ -36,7 +36,7 @@ char	*gnl_strjoin(char *s1, char *s2, size_t len)
 	j = 0;
 	join = malloc((s1_len + s2_len + 1) * sizeof(char));
 	if (!join)
-		return (free_and_null(&s1));
+		return (gnl_free_and_null(&s1));
 	while (i < s1_len)
 	{
 		join[i] = s1[i];
@@ -45,7 +45,7 @@ char	*gnl_strjoin(char *s1, char *s2, size_t len)
 	while (s2[j] && j < len)
 		join[i++] = s2[j++];
 	join[i] = 0;
-	return (free_and_null(&s1), join);
+	return (gnl_free_and_null(&s1), join);
 }
 
 size_t	gnl_strlen(char *s, int len_line)
@@ -85,7 +85,7 @@ char	*gnl_substr(char *s, size_t start, size_t len, int to_free)
 		sub_len = s_len - start + 1;
 	sub = malloc(sub_len * sizeof(char));
 	if (!sub)
-		return (free_and_null(&s));
+		return (gnl_free_and_null(&s));
 	i = 0;
 	while (start < s_len && i + 1 < sub_len)
 	{
@@ -94,11 +94,11 @@ char	*gnl_substr(char *s, size_t start, size_t len, int to_free)
 	}
 	sub[i] = 0;
 	if (to_free)
-		free_and_null(&s);
+		gnl_free_and_null(&s);
 	return (sub);
 }
 
-void	init_empty_string(char	**s)
+void	gnl_init_empty_string(char	**s)
 {
 	if (*s)
 		return ;

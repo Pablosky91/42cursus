@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_pointer.c                                 :+:      :+:    :+:   */
+/*   pf_print_unsigned_int.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 00:10:22 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/28 03:08:11 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/02/24 00:10:01 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/09/10 15:50:14 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_pointer(size_t p)
+int	pf_print_unsigned_int(unsigned int nbr)
 {
 	int	count;
 
 	count = 0;
-	count += ft_print_string("0x");
-	count += ft_print_hexadecimal(p, HEX_LOWER);
+	if (nbr >= 10)
+		count += pf_print_unsigned_int(nbr / 10);
+	count += pf_print((nbr % 10) + '0');
 	return (count);
 }

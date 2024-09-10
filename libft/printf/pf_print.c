@@ -1,37 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   pf_print.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 14:12:24 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/10 15:48:55 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/02/23 18:34:17 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/09/10 15:52:31 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int	pf_print(char c)
 {
-	va_list	args;
-	int		i;
-	int		written_chars;
-
-	i = 0;
-	written_chars = 0;
-	va_start(args, format);
-	while (format[i])
-	{
-		if (format[i] == PRINTF_SPECIFIER)
-		{
-			i++;
-			written_chars += pf_print_flag(format[i], args);
-		}
-		else
-			written_chars += pf_print(format[i]);
-		i++;
-	}
-	va_end(args);
-	return (written_chars);
+	ft_putchar_fd(c, STDOUT_FILENO);
+	return (1);
 }

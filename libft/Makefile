@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 16:43:04 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/08/29 18:00:32 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/09/10 15:52:14 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,14 +91,14 @@ SOURCES =	\
 				ft_strrchr.c\
 				ft_strtrim.c)\
 			$(addprefix printf/,\
-				ft_print_char.c\
-				ft_print_flag.c\
-				ft_print_hexadecimal.c\
-				ft_print_int.c\
-				ft_print_pointer.c\
-				ft_print_string.c\
-				ft_print_unsigned_int.c\
-				ft_print.c\
+				pf_print_char.c\
+				pf_print_flag.c\
+				pf_print_hexadecimal.c\
+				pf_print_int.c\
+				pf_print_pointer.c\
+				pf_print_string.c\
+				pf_print_unsigned_int.c\
+				pf_print.c\
 				ft_printf.c)
 
 OBJ_DIR = obj/

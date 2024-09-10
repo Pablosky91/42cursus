@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print.c                                         :+:      :+:    :+:   */
+/*   pf_print_char.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 18:34:17 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 21:50:28 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/02/23 23:36:29 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/09/10 15:48:44 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print(char c)
+int	pf_print_char(char c)
 {
-	ft_putchar_fd(c, STDOUT_FILENO);
-	return (1);
+	return (pf_print(c));
 }

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 18:57:18 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/05/02 21:38:58 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/10 15:46:17 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@
 #  define BUFFER_SIZE 42
 # endif
 
-# define LINE_LEN 1
-# define WHOLE_LEN 0
-# define TO_FREE 1
-# define NOT_TO_FREE 0
+# define LINE_LEN true
+# define WHOLE_LEN false
+# define TO_FREE true
+# define NOT_TO_FREE false
 # define MAX_FD 4096
 
 char	*get_next_line(int fd);
 
-char	*free_and_null(char **s);
+char	*gnl_free_and_null(char **s);
 char	*gnl_strjoin(char *s1, char *s2, size_t len);
 size_t	gnl_strlen(char *s, int len_line);
 char	*gnl_substr(char *s, size_t start, size_t len, int to_free);
-void	init_empty_string(char **s);
+void	gnl_init_empty_string(char **s);
 
 #endif

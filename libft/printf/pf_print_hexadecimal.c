@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_string.c                                  :+:      :+:    :+:   */
+/*   pf_print_hexadecimal.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/23 18:19:25 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/02/23 23:58:36 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/02/24 00:07:05 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/09/10 15:49:28 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_print_string(char *str)
+int	pf_print_hexadecimal(size_t hex, char *hex_case)
 {
-	int	i;
+	int	count;
 
-	if (!str)
-		return (ft_print_string(PRINT_NULL));
-	i = 0;
-	while (str[i])
-		i += ft_print(str[i]);
-	return (i);
+	count = 0;
+	if (hex >= 16)
+		count += pf_print_hexadecimal(hex / 16, hex_case);
+	count += pf_print(hex_case[hex % 16]);
+	return (count);
 }
