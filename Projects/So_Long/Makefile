@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/09/09 22:06:43 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/09/11 21:04:53 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ MLX_PATH := MLX42
 MLX_BUILD := $(MLX_PATH)/build
 MLX_NAME := $(MLX_BUILD)/libmlx42.a
 MLX_INCLUDE := $(MLX_PATH)/include/MLX42
-MLX_FLAG := -L $(MLX_BUILD) -l mlx42 -l glfw
+MLX_FLAG := -L $(MLX_BUILD) -l mlx42 -l glfw -l dl -l m -pthread
 
 
 #FILES
@@ -42,12 +42,18 @@ SRC_DIR := src/
 OBJ_DIR := obj/
 
 SOURCES :=	\
-			exit_game.c\
-			free_game.c\
-			mlx_stuff.c\
-			read_map.c\
 			so_long.c\
-			valid_path.c\
+			$(addprefix control/,\
+				exit_game.c\
+				free_game.c\
+				)\
+			$(addprefix parse/,\
+				read_map.c\
+				valid_path.c\
+				)\
+			$(addprefix window/,\
+				mlx_stuff.c\
+				)\
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 SOURCES := $(addprefix $(SRC_DIR), $(SOURCES))
@@ -105,10 +111,14 @@ $(MLX_NAME):
 	@$(MAKE) msg_mlx_end
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $^ $(LIBFT_FLAG) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -o $@
+	echo $@
+	$(CC) $(CFLAGS) -c $^ $(LIBFT_FLAG) -I $(SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -o $@
 
 $(OBJ_DIR):
 	$(MKDIR) $(OBJ_DIR)
+	$(MKDIR) $(OBJ_DIR)/control
+	$(MKDIR) $(OBJ_DIR)/parse
+	$(MKDIR) $(OBJ_DIR)/window
 
 c: clean
 clean: msg_clean_start
@@ -154,39 +164,44 @@ exec: all
 rexec: re exec
 
 error: all
-	chmod 000 maps/invalid/change_permissions.ber
 	@echo
-	-./$(NAME) maps/invalid/directory.ber
+	-./$(NAME)
 	@echo
 	-./$(NAME) maps/invalid/.ber
 	@echo
 	-./$(NAME) maps/invalid/no_extension
 	@echo
-	-./$(NAME) maps/invalid/change_permissions.ber
-	@echo
-	-./$(NAME) maps/invalid/no_collectibles.ber
-	@echo
-	-./$(NAME) maps/invalid/no_exit.ber
+	-./$(NAME) maps/invalid/other_extension.txt.ber
 	@echo
 	-./$(NAME) maps/invalid/no_file.ber
 	@echo
-	-./$(NAME) maps/invalid/no_path.ber
+	-./$(NAME) maps/invalid/directory.ber
 	@echo
-	-./$(NAME) maps/invalid/no_starting_position.ber
+	chmod 000 maps/invalid/change_permissions.ber
+	-./$(NAME) maps/invalid/change_permissions.ber
+	@chmod 644 maps/invalid/change_permissions.ber
+	@echo
+	-./$(NAME) maps/invalid/empty.ber
+	@echo
+	-./$(NAME) maps/invalid/not_surrounded.ber
 	@echo
 	-./$(NAME) maps/invalid/not_rectangular1.ber
 	@echo
 	-./$(NAME) maps/invalid/not_rectangular2.ber
 	@echo
-	-./$(NAME) maps/invalid/not_surrounded.ber
+	-./$(NAME) maps/invalid/no_collectibles.ber
 	@echo
-	-./$(NAME) maps/invalid/other_characters.ber
+	-./$(NAME) maps/invalid/no_starting_position.ber
 	@echo
-	-./$(NAME) maps/invalid/other_extension.txt.ber
+	-./$(NAME) maps/invalid/two_starting_positions.ber
+	@echo
+	-./$(NAME) maps/invalid/no_exit.ber
 	@echo
 	-./$(NAME) maps/invalid/two_exits.ber
 	@echo
-	-./$(NAME) maps/invalid/two_starting_positions.ber
+	-./$(NAME) maps/invalid/other_characters.ber
+	@echo
+	-./$(NAME) maps/invalid/no_path.ber
 	@echo
 
 levels: all
@@ -213,7 +228,7 @@ normi:
 v: valgrind
 valgrind: clean $(LIBFT) $(OBJECTS) | $(VALGRIND_DIR)
 	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(NAME)
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ././$(NAME) $(MAP)
+	@-valgrind --leak-check=full --show-leak-kinds=all --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ././$(NAME) $(MAP)
 	@echo "$(BLUE) $$(grep "ERROR SUMMARY" $(VALGRIND_DIR)/$$(ls valgrind | tail -1))"
 	@$(MAKE) clean
 

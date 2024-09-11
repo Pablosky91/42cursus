@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:45:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/06 16:03:49 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:23:29 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	print_path(t_game *game, t_path_checker	*checker)
 		ft_printf("]\n");
 		node = node->next;
 	}
-	printf("\n");
+	ft_printf("\n");
 }
 
 int	get_id_fish(t_game *game, t_position position)
@@ -225,6 +225,7 @@ bool	recursive(t_game *game, t_path_checker *checker)
 	return (false);
 }
 
+//TODO alloc prot
 void	valid_path(t_game *game)
 {
 	t_path_checker	*checker;

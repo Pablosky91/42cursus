@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 8:59:27 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/27 12:39:12 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/09/10 18:50:28 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/09/11 21:16:41 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	init(t_game **game);
 
+/*
 void	create_map(t_game *game)
 {
 	game->map->height = 7;
@@ -88,31 +89,13 @@ void	show_map(t_game *game)
 	}
 	ft_printf("\n");
 }
+*/
 
-static void	init(t_game **game)
-{
-	*game = malloc(sizeof(t_game));
-	(*game)->mlx = NULL;
-	(*game)->map = malloc(sizeof(t_map));
-	(*game)->map->cells = NULL;
-	(*game)->map->width = 0;
-	(*game)->map->height = 0;
-	(*game)->penguin = malloc(sizeof(t_penguin));
-	(*game)->penguin->facing = STILL;
-	(*game)->fishes = NULL;
-	(*game)->home = malloc(sizeof(t_home));
-	(*game)->home->exists = false;
-	(*game)->quantity_fishes = 0;
-	(*game)->collected_fishes = 0;
-	(*game)->initial_pos = NULL;
-	(*game)->moves = 0;
-}
-
-int	main(int argc, char **argv)
-{
 	/* int32_t	width = 5, height = 7;
 	mlx_get_monitor_size(0, &width, &height);
 	ft_printf("w: %i, h: %i\n", width, height); */
+int	main(int argc, char **argv)
+{
 	t_game	*game;
 
 	game = NULL;
@@ -120,12 +103,29 @@ int	main(int argc, char **argv)
 		exit_game(game, NO_ARGUMENT);
 	init(&game);
 	read_map(game, argv[1]);
-	print_map(game);
-	mlx_loop_hook(game->mlx, &my_loop_hook, game);
-	mlx_key_hook(game->mlx, &my_key_hook, game);
 	// mlx_mouse_hook(game->mlx, &my_mouse_hook, game);
 	// mlx_cursor_hook(game->mlx, &my_cursor_hook, game);
 	// mlx_scroll_hook(game->mlx, &my_scroll_hook, game);
+	print_map(game);
+	mlx_loop_hook(game->mlx, &my_loop_hook, game);
+	mlx_key_hook(game->mlx, &my_key_hook, game);
 	mlx_loop(game->mlx);
+	exit_game(game, OK);
 	return (0);
+}
+
+static void	init(t_game **game)
+{
+	*game = ft_calloc(1, sizeof(t_game));
+	if (!*game)
+		exit_game(*game, NO_ALLOCATION);
+	(*game)->map = ft_calloc(1, sizeof(t_map));
+	if (!((*game)->map))
+		exit_game(*game, NO_ALLOCATION);
+	(*game)->penguin = ft_calloc(1, sizeof(t_penguin));
+	if (!((*game)->penguin))
+		exit_game(*game, NO_ALLOCATION);
+	(*game)->home = ft_calloc(1, sizeof(t_home));
+	if (!((*game)->home))
+		exit_game(*game, NO_ALLOCATION);
 }

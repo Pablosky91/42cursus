@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:46:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/09 22:18:58 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/11 21:13:48 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int	open_map(t_game *game, char *path)
 {
 	int	fd;
 
+	errno = 0;
 	fd = open(path, O_RDWR);
 	if (errno == ENOENT)
 		exit_game(game, INEXISTENT_FILE);
@@ -48,22 +49,26 @@ int	open_map(t_game *game, char *path)
 	fd = open(path, O_RDONLY);
 	if (errno == EACCES)
 		exit_game(game, FILE_NO_PERMISSION);
+	if (errno)
+		exit_game(game, UNKNOWN);
 	return (fd);
 }
 
 /*
 Gets width, height and number of fishes
 */
-void	get_info_map(t_game *game, char *path)
+t_error	get_info_map(t_game *game, char *path)
 {
 	char	*line;
 	int		length;
 	int		fd;
+	t_error	error_code;
 
+	error_code = OK;
 	fd = open_map(game, path);
 	line = get_next_line(fd);
 	if (!line)
-		exit_game(game, NOT_SURROUNDED);
+		return (NOT_SURROUNDED);
 	game->map->width = ft_strlen(line);
 	if (line[ft_strlen(line) - 1] == '\n')
 		game->map->width--;
@@ -72,22 +77,23 @@ void	get_info_map(t_game *game, char *path)
 		length = ft_strlen(line);
 		if ((line[length - 1] != '\n' || length - 1 != game->map->width)
 			&& (line[length - 1] == '\n' || length != game->map->width))
-			exit_game(game, NOT_RECTANGULAR);
+			error_code = NOT_RECTANGULAR;
 		game->quantity_fishes += ft_count_char(line, FISH_CHAR);
 		game->map->height++;
 		free(line);
 		line = get_next_line(fd);
 	}
 	if (!game->quantity_fishes)
-		exit_game(game, NO_COIN);
+		error_code = NO_COIN;
 	close(fd);
+	return (error_code);
 }
 
 t_error	auxiliary_penguin(t_game *game, int row, int col)
 {
 	if (game->initial_pos)
 		return (NO_PLAYER);
-	game->initial_pos = malloc(sizeof(t_position));
+	game->initial_pos = ft_calloc(1, sizeof(t_position));
 	if (!game->initial_pos)
 		return (NO_ALLOCATION);
 	game->initial_pos->row = row;
@@ -110,12 +116,11 @@ t_error	auxiliary_fish(t_game *game, int row, int col)
 	static int	fish_id = 0;
 
 	game->map->cells[row][col] = FISH;
-	game->fishes[fish_id] = malloc(sizeof(t_fish));
+	game->fishes[fish_id] = ft_calloc(1, sizeof(t_fish));
 	if (!game->fishes[fish_id])
 		return (NO_ALLOCATION);
-	game->fishes[fish_id]->collected = false;
 	game->fishes[fish_id]->id = fish_id;
-	game->fishes[fish_id]->position = malloc(sizeof(t_position));
+	game->fishes[fish_id]->position = ft_calloc(1, sizeof(t_position));
 	if (!game->fishes[fish_id]->position)
 		return (NO_ALLOCATION);
 	game->fishes[fish_id]->position->row = row;
@@ -144,7 +149,6 @@ t_error	auxiliary(t_game *game, char byte, int row, int col)
 	return (OK);
 }
 
-//TODO error malloc 
 void	read_map(t_game *game, char *path)
 {
 	char	*buffer;
@@ -154,7 +158,9 @@ void	read_map(t_game *game, char *path)
 	t_error	error_code;
 
 	check_extension(game, path);
-	get_info_map(game, path);
+	error_code = get_info_map(game, path);
+	if (error_code)
+		exit_game(game, error_code);
 	game->map->cells = ft_calloc(game->map->height + 1, sizeof(t_cell *));
 	if (!game->map->cells)
 		exit_game(game, NO_ALLOCATION);
@@ -162,7 +168,7 @@ void	read_map(t_game *game, char *path)
 	if (!game->fishes)
 		exit_game(game, NO_ALLOCATION);
 	fd = open_map(game, path);
-	buffer = malloc(sizeof(char));
+	buffer = ft_calloc(1, sizeof(char));
 	if (!buffer)
 		exit_game(game, NO_ALLOCATION);
 	row = 0;
@@ -171,14 +177,23 @@ void	read_map(t_game *game, char *path)
 		col = 0;
 		game->map->cells[row] = ft_calloc(game->map->width + 1, sizeof(t_cell));
 		if (!game->map->cells[row])
+		{
+			free(buffer);
 			exit_game(game, NO_ALLOCATION);
+		}
 		while (col < game->map->width)
 		{
-			read(fd, buffer, 1);
-			//TODO invalid read
+			if (read(fd, buffer, 1) < 0)
+			{
+				free(buffer);
+				exit_game(game, UNKNOWN);
+			}
 			error_code = auxiliary(game, buffer[0], row, col);
 			if (error_code)
+			{
+				free(buffer);
 				exit_game(game, error_code);
+			}
 			col++;
 		}
 		read(fd, buffer, 1);

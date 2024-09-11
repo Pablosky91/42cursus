@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/09 20:29:19 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/11 18:11:25 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,19 @@
 typedef enum e_error
 {
 	OK = 0,
+	UNKNOWN,
 	NO_ARGUMENT,
 	NO_ALLOCATION,
+	INVALID_EXTENSION,
 	INEXISTENT_FILE,
 	FILE_IS_DIRECTORY,
 	FILE_NO_PERMISSION,
-	INVALID_EXTENSION,
-	NOT_RECTANGULAR,
 	NOT_SURROUNDED,
-	OTHER_CHARACTERS,
+	NOT_RECTANGULAR,
 	NO_COIN,
 	NO_PLAYER,
 	NO_EXIT,
+	OTHER_CHARACTERS,
 	NO_VALID_PATH
 }	t_error;
 
@@ -130,9 +131,9 @@ typedef struct s_game
 	t_penguin	*penguin;
 	t_fish		**fishes;
 	t_home		*home;
+	t_position	*initial_pos;
 	int			quantity_fishes;
 	int			collected_fishes;
-	t_position	*initial_pos;
 	int			moves;
 }	t_game;
 
