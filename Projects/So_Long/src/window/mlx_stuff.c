@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:32:14 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/09 21:03:11 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/12 21:14:04 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,20 @@ t_direction	direction_from_to(int32_t from_x, int32_t from_y, int32_t to_x, int3
 		return (EAST);
 }
 
-void	center_of_position(t_position *position, int32_t *x, int32_t *y)
+void	center_of_position(int row, int col/* t_position *position */, int32_t *x, int32_t *y)
 {
-	*y = IMG_SIZE * (position->row + 0.5);
-	*x = IMG_SIZE * (position->col + 0.5);
+	*y = IMG_SIZE * (/* position-> */row + 0.5);
+	*x = IMG_SIZE * (/* position-> */col + 0.5);
 }
 
-t_position	pixels_to_position(int32_t x, int32_t y)
+/* t_position */void	pixels_to_position(int32_t x, int32_t y, int *row, int *col)
 {
-	t_position	position;
+	//t_position	position;
 
-	position.row = y / IMG_SIZE;
-	position.col = x / IMG_SIZE;
+	/* position. */*row = y / IMG_SIZE;
+	/* position. */*col = x / IMG_SIZE;
 
-	return (position);
+	//return (position);
 }
 
 t_cell	get_cell_at(t_game *game, int32_t x, int32_t y)
@@ -55,10 +55,15 @@ t_cell	get_cell_at(t_game *game, int32_t x, int32_t y)
 
 void	start_movement(t_game *game, t_direction direction)
 {
+	int row;
+	int col;
+
 	if (game->penguin->facing != STILL)
 		return ;
 	game->penguin->facing = direction;
-	if (get_cell_by(game, pixels_to_position(game->penguin->x, game->penguin->y), game->penguin->facing) != WALL)
+	//if (get_cell_by(game, pixels_to_position(game->penguin->x, game->penguin->y), game->penguin->facing) != WALL)
+	pixels_to_position(game->penguin->x, game->penguin->y, &row, &col);
+	if (get_cell_by(game, row, col, game->penguin->facing) != WALL)
 		ft_printf("Moves: %i\n", ++game->moves);
 }
 
@@ -149,8 +154,12 @@ void	move_penguin(t_game *game)
 void	collect_fish(t_game *game)
 {
 	int	id_fish;
+	int	row;
+	int	col;
 
-	id_fish = get_id_fish(game, pixels_to_position(game->penguin->x, game->penguin->y));
+	//id_fish = get_id_fish(game, pixels_to_position(game->penguin->x, game->penguin->y));
+	pixels_to_position(game->penguin->x, game->penguin->y, &row, &col);
+	id_fish = get_id_fish(game, row, col);
 	if (id_fish != -1 && !game->fishes[id_fish]->collected)
 	{
 		game->fishes[id_fish]->alive->enabled = false;
@@ -175,8 +184,8 @@ void	retry(t_game *game)
 {
 	int	id_fish;
 
-	game->penguin->y = game->initial_pos->row * IMG_SIZE;
-	game->penguin->x = game->initial_pos->col * IMG_SIZE;
+	game->penguin->y = game->initial_row/* initial_pos->row */ * IMG_SIZE;
+	game->penguin->x = game->initial_col/* initial_pos->col */ * IMG_SIZE;
 	game->penguin->facing = STILL;
 	id_fish = 0;
 

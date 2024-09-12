@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:50:28 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/11 21:16:41 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/12 21:14:54 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,4 +128,6 @@ static void	init(t_game **game)
 	(*game)->home = ft_calloc(1, sizeof(t_home));
 	if (!((*game)->home))
 		exit_game(*game, NO_ALLOCATION);
+	(*game)->initial_row = -1;
+	(*game)->initial_col = -1;
 }

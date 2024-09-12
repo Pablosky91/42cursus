@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/09/11 21:04:53 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/09/12 16:54:19 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,11 @@ SOURCES :=	\
 				free_game.c\
 				)\
 			$(addprefix parse/,\
+				check_extension.c\
+				get_info_map.c\
+				open_file.c\
 				read_map.c\
+				save_cell.c\
 				valid_path.c\
 				)\
 			$(addprefix window/,\

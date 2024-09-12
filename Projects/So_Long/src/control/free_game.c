@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:41:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/10 15:54:18 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/12 21:08:24 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	free_game(t_game *game)
 	i = 0;
 	if (game->fishes)
 	{
-		while (game->fishes[i])
-			free(game->fishes[i++]->position);
+		/* while (game->fishes[i])
+			free(game->fishes[i++]->position); */
 		ft_free_double_pointer((void **) game->fishes);
 	}
 	if (game->map && game->map->cells)
@@ -30,7 +30,7 @@ void	free_game(t_game *game)
 	free(game->map);
 	free(game->penguin);
 	free(game->home);
-	free(game->initial_pos);
+	//free(game->initial_pos);
 	if (game->mlx)
 		mlx_terminate(game->mlx);
 	free(game);
