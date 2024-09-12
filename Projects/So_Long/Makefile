@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/09/12 16:54:19 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/09/12 23:11:35 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -175,7 +175,7 @@ error: all
 	@echo
 	-./$(NAME) maps/invalid/no_extension
 	@echo
-	-./$(NAME) maps/invalid/other_extension.txt.ber
+	-./$(NAME) maps/invalid/other_extension.txt
 	@echo
 	-./$(NAME) maps/invalid/no_file.ber
 	@echo

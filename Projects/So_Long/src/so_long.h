@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/12 21:01:03 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/12 23:27:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 
 	//ENUMS//
 
-typedef enum e_error
+typedef enum e_exit_code
 {
 	OK = 0,
 	UNKNOWN,
@@ -47,8 +47,9 @@ typedef enum e_error
 	NO_PLAYER,
 	NO_EXIT,
 	OTHER_CHARACTERS,
-	NO_VALID_PATH
-}	t_error;
+	NO_VALID_PATH,
+	MAX_CODE
+}	t_exit_code;
 
 typedef enum e_cell
 {
@@ -70,17 +71,8 @@ typedef enum e_direction
 
 	//STRUCTS//
 
-/*
-typedef struct s_position
-{
-	int	row;
-	int	col;
-}	t_position;
-*/
-
 typedef struct s_status_node
 {
-	//t_position				*position;
 	int						row;
 	int						col;
 	bool					*fishes;
@@ -117,7 +109,6 @@ typedef struct s_fish
 	mlx_image_t	*alive;
 	mlx_image_t	*dead;
 	int			id;
-	//t_position	*position;
 	int			row;
 	int			col;
 	bool		collected;
@@ -137,12 +128,13 @@ typedef struct s_game
 	t_penguin	*penguin;
 	t_fish		**fishes;
 	t_home		*home;
-	//t_position	*initial_pos;
 	int			initial_row;
 	int			initial_col;
 	int			quantity_fishes;
 	int			collected_fishes;
 	int			moves;
+	int			img_size;
+	int			speed;
 }	t_game;
 
 	//FUNCTIONS
@@ -150,15 +142,15 @@ typedef struct s_game
 	//PARSE
 
 void		check_extension(t_game *game, char *path);
-t_error		get_info_map(t_game *game, char *path);
+t_exit_code	get_info_map(t_game *game, char *path);
 int			open_file(t_game *game, char *path);
 void		read_map(t_game *game, char *path);
-t_error		save_cell(t_game *game, char byte, int row, int col);
+t_exit_code	save_cell(t_game *game, char byte, int row, int col);
 void		valid_path(t_game *game);
 
 	//CONTROL
 
-void		exit_game(t_game *game, t_error error);
+void		exit_game(t_game *game, t_exit_code error);
 void		free_game(t_game *game);
 
 	//WINDOW
@@ -170,8 +162,7 @@ void		my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, vo
 void		my_scroll_hook(double x_delta, double y_delta, void *param);
 void		print_map(t_game *game);
 
-//t_position	*create_pos(int row, int col);
-t_cell		get_cell_by(t_game *game, int row, int col/* t_position position */, t_direction direction);
-int			get_id_fish(t_game *game, int row, int col/* t_position position */);
+t_cell		get_cell_by(t_game *game, int row, int col, t_direction direction);
+int			get_id_fish(t_game *game, int row, int col);
 
 #endif

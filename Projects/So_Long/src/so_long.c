@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:50:28 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/12 21:14:54 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/12 23:29:45 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,86 +14,15 @@
 
 static void	init(t_game **game);
 
-/*
-void	create_map(t_game *game)
+/* void my_resize_hook(int32_t width, int32_t height, void* param)
 {
-	game->map->height = 7;
-	game->map->width = 9;
-	game->map->cells = ft_calloc(sizeof(t_cell *), game->map->height + 1);
-	game->quantity_fishes = 2;
-	game->fishes = ft_calloc(game->quantity_fishes + 1, sizeof(t_fish *));
-	for (int i = 0; i < game->map->height; i++)
-	{
-		game->map->cells[i] = malloc(sizeof(t_cell) * game->map->width);
-		for (int j = 0; j < game->map->width; j++)
-		{
-			if (i == 0 || i == game->map->height - 1 || j == 0 || j == game->map->width - 1)
-				game->map->cells[i][j] = WALL;
-			else if (i == 1 && j == 1)
-			{
-				game->map->cells[i][j] = PENGUIN;
-				game->initial_pos->row = i;
-				game->initial_pos->col = j;
-			}
-			else if (i == game->map->height - 3 && j == game->map->width - 2)
-				game->map->cells[i][j] = HOME;
-			else if (i == 5 && j == 7)
-			{
-				game->map->cells[i][j] = FISH;
-				game->fishes[0] = malloc(sizeof(t_fish));
-				game->fishes[0]->collected = false;
-				game->fishes[0]->id = 1;
-				game->fishes[0]->position = malloc(sizeof(t_position));
-				game->fishes[0]->position->row = i;
-				game->fishes[0]->position->col = j;
-			}
-			else if (i == game->map->height / 2 && j == game->map->width / 2)
-			{
-				game->map->cells[i][j] = FISH;
-				game->fishes[1] = malloc(sizeof(t_fish));
-				game->fishes[1]->collected = false;
-				game->fishes[1]->id = 2;
-				game->fishes[1]->position = malloc(sizeof(t_position));
-				game->fishes[1]->position->row = i;
-				game->fishes[1]->position->col = j;
-			}
-			else if (i == 1 && j == game->map->width / 2)
-				game->map->cells[i][j] = WALL;
-			else if (i == game->map->height - 2 && j == game->map->width / 2 - 1)
-				game->map->cells[i][j] = WALL;
-			else
-				game->map->cells[i][j] = ICE;
-		}
-	}
-}
+	t_game *game = param;
+	ft_printf("window width: %i, height: %i\n", game->mlx->width, game->mlx->height);
+	char *c = ft_strjoin(ft_itoa(game->mlx->width), ft_itoa(game->mlx->height));
+	mlx_put_string(game->mlx, c, 100, 100);
 
-void	show_map(t_game *game)
-{
-	for (int i = 0; i < game->map->height; i++)
-	{
-		for (int j = 0; j < game->map->width; j++)
-		{
-			if (game->map->cells[i][j] == WALL)
-				ft_printf("X");
-			else if (game->map->cells[i][j] == PENGUIN)
-				ft_printf("P");
-			else if (game->map->cells[i][j] == FISH)
-				ft_printf("C");
-			else if (game->map->cells[i][j] == HOME)
-				ft_printf("E");
-			else if (game->map->cells[i][j] == ICE)
-				ft_printf(" ");
-			if (j == game->map->width - 1)
-				ft_printf("\n");
-		}
-	}
-	ft_printf("\n");
-}
-*/
+} */
 
-	/* int32_t	width = 5, height = 7;
-	mlx_get_monitor_size(0, &width, &height);
-	ft_printf("w: %i, h: %i\n", width, height); */
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -109,6 +38,7 @@ int	main(int argc, char **argv)
 	print_map(game);
 	mlx_loop_hook(game->mlx, &my_loop_hook, game);
 	mlx_key_hook(game->mlx, &my_key_hook, game);
+	//mlx_resize_hook(game->mlx, &my_resize_hook, game);
 	mlx_loop(game->mlx);
 	exit_game(game, OK);
 	return (0);
@@ -130,4 +60,6 @@ static void	init(t_game **game)
 		exit_game(*game, NO_ALLOCATION);
 	(*game)->initial_row = -1;
 	(*game)->initial_col = -1;
+	(*game)->img_size = 100;
+	(*game)->speed = 10;
 }

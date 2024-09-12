@@ -12,41 +12,27 @@
 
 #include "so_long.h"
 
-void	message_error(t_error error)
-{
-	if (error == NO_ARGUMENT)
-		ft_printf("Error\nThe program takes as parameter a map description file\n");
-	else if (error == UNKNOWN)
-		ft_printf("Error\nUnknown error happened during the execution\n");
-	else if (error == NO_ALLOCATION)
-		ft_printf("Error\nCannot allocate memory\n");
-	else if (error == INEXISTENT_FILE)
-		ft_printf("Error\nNo such file\n");
-	else if (error == FILE_IS_DIRECTORY)
-		ft_printf("Error\nMap path leads to a directory\n");
-	else if (error == FILE_NO_PERMISSION)
-		ft_printf("Error\nPermission to read map file denied\n");
-	else if (error == INVALID_EXTENSION)
-		ft_printf("Error\nMap file must have .ber extension\n");
-	else if (error == NOT_RECTANGULAR)
-		ft_printf("Error\nThe map must be rectangular\n");
-	else if (error == NOT_SURROUNDED)
-		ft_printf("Error\nThe map must be surrounded by walls\n");
-	else if (error == OTHER_CHARACTERS)
-		ft_printf("Error\nThe map is composed of invalid characters\n");
-	else if (error == NO_COIN)
-		ft_printf("Error\nThe map must contain at least one collectible\n");
-	else if (error == NO_PLAYER)
-		ft_printf("Error\nThe map must contain one and only one starting position\n");
-	else if (error == NO_EXIT)
-		ft_printf("Error\nThe map must contain one and only one exit\n");
-	else if (error == NO_VALID_PATH)
-		ft_printf("Error\nThe map must have a valid path\n");
-}
+static const char	*g_message[MAX_CODE] = {
+	"",
+	"Error\nUnknown error happened during the execution\n",
+	"Error\nThe program takes as parameter a map description file\n",
+	"Error\nCannot allocate memory\n",
+	"Error\nMap file must have .ber extension\n",
+	"Error\nNo such file\n",
+	"Error\nMap path leads to a directory\n",
+	"Error\nPermission to read map file denied\n",
+	"Error\nThe map must be surrounded by walls\n",
+	"Error\nThe map must be rectangular\n",
+	"Error\nThe map must contain at least one collectible\n",
+	"Error\nThe map must contain one and only one starting position\n",
+	"Error\nThe map must contain one and only one exit\n",
+	"Error\nThe map is composed of invalid characters\n",
+	"Error\nThe map must have a valid path\n",
+};
 
-void	exit_game(t_game *game, t_error error)
+void	exit_game(t_game *game, t_exit_code error)
 {
-	message_error(error);
+	ft_printf(g_message[error]);
 	free_game(game);
 	exit(error);
 }

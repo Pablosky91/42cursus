@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:46:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/12 22:18:38 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/12 23:27:01 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	read_map(t_game *game, char *path)
 {
-	char	*buffer;
-	int		row;
-	int		col;
-	int		fd;
-	t_error	error_code;
+	char		*buffer;
+	int			row;
+	int			col;
+	int			fd;
+	t_exit_code	error_code;
 
 	check_extension(game, path);
 	error_code = get_info_map(game, path);
@@ -63,7 +63,6 @@ void	read_map(t_game *game, char *path)
 		row++;
 	}
 	free(buffer);
-	//if (!game->initial_pos)
 	if (game->initial_row == -1 || game->initial_col == -1)
 		exit_game(game, NO_PLAYER);
 	if (!game->home->exists)
