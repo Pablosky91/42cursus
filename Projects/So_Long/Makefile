@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/09/12 23:11:35 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/09/13 21:04:36 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,10 @@ SOURCES :=	\
 				valid_path.c\
 				)\
 			$(addprefix window/,\
+				init_mlx.c\
 				mlx_stuff.c\
+				my_key_hook.c\
+				my_loop_hook.c\
 				)\
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
@@ -115,14 +118,13 @@ $(MLX_NAME):
 	@$(MAKE) msg_mlx_end
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
-	echo $@
 	$(CC) $(CFLAGS) -c $^ $(LIBFT_FLAG) -I $(SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -o $@
 
 $(OBJ_DIR):
 	$(MKDIR) $(OBJ_DIR)
-	$(MKDIR) $(OBJ_DIR)/control
-	$(MKDIR) $(OBJ_DIR)/parse
-	$(MKDIR) $(OBJ_DIR)/window
+	$(MKDIR) $(OBJ_DIR)control
+	$(MKDIR) $(OBJ_DIR)parse
+	$(MKDIR) $(OBJ_DIR)window
 
 c: clean
 clean: msg_clean_start

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/12 23:27:15 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/09/13 22:13:33 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 
 # define MAP_EXTENSION ".ber"
 # define PATH_SEPARATOR '/'
+
+# define WINDOW_TITLE "So Long"
 
 	//ENUMS//
 
@@ -155,14 +157,19 @@ void		free_game(t_game *game);
 
 	//WINDOW
 
-void		my_cursor_hook(double x_pos, double y_pos, void *param);
+void		init_mlx(t_game *game);
 void		my_key_hook(mlx_key_data_t keydata, void *param);
 void		my_loop_hook(void *param);
-void		my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param);
-void		my_scroll_hook(double x_delta, double y_delta, void *param);
-void		print_map(t_game *game);
+void		start_movement(t_game *game, t_direction direction);
 
 t_cell		get_cell_by(t_game *game, int row, int col, t_direction direction);
 int			get_id_fish(t_game *game, int row, int col);
+void		move_penguin(t_game *game);
+void		collect_fish(t_game *game);
+void		enter_home(t_game *game);
+
+//BONUSvoid		my_cursor_hook(double x_pos, double y_pos, void *param);
+//BONUSvoid		my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param);
+//BONUSvoid		my_scroll_hook(double x_delta, double y_delta, void *param);
 
 #endif
