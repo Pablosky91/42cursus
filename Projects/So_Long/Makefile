@@ -94,7 +94,10 @@ RESET := \033[0m
 
 #EXTRA VARIABLES
 
-MAP := maps/medium.ber
+MAP := medium
+MAP_DIRECTORY := maps/
+MAP_EXTENSION := .ber
+
 
 OUT := out
 
@@ -163,9 +166,9 @@ be: bonus
 	@./$(BONUS_NAME) $(ARG)
 
 e: exec
-exec: all
-	@clear
-	@-./$(NAME) $(MAP)
+exec: #all
+#	@clear
+	-./$(NAME) $(addprefix $(MAP_DIRECTORY), $(addsuffix $(MAP_EXTENSION), $(MAP)))
 
 rexec: re exec
 
