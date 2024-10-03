@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:32:14 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/03 11:43:54 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 16:28:52 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,98 +155,3 @@ void	enter_home(t_game *game)
 	if (game->collected_fishes == game->quantity_fishes && get_cell_at(game, game->penguin->x, game->penguin->y) == HOME)
 		exit_game(game, OK);
 }
-
-/* 
-t_direction	direction_from_to(int32_t from_x, int32_t from_y, int32_t to_x, int32_t to_y)
-{
-	double	x;
-	double	y;
-
-	x = to_x - from_x;
-	y = to_y - from_y;
-	if (y < 0 && fabs(x) < fabs(y))
-		return (NORTH);
-	else if (x < 0 && fabs(x) > fabs(y))
-		return (WEST);
-	else if (y > 0 && fabs(x) < fabs(y))
-		return (SOUTH);
-	else
-		return (EAST);
-}
-
-void	retry(t_game *game)
-{
-	int	id_fish;
-
-	game->penguin->y = game->initial_row * game->img_size;
-	game->penguin->x = game->initial_col * game->img_size;
-	game->penguin->facing = STILL;
-	id_fish = 0;
-
-	while (id_fish < game->quantity_fishes)
-	{
-		game->fishes[id_fish]->alive->enabled = true;
-		game->fishes[id_fish]->dead->enabled = false;
-		game->fishes[id_fish]->collected = false;
-		id_fish++;
-	}
-	game->collected_fishes = 0;
-	game->home->closed->enabled = true;
-	game->home->open->enabled = false;
-	game->moves = 0;
-	ft_printf("---------\n");
-}
-
-void	my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param)
-{
-	t_game	*game;
-	int32_t	x;
-	int32_t	y;
-
-	game = param;
-	(void) mods;
-	if (button == MLX_MOUSE_BUTTON_LEFT && action == MLX_PRESS && game->penguin->facing == STILL)
-	{
-		mlx_get_mouse_pos(game->mlx, &x, &y);
-		start_movement(game, direction_from_to(game->penguin->x + game->img_size / 2, game->penguin->y + game->img_size / 2, x, y));
-	}
-}
-
-void	my_cursor_hook(double x_pos, double y_pos, void *param)
-{
-	t_game		*game;
-	int32_t		x;
-	int32_t		y;
-	t_direction	direction;
-
-	game = param;
-	x = x_pos;
-	y = y_pos;
-	direction = direction_from_to(game->penguin->x + game->img_size / 2, game->penguin->y + game->img_size / 2, x, y);
-	if (direction == NORTH)
-		mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/cursor_up.png")));
-	else if (direction == WEST)
-		mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/cursor_left.png")));
-	else if (direction == SOUTH)
-		mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/cursor_down.png")));
-	else if (direction == EAST)
-		mlx_set_cursor(game->mlx, mlx_create_cursor(mlx_load_png("textures/cursor_right.png")));
-}
-
-void	my_scroll_hook(double x_delta, double y_delta, void *param)
-{
-	t_game	*game;
-
-	game = param;
-	if (game->penguin->facing != STILL)
-		return ;
-	if (y_delta > 0)
-		start_movement(game, NORTH);
-	else if (x_delta > 0)
-		start_movement(game, WEST);
-	else if (y_delta < 0)
-		start_movement(game, SOUTH);
-	else
-		start_movement(game, EAST);
-}
- */

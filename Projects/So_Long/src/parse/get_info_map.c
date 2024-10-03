@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:39:20 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/12 23:26:47 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 16:59:56 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ Gets width, height and number of fishes
 t_exit_code	get_info_map(t_game *game, char *path)
 {
 	char		*line;
-	int			length;
 	int			fd;
 	t_exit_code	error_code;
 

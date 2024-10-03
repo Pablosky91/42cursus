@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/10/03 15:05:59 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/10/03 17:01:03 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME := so_long
 BONUS_NAME := so_long_bonus
 
 CC := gcc
-CFLAGS := -g3 -fsanitize=address #-Wall -Wextra -Werror
+CFLAGS := -g3 -fsanitize=address# -Wall -Wextra -Werror
 
 #INCLUDE
 
@@ -134,7 +134,7 @@ $(MLX_NAME):
 	@$(MAKE) msg_mlx_end
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $^ $(LIBFT_FLAG) -I $(SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -o $@
+	$(CC) $(CFLAGS) $(LIBFT_FLAG) -I $(SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -c $^ -o $@
 
 $(OBJ_DIR):
 	$(MKDIR) $(OBJ_DIR)

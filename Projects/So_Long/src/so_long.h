@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/03 15:17:42 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 17:10:39 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,9 +189,5 @@ int				get_id_fish(t_game *game, int row, int col);
 void			move_penguin(t_game *game);
 void			collect_fish(t_game *game);
 void			enter_home(t_game *game);
-
-//BONUSvoid		my_cursor_hook(double x_pos, double y_pos, void *param);
-//BONUSvoid		my_mouse_hook(mouse_key_t button, action_t action, modifier_key_t mods, void *param);
-//BONUSvoid		my_scroll_hook(double x_delta, double y_delta, void *param);
 
 #endif
