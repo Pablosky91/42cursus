@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 08:41:51 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 22:31:21 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:46:41 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	cut_moves(t_data *data)
 	while (iter)
 	{
 		go_back = false;
-		if ((iter->move == sa || iter->move == sb || iter->move == ss)
+		if ((iter->move == SA || iter->move == SB || iter->move == SS)
 			&& iter->quantity > 1)
 		{
 			go_back = true;
@@ -59,14 +59,14 @@ static bool	are_neutral(t_move_list *node, int lower)
 
 	first = node->move;
 	second = node->next->move;
-	if (node->next && ((first == ra && second == rra)
-			|| (first == rra && second == ra)
-			|| (first == rb && second == rrb)
-			|| (first == rrb && second == rb)
-			|| (first == rr && second == rrr)
-			|| (first == rrr && second == rr)
-			|| (first == pa && second == pb)
-			|| (first == pb && second == pa)))
+	if (node->next && ((first == RA && second == RRA)
+			|| (first == RRA && second == RA)
+			|| (first == RB && second == RRB)
+			|| (first == RRB && second == RB)
+			|| (first == RR && second == RRR)
+			|| (first == RRR && second == RR)
+			|| (first == PA && second == PB)
+			|| (first == PB && second == PA)))
 	{
 		node->quantity -= lower;
 		node->next->quantity -= lower;
@@ -84,16 +84,16 @@ static bool	are_combinable(t_move_list *node, int lower)
 {
 	t_move	combo;
 
-	combo = no;
-	if ((node->move == ra && node->next->move == rb)
-		|| (node->move == rb && node->next->move == ra))
-		combo = rr;
-	if ((node->move == rra && node->next->move == rrb)
-		|| (node->move == rrb && node->next->move == rra))
-		combo = rrr;
-	if ((node->move == sa && node->next->move == sb)
-		|| (node->move == sb && node->next->move == sa))
-		combo = ss;
+	combo = NO;
+	if ((node->move == RA && node->next->move == RB)
+		|| (node->move == RB && node->next->move == RA))
+		combo = RR;
+	if ((node->move == RRA && node->next->move == RRB)
+		|| (node->move == RRB && node->next->move == RRA))
+		combo = RRR;
+	if ((node->move == SA && node->next->move == SB)
+		|| (node->move == SB && node->next->move == SA))
+		combo = SS;
 	if (combo && node->quantity == lower)
 	{
 		node->move = combo;

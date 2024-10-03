@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:48:53 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/20 22:09:33 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:41:58 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	read_data(t_data *data, int argc, char **argv)
 		j = 0;
 		split = ft_split(argv[i++], ' ');
 		if (!split || !split[0])
-			return (free(split), provoke_error(data, malloc_error));
+			return (free(split), provoke_error(data, MALLOC_ERROR));
 		while (split[j])
 		{
 			if (!better_atoi(data, split[j], &num))
@@ -66,16 +66,16 @@ static bool	better_atoi(t_data *data, char *str, int *num)
 		if (str[i] == '-')
 			sign = -1;
 		if (!str[i + 1])
-			return (provoke_error(data, not_an_integer));
+			return (provoke_error(data, NOT_AN_INTEGER));
 		i++;
 	}
 	while (str[i])
 	{
 		if (str[i] < '0' || str[i] > '9')
-			return (provoke_error(data, not_an_integer));
+			return (provoke_error(data, NOT_AN_INTEGER));
 		result = result * 10 + str[i++] - '0';
 		if (result * sign < INT_MIN || result * sign > INT_MAX)
-			return (provoke_error(data, not_range_integer));
+			return (provoke_error(data, NOT_RANGE_INTEGER));
 	}
 	*num = result * sign;
 	return (!data->error_code);
@@ -110,7 +110,7 @@ static bool	ps_add_back(t_data *data, int content)
 
 	new_node = ps_new(content);
 	if (!new_node)
-		return (provoke_error(data, malloc_error));
+		return (provoke_error(data, MALLOC_ERROR));
 	if (!data->top_a)
 		return (data->top_a = new_node, data->bot_a = new_node, true);
 	iter = data->top_a;
@@ -121,7 +121,7 @@ static bool	ps_add_back(t_data *data, int content)
 		else if (iter->content > content)
 			iter->index++;
 		else
-			return (free(new_node), provoke_error(data, duplicate_number));
+			return (free(new_node), provoke_error(data, DUPLICATE_NUMBER));
 		prev = iter;
 		iter = iter->next;
 	}

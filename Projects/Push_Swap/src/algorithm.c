@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:08:21 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 22:02:10 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:46:35 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ bool	sort(t_data *data)
 		return (sort_three(data));
 	half = malloc(sizeof(t_half));
 	if (!half)
-		return (provoke_error(data, malloc_error));
-	half->location = top_a;
+		return (provoke_error(data, MALLOC_ERROR));
+	half->location = TOP_A;
 	half->size = data->size_a;
 	half->min_num = 0;
 	half->max_num = data->size_a - 1;
@@ -45,12 +45,12 @@ Updates the size of the stacks.
 */
 bool	move(t_data *data, t_move move)
 {
-	if (move == pa && data->size_b > 0)
+	if (move == PA && data->size_b > 0)
 	{
 		data->size_a++;
 		data->size_b--;
 	}
-	else if (move == pb && data->size_a > 0)
+	else if (move == PB && data->size_a > 0)
 	{
 		data->size_a--;
 		data->size_b++;
@@ -64,24 +64,24 @@ Moves a node from the given location to the corresponding location.
 */
 bool	move_from_to(t_data *data, t_location from, bool is_min)
 {
-	if (from == top_a && !is_min)
-		return (move(data, ra));
-	if (from == top_a && is_min)
-		return (move(data, pb));
-	if (from == bot_a && !is_min)
-		return (move(data, rra));
-	if (from == bot_a && is_min)
-		if (move(data, rra))
-			return (move(data, pb));
-	if (from == top_b && !is_min)
-		return (move(data, pa));
-	if (from == top_b && is_min)
-		return (move(data, rb));
-	if (from == bot_b && !is_min)
-		if (move(data, rrb))
-			return (move(data, pa));
-	if (from == bot_b && is_min)
-		return (move(data, rrb));
+	if (from == TOP_A && !is_min)
+		return (move(data, RA));
+	if (from == TOP_A && is_min)
+		return (move(data, PB));
+	if (from == BOT_A && !is_min)
+		return (move(data, RRA));
+	if (from == BOT_A && is_min)
+		if (move(data, RRA))
+			return (move(data, PB));
+	if (from == TOP_B && !is_min)
+		return (move(data, PA));
+	if (from == TOP_B && is_min)
+		return (move(data, RB));
+	if (from == BOT_B && !is_min)
+		if (move(data, RRB))
+			return (move(data, PA));
+	if (from == BOT_B && is_min)
+		return (move(data, RRB));
 	return (!data->error_code);
 }
 
@@ -95,16 +95,16 @@ static bool	divide(t_data *data, t_half *half)
 
 	half->min_half = malloc(sizeof(t_half));
 	if (!half->min_half)
-		return (provoke_error(data, malloc_error));
+		return (provoke_error(data, MALLOC_ERROR));
 	half->max_half = malloc(sizeof(t_half));
 	if (!half->max_half)
-		return (free(half->min_half), provoke_error(data, malloc_error));
-	half->max_half->location = bot_a;
-	if (half->location != top_a)
-		half->max_half->location = top_a;
-	half->min_half->location = bot_b;
-	if (half->location != top_b)
-		half->min_half->location = top_b;
+		return (free(half->min_half), provoke_error(data, MALLOC_ERROR));
+	half->max_half->location = BOT_A;
+	if (half->location != TOP_A)
+		half->max_half->location = TOP_A;
+	half->min_half->location = BOT_B;
+	if (half->location != TOP_B)
+		half->min_half->location = TOP_B;
 	half->min_half->size = (half->size + 1) / 2;
 	half->min_half->min_num = half->min_num;
 	half->min_half->max_num = half->min_num + half->min_half->size - 1;

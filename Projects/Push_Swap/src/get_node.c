@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:24:49 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 22:04:09 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:42:52 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ t_node	*get_first_node(t_data *data, t_half *half)
 {
 	t_node	*node;
 
-	if (half->location == top_a)
+	if (half->location == TOP_A)
 		node = data->top_a;
-	else if (half->location == bot_a)
+	else if (half->location == BOT_A)
 		node = data->bot_a;
-	else if (half->location == top_b)
+	else if (half->location == TOP_B)
 		node = data->top_b;
-	else if (half->location == bot_b)
+	else if (half->location == BOT_B)
 		node = data->bot_b;
 	return (node);
 }
@@ -44,14 +44,14 @@ bool	node_forward(t_node **node, t_data *data, t_half *half)
 	aux = NULL;
 	if (!*node)
 		*node = get_first_node(data, half);
-	else if (half->location == top_a || half->location == top_b)
+	else if (half->location == TOP_A || half->location == TOP_B)
 		*node = (*node)->next;
 	else
 		*node = (*node)->prev;
 	if (*node
 		&& ((*node)->index < half->min_num || (*node)->index > half->max_num))
 		*node = NULL;
-	if (*node && (half->location == top_a || half->location == top_b))
+	if (*node && (half->location == TOP_A || half->location == TOP_B))
 		aux = (*node)->next;
 	else if (*node)
 		aux = (*node)->prev;
@@ -68,11 +68,11 @@ bool	node_backward(t_node **node, t_half *half)
 	t_node	*aux;
 
 	aux = NULL;
-	if (half->location == top_a || half->location == top_b)
+	if (half->location == TOP_A || half->location == TOP_B)
 		*node = (*node)->prev;
 	else
 		*node = (*node)->next;
-	if (*node && (half->location == top_a || half->location == top_b))
+	if (*node && (half->location == TOP_A || half->location == TOP_B))
 		aux = (*node)->prev;
 	else if (*node)
 		aux = (*node)->next;

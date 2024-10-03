@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 10:24:35 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/22 20:52:08 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:46:41 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	if (argc < 2)
-		return (success);
+		return (SUCCESS);
 	if (!initialize(&data))
 		error(data);
 	if (!read_data(data, argc, argv))
@@ -34,7 +34,7 @@ int	main(int argc, char **argv)
 	else
 		ft_putendl_fd(KO_MESSAGE, STDOUT_FILENO);
 	free_data(data);
-	return (success);
+	return (SUCCESS);
 }
 
 /*
@@ -53,7 +53,7 @@ static bool	initialize(t_data **data)
 	(*data)->size_b = 0;
 	(*data)->move_list_first = NULL;
 	(*data)->move_list_last = NULL;
-	(*data)->error_code = success;
+	(*data)->error_code = SUCCESS;
 	return (true);
 }
 
@@ -73,7 +73,7 @@ static bool	read_instructions(t_data *data)
 		move = get_move_string(line);
 		free(line);
 		if (!move)
-			return (provoke_error(data, not_a_move));
+			return (provoke_error(data, NOT_A_MOVE));
 		execute_move(data, move);
 		line = get_next_line(STDIN_FILENO);
 	}
@@ -106,26 +106,26 @@ Returns the given string as a t_move.
 static t_move	get_move_string(char *move)
 {
 	if (ft_str_equals(move, "sa\n"))
-		return (sa);
+		return (SA);
 	else if (ft_str_equals(move, "sb\n"))
-		return (sb);
+		return (SB);
 	else if (ft_str_equals(move, "ss\n"))
-		return (ss);
+		return (SS);
 	else if (ft_str_equals(move, "pa\n"))
-		return (pa);
+		return (PA);
 	else if (ft_str_equals(move, "pb\n"))
-		return (pb);
+		return (PB);
 	else if (ft_str_equals(move, "ra\n"))
-		return (ra);
+		return (RA);
 	else if (ft_str_equals(move, "rb\n"))
-		return (rb);
+		return (RB);
 	else if (ft_str_equals(move, "rr\n"))
-		return (rr);
+		return (RR);
 	else if (ft_str_equals(move, "rra\n"))
-		return (rra);
+		return (RRA);
 	else if (ft_str_equals(move, "rrb\n"))
-		return (rrb);
+		return (RRB);
 	else if (ft_str_equals(move, "rrr\n"))
-		return (rrr);
-	return (no);
+		return (RRR);
+	return (NO);
 }

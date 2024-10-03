@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/07/29 22:13:44 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/10/03 09:56:55 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -168,10 +168,18 @@ loop: all
 
 n: norminette
 norminette:
-	@echo "norminette | grep Error\n"
-	@if norminette | grep -q "Error"; then echo "$(RED)$$(norminette | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
+	@echo "norminette src libft | grep Error\n"
+	@if norminette src libft | grep -q "Error"; then echo "$(RED)$$(norminette src libft | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
 normi:
-	@if norminette | grep -q "Error"; then echo "\n$(RED)$$(norminette | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
+	@if norminette src libft | grep -q "Error"; then echo "\n$(RED)$$(norminette src libft | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
+
+visualize:
+	cd visualizer/build;\
+	./bin/visualizer
+
+
+psegura: all
+	$(MAKE) -C psegura
 
 #until there's something better: make v CFLAGS=
 v: valgrind
@@ -206,4 +214,4 @@ msg_fclean_end:
 
 #PHONY
 
-.PHONY: all clean fclean re bonus be reb once exec loop norminette normi valgrind last_valgrind clean_valgrind a c f r b o e l n v msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
+.PHONY: all clean fclean re bonus be reb once exec loop norminette normi visualize psegura valgrind last_valgrind clean_valgrind a c f r b o e l n v msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end

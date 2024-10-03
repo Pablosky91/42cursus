@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:35:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 22:23:55 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:46:41 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ Each of the possible error codes.
 */
 typedef enum e_error
 {
-	success = 0,
-	malloc_error = 1,
-	duplicate_number = 2,
-	not_an_integer = 3,
-	not_range_integer = 4,
-	not_a_move = 5
+	SUCCESS = 0,
+	MALLOC_ERROR = 1,
+	DUPLICATE_NUMBER = 2,
+	NOT_AN_INTEGER = 3,
+	NOT_RANGE_INTEGER = 4,
+	NOT_A_MOVE = 5
 }	t_error;
 
 /*
@@ -43,10 +43,10 @@ They are top and bottom for stacks a and b.
 */
 typedef enum e_location
 {
-	top_a = 0,
-	bot_a = 1,
-	top_b = 2,
-	bot_b = 3
+	TOP_A = 0,
+	BOT_A = 1,
+	TOP_B = 2,
+	BOT_B = 3
 }	t_location;
 
 /*
@@ -55,18 +55,18 @@ NULL move is "no".
 */
 typedef enum e_move
 {
-	no = 0,
-	sa = 1,
-	sb = 2,
-	ss = 3,
-	pa = 4,
-	pb = 5,
-	ra = 6,
-	rb = 7,
-	rr = 8,
-	rra = 9,
-	rrb = 10,
-	rrr = 11
+	NO = 0,
+	SA = 1,
+	SB = 2,
+	SS = 3,
+	PA = 4,
+	PB = 5,
+	RA = 6,
+	RB = 7,
+	RR = 8,
+	RRA = 9,
+	RRB = 10,
+	RRR = 11
 }	t_move;
 
 	//STRUCTS//

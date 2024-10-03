@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 17:15:18 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 22:06:26 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:44:38 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ If the given half is at the bottom of a node and there is nothing over it,
 */
 void	bottom_to_top(t_data *data, t_half *half)
 {
-	if (half->location == bot_a && half->size == data->size_a)
-		half->location = top_a;
-	else if (half->location == bot_b && half->size == data->size_b)
-		half->location = top_b;
+	if (half->location == BOT_A && half->size == data->size_a)
+		half->location = TOP_A;
+	else if (half->location == BOT_B && half->size == data->size_b)
+		half->location = TOP_B;
 }
 
 /*
@@ -36,18 +36,18 @@ bool	simplify_max(t_data *data, t_half *half)
 
 	ok = true;
 	iter = get_first_node(data, half);
-	if (half->location == top_a)
+	if (half->location == TOP_A)
 		while (node_forward(&iter, data, half))
 			;
 	while (iter && half->size > 0 && iter->index == half->max_num && ok)
 	{
-		if (half->location == top_a)
+		if (half->location == TOP_A)
 			node_backward(&iter, half);
 		else
 			node_forward(&iter, data, half);
 		half->max_num--;
 		half->size--;
-		if (half->location != top_a)
+		if (half->location != TOP_A)
 			ok = move_from_to(data, half->location, false);
 	}
 	return (!data->error_code);
@@ -66,20 +66,20 @@ bool	simplify_min_before(t_data *data, t_half *half, __u_int	*n_mins)
 	ok = true;
 	*n_mins = 0;
 	iter = get_first_node(data, half);
-	if (half->location != top_a)
+	if (half->location != TOP_A)
 		while (node_forward(&iter, data, half))
 			;
 	while (iter && half->size > 0 && iter->index == half->min_num && ok)
 	{
-		if (half->location != top_a)
+		if (half->location != TOP_A)
 			node_backward(&iter, half);
 		else
 			node_forward(&iter, data, half);
 		half->min_num++;
 		half->size--;
 		(*n_mins)++;
-		if (half->location == top_a)
-			ok = move(data, pb);
+		if (half->location == TOP_A)
+			ok = move(data, PB);
 	}
 	return (!data->error_code);
 }
@@ -94,8 +94,8 @@ bool	simplify_min_after(t_data *data, t_half *half, __u_int n_mins)
 	ok = true;
 	while (n_mins && ok)
 	{
-		if (half->location == top_a)
-			half->location = top_b;
+		if (half->location == TOP_A)
+			half->location = TOP_B;
 		ok = move_from_to(data, half->location, false);
 		n_mins--;
 	}

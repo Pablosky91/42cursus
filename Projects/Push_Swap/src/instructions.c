@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 21:23:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 22:04:37 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:46:41 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ bool	save_move(t_data *data, t_move move)
 	{
 		node = malloc(sizeof(t_move_list));
 		if (!node)
-			return (provoke_error(data, malloc_error));
+			return (provoke_error(data, MALLOC_ERROR));
 		node->move = move;
 		node->quantity = 1;
 		node->next = NULL;
@@ -79,27 +79,27 @@ Returns the given t_move as a string.
 */
 static char	*get_string_move(t_move move)
 {
-	if (move == sa)
+	if (move == SA)
 		return ("sa\n");
-	else if (move == sb)
+	else if (move == SB)
 		return ("sb\n");
-	else if (move == ss)
+	else if (move == SS)
 		return ("ss\n");
-	else if (move == pa)
+	else if (move == PA)
 		return ("pa\n");
-	else if (move == pb)
+	else if (move == PB)
 		return ("pb\n");
-	else if (move == ra)
+	else if (move == RA)
 		return ("ra\n");
-	else if (move == rb)
+	else if (move == RB)
 		return ("rb\n");
-	else if (move == rr)
+	else if (move == RR)
 		return ("rr\n");
-	else if (move == rra)
+	else if (move == RRA)
 		return ("rra\n");
-	else if (move == rrb)
+	else if (move == RRB)
 		return ("rrb\n");
-	else if (move == rrr)
+	else if (move == RRR)
 		return ("rrr\n");
 	return ("");
 }

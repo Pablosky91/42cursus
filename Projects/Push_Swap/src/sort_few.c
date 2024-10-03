@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 19:13:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 21:58:15 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:46:28 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool	sort_two(t_data *data)
 	first = data->top_a->index;
 	second = data->top_a->next->index;
 	if (first > second)
-		return (move(data, sa));
+		return (move(data, SA));
 	return (!data->error_code);
 }
 
@@ -50,16 +50,16 @@ bool	sort_three(t_data *data)
 	second = data->top_a->next->index;
 	third = data->top_a->next->next->index;
 	if (first < second && second > third && first < third)
-		if (move(data, sa))
-			return (move(data, ra));
+		if (move(data, SA))
+			return (move(data, RA));
 	if (first > second && second < third && first < third)
-		return (move(data, sa));
+		return (move(data, SA));
 	if (first < second && second > third && first > third)
-		return (move(data, rra));
+		return (move(data, RRA));
 	if (first > second && second < third && first > third)
-		return (move(data, ra));
+		return (move(data, RA));
 	if (first > second && second > third)
-		if (move(data, sa))
-			return (move(data, rra));
+		if (move(data, SA))
+			return (move(data, RRA));
 	return (!data->error_code);
 }

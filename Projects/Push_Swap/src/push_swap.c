@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 12:10:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/08/22 20:51:56 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:43:32 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char **argv)
 	cut_moves(data);
 	print_moves(data);
 	free_data(data);
-	return (success);
+	return (SUCCESS);
 }
 
 /*
@@ -75,6 +75,6 @@ static bool	initialize(t_data **data)
 	(*data)->size_b = 0;
 	(*data)->move_list_first = NULL;
 	(*data)->move_list_last = NULL;
-	(*data)->error_code = success;
-	return (move(*data, no));
+	(*data)->error_code = SUCCESS;
+	return (move(*data, NO));
 }

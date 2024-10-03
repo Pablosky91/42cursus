@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 21:13:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 21:47:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:41:16 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	error(t_data *data)
 {
 	t_error	error_code;
 
-	error_code = malloc_error;
+	error_code = MALLOC_ERROR;
 	if (data)
 	{
 		error_code = data->error_code;

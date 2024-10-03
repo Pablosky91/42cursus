@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 19:40:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/07/29 22:03:37 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 09:46:41 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,29 @@ Updates the placement of the nodes executing the given move.
 */
 void	execute_move(t_data *data, t_move move)
 {
-	if (move == sa)
+	if (move == SA)
 		return (swap(&data->top_a, &data->bot_a));
-	else if (move == sb)
+	else if (move == SB)
 		return (swap(&data->top_b, &data->bot_b));
-	else if (move == ss)
+	else if (move == SS)
 		return (swap(&data->top_a, &data->bot_a),
 			swap(&data->top_b, &data->bot_b));
-	else if (move == pa)
+	else if (move == PA)
 		return (push(&data->top_b, &data->bot_b, &data->top_a, &data->bot_a));
-	else if (move == pb)
+	else if (move == PB)
 		return (push(&data->top_a, &data->bot_a, &data->top_b, &data->bot_b));
-	else if (move == ra)
+	else if (move == RA)
 		return (rotate(&data->top_a, &data->bot_a));
-	else if (move == rb)
+	else if (move == RB)
 		return (rotate(&data->top_b, &data->bot_b));
-	else if (move == rr)
+	else if (move == RR)
 		return (rotate(&data->top_a, &data->bot_a),
 			rotate(&data->top_b, &data->bot_b));
-	else if (move == rra)
+	else if (move == RRA)
 		return (reverse_rotate(&data->top_a, &data->bot_a));
-	else if (move == rrb)
+	else if (move == RRB)
 		return (reverse_rotate(&data->top_b, &data->bot_b));
-	else if (move == rrr)
+	else if (move == RRR)
 		return (reverse_rotate(&data->top_a, &data->bot_a),
 			reverse_rotate(&data->top_b, &data->bot_b));
 }
