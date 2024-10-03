@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   my_loop_hook.c                                     :+:      :+:    :+:   */
+/*   create_logo.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/13 21:03:25 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/03 15:10:27 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/10/03 15:05:41 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/10/03 15:06:02 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	my_loop_hook(void *param)
+void	create_logo(t_game *game)
 {
-	t_game	*game;
+	mlx_texture_t	*texture;
 
-	game = param;
-	move_penguin(game);
-	collect_fish(game);
-	enter_home(game);
+	texture = mlx_load_png("textures/logo.png");
+	if (!texture)
+		exit_game(game, _MLX_PNG);
+	mlx_set_icon(game->mlx, texture);
+	mlx_delete_texture(texture);
 }

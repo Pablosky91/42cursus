@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/10/03 11:18:41 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/10/03 15:05:59 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,6 +67,8 @@ SOURCES :=	\
 				valid_path.c\
 				)\
 			$(addprefix window/,\
+				create_logo.c\
+				create_window.c\
 				init_mlx.c\
 				mlx_stuff.c\
 				my_key_hook.c\

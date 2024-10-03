@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:32:14 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/09/13 21:52:11 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 11:43:54 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ t_cell	get_cell_at(t_game *game, int32_t x, int32_t y)
 
 void	start_movement(t_game *game, t_direction direction)
 {
-	int row;
-	int col;
+	int	row;
+	int	col;
 
 	if (game->penguin->facing != STILL)
 		return ;

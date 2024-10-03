@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/03 11:18:57 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/03 15:17:42 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ typedef enum e_exit_code
 	NO_EXIT,
 	OTHER_CHARACTERS,
 	NO_VALID_PATH,
+	_MLX_INIT,
+	_MLX_PNG,
+	_MLX_RESIZE,
+	_MLX_PRINT,
 	MAX_CODE
 }	t_exit_code;
 
@@ -162,20 +166,25 @@ t_exit_code		save_cell(t_game *game, char byte, int row, int col);
 void			add_node(t_game *game, t_status_node	*node);
 t_status_node	*copy_node(t_game *game, t_status_node *node);
 t_status_node	*create_node(t_game *game, int row, int col);
-t_cell			get_cell_by(t_game *game, int row, int col, t_direction direction);
+t_cell			get_cell_by(t_game *game,
+					int row, int col, t_direction direction);
 int				get_id_fish(t_game *game, int row, int col);
-bool			is_same_status(t_game *game, t_status_node *status_1, t_status_node *status_2);
+bool			is_same_status(t_game *game,
+					t_status_node *status_1, t_status_node *status_2);
 bool			is_node_repeated(t_game *game, t_status_node *node);
 void			valid_path(t_game *game);
 
 	//WINDOW//
 
+void			create_logo(t_game *game);
+void			create_window(t_game *game);
 void			init_mlx(t_game *game);
 void			my_key_hook(mlx_key_data_t keydata, void *param);
 void			my_loop_hook(void *param);
 void			start_movement(t_game *game, t_direction direction);
 
-t_cell			get_cell_by(t_game *game, int row, int col, t_direction direction);
+t_cell			get_cell_by(t_game *game,
+					int row, int col, t_direction direction);
 int				get_id_fish(t_game *game, int row, int col);
 void			move_penguin(t_game *game);
 void			collect_fish(t_game *game);
