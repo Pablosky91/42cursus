@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/09/13 21:04:36 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/10/03 11:18:41 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,9 @@ SOURCES :=	\
 			so_long.c\
 			$(addprefix control/,\
 				exit_game.c\
+				free_checker.c\
 				free_game.c\
+				free_status.c\
 				)\
 			$(addprefix parse/,\
 				check_extension.c\
@@ -53,6 +55,15 @@ SOURCES :=	\
 				open_file.c\
 				read_map.c\
 				save_cell.c\
+				)\
+			$(addprefix pathing/,\
+				add_node.c\
+				copy_node.c\
+				create_node.c\
+				get_cell_by.c\
+				get_id_fish.c\
+				is_same_status.c\
+				is_node_repeated.c\
 				valid_path.c\
 				)\
 			$(addprefix window/,\
@@ -127,6 +138,7 @@ $(OBJ_DIR):
 	$(MKDIR) $(OBJ_DIR)
 	$(MKDIR) $(OBJ_DIR)control
 	$(MKDIR) $(OBJ_DIR)parse
+	$(MKDIR) $(OBJ_DIR)pathing
 	$(MKDIR) $(OBJ_DIR)window
 
 c: clean
@@ -166,7 +178,7 @@ be: bonus
 	@./$(BONUS_NAME) $(ARG)
 
 e: exec
-exec: #all
+exec: all
 #	@clear
 	-./$(NAME) $(addprefix $(MAP_DIRECTORY), $(addsuffix $(MAP_EXTENSION), $(MAP)))
 
@@ -184,6 +196,7 @@ error: all
 	@echo
 	-./$(NAME) maps/invalid/no_file.ber
 	@echo
+	mkdir -p  maps/invalid/directory.ber
 	-./$(NAME) maps/invalid/directory.ber
 	@echo
 	chmod 000 maps/invalid/change_permissions.ber
@@ -194,9 +207,9 @@ error: all
 	@echo
 	-./$(NAME) maps/invalid/not_surrounded.ber
 	@echo
-	-./$(NAME) maps/invalid/not_rectangular1.ber
+	-./$(NAME) maps/invalid/not_rectangular0.ber
 	@echo
-	-./$(NAME) maps/invalid/not_rectangular2.ber
+	-./$(NAME) maps/invalid/not_rectangular1.ber
 	@echo
 	-./$(NAME) maps/invalid/no_collectibles.ber
 	@echo
@@ -215,15 +228,17 @@ error: all
 
 levels: all
 	@echo
-	-./$(NAME) maps/level00.ber
+	-./$(NAME) maps/tutorial0.ber
 	@echo
-	-./$(NAME) maps/level01.ber
+	-./$(NAME) maps/tutorial1.ber
 	@echo
-	-./$(NAME) maps/level02.ber
+	-./$(NAME) maps/tutorial2.ber
 	@echo
-	-./$(NAME) maps/level03.ber
+	-./$(NAME) maps/tutorial3.ber
 	@echo
-	-./$(NAME) maps/level04.ber
+	-./$(NAME) maps/square0.ber
+	@echo
+	-./$(NAME) maps/square1.ber
 	@echo
 
 n: norminette

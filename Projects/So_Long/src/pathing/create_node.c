@@ -1,34 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_game.c                                        :+:      :+:    :+:   */
+/*   create_node.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/29 15:41:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/03 10:50:13 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/10/03 11:06:30 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/10/03 11:06:43 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	free_game(t_game *game)
+t_status_node	*create_node(t_game *game, int row, int col)
 {
-	int	i;
+	t_status_node	*node;
 
-	if (!game)
-		return ;
-	i = 0;
-	if (game->fishes)
-		ft_free_double_pointer((void **) game->fishes);
-	if (game->map && game->map->cells)
-		ft_free_double_pointer((void **) game->map->cells);
-	free(game->map);
-	free(game->penguin);
-	free(game->home);
-	if (game->checker)
-		free_checker(game->checker);
-	if (game->mlx)
-		mlx_terminate(game->mlx);
-	free(game);
+	node = ft_calloc(1, sizeof(t_status_node));
+	if (!node)
+		exit_game(game, NO_ALLOCATION);
+	node->row = row;
+	node->col = col;
+	node->fishes = ft_calloc(game->quantity_fishes, sizeof(bool));
+	if (!node->fishes)
+		exit_game(game, NO_ALLOCATION);
+	return (node);
 }
