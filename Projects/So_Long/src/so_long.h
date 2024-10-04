@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/03 17:10:39 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/04 20:54:30 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -183,11 +183,13 @@ void			my_key_hook(mlx_key_data_t keydata, void *param);
 void			my_loop_hook(void *param);
 void			start_movement(t_game *game, t_direction direction);
 
+void			show_penguin(t_game *game);
 t_cell			get_cell_by(t_game *game,
 					int row, int col, t_direction direction);
 int				get_id_fish(t_game *game, int row, int col);
-void			move_penguin(t_game *game);
-void			collect_fish(t_game *game);
+int				move_penguin(t_game *game,
+					t_direction moving, int32_t future_x, int32_t future_y);
+void			collect_fish(t_game *game, int id_fish);
 void			enter_home(t_game *game);
 
 #endif

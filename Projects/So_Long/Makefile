@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/10/03 17:01:03 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/10/03 19:22:51 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -254,7 +254,7 @@ normi:
 v: valgrind
 valgrind: clean $(LIBFT) $(OBJECTS) | $(VALGRIND_DIR)
 	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(NAME)
-	@-valgrind --leak-check=full --show-leak-kinds=all --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ././$(NAME) $(MAP)
+	@-valgrind --leak-check=full --show-leak-kinds=all --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ././$(NAME) $(addprefix $(MAP_DIRECTORY), $(addsuffix $(MAP_EXTENSION), $(MAP)))
 	@echo "$(BLUE) $$(grep "ERROR SUMMARY" $(VALGRIND_DIR)/$$(ls valgrind | tail -1))"
 	@$(MAKE) clean
 
