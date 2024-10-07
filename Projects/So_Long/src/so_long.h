@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/04 20:54:30 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/07 21:27:21 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,59 +20,79 @@
 
 	//MACROS//
 
-# define WALL_CHAR '1'
-# define ICE_CHAR '0'
-# define PENGUIN_CHAR 'P'
-# define FISH_CHAR 'C'
-# define HOME_CHAR 'E'
+# define WALL_CHAR		'1'
+# define ICE_CHAR		'0'
+# define PENGUIN_CHAR	'P'
+# define FISH_CHAR		'C'
+# define HOME_CHAR		'E'
 
-# define MAP_EXTENSION ".ber"
-# define PATH_SEPARATOR '/'
+# define MAP_EXTENSION	".ber"
+# define PATH_SEPARATOR	'/'
 
-# define WINDOW_TITLE "So Long"
+# define WINDOW_TITLE	"So Long"
+# define WINDOW_SIZE	0.95
+# define RELATIVE_SPEED 0.125
+
+# define ICE_LAYER		1
+# define OBJECTS_LAYER	2
+# define PENGUIN_LAYER	3
+
+# define IMG_ICE			"textures/ice.png"
+# define IMG_WALL			"textures/wall.png"
+# define IMG_PENGUIN		"textures/penguin.png"
+# define IMG_PENGUIN_N		"textures/slide_up.png"
+# define IMG_PENGUIN_W		"textures/slide_left.png"
+# define IMG_PENGUIN_S		"textures/slide_down.png"
+# define IMG_PENGUIN_E		"textures/slide_right.png"
+# define IMG_FISH_ALIVE		"textures/fish.png"
+# define IMG_FISH_DEAD		"textures/bones.png"
+# define IMG_HOME_CLOSED	"textures/home_closed.png"
+# define IMG_HOME_OPEN		"textures/home_open.png"
+
+# define MOVE_MSG	"Moves: %i\n"
 
 	//ENUMS//
 
 typedef enum e_exit_code
 {
-	OK = 0,
-	UNKNOWN,
-	NO_ARGUMENT,
-	NO_ALLOCATION,
-	INVALID_EXTENSION,
-	INEXISTENT_FILE,
-	FILE_IS_DIRECTORY,
-	FILE_NO_PERMISSION,
-	NOT_SURROUNDED,
-	NOT_RECTANGULAR,
-	NO_COIN,
-	NO_PLAYER,
-	NO_EXIT,
-	OTHER_CHARACTERS,
-	NO_VALID_PATH,
-	_MLX_INIT,
-	_MLX_PNG,
-	_MLX_RESIZE,
-	_MLX_PRINT,
-	MAX_CODE
+	SL_OK					= 0,
+	SL_UNKNOWN				= 1,
+	SL_NO_ARGUMENT			= 2,
+	SL_NO_ALLOCATION		= 3,
+	SL_INVALID_EXTENSION	= 4,
+	SL_INEXISTENT_FILE		= 5,
+	SL_FILE_IS_DIRECTORY	= 6,
+	SL_FILE_NO_PERMISSION	= 7,
+	SL_NOT_SURROUNDED		= 8,
+	SL_NOT_RECTANGULAR		= 9,
+	SL_NO_COIN				= 10,
+	SL_NO_PLAYER			= 11,
+	SL_NO_EXIT				= 12,
+	SL_OTHER_CHARACTERS		= 13,
+	SL_NO_VALID_PATH		= 14,
+	SL_MLX_INIT				= 15,
+	SL_MLX_PNG				= 16,
+	SL_MLX_RESIZE			= 17,
+	SL_MLX_PRINT			= 18,
+	SL_MAX_CODE				= 19
 }	t_exit_code;
 
 typedef enum e_cell
 {
-	WALL = 0,
-	ICE = 1,
-	FISH = 2,
-	PENGUIN = 3,
-	HOME = 4
+	WALL	= 0,
+	ICE		= 1,
+	FISH	= 2,
+	PENGUIN	= 3,
+	HOME	= 4
 }	t_cell;
 
 typedef enum e_direction
 {
-	STILL = 0,
-	NORTH = 1,
-	WEST = 2,
-	SOUTH = 3,
-	EAST = 4
+	STILL	= 0,
+	NORTH	= 1,
+	WEST	= 2,
+	SOUTH	= 3,
+	EAST	= 4
 }	t_direction;
 
 	//STRUCTS//
@@ -176,20 +196,13 @@ void			valid_path(t_game *game);
 
 	//WINDOW//
 
-void			create_logo(t_game *game);
 void			create_window(t_game *game);
 void			init_mlx(t_game *game);
-void			my_key_hook(mlx_key_data_t keydata, void *param);
-void			my_loop_hook(void *param);
-void			start_movement(t_game *game, t_direction direction);
-
-void			show_penguin(t_game *game);
-t_cell			get_cell_by(t_game *game,
-					int row, int col, t_direction direction);
-int				get_id_fish(t_game *game, int row, int col);
 int				move_penguin(t_game *game,
 					t_direction moving, int32_t future_x, int32_t future_y);
-void			collect_fish(t_game *game, int id_fish);
-void			enter_home(t_game *game);
+void			my_key_hook(mlx_key_data_t keydata, void *param);
+void			my_loop_hook(void *param);
+void			show_penguin(t_game *game);
+void			start_movement(t_game *game, t_direction direction);
 
 #endif

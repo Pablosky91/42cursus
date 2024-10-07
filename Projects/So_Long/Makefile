@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/10/03 19:22:51 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/10/07 19:09:21 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ NAME := so_long
 BONUS_NAME := so_long_bonus
 
 CC := gcc
-CFLAGS := -g3 -fsanitize=address# -Wall -Wextra -Werror
+CFLAGS := -g3 -fsanitize=address -Wall -Wextra -Werror
 
 #INCLUDE
 
@@ -67,12 +67,13 @@ SOURCES :=	\
 				valid_path.c\
 				)\
 			$(addprefix window/,\
-				create_logo.c\
 				create_window.c\
 				init_mlx.c\
-				mlx_stuff.c\
+				move_penguin.c\
 				my_key_hook.c\
 				my_loop_hook.c\
+				show_penguin.c\
+				start_movement.c\
 				)\
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))

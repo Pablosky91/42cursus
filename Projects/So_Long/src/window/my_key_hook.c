@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 20:19:02 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/03 16:28:02 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/07 21:24:11 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	my_key_hook(mlx_key_data_t keydata, void *param)
 
 	game = param;
 	if (keydata.key == MLX_KEY_ESCAPE)
-		exit_game(game, OK);
+		exit_game(game, SL_OK);
 	if (keydata.action != MLX_PRESS || game->penguin->facing != STILL)
 		return ;
 	if (keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP)

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 15:45:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/04 11:37:46 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/07 21:26:22 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,12 @@ static bool	check_exit(t_game *game, t_status_node *node);
 
 void	valid_path(t_game *game)
 {
-	bool			valid;
-
 	game->checker = ft_calloc(1, sizeof(t_path_checker));
 	if (!game->checker)
-		exit_game(game, NO_ALLOCATION);
+		exit_game(game, SL_NO_ALLOCATION);
 	add_node(game, create_node(game, game->initial_row, game->initial_col));
 	if (!check_path(game, game->checker->tail))
-		exit_game(game, NO_VALID_PATH);
+		exit_game(game, SL_NO_VALID_PATH);
 }
 
 /*

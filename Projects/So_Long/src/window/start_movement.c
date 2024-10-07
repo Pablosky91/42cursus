@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_logo.c                                      :+:      :+:    :+:   */
+/*   start_movement.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/03 15:05:41 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/03 15:06:02 by pdel-olm         ###   ########.fr       */
+/*   Created: 2024/10/07 17:59:59 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/10/07 21:07:58 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	create_logo(t_game *game)
+void	start_movement(t_game *game, t_direction direction)
 {
-	mlx_texture_t	*texture;
+	int	row;
+	int	col;
 
-	texture = mlx_load_png("textures/logo.png");
-	if (!texture)
-		exit_game(game, _MLX_PNG);
-	mlx_set_icon(game->mlx, texture);
-	mlx_delete_texture(texture);
+	if (game->penguin->facing != STILL)
+		return ;
+	row = game->penguin->y / game->img_size;
+	col = game->penguin->x / game->img_size;
+	if (get_cell_by(game, row, col, direction) == WALL)
+		return ;
+	game->penguin->facing = direction;
+	ft_printf(MOVE_MSG, ++game->moves);
 }

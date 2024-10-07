@@ -12,7 +12,7 @@
 
 #include "so_long.h"
 
-static const char	*g_message[MAX_CODE] = {
+static const char	*g_message[SL_MAX_CODE] = {
 	"",
 	"Error\nUnknown error happened during the execution\n",
 	"Error\nThe program takes as parameter a map description file\n",
