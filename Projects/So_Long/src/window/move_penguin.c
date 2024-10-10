@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:32:14 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/07 18:45:08 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:31:00 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,24 @@ static void		goes_into_wall(t_game *game,
 static t_cell	get_cell_at(t_game *game, int32_t x, int32_t y);
 
 int	move_penguin(t_game *game,
-		t_direction moving, int32_t future_x, int32_t future_y)
+		t_direction moving, int32_t x, int32_t y)
 {
 	int	id_before;
 	int	id_after;
 
-	id_before = get_id_fish_exit(game, moving, future_x, future_y);
+	id_before = get_id_fish_exit(game, moving, x, y);
 	if (moving == NORTH)
-		future_y -= game->speed;
+		y -= game->speed;
 	else if (moving == WEST)
-		future_x -= game->speed;
+		x -= game->speed;
 	else if (moving == SOUTH)
-		future_y += game->speed;
+		y += game->speed;
 	else if (moving == EAST)
-		future_x += game->speed;
-	id_after = get_id_fish_exit(game, moving, future_x, future_y);
-	goes_into_wall(game, moving, &future_x, &future_y);
-	game->penguin->x = future_x;
-	game->penguin->y = future_y;
+		x += game->speed;
+	id_after = get_id_fish_exit(game, moving, x, y);
+	goes_into_wall(game, moving, &x, &y);
+	game->penguin->x = x;
+	game->penguin->y = y;
 	if (id_before != id_after)
 		return (id_before);
 	return (-1);

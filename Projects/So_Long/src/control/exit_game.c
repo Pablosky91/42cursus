@@ -34,9 +34,9 @@ static const char	*g_message[SL_MAX_CODE] = {
 	"Error\nCould not print an image in the window\n"
 };
 
-void	exit_game(t_game *game, t_exit_code error)
+void	exit_game(t_game *game, t_exit_code exit_code)
 {
-	ft_printf(g_message[error]);
+	ft_printf(g_message[exit_code]);
 	free_game(game);
-	exit(error);
+	exit(exit_code);
 }

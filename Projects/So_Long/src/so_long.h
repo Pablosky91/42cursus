@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/07 21:27:21 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/10 20:38:38 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@
 # include "math.h"
 # include "MLX42.h"
 
-	//MACROS//
+/******************************************************************************/
+/*                                   MACROS                                   */
+/******************************************************************************/
 
 # define WALL_CHAR		'1'
 # define ICE_CHAR		'0'
@@ -51,7 +53,9 @@
 
 # define MOVE_MSG	"Moves: %i\n"
 
-	//ENUMS//
+/******************************************************************************/
+/*                                   ENUMS                                    */
+/******************************************************************************/
 
 typedef enum e_exit_code
 {
@@ -95,7 +99,9 @@ typedef enum e_direction
 	EAST	= 4
 }	t_direction;
 
-	//STRUCTS//
+/******************************************************************************/
+/*                                  STRUCTS                                   */
+/******************************************************************************/
 
 typedef struct s_status_node
 {
@@ -164,45 +170,226 @@ typedef struct s_game
 	int				speed;
 }	t_game;
 
-	//FUNCTIONS//
+/******************************************************************************/
+/*                                 FUNCTIONS                                  */
+/******************************************************************************/
 
-	//CONTROL//
+/******************************************************************************/
+/*                            FUNCTIONS - CONTROL                             */
+/******************************************************************************/
 
-void			exit_game(t_game *game, t_exit_code error);
-void			free_checker(t_path_checker *checker);
+/**
+ * @brief Exits the program in a clean way, freeing all allocated memory.
+ * 
+ * @param game All game information.
+ * @param exit_code The reason why the program is closed.
+ */
+void			exit_game(t_game *game, t_exit_code exit_code);
+
+/**
+ * @brief Frees all allocated memory by the program.
+ * 
+ * @param game All game information.
+ */
 void			free_game(t_game *game);
+
+/**
+ * @brief Frees a node from the path_checker.
+ * 
+ * @param status The status_node to be freed.
+ */
 void			free_status(t_status_node *status);
 
-	//PARSE//
+/******************************************************************************/
+/*                             FUNCTIONS - PARSE                              */
+/******************************************************************************/
 
+/**
+ * @brief Checks the given path has a valid extension.
+ * 
+ * @param game All game information.
+ * @param path The path of the map file.
+ */
 void			check_extension(t_game *game, char *path);
+
+/**
+ * @brief Gets width, height and number of fishes of the map.
+ * 
+ * @param game All game information.
+ * @param path The path of the map file.
+ * @return Exit code (type of error or success).
+ */
 t_exit_code		get_info_map(t_game *game, char *path);
+
+/**
+ * @brief Opens the file, checking for several errors.
+ * 
+ * @param game All game information.
+ * @param path The path of the map file.
+ * @return The file descriptor.
+ */
 int				open_file(t_game *game, char *path);
+
+/**
+ * @brief Reads and stores a map.
+ * 
+ * @param game All game information.
+ * @param path The path of the map file.
+ */
 void			read_map(t_game *game, char *path);
+
+/**
+ * @brief Saves a cell in the map structure.
+ * 
+ * @param game All game information.
+ * @param byte Byte read from the map file.
+ * @param row Row of the map.
+ * @param col Column of the map.
+ * @return Exit code (type of error or success).
+ */
 t_exit_code		save_cell(t_game *game, char byte, int row, int col);
 
-	//PATHING//
+/******************************************************************************/
+/*                            FUNCTIONS - PATHING                             */
+/******************************************************************************/
 
+/**
+ * @brief Adds a node to the back of the checker list.
+ * 
+ * @param game All game information.
+ * @param node The node to be added.
+ */
 void			add_node(t_game *game, t_status_node	*node);
+
+/**
+ * @brief Copies the content of a node.
+ * 
+ * @param game All game information.
+ * @param node The node to be copied.
+ * @return A pointer of the new node.
+ */
 t_status_node	*copy_node(t_game *game, t_status_node *node);
+
+/**
+ * @brief Creates a new node with a given position and an empty fish array.
+ * 
+ * @param game All game information.
+ * @param row Row of the node.
+ * @param col Column of the row.
+ * @return A pointer of the new node.
+ */
 t_status_node	*create_node(t_game *game, int row, int col);
+
+/**
+ * @brief Gets the type of the cell next to a position in a given direction.
+ * 
+ * @param game All game information.
+ * @param row Row of the initial cell.
+ * @param col Column of the initial cell.
+ * @param direction The direction to get the wanted cell.
+ * @return The type of cell.
+ */
 t_cell			get_cell_by(t_game *game,
 					int row, int col, t_direction direction);
+
+/**
+ * @brief Gets the fish id from a position, if it exists.
+ * 
+ * @param game All game information.
+ * @param row The row of the fish.
+ * @param col The column of the fish.
+ * @return The fish id. -1 if there's no fish on that position.
+ */
 int				get_id_fish(t_game *game, int row, int col);
+
+/**
+ * @brief Compares the content of two nodes.
+ * 
+ * @param game All game information.
+ * @param status_1 One node.
+ * @param status_2 The other node.
+ * @return Wether they are the same status or not.
+ */
 bool			is_same_status(t_game *game,
 					t_status_node *status_1, t_status_node *status_2);
+
+/**
+ * @brief Compares the given node to all stored nodes in the checker.
+ * 
+ * @param game All game information.
+ * @param node The new node to be compared.
+ * @return Wether the node is repeated or not.
+ */
 bool			is_node_repeated(t_game *game, t_status_node *node);
+
+/**
+ * @brief Checks if there is a valid path in a map.
+ * 
+ * @param game All game information.
+ */
 void			valid_path(t_game *game);
 
-	//WINDOW//
+/******************************************************************************/
+/*                             FUNCTIONS - WINDOW                             */
+/******************************************************************************/
 
+/**
+ * @brief Creates a window to display the game.
+ * 
+ * @param game All game information.
+ */
 void			create_window(t_game *game);
+
+/**
+ * @brief Creates the mlx instance, window and all images.
+ * 
+ * @param game All game information.
+ */
 void			init_mlx(t_game *game);
+
+/**
+ * @brief Updates the ordinates of the penguin as it moves.
+ * 
+ * @param game All game information.
+ * @param moving Direction in which the penguin is moving.
+ * @param future_x Actual x ordinate of the penguin.
+ * @param future_y Actual y ordinate of the penguin.
+ * @return The id of the cell the penguin moves onto.
+ * If there is a fish, its id. If it is the home, -HOME. Any other cell -1.
+ */
 int				move_penguin(t_game *game,
-					t_direction moving, int32_t future_x, int32_t future_y);
+					t_direction moving, int32_t x, int32_t y);
+
+/**
+ * @brief Function called whenever a key is acted on.
+ * It starts the movement based on the input.
+ * 
+ * @param keydata All keydata information.
+ * @param param All game information.
+ */
 void			my_key_hook(mlx_key_data_t keydata, void *param);
+
+/**
+ * @brief Function called every frame of the game.
+ * It moves and shows the penguin and checks for fishes and the home.
+ * 
+ * @param param All game information.
+ */
 void			my_loop_hook(void *param);
+
+/**
+ * @brief Updates the position and sprite of the penguin in the window.
+ * 
+ * @param game All game information.
+ */
 void			show_penguin(t_game *game);
+
+/**
+ * @brief Starts the movement in the given direction when possible.
+ * 
+ * @param game All game information.
+ * @param direction The direction to move.
+ */
 void			start_movement(t_game *game, t_direction direction);
 
 #endif

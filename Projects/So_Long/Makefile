@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/10/07 19:09:21 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/10/10 12:30:28 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,7 +45,6 @@ SOURCES :=	\
 			so_long.c\
 			$(addprefix control/,\
 				exit_game.c\
-				free_checker.c\
 				free_game.c\
 				free_status.c\
 				)\
