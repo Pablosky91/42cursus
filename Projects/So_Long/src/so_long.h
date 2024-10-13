@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/10 20:38:38 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/13 11:24:07 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <errno.h>
 # include "libft.h"
-# include "math.h"
 # include "MLX42.h"
 
 /******************************************************************************/
@@ -323,7 +322,7 @@ bool			is_same_status(t_game *game,
 bool			is_node_repeated(t_game *game, t_status_node *node);
 
 /**
- * @brief Checks if there is a valid path in a map.
+ * @brief Checks wether there is a valid path in a map.
  * 
  * @param game All game information.
  */

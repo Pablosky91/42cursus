@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:39:20 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/07 21:25:37 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/13 11:28:02 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 static t_exit_code	read_lines(t_game *game, int fd, char *line);
 
-/*
-Gets width, height and number of fishes
-*/
 t_exit_code	get_info_map(t_game *game, char *path)
 {
 	char		*line;
@@ -37,6 +34,15 @@ t_exit_code	get_info_map(t_game *game, char *path)
 	return (error_code);
 }
 
+/**
+ * @brief Reads all lines to compare their width and know how many are there.
+ * It also counts the fishes.
+ * 
+ * @param game All game information.
+ * @param fd The file descriptor.
+ * @param line The first line of the file.
+ * @return Exit code (type of error or success).
+ */
 static t_exit_code	read_lines(t_game *game, int fd, char *line)
 {
 	int			length;

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 20:08:49 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/07 21:26:41 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/13 11:50:09 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,13 @@ void	init_mlx(t_game *game)
 	}
 }
 
+/**
+ * @brief Prints an image corresponding to the cell type.
+ * 
+ * @param game All game information.
+ * @param row The row of the map to print.
+ * @param col The column of the map to print.
+ */
 static void	draw_cell(t_game *game, int row, int col)
 {
 	mlx_image_t	*img;
@@ -45,7 +52,7 @@ static void	draw_cell(t_game *game, int row, int col)
 	if (game->map->cells[row][col] == WALL)
 		create_image(game, &img, IMG_WALL,
 			(int []){row, col, OBJECTS_LAYER, true});
-	if (game->map->cells[row][col] == PENGUIN)
+	else if (game->map->cells[row][col] == PENGUIN)
 	{
 		game->penguin->y = row * game->img_size;
 		game->penguin->x = col * game->img_size;
@@ -60,9 +67,17 @@ static void	draw_cell(t_game *game, int row, int col)
 		create_image(game, &(game->penguin->east), IMG_PENGUIN_E,
 			(int []){row, col, PENGUIN_LAYER, false});
 	}
-	draw_cell_2(game, row, col);
+	else
+		draw_cell_2(game, row, col);
 }
 
+/**
+ * @brief Continuation of draw_cell.
+ * 
+ * @param game All game information.
+ * @param row The row of the map to print.
+ * @param col The column of the map to print.
+ */
 static void	draw_cell_2(t_game *game, int row, int col)
 {
 	static int	id_fish = 0;
@@ -84,7 +99,14 @@ static void	draw_cell_2(t_game *game, int row, int col)
 	}
 }
 
-//position: row, col, layer, enabled,
+/**
+ * @brief Prints the given png to the given position.
+ * 
+ * @param game All game information.
+ * @param img The image to save.
+ * @param path The path to the png to print.
+ * @param position Array consisting of row, column, layer and wether is enabled.
+ */
 static void	create_image(t_game *game,
 				mlx_image_t **img, char *path, int position[])
 {

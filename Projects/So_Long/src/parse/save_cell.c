@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/12 16:52:17 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/07 21:26:17 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/13 11:35:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ t_exit_code	save_cell(t_game *game, char byte, int row, int col)
 	return (SL_OK);
 }
 
+/**
+ * @brief Saves a fish in the map structure.
+ * 
+ * @param game All game information.
+ * @param row The row of the map where to save.
+ * @param col The column of the map where to save.
+ * @return Exit code (type of error or success).
+ */
 static t_exit_code	save_fish(t_game *game, int row, int col)
 {
 	static int	fish_id = 0;
@@ -51,6 +59,14 @@ static t_exit_code	save_fish(t_game *game, int row, int col)
 	return (SL_OK);
 }
 
+/**
+ * @brief Saves the penguin in the map structure.
+ * 
+ * @param game All game information.
+ * @param row The row of the map where to save.
+ * @param col The column of the map where to save.
+ * @return Exit code (type of error or success).
+ */
 static t_exit_code	save_penguin(t_game *game, int row, int col)
 {
 	if (game->initial_row != -1 || game->initial_col != -1)
@@ -61,6 +77,14 @@ static t_exit_code	save_penguin(t_game *game, int row, int col)
 	return (SL_OK);
 }
 
+/**
+ * @brief Saves the home in the map structure.
+ * 
+ * @param game All game information.
+ * @param row The row of the map where to save.
+ * @param col The column of the map where to save.
+ * @return Exit code (type of error or success).
+ */
 static t_exit_code	save_home(t_game *game, int row, int col)
 {
 	if (game->home->exists)

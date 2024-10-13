@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:50:28 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/07 21:24:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/13 10:58:13 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ int	main(int argc, char **argv)
 	return (0);
 }
 
+/**
+ * @brief Initialises and allocates the game structure.
+ * 
+ * @param game The game instance to be initialised.
+ */
 static void	init(t_game **game)
 {
 	*game = ft_calloc(1, sizeof(t_game));

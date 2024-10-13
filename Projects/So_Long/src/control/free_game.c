@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:41:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/10 12:30:19 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/13 10:52:21 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ void	free_game(t_game *game)
 	free(game);
 }
 
+/**
+ * @brief Frees all nodes in a checker and the checker itself.
+ * 
+ * @param checker The path_checker to free.
+ */
 static void	free_checker(t_path_checker *checker)
 {
 	t_status_node	*iter;

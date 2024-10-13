@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 17:55:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/07 18:23:12 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/13 11:37:07 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ void	show_penguin(t_game *game)
 		show_sprite(game, game->penguin->east);
 }
 
+/**
+ * @brief Moves to the actual position and enables the given image.
+ * 
+ * @param game All game information.
+ * @param image The image to show.
+ */
 static void	show_sprite(t_game *game, mlx_image_t *image)
 {
 	image->instances[0].x = game->penguin->x;

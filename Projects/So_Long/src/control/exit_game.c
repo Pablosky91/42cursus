@@ -12,6 +12,9 @@
 
 #include "so_long.h"
 
+/**
+ * @brief Array with the descriptions of the exit codes.
+ */
 static const char	*g_message[SL_MAX_CODE] = {
 	"",
 	"Error\nUnknown error happened during the execution\n",

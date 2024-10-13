@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 21:03:25 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/10 20:40:00 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/13 11:40:48 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,13 @@ void	my_loop_hook(void *param)
 		enter_home(game);
 }
 
+/**
+ * @brief Collects and enables the bones of the given fish.
+ * If it is the last fish, enables the open home.
+ * 
+ * @param game All game information.
+ * @param id_fish The fish id.
+ */
 static void	collect_fish(t_game *game, int id_fish)
 {
 	if (!game->fishes[id_fish]->collected)
@@ -50,6 +57,11 @@ static void	collect_fish(t_game *game, int id_fish)
 	}
 }
 
+/**
+ * @brief If all fishes are collected, it exits the game in a clean way.
+ * 
+ * @param game All game information.
+ */
 static void	enter_home(t_game *game)
 {
 	if (game->collected_fishes == game->quantity_fishes)

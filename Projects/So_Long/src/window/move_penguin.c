@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 15:32:14 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/10 16:31:00 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/13 12:03:06 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@ int	move_penguin(t_game *game,
 	return (-1);
 }
 
+/**
+ * @brief Gets the id of a cell where a pixel is located.
+ * 
+ * @param game All game information.
+ * @param moving Direction in which the penguin is moving.
+ * @param x X ordinate of the pixel.
+ * @param y Y ordinate of the pixel.
+ * @return If there is a fish, its id. If it is the home, -HOME.
+ * Any other cell -1.
+ */
 static int	get_id_fish_exit(t_game *game,
 				t_direction moving, int32_t x, int32_t y)
 {
@@ -58,6 +68,14 @@ static int	get_id_fish_exit(t_game *game,
 	return (-1);
 }
 
+/**
+ * @brief Checks if the penguin entered a wall and relocates it.
+ * 
+ * @param game All game information.
+ * @param direction Direction in which the penguin is moving.
+ * @param x X ordinate of the penguin.
+ * @param y Y ordinate of the penguin.
+ */
 static void	goes_into_wall(t_game *game,
 				t_direction direction, int32_t *x, int32_t *y)
 {
@@ -78,6 +96,14 @@ static void	goes_into_wall(t_game *game,
 	game->penguin->facing = STILL;
 }
 
+/**
+ * @brief Gets the cell type of the cell in which a pixel is located.
+ * 
+ * @param game All game information.
+ * @param x X ordinate of the pixel.
+ * @param y Y ordinate of the pixel.
+ * @return The type of cell.
+ */
 static t_cell	get_cell_at(t_game *game, int32_t x, int32_t y)
 {
 	return (game->map->cells[y / game->img_size][x / game->img_size]);

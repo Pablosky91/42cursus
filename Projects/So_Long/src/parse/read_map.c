@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:46:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/07 21:25:57 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/13 11:32:27 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,13 @@ void	read_map(t_game *game, char *path)
 	valid_path(game);
 }
 
+/**
+ * @brief Reads the file byte by byte and saves the cell type in the map.
+ * 
+ * @param game All game information.
+ * @param buffer The read buffer.
+ * @param fd The file descriptor.
+ */
 static void	save_map(t_game *game, char *buffer, int fd)
 {
 	int			row;
@@ -72,6 +79,13 @@ static void	save_map(t_game *game, char *buffer, int fd)
 	}
 }
 
+/**
+ * @brief Exits the program in a clean way and frees the read buffer.
+ * 
+ * @param game All game information.
+ * @param error The reason why the program is closed.
+ * @param buffer The read buffer to free.
+ */
 static void	exit_game_free_buffer(t_game *game, t_exit_code error, char *buffer)
 {
 	free(buffer);
