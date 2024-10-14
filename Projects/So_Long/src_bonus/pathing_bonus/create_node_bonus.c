@@ -1,0 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_node_bonus.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/14 19:27:57 by pdel-olm          #+#    #+#             */
+/*   Updated: 2024/10/14 21:19:40 by pdel-olm         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "so_long_bonus.h"
+
+t_status_node	*create_node(t_game *game, int row, int col)
+{
+	t_status_node	*node;
+
+	node = ft_calloc(1, sizeof(t_status_node));
+	if (!node)
+		exit_game(game, SL_NO_ALLOCATION);
+	node->row = row;
+	node->col = col;
+	node->fishes = ft_calloc(game->quantity_fishes, sizeof(bool));
+	if (!node->fishes)
+	{
+		free(node);
+		exit_game(game, SL_NO_ALLOCATION);
+	}
+	return (node);
+}

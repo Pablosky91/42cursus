@@ -4,9 +4,11 @@
 **/.*
 **/valgrind
 **/obj
+**/obj_bonus
 *.pdf
 ignore
 
 so_long
+so_long_bonus
 push_swap
 checker

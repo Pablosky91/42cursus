@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/10/13 11:04:03 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/10/14 21:36:53 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,21 +80,19 @@ SOURCES := $(addprefix $(SRC_DIR), $(SOURCES))
 
 #BONUS FILES
 
-BONUS_SRC_DIR := $(SRC_DIR)bonus/
-BONUS_OBJ_DIR := $(OBJ_DIR)bonus/
+BONUS_SRC_DIR := src_bonus/
+BONUS_OBJ_DIR := obj_bonus/
 
 BONUS_SOURCES := \
 
-BONUS_REGULAR_SOURCES := \
+BONUS_SOURCES := $(addprefix $(SRC_DIR), $(BONUS_SOURCES))
+BONUS_SOURCES += $(SOURCES)
 
-BONUS_OBJECTS := $(addprefix $(BONUS_OBJ_DIR), $(BONUS_SOURCES:.c=.o))
-BONUS_SOURCES := $(addprefix $(BONUS_SRC_DIR), $(BONUS_SOURCES))
+BONUS_SOURCES := $(BONUS_SOURCES:.c=_bonus.c)
+BONUS_SOURCES := $(subst /,_bonus/,$(BONUS_SOURCES))
 
-BONUS_REGULAR_OBJECTS := $(addprefix $(OBJ_DIR), $(BONUS_REGULAR_SOURCES:.c=.o))
-BONUS_REGULAR_SOURCES := $(addprefix $(SRC_DIR), $(BONUS_REGULAR_SOURCES))
-
-BONUS_OBJECTS += $(BONUS_REGULAR_OBJECTS)
-BONUS_SOURCES += $(BONUS_REGULAR_SOURCES)
+BONUS_OBJECTS := $(BONUS_SOURCES:.c=.o)
+BONUS_OBJECTS := $(subst $(BONUS_SRC_DIR),$(BONUS_OBJ_DIR),$(BONUS_OBJECTS))
 
 #COLOURS
 
@@ -121,6 +119,10 @@ VALGRIND_DIR := valgrind/
 a: all
 all: $(NAME)
 
+test:
+	echo $(BONUS_SOURCES)
+	echo $(BONUS_OBJECTS)
+
 $(NAME): $(LIBFT) $(MLX_NAME) $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(NAME)
 
@@ -145,13 +147,13 @@ $(OBJ_DIR):
 
 c: clean
 clean: msg_clean_start
-	$(RM) $(OBJ_DIR)
+	$(RM) $(OBJ_DIR) $(BONUS_OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_PATH) clean
 	@$(MAKE) msg_clean_end
 
 f: fclean
 fclean: msg_fclean_start
-	$(RM) $(OBJ_DIR) $(MLX_BUILD) $(NAME) $(BONUS_NAME)
+	$(RM) $(OBJ_DIR) $(BONUS_OBJ_DIR) $(MLX_BUILD) $(NAME) $(BONUS_NAME)
 	@$(MAKE) -C $(LIBFT_PATH) fclean
 	@$(MAKE) msg_fclean_end
 
@@ -163,25 +165,28 @@ re: fclean all
 b:bonus
 bonus: $(BONUS_NAME)
 
-$(BONUS_NAME): $(LIBFT) $(BONUS_OBJECTS)
-	$(CC) $(CFLAGS) $(BONUS_OBJECTS) $(LIBFT_FLAG) -o $(BONUS_NAME)
+$(BONUS_NAME): $(LIBFT) $(MLX_NAME) $(BONUS_OBJECTS)
+	$(CC) $(CFLAGS) $(BONUS_OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(BONUS_NAME)
 
 $(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c | $(BONUS_OBJ_DIR)
-	$(CC) $(CFLAGS) -c $^ $(LIBFT_FLAG) -I $(LIBFT_PATH) -o $@
+	$(CC) $(CFLAGS) $(LIBFT_FLAG) -I $(BONUS_SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -c $^ -o $@
 
 $(BONUS_OBJ_DIR):
 	$(MKDIR) $(BONUS_OBJ_DIR)
+	$(MKDIR) $(BONUS_OBJ_DIR)control_bonus
+	$(MKDIR) $(BONUS_OBJ_DIR)parse_bonus
+	$(MKDIR) $(BONUS_OBJ_DIR)pathing_bonus
+	$(MKDIR) $(BONUS_OBJ_DIR)window_bonus
 
 #EXTRA RULES
 
 reb: fclean bonus
 
 be: bonus
-	@./$(BONUS_NAME) $(ARG)
+	-./$(BONUS_NAME) $(addprefix $(MAP_DIRECTORY), $(addsuffix $(MAP_EXTENSION), $(MAP)))
 
 e: exec
 exec: all
-#	@clear
 	-./$(NAME) $(addprefix $(MAP_DIRECTORY), $(addsuffix $(MAP_EXTENSION), $(MAP)))
 
 rexec: re exec
