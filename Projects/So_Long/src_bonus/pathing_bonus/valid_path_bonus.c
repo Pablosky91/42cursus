@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:28:41 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/14 21:19:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:29:09 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static bool	check_path(t_game *game, t_status_node *start);
 static bool	check_path_direction(t_game *game,
 				t_direction direction, t_status_node *node);
-static void	check_next_cell(t_game *game,
+static bool	check_next_cell(t_game *game,
 				t_direction direction, t_status_node *node);
 static bool	check_exit(t_game *game, t_status_node *node);
 
@@ -61,7 +61,11 @@ static bool	check_path_direction(t_game *game,
 {
 	while (get_cell_by(game, node->row, node->col, direction) != WALL)
 	{
-		check_next_cell(game, direction, node);
+		if (check_next_cell(game, direction, node))
+		{
+			free_status(node);
+			return (false);
+		}
 		if (check_exit(game, node))
 			return (true);
 	}
@@ -77,13 +81,14 @@ static bool	check_path_direction(t_game *game,
 }
 
 /**
- * @brief Moves the position of the node and checks for collectibles.
+ * @brief Moves the position of the node and checks for collectibles and enemies.
  * 
  * @param game All game information.
  * @param direction The direction to move.
  * @param node The node from which to move.
+ * @return Wether the next cell is an enemy.
  */
-static void	check_next_cell(t_game *game,
+static bool	check_next_cell(t_game *game,
 				t_direction direction, t_status_node *node)
 {
 	if (direction == NORTH)
@@ -96,6 +101,9 @@ static void	check_next_cell(t_game *game,
 		node->col++;
 	if (game->map->cells[node->row][node->col] == FISH)
 		node->fishes[get_id_fish(game, node->row, node->col)] = true;
+	if (game->map->cells[node->row][node->col] == SEAL)
+		return (true);
+	return (false);
 }
 
 /**

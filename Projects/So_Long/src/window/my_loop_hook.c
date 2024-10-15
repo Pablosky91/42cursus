@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 21:03:25 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/13 11:40:48 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/15 14:50:19 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ static void	enter_home(t_game *game);
 void	my_loop_hook(void *param)
 {
 	t_game	*game;
-	int		id_fish_home;
+	int		id_cell;
 
 	game = param;
-	id_fish_home = -1;
+	id_cell = -1;
 	if (game->penguin->facing != STILL)
-		id_fish_home = move_penguin(game,
+		id_cell = move_penguin(game,
 				game->penguin->facing, game->penguin->x, game->penguin->y);
 	show_penguin(game);
-	if (id_fish_home == -1)
+	if (id_cell == -1)
 		return ;
-	if (id_fish_home >= 0)
-		collect_fish(game, id_fish_home);
-	if (id_fish_home == -HOME)
+	if (id_cell >= 0)
+		collect_fish(game, id_cell);
+	if (id_cell == -HOME)
 		enter_home(game);
 }
 

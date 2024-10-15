@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:06 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/14 21:19:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/15 09:20:31 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,9 @@ static void	draw_cell(t_game *game, int row, int col)
 		create_image(game, &(game->penguin->east), IMG_PENGUIN_E,
 			(int []){row, col, PENGUIN_LAYER, false});
 	}
+	else if (game->map->cells[row][col] == SEAL)
+		create_image(game, &img, IMG_SEAL,
+			(int []){row, col, SEAL_LAYER, true});
 	else
 		draw_cell_2(game, row, col);
 }
@@ -90,7 +93,7 @@ static void	draw_cell_2(t_game *game, int row, int col)
 			(int []){row, col, OBJECTS_LAYER, false});
 		id_fish++;
 	}
-	if (game->map->cells[row][col] == HOME)
+	else if (game->map->cells[row][col] == HOME)
 	{
 		create_image(game, &(game->home->closed), IMG_HOME_CLOSED,
 			(int []){row, col, OBJECTS_LAYER, true});

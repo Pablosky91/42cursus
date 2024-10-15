@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:27:32 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/14 21:19:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:18:08 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static t_exit_code	save_fish(t_game *game, int row, int col);
 static t_exit_code	save_penguin(t_game *game, int row, int col);
 static t_exit_code	save_home(t_game *game, int row, int col);
+static t_exit_code	save_seal(t_game *game, int row, int col);
 
 t_exit_code	save_cell(t_game *game, char byte, int row, int col)
 {
@@ -31,6 +32,8 @@ t_exit_code	save_cell(t_game *game, char byte, int row, int col)
 		return (save_penguin(game, row, col));
 	else if (byte == HOME_CHAR)
 		return (save_home(game, row, col));
+	else if (byte == SEAL_CHAR)
+		return (save_seal(game, row, col));
 	else
 		return (SL_OTHER_CHARACTERS);
 	return (SL_OK);
@@ -91,5 +94,19 @@ static t_exit_code	save_home(t_game *game, int row, int col)
 		return (SL_NO_EXIT);
 	game->map->cells[row][col] = HOME;
 	game->home->exists = true;
+	return (SL_OK);
+}
+
+/**
+ * @brief Saves a seal in the map structure.
+ * 
+ * @param game All game information.
+ * @param row The row of the map where to save.
+ * @param col The column of the map where to save.
+ * @return Exit code (type of error or success).
+ */
+static t_exit_code	save_seal(t_game *game, int row, int col)
+{
+	game->map->cells[row][col] = SEAL;
 	return (SL_OK);
 }

@@ -6,12 +6,12 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:30:00 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/14 19:30:01 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/15 15:20:46 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-# define SO_LONG_H
+#ifndef SO_LONG_BONUS_H
+# define SO_LONG_BONUS_H
 
 # include <errno.h>
 # include "libft.h"
@@ -26,6 +26,7 @@
 # define PENGUIN_CHAR	'P'
 # define FISH_CHAR		'C'
 # define HOME_CHAR		'E'
+# define SEAL_CHAR		'S'
 
 # define MAP_EXTENSION	".ber"
 # define PATH_SEPARATOR	'/'
@@ -37,6 +38,7 @@
 # define ICE_LAYER		1
 # define OBJECTS_LAYER	2
 # define PENGUIN_LAYER	3
+# define SEAL_LAYER	4
 
 # define IMG_ICE			"textures/ice.png"
 # define IMG_WALL			"textures/wall.png"
@@ -49,6 +51,7 @@
 # define IMG_FISH_DEAD		"textures/bones.png"
 # define IMG_HOME_CLOSED	"textures/home_closed.png"
 # define IMG_HOME_OPEN		"textures/home_open.png"
+# define IMG_SEAL			"textures/seal.png"
 
 # define MOVE_MSG	"Moves: %i\n"
 
@@ -86,7 +89,8 @@ typedef enum e_cell
 	ICE		= 1,
 	FISH	= 2,
 	PENGUIN	= 3,
-	HOME	= 4
+	HOME	= 4,
+	SEAL	= 5
 }	t_cell;
 
 typedef enum e_direction
@@ -375,6 +379,14 @@ void			my_key_hook(mlx_key_data_t keydata, void *param);
  * @param param All game information.
  */
 void			my_loop_hook(void *param);
+
+//TODO doc
+/**
+ * @brief 
+ * 
+ * @param game All game information.
+ */
+void			retry(t_game *game);
 
 /**
  * @brief Updates the position and sprite of the penguin in the window.

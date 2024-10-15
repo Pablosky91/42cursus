@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 20:08:49 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/13 11:50:09 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/15 09:18:44 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ static void	draw_cell_2(t_game *game, int row, int col)
 			(int []){row, col, OBJECTS_LAYER, false});
 		id_fish++;
 	}
-	if (game->map->cells[row][col] == HOME)
+	else if (game->map->cells[row][col] == HOME)
 	{
 		create_image(game, &(game->home->closed), IMG_HOME_CLOSED,
 			(int []){row, col, OBJECTS_LAYER, true});
