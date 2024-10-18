@@ -1,7 +1,7 @@
 #VARIABLES
 
 NAME = test.out
-OTHER_PATH = ../Printf
+OTHER_PATH = ..
 
 RM = rm -f
 
@@ -22,11 +22,11 @@ C_LIBRARY = -L $(LIBRARY_PATH) -l $(LIBRARY_NAME)
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS)
-	$(CC) $(CFLAGS) $(C_INCLUDE) $(C_LIBRARY) -o $@ $^ 
+$(NAME): library $(OBJECTS)
+	$(CC) $(OBJECTS) $(CFLAGS) $(C_INCLUDE) $(C_LIBRARY) -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(C_INCLUDE) -o $@ -c $^
+	$(CC) $(CFLAGS) $(C_INCLUDE) $(C_LIBRARY) -o $@ -c $^
 
 clean:
 	$(RM) $(OBJECTS)
@@ -41,10 +41,8 @@ re: fclean all
 library:
 	@$(MAKE) -C $(OTHER_PATH) all
 
-exec: library all
+exec: all
 	@clear
 	@./$(NAME)
-#	@$(MAKE) -s fclean
-#	@$(MAKE) -s -C $(OTHER_PATH) fclean
 
 .PHONY: all clean fclean re library exec

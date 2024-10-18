@@ -6,12 +6,11 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 20:44:11 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:17 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/18 17:08:58 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
-#include <stdarg.h>
 #include "ft_printf.h"
 
 int	main(void)

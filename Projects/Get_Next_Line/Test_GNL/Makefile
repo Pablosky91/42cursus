@@ -1,7 +1,7 @@
 #VARIABLES
 
 NAME = test.out
-OTHER_PATH = ../Get_Next_Line
+OTHER_PATH = ..
 
 RM = rm -f
 
