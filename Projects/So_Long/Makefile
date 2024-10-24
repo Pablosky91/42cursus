@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/10/18 16:13:24 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/10/24 18:01:40 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ MLX_BUILD := $(MLX_PATH)/build
 MLX_NAME := $(MLX_BUILD)/libmlx42.a
 MLX_INCLUDE := $(MLX_PATH)/include/MLX42
 MLX_FLAG := -L $(MLX_BUILD) -l mlx42 -l glfw -l dl -l m -pthread
-
 
 #FILES
 
@@ -84,6 +83,13 @@ BONUS_SRC_DIR := src_bonus/
 BONUS_OBJ_DIR := obj_bonus/
 
 BONUS_SOURCES := \
+				$(addprefix window/,\
+					direction_to_mouse.c\
+					my_cursor_hook.c\
+					my_mouse_hook.c\
+					my_scroll_hook.c\
+					retry.c\
+				)\
 
 BONUS_SOURCES := $(addprefix $(SRC_DIR), $(BONUS_SOURCES))
 BONUS_SOURCES += $(SOURCES)
@@ -233,7 +239,7 @@ error: all
 	-./$(NAME) maps/invalid/no_path.ber
 	@echo
 
-levels: all
+levels: all bonus
 	@echo
 	-./$(NAME) maps/tutorial0.ber
 	@echo
@@ -245,15 +251,19 @@ levels: all
 	@echo
 	-./$(NAME) maps/square0.ber
 	@echo
-	-./$(NAME) maps/square1.ber
+	-./$(BONUS_NAME) maps/square1.ber
+	@echo
+	-./$(BONUS_NAME) maps/tutorial4.ber
+	@echo
+	-./$(BONUS_NAME) maps/labyrinth.ber
 	@echo
 
 n: norminette
 norminette:
-	@echo "norminette src libft | grep Error\n"
-	@if norminette src libft | grep -q "Error"; then echo "$(RED)$$(norminette src libft | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
+	@echo "norminette src src_bonus libft | grep Error\n"
+	@if norminette src src_bonus libft | grep -q "Error"; then echo "$(RED)$$(norminette src_bonus src libft | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
 normi:
-	@if norminette src libft | grep -q "Error"; then echo "\n$(RED)$$(norminette src libft | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
+	@if norminette src src_bonus libft | grep -q "Error"; then echo "\n$(RED)$$(norminette src src_bonus libft | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
 
 #until there's something better: make v CFLAGS=
 v: valgrind

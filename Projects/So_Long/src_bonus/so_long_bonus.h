@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:30:00 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:02:57 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SO_LONG_BONUS_H
 
 # include <errno.h>
+# include <math.h>
 # include "libft.h"
 # include "MLX42.h"
 
@@ -38,7 +39,7 @@
 # define ICE_LAYER		1
 # define OBJECTS_LAYER	2
 # define PENGUIN_LAYER	3
-# define SEAL_LAYER	4
+# define SEAL_LAYER		4
 
 # define IMG_ICE			"textures/ice.png"
 # define IMG_WALL			"textures/wall.png"
@@ -52,6 +53,11 @@
 # define IMG_HOME_CLOSED	"textures/home_closed.png"
 # define IMG_HOME_OPEN		"textures/home_open.png"
 # define IMG_SEAL			"textures/seal.png"
+# define IMG_LOGO			"textures/logo.png"
+# define IMG_CURSOR_N		"textures/cursor_up.png"
+# define IMG_CURSOR_W		"textures/cursor_left.png"
+# define IMG_CURSOR_S		"textures/cursor_down.png"
+# define IMG_CURSOR_E		"textures/cursor_right.png"
 
 # define MOVE_MSG	"Moves: %i\n"
 
@@ -156,6 +162,14 @@ typedef struct s_home
 	bool		exists;
 }	t_home;
 
+typedef struct s_cursor
+{
+	mlx_win_cursor_t	*up;
+	mlx_win_cursor_t	*left;
+	mlx_win_cursor_t	*down;
+	mlx_win_cursor_t	*right;
+}	t_cursor;
+
 typedef struct s_game
 {
 	mlx_t			*mlx;
@@ -164,6 +178,7 @@ typedef struct s_game
 	t_fish			**fishes;
 	t_home			*home;
 	t_path_checker	*checker;
+	t_cursor		*cursor;
 	int				initial_row;
 	int				initial_col;
 	int				quantity_fishes;
@@ -344,6 +359,14 @@ void			valid_path(t_game *game);
 void			create_window(t_game *game);
 
 /**
+ * @brief Calculates the direction from the center of the penguin to the cursor.
+ * 
+ * @param game All game information.
+ * @return The direction from penguin to the cursor.
+ */
+t_direction		direction_to_mouse(t_game *game);
+
+/**
  * @brief Creates the mlx instance, window and all images.
  * 
  * @param game All game information.
@@ -363,6 +386,9 @@ void			init_mlx(t_game *game);
 int				move_penguin(t_game *game,
 					t_direction moving, int32_t x, int32_t y);
 
+//TODO doc
+void			my_cursor_hook(double x_pos, double y_pos, void *param);
+
 /**
  * @brief Function called whenever a key is acted on.
  * It starts the movement based on the input.
@@ -379,6 +405,13 @@ void			my_key_hook(mlx_key_data_t keydata, void *param);
  * @param param All game information.
  */
 void			my_loop_hook(void *param);
+
+//TODO doc
+void			my_mouse_hook(mouse_key_t button,
+					action_t action, modifier_key_t mods, void *param);
+
+//TODO doc
+void			my_scroll_hook(double x_delta, double y_delta, void *param);
 
 //TODO doc
 /**

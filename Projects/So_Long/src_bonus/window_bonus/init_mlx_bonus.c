@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:06 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/22 17:03:26 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,12 @@ static void	draw_cell(t_game *game, int row, int col)
 	if (game->map->cells[row][col] == WALL)
 		create_image(game, &img, IMG_WALL,
 			(int []){row, col, OBJECTS_LAYER, true});
-	else if (game->map->cells[row][col] == PENGUIN)
+	else if (game->map->cells[row][col] == HOME)
 	{
-		game->penguin->y = row * game->img_size;
-		game->penguin->x = col * game->img_size;
-		create_image(game, &(game->penguin->still), IMG_PENGUIN,
-			(int []){row, col, PENGUIN_LAYER, true});
-		create_image(game, &(game->penguin->north), IMG_PENGUIN_N,
-			(int []){row, col, PENGUIN_LAYER, false});
-		create_image(game, &(game->penguin->west), IMG_PENGUIN_W,
-			(int []){row, col, PENGUIN_LAYER, false});
-		create_image(game, &(game->penguin->south), IMG_PENGUIN_S,
-			(int []){row, col, PENGUIN_LAYER, false});
-		create_image(game, &(game->penguin->east), IMG_PENGUIN_E,
-			(int []){row, col, PENGUIN_LAYER, false});
+		create_image(game, &(game->home->closed), IMG_HOME_CLOSED,
+			(int []){row, col, OBJECTS_LAYER, true});
+		create_image(game, &(game->home->open), IMG_HOME_OPEN,
+			(int []){row, col, OBJECTS_LAYER, false});
 	}
 	else if (game->map->cells[row][col] == SEAL)
 		create_image(game, &img, IMG_SEAL,
@@ -85,19 +77,26 @@ static void	draw_cell_2(t_game *game, int row, int col)
 {
 	static int	id_fish = 0;
 
+	if (game->map->cells[row][col] == PENGUIN)
+	{
+		game->penguin->y = row * game->img_size;
+		game->penguin->x = col * game->img_size;
+		create_image(game, &(game->penguin->still), IMG_PENGUIN,
+			(int []){row, col, PENGUIN_LAYER, true});
+		create_image(game, &(game->penguin->north), IMG_PENGUIN_N,
+			(int []){row, col, PENGUIN_LAYER, false});
+		create_image(game, &(game->penguin->west), IMG_PENGUIN_W,
+			(int []){row, col, PENGUIN_LAYER, false});
+		create_image(game, &(game->penguin->south), IMG_PENGUIN_S,
+			(int []){row, col, PENGUIN_LAYER, false});
+		create_image(game, &(game->penguin->east), IMG_PENGUIN_E,
+			(int []){row, col, PENGUIN_LAYER, false});
+	}
 	if (game->map->cells[row][col] == FISH)
 	{
 		create_image(game, &(game->fishes[id_fish]->alive), IMG_FISH_ALIVE,
 			(int []){row, col, OBJECTS_LAYER, true});
-		create_image(game, &(game->fishes[id_fish]->dead), IMG_FISH_DEAD,
-			(int []){row, col, OBJECTS_LAYER, false});
-		id_fish++;
-	}
-	else if (game->map->cells[row][col] == HOME)
-	{
-		create_image(game, &(game->home->closed), IMG_HOME_CLOSED,
-			(int []){row, col, OBJECTS_LAYER, true});
-		create_image(game, &(game->home->open), IMG_HOME_OPEN,
+		create_image(game, &(game->fishes[id_fish++]->dead), IMG_FISH_DEAD,
 			(int []){row, col, OBJECTS_LAYER, false});
 	}
 }

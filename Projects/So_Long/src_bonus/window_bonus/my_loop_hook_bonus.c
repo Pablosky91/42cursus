@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 15:14:04 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/24 17:49:53 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	my_loop_hook(void *param)
 		id_cell = move_penguin(game,
 				game->penguin->facing, game->penguin->x, game->penguin->y);
 	show_penguin(game);
+	my_cursor_hook(0, 0, game);
 	if (id_cell == -1)
 		return ;
 	if (id_cell >= 0)

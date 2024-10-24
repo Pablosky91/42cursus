@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:20 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:02:32 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/22 18:55:22 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,13 @@ void	my_key_hook(mlx_key_data_t keydata, void *param)
 		start_movement(game, EAST);
 }
 
-//TODO doc
+/**
+ * @brief Changes the speed of the penguin.
+ * 0 stands for max speed, and the other number keys as 10 times the percentage.
+ * 
+ * @param keydata All keydata information.
+ * @param game All game information.
+ */
 static void	change_speed(mlx_key_data_t keydata, t_game *game)
 {
 	if (keydata.key == MLX_KEY_0 || keydata.key == MLX_KEY_KP_0)

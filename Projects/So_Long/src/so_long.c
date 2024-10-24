@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:50:28 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/22 19:03:50 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	main(int argc, char **argv)
 	init(&game);
 	read_map(game, argv[1]);
 	init_mlx(game);
-	mlx_loop_hook(game->mlx, &my_loop_hook, game);
 	mlx_key_hook(game->mlx, &my_key_hook, game);
+	mlx_loop_hook(game->mlx, &my_loop_hook, game);
 	mlx_loop(game->mlx);
 	exit_game(game, SL_OK);
 	return (0);
