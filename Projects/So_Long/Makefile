@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/10/24 18:01:40 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/10/24 21:58:22 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ MKDIR := mkdir -p
 NAME := so_long
 BONUS_NAME := so_long_bonus
 
-CC := gcc
+CC := cc
 CFLAGS := -g3 -fsanitize=address -Wall -Wextra -Werror
 
 #INCLUDE
@@ -85,6 +85,7 @@ BONUS_OBJ_DIR := obj_bonus/
 BONUS_SOURCES := \
 				$(addprefix window/,\
 					direction_to_mouse.c\
+					my_close_hook.c\
 					my_cursor_hook.c\
 					my_mouse_hook.c\
 					my_scroll_hook.c\
@@ -270,6 +271,13 @@ v: valgrind
 valgrind: clean $(LIBFT) $(OBJECTS) | $(VALGRIND_DIR)
 	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(NAME)
 	@-valgrind --leak-check=full --show-leak-kinds=all --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ././$(NAME) $(addprefix $(MAP_DIRECTORY), $(addsuffix $(MAP_EXTENSION), $(MAP)))
+	@echo "$(BLUE) $$(grep "ERROR SUMMARY" $(VALGRIND_DIR)/$$(ls valgrind | tail -1))"
+	@$(MAKE) clean
+
+vb: balgrind
+balgrind: clean $(LIBFT) $(BONUS_OBJECTS) | $(VALGRIND_DIR)
+	@$(CC) $(CFLAGS) $(BONUS_OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(BONUS_NAME)
+	@-valgrind --leak-check=full --show-leak-kinds=all --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ././$(BONUS_NAME) $(addprefix $(MAP_DIRECTORY), $(addsuffix $(MAP_EXTENSION), $(MAP)))
 	@echo "$(BLUE) $$(grep "ERROR SUMMARY" $(VALGRIND_DIR)/$$(ls valgrind | tail -1))"
 	@$(MAKE) clean
 

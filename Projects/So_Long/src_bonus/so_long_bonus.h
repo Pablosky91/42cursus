@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:30:00 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/24 18:02:57 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:25:34 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,25 +68,27 @@
 typedef enum e_exit_code
 {
 	SL_OK					= 0,
-	SL_UNKNOWN				= 1,
-	SL_NO_ARGUMENT			= 2,
-	SL_NO_ALLOCATION		= 3,
-	SL_INVALID_EXTENSION	= 4,
-	SL_INEXISTENT_FILE		= 5,
-	SL_FILE_IS_DIRECTORY	= 6,
-	SL_FILE_NO_PERMISSION	= 7,
-	SL_NOT_SURROUNDED		= 8,
-	SL_NOT_RECTANGULAR		= 9,
-	SL_NO_COIN				= 10,
-	SL_NO_PLAYER			= 11,
-	SL_NO_EXIT				= 12,
-	SL_OTHER_CHARACTERS		= 13,
-	SL_NO_VALID_PATH		= 14,
-	SL_MLX_INIT				= 15,
-	SL_MLX_PNG				= 16,
-	SL_MLX_RESIZE			= 17,
-	SL_MLX_PRINT			= 18,
-	SL_MAX_CODE				= 19
+	SL_SURRENDER			= 1,
+	SL_DEATH				= 2,
+	SL_UNKNOWN				= 3,
+	SL_NO_ARGUMENT			= 4,
+	SL_NO_ALLOCATION		= 5,
+	SL_INVALID_EXTENSION	= 6,
+	SL_INEXISTENT_FILE		= 7,
+	SL_FILE_IS_DIRECTORY	= 8,
+	SL_FILE_NO_PERMISSION	= 9,
+	SL_NOT_SURROUNDED		= 10,
+	SL_NOT_RECTANGULAR		= 11,
+	SL_NO_COIN				= 12,
+	SL_NO_PLAYER			= 13,
+	SL_NO_EXIT				= 14,
+	SL_OTHER_CHARACTERS		= 15,
+	SL_NO_VALID_PATH		= 16,
+	SL_MLX_INIT				= 17,
+	SL_MLX_PNG				= 18,
+	SL_MLX_RESIZE			= 19,
+	SL_MLX_PRINT			= 20,
+	SL_MAX_CODE				= 21
 }	t_exit_code;
 
 typedef enum e_cell
@@ -385,6 +387,9 @@ void			init_mlx(t_game *game);
  */
 int				move_penguin(t_game *game,
 					t_direction moving, int32_t x, int32_t y);
+
+//TODO doc
+void			my_close_hook(void *param);
 
 //TODO doc
 void			my_cursor_hook(double x_pos, double y_pos, void *param);

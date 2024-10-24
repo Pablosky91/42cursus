@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:20 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/22 18:55:22 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/24 18:35:24 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	my_key_hook(mlx_key_data_t keydata, void *param)
 	if (keydata.action != MLX_PRESS)
 		return ;
 	if (keydata.key == MLX_KEY_ESCAPE)
-		exit_game(game, SL_OK);
+		exit_game(game, SL_SURRENDER);
 	if (keydata.key == MLX_KEY_R)
 		retry(game);
 	change_speed(keydata, game);

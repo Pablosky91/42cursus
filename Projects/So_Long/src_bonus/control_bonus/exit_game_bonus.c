@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/24 21:26:40 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
  * @brief Array with the descriptions of the exit codes.
  */
 static const char	*g_message[SL_MAX_CODE] = {
-	"",
+	"You won after %s seconds\n",
+	"You gave up after %s seconds\n",
+	"You died after %s seconds\n",
 	"Error\nUnknown error happened during the execution\n",
 	"Error\nThe program takes as parameter a map description file\n",
 	"Error\nCould not allocate memory\n",
@@ -39,7 +41,19 @@ static const char	*g_message[SL_MAX_CODE] = {
 
 void	exit_game(t_game *game, t_exit_code exit_code)
 {
-	ft_printf(g_message[exit_code]);
+	char	*time;
+
+	if (exit_code <= SL_DEATH)
+	{
+		time = ft_dtoa(mlx_get_time(), 2);
+		if (!time)
+			exit_game(game, SL_NO_ALLOCATION);
+		ft_printf(g_message[exit_code], time);
+		free(time);
+		exit_code = SL_OK;
+	}
+	else
+		ft_printf(g_message[exit_code]);
 	free_game(game);
 	exit(exit_code);
 }
