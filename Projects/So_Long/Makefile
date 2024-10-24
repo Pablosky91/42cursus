@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/10/24 21:58:22 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/10/25 00:20:24 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ MKDIR := mkdir -p
 NAME := so_long
 BONUS_NAME := so_long_bonus
 
-CC := cc
+CC := gcc
 CFLAGS := -g3 -fsanitize=address -Wall -Wextra -Werror
 
 #INCLUDE
@@ -37,6 +37,13 @@ MLX_FLAG := -L $(MLX_BUILD) -l mlx42 -l glfw -l dl -l m -pthread
 
 #FILES
 
+DIRECTORIES :=	\
+				control\
+				hook\
+				parse\
+				pathing\
+				window\
+
 SRC_DIR := src/
 OBJ_DIR := obj/
 
@@ -47,6 +54,10 @@ SOURCES :=	\
 				free_game.c\
 				free_status.c\
 				)\
+			$(addprefix hook/,\
+				my_key_hook.c\
+				my_loop_hook.c\
+			)\
 			$(addprefix parse/,\
 				check_extension.c\
 				get_info_map.c\
@@ -68,8 +79,6 @@ SOURCES :=	\
 				create_window.c\
 				init_mlx.c\
 				move_penguin.c\
-				my_key_hook.c\
-				my_loop_hook.c\
 				show_penguin.c\
 				start_movement.c\
 				)\
@@ -83,12 +92,14 @@ BONUS_SRC_DIR := src_bonus/
 BONUS_OBJ_DIR := obj_bonus/
 
 BONUS_SOURCES := \
-				$(addprefix window/,\
-					direction_to_mouse.c\
+				$(addprefix hook/,\
 					my_close_hook.c\
 					my_cursor_hook.c\
 					my_mouse_hook.c\
 					my_scroll_hook.c\
+				)\
+				$(addprefix window/,\
+					direction_to_mouse.c\
 					retry.c\
 				)\
 
@@ -126,10 +137,6 @@ VALGRIND_DIR := valgrind/
 a: all
 all: $(NAME)
 
-test:
-	echo $(BONUS_SOURCES)
-	echo $(BONUS_OBJECTS)
-
 $(NAME): $(LIBFT) $(MLX_NAME) $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(NAME)
 
@@ -146,11 +153,7 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(LIBFT_FLAG) -I $(SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -c $^ -o $@
 
 $(OBJ_DIR):
-	$(MKDIR) $(OBJ_DIR)
-	$(MKDIR) $(OBJ_DIR)control
-	$(MKDIR) $(OBJ_DIR)parse
-	$(MKDIR) $(OBJ_DIR)pathing
-	$(MKDIR) $(OBJ_DIR)window
+	$(MKDIR) $(addprefix $(OBJ_DIR),$(DIRECTORIES))
 
 c: clean
 clean: msg_clean_start
@@ -179,11 +182,7 @@ $(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c | $(BONUS_OBJ_DIR)
 	$(CC) $(CFLAGS) $(LIBFT_FLAG) -I $(BONUS_SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -c $^ -o $@
 
 $(BONUS_OBJ_DIR):
-	$(MKDIR) $(BONUS_OBJ_DIR)
-	$(MKDIR) $(BONUS_OBJ_DIR)control_bonus
-	$(MKDIR) $(BONUS_OBJ_DIR)parse_bonus
-	$(MKDIR) $(BONUS_OBJ_DIR)pathing_bonus
-	$(MKDIR) $(BONUS_OBJ_DIR)window_bonus
+	$(MKDIR) $(addprefix $(BONUS_OBJ_DIR),$(addsuffix _bonus,$(DIRECTORIES)))
 
 #EXTRA RULES
 

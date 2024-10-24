@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/24 22:26:09 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/24 22:26:33 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,6 @@ static void	enter_home(t_game *game)
  */
 static void	enemy(t_game *game)
 {
+	//retry(game);
 	exit_game(game, SL_DEATH);
 }
