@@ -27,6 +27,7 @@ void	my_loop_hook(void *param)
 		id_cell = move_penguin(game,
 				game->penguin->facing, game->penguin->x, game->penguin->y);
 	show_penguin(game);
+	game->frame++;
 	my_cursor_hook(0, 0, game);
 	if (id_cell == -1)
 		return ;

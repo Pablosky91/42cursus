@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:30:00 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/24 22:25:34 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/29 20:25:21 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,16 @@
 
 # define IMG_ICE			"textures/ice.png"
 # define IMG_WALL			"textures/wall.png"
-# define IMG_PENGUIN		"textures/penguin.png"
+# define IMG_PENGUIN_0		"textures/penguin_0.png"
+# define IMG_PENGUIN_1		"textures/penguin_1.png"
 # define IMG_PENGUIN_N		"textures/slide_up.png"
+# define IMG_PENGUIN_N_1	"textures/slide_up_1.png"
 # define IMG_PENGUIN_W		"textures/slide_left.png"
+# define IMG_PENGUIN_W_1	"textures/slide_left_1.png"
 # define IMG_PENGUIN_S		"textures/slide_down.png"
+# define IMG_PENGUIN_S_1	"textures/slide_down_1.png"
 # define IMG_PENGUIN_E		"textures/slide_right.png"
+# define IMG_PENGUIN_E_1	"textures/slide_right_1.png"
 # define IMG_FISH_ALIVE		"textures/fish.png"
 # define IMG_FISH_DEAD		"textures/bones.png"
 # define IMG_HOME_CLOSED	"textures/home_closed.png"
@@ -131,10 +136,15 @@ typedef struct s_path_checker
 typedef struct s_penguin
 {
 	mlx_image_t	*still;
+	mlx_image_t	*still_1;
 	mlx_image_t	*north;
+	mlx_image_t	*north_1;
 	mlx_image_t	*west;
+	mlx_image_t	*west_1;
 	mlx_image_t	*south;
+	mlx_image_t	*south_1;
 	mlx_image_t	*east;
+	mlx_image_t	*east_1;
 	t_direction	facing;
 	int32_t		x;
 	int32_t		y;
@@ -188,6 +198,7 @@ typedef struct s_game
 	int				moves;
 	int				img_size;
 	int				speed;
+	int				frame;
 }	t_game;
 
 /******************************************************************************/
