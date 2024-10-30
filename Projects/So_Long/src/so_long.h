@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:07:12 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@
 
 # define IMG_ICE			"textures/ice.png"
 # define IMG_WALL			"textures/wall.png"
-# define IMG_PENGUIN		"textures/penguin.png"
-# define IMG_PENGUIN_N		"textures/slide_up.png"
-# define IMG_PENGUIN_W		"textures/slide_left.png"
-# define IMG_PENGUIN_S		"textures/slide_down.png"
-# define IMG_PENGUIN_E		"textures/slide_right.png"
+# define IMG_PENGUIN		"textures/penguin_a.png"
+# define IMG_PENGUIN_N		"textures/penguin_up_a.png"
+# define IMG_PENGUIN_W		"textures/penguin_left_a.png"
+# define IMG_PENGUIN_S		"textures/penguin_down_a.png"
+# define IMG_PENGUIN_E		"textures/penguin_right_a.png"
 # define IMG_FISH_ALIVE		"textures/fish.png"
 # define IMG_FISH_DEAD		"textures/bones.png"
 # define IMG_HOME_CLOSED	"textures/home_closed.png"

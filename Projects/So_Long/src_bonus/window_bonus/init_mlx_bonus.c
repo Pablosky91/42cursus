@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:06 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/29 20:08:52 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/30 11:06:40 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,25 +81,25 @@ static void	draw_cell_2(t_game *game, int row, int col)
 	{
 		game->penguin->y = row * game->img_size;
 		game->penguin->x = col * game->img_size;
-		create_image(game, &(game->penguin->still), IMG_PENGUIN_0,
+		create_image(game, &(game->penguin->still_a), IMG_PENGUIN_A,
 			(int []){row, col, PENGUIN_LAYER, true});
-		create_image(game, &(game->penguin->still_1), IMG_PENGUIN_1,
+		create_image(game, &(game->penguin->still_b), IMG_PENGUIN_B,
 			(int []){row, col, PENGUIN_LAYER, true});
-		create_image(game, &(game->penguin->north), IMG_PENGUIN_N,
+		create_image(game, &(game->penguin->north_a), IMG_PENGUIN_N_A,
 			(int []){row, col, PENGUIN_LAYER, false});
-		create_image(game, &(game->penguin->north_1), IMG_PENGUIN_N_1,
+		create_image(game, &(game->penguin->north_b), IMG_PENGUIN_N_B,
 			(int []){row, col, PENGUIN_LAYER, false});
-		create_image(game, &(game->penguin->west), IMG_PENGUIN_W,
+		create_image(game, &(game->penguin->west_a), IMG_PENGUIN_W_A,
 			(int []){row, col, PENGUIN_LAYER, false});
-		create_image(game, &(game->penguin->west_1), IMG_PENGUIN_W_1,
+		create_image(game, &(game->penguin->west_b), IMG_PENGUIN_W_B,
 			(int []){row, col, PENGUIN_LAYER, false});
-		create_image(game, &(game->penguin->south), IMG_PENGUIN_S,
+		create_image(game, &(game->penguin->south_a), IMG_PENGUIN_S_A,
 			(int []){row, col, PENGUIN_LAYER, false});
-		create_image(game, &(game->penguin->south_1), IMG_PENGUIN_S_1,
+		create_image(game, &(game->penguin->south_b), IMG_PENGUIN_S_B,
 			(int []){row, col, PENGUIN_LAYER, false});
-		create_image(game, &(game->penguin->east), IMG_PENGUIN_E,
+		create_image(game, &(game->penguin->east_a), IMG_PENGUIN_E_A,
 			(int []){row, col, PENGUIN_LAYER, false});
-		create_image(game, &(game->penguin->east_1), IMG_PENGUIN_E_1,
+		create_image(game, &(game->penguin->east_b), IMG_PENGUIN_E_B,
 			(int []){row, col, PENGUIN_LAYER, false});
 	}
 	if (game->map->cells[row][col] == FISH)
