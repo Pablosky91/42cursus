@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 17:55:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/01 17:53:33 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,6 @@ static void	show_sprite(t_game *game, mlx_image_t *image);
 
 void	show_penguin(t_game *game)
 {
-	game->penguin->still->enabled = false;
-	game->penguin->north->enabled = false;
-	game->penguin->west->enabled = false;
-	game->penguin->south->enabled = false;
-	game->penguin->east->enabled = false;
 	if (game->penguin->facing == STILL)
 		show_sprite(game, game->penguin->still);
 	else if (game->penguin->facing == NORTH)
@@ -41,7 +36,9 @@ void	show_penguin(t_game *game)
  */
 static void	show_sprite(t_game *game, mlx_image_t *image)
 {
+	game->penguin->showing->enabled = false;
 	image->instances[0].x = game->penguin->x;
 	image->instances[0].y = game->penguin->y;
 	image->enabled = true;
+	game->penguin->showing = image;
 }

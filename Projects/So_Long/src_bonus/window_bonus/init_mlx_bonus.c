@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:06 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/01 13:20:39 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/01 17:44:01 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ static void	draw_cell_2(t_game *game, int row, int col)
 			(int []){row, col, PENGUIN_LAYER, false});
 		create_image(game, &(game->penguin->east_b), IMG_PENGUIN_E_B,
 			(int []){row, col, PENGUIN_LAYER, false});
+		game->penguin->showing = game->penguin->still_a;
 	}
 	if (game->map->cells[row][col] == FISH)
 	{

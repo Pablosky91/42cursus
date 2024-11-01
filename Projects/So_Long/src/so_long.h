@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/01 14:54:15 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/01 17:46:37 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef struct s_penguin
 	mlx_image_t	*west;
 	mlx_image_t	*south;
 	mlx_image_t	*east;
+	mlx_image_t	*showing;
 	t_direction	facing;
 	int32_t		x;
 	int32_t		y;
