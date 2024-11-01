@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/11/01 13:17:49 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/11/02 00:29:18 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,7 +76,7 @@ SOURCES :=	\
 				valid_path.c\
 				)\
 			$(addprefix window/,\
-				create_window.c\
+				draw_cell.c\
 				init_mlx.c\
 				move_penguin.c\
 				show_penguin.c\
@@ -284,6 +284,8 @@ levels: all bonus
 	@echo
 	-./$(BONUS_NAME) maps/labyrinth.ber
 	@echo
+
+run: levels fclean
 
 n: norminette
 norminette:

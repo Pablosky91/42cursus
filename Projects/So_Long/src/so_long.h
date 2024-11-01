@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/01 17:46:37 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/02 00:43:32 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,27 @@ void			free_game(t_game *game);
 void			free_status(t_status_node *status);
 
 /******************************************************************************/
+/*                              FUNCTIONS - HOOK                              */
+/******************************************************************************/
+
+/**
+ * @brief Function called whenever a key is acted on.
+ * It starts the movement based on the input.
+ * 
+ * @param keydata All keydata information.
+ * @param param All game information.
+ */
+void			my_key_hook(mlx_key_data_t keydata, void *param);
+
+/**
+ * @brief Function called every frame of the game.
+ * It moves and shows the penguin and checks for fishes and the home.
+ * 
+ * @param param All game information.
+ */
+void			my_loop_hook(void *param);
+
+/******************************************************************************/
 /*                             FUNCTIONS - PARSE                              */
 /******************************************************************************/
 
@@ -333,11 +354,13 @@ void			valid_path(t_game *game);
 /******************************************************************************/
 
 /**
- * @brief Creates a window to display the game.
+ * @brief Prints an image corresponding to the cell type.
  * 
  * @param game All game information.
+ * @param row The row of the map to print.
+ * @param col The column of the map to print.
  */
-void			create_window(t_game *game);
+void			draw_cell(t_game *game, int row, int col);
 
 /**
  * @brief Creates the mlx instance, window and all images.
@@ -358,23 +381,6 @@ void			init_mlx(t_game *game);
  */
 int				move_penguin(t_game *game,
 					t_direction moving, int32_t x, int32_t y);
-
-/**
- * @brief Function called whenever a key is acted on.
- * It starts the movement based on the input.
- * 
- * @param keydata All keydata information.
- * @param param All game information.
- */
-void			my_key_hook(mlx_key_data_t keydata, void *param);
-
-/**
- * @brief Function called every frame of the game.
- * It moves and shows the penguin and checks for fishes and the home.
- * 
- * @param param All game information.
- */
-void			my_loop_hook(void *param);
 
 /**
  * @brief Updates the position and sprite of the penguin in the window.
