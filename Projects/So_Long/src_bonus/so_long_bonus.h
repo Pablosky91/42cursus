@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:30:00 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/01 13:22:09 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/01 14:51:52 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,6 +166,8 @@ typedef struct s_map
 	t_cell	**cells;
 	int		width;
 	int		height;
+	int		initial_row;
+	int		initial_col;
 }	t_map;
 
 typedef struct s_fish
@@ -182,7 +184,6 @@ typedef struct s_home
 {
 	mlx_image_t	*open;
 	mlx_image_t	*closed;
-	bool		exists;
 }	t_home;
 
 typedef struct s_cursor
@@ -213,8 +214,6 @@ typedef struct s_game
 	t_path_checker	*checker;
 	t_cursor		*cursor;
 	t_counter		*counter;
-	int				initial_row;
-	int				initial_col;
 	int				quantity_fishes;
 	int				collected_fishes;
 	int				moves;

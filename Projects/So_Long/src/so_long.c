@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 18:50:28 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/22 19:03:50 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/01 14:56:31 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,4 @@ static void	init(t_game **game)
 	(*game)->map = ft_calloc(1, sizeof(t_map));
 	if (!((*game)->map))
 		exit_game(*game, SL_NO_ALLOCATION);
-	(*game)->penguin = ft_calloc(1, sizeof(t_penguin));
-	if (!((*game)->penguin))
-		exit_game(*game, SL_NO_ALLOCATION);
-	(*game)->home = ft_calloc(1, sizeof(t_home));
-	if (!((*game)->home))
-		exit_game(*game, SL_NO_ALLOCATION);
-	(*game)->initial_row = -1;
-	(*game)->initial_col = -1;
 }

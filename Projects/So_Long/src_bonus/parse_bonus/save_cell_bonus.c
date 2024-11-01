@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:27:32 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/01 14:46:20 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,13 @@ static t_exit_code	save_fish(t_game *game, int row, int col)
  */
 static t_exit_code	save_penguin(t_game *game, int row, int col)
 {
-	if (game->initial_row != -1 || game->initial_col != -1)
+	if (game->penguin)
 		return (SL_NO_PLAYER);
-	game->initial_row = row;
-	game->initial_col = col;
+	game->penguin = ft_calloc(1, sizeof(t_penguin));
+	if (!game->penguin)
+		exit_game(game, SL_NO_ALLOCATION);
+	game->map->initial_row = row;
+	game->map->initial_col = col;
 	game->map->cells[row][col] = PENGUIN;
 	return (SL_OK);
 }
@@ -90,10 +93,12 @@ static t_exit_code	save_penguin(t_game *game, int row, int col)
  */
 static t_exit_code	save_home(t_game *game, int row, int col)
 {
-	if (game->home->exists)
+	if (game->home)
 		return (SL_NO_EXIT);
+	game->home = ft_calloc(1, sizeof(t_home));
+	if (!game->home)
+		exit_game(game, SL_NO_ALLOCATION);
 	game->map->cells[row][col] = HOME;
-	game->home->exists = true;
 	return (SL_OK);
 }
 

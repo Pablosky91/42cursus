@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:28:41 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 14:49:08 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/01 14:59:26 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	valid_path(t_game *game)
 	game->checker = ft_calloc(1, sizeof(t_path_checker));
 	if (!game->checker)
 		exit_game(game, SL_NO_ALLOCATION);
-	add_node(game, create_node(game, game->initial_row, game->initial_col));
+	add_node(game,
+		create_node(game, game->map->initial_row, game->map->initial_col));
 	if (!check_path(game, game->checker->head))
 		exit_game(game, SL_NO_VALID_PATH);
 }

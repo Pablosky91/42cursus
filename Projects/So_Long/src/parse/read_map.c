@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/27 11:46:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/01 14:57:13 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	read_map(t_game *game, char *path)
 		exit_game(game, SL_NO_ALLOCATION);
 	save_map(game, buffer, fd);
 	free(buffer);
-	if (game->initial_row == -1 || game->initial_col == -1)
+	if (!game->penguin)
 		exit_game(game, SL_NO_PLAYER);
-	if (!game->home->exists)
+	if (!game->home)
 		exit_game(game, SL_NO_EXIT);
 	valid_path(game);
 }
