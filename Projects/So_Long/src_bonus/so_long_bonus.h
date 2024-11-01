@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:30:00 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/30 11:06:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/01 13:22:09 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,27 @@
 # define FRAMES_PENGUIN_MOVING	10
 
 # define IMG_ICE			"textures/ice.png"
-# define IMG_WALL			"textures/wall.png"
-# define IMG_PENGUIN_A		"textures/penguin_a.png"
-# define IMG_PENGUIN_B		"textures/penguin_b.png"
-# define IMG_PENGUIN_N_A	"textures/penguin_up_a.png"
-# define IMG_PENGUIN_N_B	"textures/penguin_up_b.png"
-# define IMG_PENGUIN_W_A	"textures/penguin_left_a.png"
-# define IMG_PENGUIN_W_B	"textures/penguin_left_b.png"
-# define IMG_PENGUIN_S_A	"textures/penguin_down_a.png"
-# define IMG_PENGUIN_S_B	"textures/penguin_down_b.png"
-# define IMG_PENGUIN_E_A	"textures/penguin_right_a.png"
-# define IMG_PENGUIN_E_B	"textures/penguin_right_b.png"
+# define IMG_WALL			"textures/wall/wall.png"
+# define IMG_WALL_0			"textures/wall/wall_0.png"
+# define IMG_WALL_1			"textures/wall/wall_1.png"
+# define IMG_WALL_2			"textures/wall/wall_2.png"
+# define IMG_WALL_3			"textures/wall/wall_3.png"
+# define IMG_WALL_4			"textures/wall/wall_4.png"
+# define IMG_WALL_5			"textures/wall/wall_5.png"
+# define IMG_WALL_6			"textures/wall/wall_6.png"
+# define IMG_WALL_7			"textures/wall/wall_7.png"
+# define IMG_WALL_8			"textures/wall/wall_8.png"
+# define IMG_WALL_9			"textures/wall/wall_9.png"
+# define IMG_PENGUIN_A		"textures/penguin/penguin_a.png"
+# define IMG_PENGUIN_B		"textures/penguin/penguin_b.png"
+# define IMG_PENGUIN_N_A	"textures/penguin/penguin_up_a.png"
+# define IMG_PENGUIN_N_B	"textures/penguin/penguin_up_b.png"
+# define IMG_PENGUIN_W_A	"textures/penguin/penguin_left_a.png"
+# define IMG_PENGUIN_W_B	"textures/penguin/penguin_left_b.png"
+# define IMG_PENGUIN_S_A	"textures/penguin/penguin_down_a.png"
+# define IMG_PENGUIN_S_B	"textures/penguin/penguin_down_b.png"
+# define IMG_PENGUIN_E_A	"textures/penguin/penguin_right_a.png"
+# define IMG_PENGUIN_E_B	"textures/penguin/penguin_right_b.png"
 # define IMG_FISH_ALIVE		"textures/fish.png"
 # define IMG_FISH_DEAD		"textures/bones.png"
 # define IMG_HOME_CLOSED	"textures/home_closed.png"
@@ -66,8 +76,6 @@
 # define IMG_CURSOR_W		"textures/cursor_left.png"
 # define IMG_CURSOR_S		"textures/cursor_down.png"
 # define IMG_CURSOR_E		"textures/cursor_right.png"
-
-# define MOVE_MSG	"Moves: %i\n"
 
 /******************************************************************************/
 /*                                   ENUMS                                    */
@@ -185,6 +193,16 @@ typedef struct s_cursor
 	mlx_win_cursor_t	*right;
 }	t_cursor;
 
+typedef struct s_counter
+{
+	mlx_image_t	*units[10];
+	mlx_image_t	*tens[10];
+	mlx_image_t	*hundreds[10];
+	int			units_show;
+	int			tens_show;
+	int			hundreds_show;
+}	t_counter;
+
 typedef struct s_game
 {
 	mlx_t			*mlx;
@@ -194,6 +212,7 @@ typedef struct s_game
 	t_home			*home;
 	t_path_checker	*checker;
 	t_cursor		*cursor;
+	t_counter		*counter;
 	int				initial_row;
 	int				initial_col;
 	int				quantity_fishes;
@@ -431,6 +450,9 @@ void			my_mouse_hook(mouse_key_t button,
 
 //TODO doc
 void			my_scroll_hook(double x_delta, double y_delta, void *param);
+
+//TODO doc
+void			refresh_counter(t_game *game, int moves);
 
 //TODO doc
 /**

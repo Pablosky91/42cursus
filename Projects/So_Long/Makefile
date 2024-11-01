@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/10/25 00:20:24 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/11/01 13:17:49 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -100,6 +100,7 @@ BONUS_SOURCES := \
 				)\
 				$(addprefix window/,\
 					direction_to_mouse.c\
+					refresh_counter.c\
 					retry.c\
 				)\
 
@@ -198,46 +199,72 @@ exec: all
 rexec: re exec
 
 error: all
-	@echo
-	-./$(NAME)
-	@echo
-	-./$(NAME) maps/invalid/.ber
-	@echo
-	-./$(NAME) maps/invalid/no_extension
-	@echo
-	-./$(NAME) maps/invalid/other_extension.txt
-	@echo
-	-./$(NAME) maps/invalid/no_file.ber
-	@echo
-	mkdir -p  maps/invalid/directory.ber
-	-./$(NAME) maps/invalid/directory.ber
-	@echo
-	chmod 000 maps/invalid/change_permissions.ber
-	-./$(NAME) maps/invalid/change_permissions.ber
-	@chmod 644 maps/invalid/change_permissions.ber
-	@echo
-	-./$(NAME) maps/invalid/empty.ber
-	@echo
-	-./$(NAME) maps/invalid/not_surrounded.ber
-	@echo
-	-./$(NAME) maps/invalid/not_rectangular0.ber
-	@echo
-	-./$(NAME) maps/invalid/not_rectangular1.ber
-	@echo
-	-./$(NAME) maps/invalid/no_collectibles.ber
-	@echo
-	-./$(NAME) maps/invalid/no_starting_position.ber
-	@echo
-	-./$(NAME) maps/invalid/two_starting_positions.ber
-	@echo
-	-./$(NAME) maps/invalid/no_exit.ber
-	@echo
-	-./$(NAME) maps/invalid/two_exits.ber
-	@echo
-	-./$(NAME) maps/invalid/other_characters.ber
-	@echo
-	-./$(NAME) maps/invalid/no_path.ber
-	@echo
+	@echo "\nMap:"
+	@./$(NAME) || true
+
+	@echo "\nMap: maps/invalid/.ber"
+	@cat maps/invalid/.ber && echo
+	@./$(NAME) maps/invalid/.ber || true
+
+	@echo "\nMap: maps/invalid/no_extension"
+	@cat maps/invalid/no_extension && echo
+	@./$(NAME) maps/invalid/no_extension || true
+
+	@echo "\nMap: maps/invalid/other_extension.txt"
+	@cat maps/invalid/other_extension.txt && echo
+	@./$(NAME) maps/invalid/other_extension.txt || true
+
+	@echo "\nMap: maps/invalid/no_file.ber"
+	@./$(NAME) maps/invalid/no_file.ber || true
+
+	@echo "\nMap: maps/invalid/directory.ber"
+	@$(MKDIR) maps/invalid/directory.ber
+	@./$(NAME) maps/invalid/directory.ber || true
+
+	@echo "\nMap: maps/invalid/no_permissions.ber"
+	@chmod 000 maps/invalid/no_permissions.ber
+	@./$(NAME) maps/invalid/no_permissions.ber || true
+	@chmod 644 maps/invalid/no_permissions.ber
+
+	@echo "\nMap: maps/invalid/empty.ber"
+	@cat maps/invalid/empty.ber && echo
+	@./$(NAME) maps/invalid/empty.ber || true
+
+	@echo "\nMap: maps/invalid/not_surrounded.ber"
+	@cat maps/invalid/not_surrounded.ber && echo
+	@./$(NAME) maps/invalid/not_surrounded.ber || true
+
+	@echo "\nMap: maps/invalid/not_rectangular0.ber"
+	@cat maps/invalid/not_rectangular0.ber && echo
+	@./$(NAME) maps/invalid/not_rectangular0.ber || true
+
+	@echo "\nMap: maps/invalid/not_rectangular1.ber"
+	@cat maps/invalid/not_rectangular1.ber && echo
+	@./$(NAME) maps/invalid/not_rectangular1.ber || true
+
+	@echo "\nMap: maps/invalid/no_collectibles.ber"
+	@cat maps/invalid/no_collectibles.ber && echo
+	@./$(NAME) maps/invalid/no_collectibles.ber || true
+
+	@echo "\nMap: maps/invalid/no_starting_position.ber"
+	@cat maps/invalid/no_starting_position.ber && echo
+	@./$(NAME) maps/invalid/no_starting_position.ber || true
+
+	@echo "\nMap: maps/invalid/two_starting_positions.ber"
+	@cat maps/invalid/two_starting_positions.ber && echo
+	@./$(NAME) maps/invalid/two_starting_positions.ber || true
+
+	@echo "\nMap: maps/invalid/no_exit.ber"
+	@cat maps/invalid/no_exit.ber && echo
+	@./$(NAME) maps/invalid/no_exit.ber || true
+
+	@echo "\nMap: maps/invalid/two_exits.ber"
+	@cat maps/invalid/two_exits.ber && echo
+	@./$(NAME) maps/invalid/two_exits.ber || true
+
+	@echo "\nMap: maps/invalid/other_characters.ber"
+	@cat maps/invalid/other_characters.ber && echo
+	@./$(NAME) maps/invalid/other_characters.ber || true
 
 levels: all bonus
 	@echo

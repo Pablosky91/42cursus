@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/01 13:08:36 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,5 @@ void	start_movement(t_game *game, t_direction direction)
 	if (get_cell_by(game, row, col, direction) == WALL)
 		return ;
 	game->penguin->facing = direction;
-	ft_printf(MOVE_MSG, ++game->moves);
+	refresh_counter(game, ++game->moves);
 }

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:06 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/30 11:06:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/01 13:20:39 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,46 @@ void	init_mlx(t_game *game)
 	}
 }
 
+void	extra(t_game *game, int row, int col, mlx_image_t **numbers)
+{
+	create_image(game, &(numbers[0]), IMG_WALL_0,
+		(int []){row, col, OBJECTS_LAYER, true});
+	create_image(game, &(numbers[1]), IMG_WALL_1,
+		(int []){row, col, OBJECTS_LAYER, false});
+	create_image(game, &(numbers[2]), IMG_WALL_2,
+		(int []){row, col, OBJECTS_LAYER, false});
+	create_image(game, &(numbers[3]), IMG_WALL_3,
+		(int []){row, col, OBJECTS_LAYER, false});
+	create_image(game, &(numbers[4]), IMG_WALL_4,
+		(int []){row, col, OBJECTS_LAYER, false});
+	create_image(game, &(numbers[5]), IMG_WALL_5,
+		(int []){row, col, OBJECTS_LAYER, false});
+	create_image(game, &(numbers[6]), IMG_WALL_6,
+		(int []){row, col, OBJECTS_LAYER, false});
+	create_image(game, &(numbers[7]), IMG_WALL_7,
+		(int []){row, col, OBJECTS_LAYER, false});
+	create_image(game, &(numbers[8]), IMG_WALL_8,
+		(int []){row, col, OBJECTS_LAYER, false});
+	create_image(game, &(numbers[9]), IMG_WALL_9,
+		(int []){row, col, OBJECTS_LAYER, false});
+}
+
+//TODO wall function
+void	draw_wall(t_game *game, int row, int col)
+{
+	mlx_image_t	*img;
+
+	if (row == 0 && col == game->map->width - 1)
+		extra(game, row, col, game->counter->units);
+	if (row == 0 && col == game->map->width - 2)
+		extra(game, row, col, game->counter->tens);
+	if (row == 0 && col == game->map->width - 3)
+		extra(game, row, col, game->counter->hundreds);
+	else
+		create_image(game, &img, IMG_WALL,
+			(int []){row, col, OBJECTS_LAYER, true});
+}
+
 /**
  * @brief Prints an image corresponding to the cell type.
  * 
@@ -50,8 +90,7 @@ static void	draw_cell(t_game *game, int row, int col)
 	create_image(game, &img, IMG_ICE,
 		(int []){row, col, ICE_LAYER, true});
 	if (game->map->cells[row][col] == WALL)
-		create_image(game, &img, IMG_WALL,
-			(int []){row, col, OBJECTS_LAYER, true});
+		draw_wall(game, row, col);
 	else if (game->map->cells[row][col] == HOME)
 	{
 		create_image(game, &(game->home->closed), IMG_HOME_CLOSED,

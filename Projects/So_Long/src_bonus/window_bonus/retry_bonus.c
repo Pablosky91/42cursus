@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 15:18:55 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 15:12:16 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/01 13:11:48 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,5 @@ void	retry(t_game *game)
 	game->home->closed->enabled = true;
 	game->home->open->enabled = false;
 	game->moves = 0;
-	ft_printf("---------\n");
+	refresh_counter(game, game->moves);
 }

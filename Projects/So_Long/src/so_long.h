@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/30 11:07:12 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/10/30 20:05:46 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@
 # define PENGUIN_LAYER	3
 
 # define IMG_ICE			"textures/ice.png"
-# define IMG_WALL			"textures/wall.png"
-# define IMG_PENGUIN		"textures/penguin_a.png"
-# define IMG_PENGUIN_N		"textures/penguin_up_a.png"
-# define IMG_PENGUIN_W		"textures/penguin_left_a.png"
-# define IMG_PENGUIN_S		"textures/penguin_down_a.png"
-# define IMG_PENGUIN_E		"textures/penguin_right_a.png"
+# define IMG_WALL			"textures/wall/wall.png"
+# define IMG_PENGUIN		"textures/penguin/penguin_a.png"
+# define IMG_PENGUIN_N		"textures/penguin/penguin_up_a.png"
+# define IMG_PENGUIN_W		"textures/penguin/penguin_left_a.png"
+# define IMG_PENGUIN_S		"textures/penguin/penguin_down_a.png"
+# define IMG_PENGUIN_E		"textures/penguin/penguin_right_a.png"
 # define IMG_FISH_ALIVE		"textures/fish.png"
 # define IMG_FISH_DEAD		"textures/bones.png"
 # define IMG_HOME_CLOSED	"textures/home_closed.png"
