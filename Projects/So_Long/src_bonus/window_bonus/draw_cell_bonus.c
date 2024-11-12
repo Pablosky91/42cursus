@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 23:10:27 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/02 00:52:09 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:33:33 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,12 @@ static void	create_image(t_game *game,
 	texture = mlx_load_png(path);
 	if (!texture)
 		exit_game(game, SL_MLX_PNG);
+	if ((int) texture->height > game->img_size
+		|| (int) texture->width > game->img_size)
+	{
+		mlx_delete_texture(texture);
+		exit_game(game, SL_BIG_MAP);
+	}
 	*img = mlx_texture_to_image(game->mlx, texture);
 	mlx_delete_texture(texture);
 	if (!mlx_resize_image(*img, game->img_size, game->img_size))

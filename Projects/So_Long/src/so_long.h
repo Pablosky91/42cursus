@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/02 00:43:32 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:35:38 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,12 @@ typedef enum e_exit_code
 	SL_NO_EXIT				= 12,
 	SL_OTHER_CHARACTERS		= 13,
 	SL_NO_VALID_PATH		= 14,
-	SL_MLX_INIT				= 15,
-	SL_MLX_PNG				= 16,
-	SL_MLX_RESIZE			= 17,
-	SL_MLX_PRINT			= 18,
-	SL_MAX_CODE				= 19
+	SL_BIG_MAP				= 15,
+	SL_MLX_INIT				= 16,
+	SL_MLX_PNG				= 17,
+	SL_MLX_RESIZE			= 18,
+	SL_MLX_PRINT			= 19,
+	SL_MAX_CODE				= 20
 }	t_exit_code;
 
 typedef enum e_cell

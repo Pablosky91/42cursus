@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/24 21:26:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/12 15:21:32 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ static const char	*g_message[SL_MAX_CODE] = {
 	"Error\nThe map must contain one and only one exit\n",
 	"Error\nThe map is composed of invalid characters\n",
 	"Error\nThe map must have a valid path\n",
+	"Error\nThe map is too big to render the images\n",
 	"Error\nCould not create the window\n",
 	"Error\nCould not load a PNG file\n",
 	"Error\nCould not resize an image\n",
