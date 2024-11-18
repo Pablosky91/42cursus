@@ -6,23 +6,23 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:13 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:32:54 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
-static int		get_id_cell(t_game *game,
+static t_id_cell	get_id_cell(t_game *game,
 					t_direction moving, int32_t x, int32_t y);
-static void		goes_into_wall(t_game *game,
+static void			goes_into_wall(t_game *game,
 					t_direction direction, int32_t *x, int32_t *y);
-static t_cell	get_cell_at(t_game *game, int32_t x, int32_t y);
+static t_cell		get_cell_at(t_game *game, int32_t x, int32_t y);
 
-int	move_penguin(t_game *game,
+t_id_cell	move_penguin(t_game *game,
 		t_direction moving, int32_t x, int32_t y)
 {
-	int	id_before;
-	int	id_after;
+	t_id_cell	id_before;
+	t_id_cell	id_after;
 
 	id_before = get_id_cell(game, moving, x, y);
 	if (moving == NORTH)
@@ -37,11 +37,14 @@ int	move_penguin(t_game *game,
 	goes_into_wall(game, moving, &x, &y);
 	game->penguin->x = x;
 	game->penguin->y = y;
-	if (id_before != id_after)
+	if (id_before.type != id_after.type || id_before.id != id_after.id)
 		return (id_before);
-	return (-1);
+	id_after.id = -1;
+	id_after.type = ICE;
+	return (id_after);
 }
 
+//TODO redo doc
 /**
  * @brief Gets the id of a cell where a pixel is located.
  * 
@@ -52,25 +55,29 @@ int	move_penguin(t_game *game,
  * @return If there is a fish, its id. If it is the home, -HOME.
  * If it is a seal, -SEAL. Any other cell -1.
  */
-static int	get_id_cell(t_game *game,
+static t_id_cell	get_id_cell(t_game *game,
 				t_direction moving, int32_t x, int32_t y)
 {
-	if ((moving == NORTH || moving == WEST) && get_cell_at(game, x, y) == HOME)
-		return (-HOME);
-	if ((moving == SOUTH || moving == EAST) && get_cell_at(game,
-			x + game->img_size - 1, y + game->img_size - 1) == HOME)
-		return (-HOME);
-	if ((moving == NORTH || moving == WEST) && get_cell_at(game, x, y) == SEAL)
-		return (-SEAL);
-	if ((moving == SOUTH || moving == EAST) && get_cell_at(game,
-			x + game->img_size - 1, y + game->img_size - 1) == SEAL)
-		return (-SEAL);
-	if (moving == NORTH || moving == WEST)
-		return (get_id_fish(game, y / game->img_size, x / game->img_size));
+	t_id_cell	id_cell;
+	int32_t		coord_x;
+	int32_t		coord_y;
+
+	coord_x = x;
+	coord_y = y;
 	if (moving == SOUTH || moving == EAST)
-		return (get_id_fish(game, (y + game->img_size - 1) / game->img_size,
-				(x + game->img_size - 1) / game->img_size));
-	return (-1);
+	{
+		coord_x = x + game->img_size - 1;
+		coord_y = y + game->img_size - 1;
+	}
+	id_cell.id = -1;
+	id_cell.type = get_cell_at(game, coord_x, coord_y);
+	if (id_cell.type == SEAL)
+		id_cell.id = get_id_seal(game,
+				coord_y / game->img_size, coord_x / game->img_size);
+	if (id_cell.type == FISH)
+		id_cell.id = get_id_fish(game,
+				coord_y / game->img_size, coord_x / game->img_size);
+	return (id_cell);
 }
 
 /**

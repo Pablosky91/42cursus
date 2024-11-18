@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:30:00 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/12 15:17:06 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/18 18:49:48 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,10 @@
 # define IMG_FISH_DEAD		"textures/bones.png"
 # define IMG_HOME_CLOSED	"textures/home_closed.png"
 # define IMG_HOME_OPEN		"textures/home_open.png"
-# define IMG_SEAL			"textures/seal.png"
+# define IMG_SEAL_A			"textures/seal_a.png"
+# define IMG_SEAL_B			"textures/seal_b.png"
+# define IMG_SEAL_EATING_A	"textures/seal_eating_a.png"
+# define IMG_SEAL_EATING_B	"textures/seal_eating_b.png"
 # define IMG_LOGO			"textures/logo.png"
 # define IMG_CURSOR_N		"textures/cursor_up.png"
 # define IMG_CURSOR_W		"textures/cursor_left.png"
@@ -131,6 +134,12 @@ typedef enum e_direction
 /*                                  STRUCTS                                   */
 /******************************************************************************/
 
+typedef struct s_id_cell
+{
+	t_cell	type;
+	int		id;
+}	t_id_cell;
+
 typedef struct s_status_node
 {
 	int						row;
@@ -182,6 +191,15 @@ typedef struct s_fish
 	bool		collected;
 }	t_fish;
 
+typedef struct s_seal
+{
+	mlx_image_t	*left;
+	mlx_image_t	*right;
+	int			id;
+	int			row;
+	int			col;
+}	t_seal;
+
 typedef struct s_home
 {
 	mlx_image_t	*open;
@@ -212,12 +230,14 @@ typedef struct s_game
 	t_map			*map;
 	t_penguin		*penguin;
 	t_fish			**fishes;
+	t_seal			**seals;
 	t_home			*home;
 	t_path_checker	*checker;
 	t_cursor		*cursor;
 	t_counter		*counter;
 	int				quantity_fishes;
 	int				collected_fishes;
+	int				quantity_seals;
 	int				moves;
 	int				img_size;
 	int				speed;
@@ -390,6 +410,9 @@ t_cell			get_cell_by(t_game *game,
  */
 int				get_id_fish(t_game *game, int row, int col);
 
+//TODO doc
+int				get_id_seal(t_game *game, int row, int col);
+
 /**
  * @brief Compares the content of two nodes.
  * 
@@ -445,6 +468,7 @@ void			draw_cell(t_game *game, int row, int col);
  */
 void			init_mlx(t_game *game);
 
+//TODO redoc
 /**
  * @brief Updates the ordinates of the penguin as it moves.
  * 
@@ -455,7 +479,7 @@ void			init_mlx(t_game *game);
  * @return The id of the cell the penguin moves onto.
  * If there is a fish, its id. If it is the home, -HOME. Any other cell -1.
  */
-int				move_penguin(t_game *game,
+t_id_cell		move_penguin(t_game *game,
 					t_direction moving, int32_t x, int32_t y);
 
 //TODO doc

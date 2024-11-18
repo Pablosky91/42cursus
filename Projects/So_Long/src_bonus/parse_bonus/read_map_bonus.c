@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:27:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/01 14:41:49 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/15 11:12:04 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,15 @@ void	read_map(t_game *game, char *path)
 	game->fishes = ft_calloc(game->quantity_fishes + 1, sizeof(t_fish *));
 	if (!game->fishes)
 		exit_game(game, SL_NO_ALLOCATION);
+	game->seals = ft_calloc(game->quantity_seals + 1, sizeof(t_seal *));
+	if (!game->seals)
+		exit_game(game, SL_NO_ALLOCATION);
 	fd = open_file(game, path);
 	buffer = ft_calloc(1, sizeof(char));
 	if (!buffer)
 		exit_game(game, SL_NO_ALLOCATION);
 	save_map(game, buffer, fd);
 	free(buffer);
-	if (!game->penguin)
-		exit_game(game, SL_NO_PLAYER);
-	if (!game->home)
-		exit_game(game, SL_NO_EXIT);
 	valid_path(game);
 }
 
@@ -58,25 +57,27 @@ static void	save_map(t_game *game, char *buffer, int fd)
 	int			col;
 	t_exit_code	error_code;
 
-	row = 0;
-	while (row < game->map->height)
+	row = -1;
+	while (++row < game->map->height)
 	{
-		col = 0;
+		col = -1;
 		game->map->cells[row] = ft_calloc(game->map->width + 1, sizeof(t_cell));
 		if (!game->map->cells[row])
 			exit_game_free_buffer(game, SL_NO_ALLOCATION, buffer);
-		while (col < game->map->width)
+		while (++col < game->map->width)
 		{
 			if (read(fd, buffer, 1) < 0)
 				exit_game_free_buffer(game, SL_UNKNOWN, buffer);
 			error_code = save_cell(game, buffer[0], row, col);
 			if (error_code)
 				exit_game_free_buffer(game, error_code, buffer);
-			col++;
 		}
 		read(fd, buffer, 1);
-		row++;
 	}
+	if (!game->penguin)
+		exit_game(game, SL_NO_PLAYER);
+	if (!game->home)
+		exit_game(game, SL_NO_EXIT);
 }
 
 /**

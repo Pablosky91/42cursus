@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:27:32 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/01 14:46:20 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/15 11:23:56 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,15 @@ static t_exit_code	save_home(t_game *game, int row, int col)
  */
 static t_exit_code	save_seal(t_game *game, int row, int col)
 {
+	static int	seal_id = 0;
+
 	game->map->cells[row][col] = SEAL;
+	game->seals[seal_id] = ft_calloc(1, sizeof(t_seal));
+	if (!game->seals[seal_id])
+		return (SL_NO_ALLOCATION);
+	game->seals[seal_id]->id = seal_id;
+	game->seals[seal_id]->row = row;
+	game->seals[seal_id]->col = col;
+	seal_id++;
 	return (SL_OK);
 }

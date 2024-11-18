@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/24 22:26:33 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/18 19:14:33 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,49 @@
 
 static void	collect_fish(t_game *game, int id_fish);
 static void	enter_home(t_game *game);
-static void	enemy(t_game *game);
+static void	enemy(t_game *game, int id_seal);
+
+//TODO doc, macro frames, static/new file
+void	show_seals(t_game *game)
+{
+	int	id_seal;
+
+	id_seal = 0;
+	while (id_seal < game->quantity_seals)
+	{
+		if (game->frame % 150 < 75)
+		{
+			game->seals[id_seal]->left->enabled = true;
+			game->seals[id_seal]->right->enabled = false;
+		}
+		else
+		{
+			game->seals[id_seal]->left->enabled = false;
+			game->seals[id_seal]->right->enabled = true;
+		}
+		id_seal++;
+	}
+}
 
 void	my_loop_hook(void *param)
 {
-	t_game	*game;
-	int		id_cell;
+	t_game		*game;
+	t_id_cell	id_cell;
 
 	game = param;
-	id_cell = -1;
 	if (game->penguin->facing != STILL)
 		id_cell = move_penguin(game,
 				game->penguin->facing, game->penguin->x, game->penguin->y);
 	show_penguin(game);
+	show_seals(game);
 	game->frame++;
 	my_cursor_hook(0, 0, game);
-	if (id_cell == -1)
-		return ;
-	if (id_cell >= 0)
-		collect_fish(game, id_cell);
-	if (id_cell == -HOME)
+	if (id_cell.type == HOME)
 		enter_home(game);
-	if (id_cell == -SEAL)
-		enemy(game);
+	else if (id_cell.type == FISH)
+		collect_fish(game, id_cell.id);
+	else if (id_cell.type == SEAL)
+		enemy(game, id_cell.id);
 }
 
 /**
@@ -79,8 +99,9 @@ static void	enter_home(t_game *game)
  * 
  * @param game All game information.
  */
-static void	enemy(t_game *game)
+static void	enemy(t_game *game, int id_seal)
 {
 	//retry(game);
+	ft_printf("killer: %i\n", id_seal);
 	exit_game(game, SL_DEATH);
 }

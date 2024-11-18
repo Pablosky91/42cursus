@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/11/02 00:29:18 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/11/18 18:45:24 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,9 @@ BONUS_SRC_DIR := src_bonus/
 BONUS_OBJ_DIR := obj_bonus/
 
 BONUS_SOURCES := \
+				$(addprefix pathing/,\
+					get_id_seal.c\
+				)\
 				$(addprefix hook/,\
 					my_close_hook.c\
 					my_cursor_hook.c\
