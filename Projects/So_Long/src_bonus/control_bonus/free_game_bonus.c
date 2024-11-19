@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:09 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/15 11:37:27 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/19 09:13:18 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	free_game(t_game *game)
 	free(game->penguin);
 	free(game->home);
 	free(game->counter);
+	free(game->ending);
 	if (game->checker)
 		free_checker(game->checker);
 	free(game->cursor);

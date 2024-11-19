@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/12 15:21:32 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:50:33 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ void	exit_game(t_game *game, t_exit_code exit_code)
 
 	if (exit_code <= SL_DEATH)
 	{
-		time = ft_dtoa(mlx_get_time(), 2);
+		if (exit_code == SL_SURRENDER)
+			time = ft_dtoa(mlx_get_time(), 2);
+		else
+			time = ft_dtoa(game->ending->time, 2);
 		if (!time)
 			exit_game(game, SL_NO_ALLOCATION);
 		ft_printf(g_message[exit_code], time);

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/18 19:14:33 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:18:34 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,16 @@ static void	collect_fish(t_game *game, int id_fish);
 static void	enter_home(t_game *game);
 static void	enemy(t_game *game, int id_seal);
 
-//TODO doc, macro frames, static/new file
-void	show_seals(t_game *game)
+//TODO static macro doc
+void	ending(t_game *game)
 {
-	int	id_seal;
-
-	id_seal = 0;
-	while (id_seal < game->quantity_seals)
+	if (game->frame - game->ending->frame >= 120)
 	{
-		if (game->frame % 150 < 75)
-		{
-			game->seals[id_seal]->left->enabled = true;
-			game->seals[id_seal]->right->enabled = false;
-		}
-		else
-		{
-			game->seals[id_seal]->left->enabled = false;
-			game->seals[id_seal]->right->enabled = true;
-		}
-		id_seal++;
+		if (game->ending->id_ending == -1)
+			exit_game(game, SL_OK);
+		exit_game(game, SL_DEATH);
 	}
+	animations(game);
 }
 
 void	my_loop_hook(void *param)
@@ -44,12 +34,12 @@ void	my_loop_hook(void *param)
 	t_id_cell	id_cell;
 
 	game = param;
+	if (game->ending->id_ending != -2)
+		return (ending(game));
 	if (game->penguin->facing != STILL)
 		id_cell = move_penguin(game,
 				game->penguin->facing, game->penguin->x, game->penguin->y);
-	show_penguin(game);
-	show_seals(game);
-	game->frame++;
+	animations(game);
 	my_cursor_hook(0, 0, game);
 	if (id_cell.type == HOME)
 		enter_home(game);
@@ -89,8 +79,11 @@ static void	collect_fish(t_game *game, int id_fish)
  */
 static void	enter_home(t_game *game)
 {
-	if (game->collected_fishes == game->quantity_fishes)
-		exit_game(game, SL_OK);
+	if (game->collected_fishes != game->quantity_fishes)
+		return ;
+	game->ending->frame = game->frame;
+	game->ending->time = mlx_get_time();
+	game->ending->id_ending = -1;
 }
 
 //TODO doc
@@ -101,7 +94,7 @@ static void	enter_home(t_game *game)
  */
 static void	enemy(t_game *game, int id_seal)
 {
-	//retry(game);
-	ft_printf("killer: %i\n", id_seal);
-	exit_game(game, SL_DEATH);
+	game->ending->frame = game->frame;
+	game->ending->time = mlx_get_time();
+	game->ending->id_ending = id_seal;
 }

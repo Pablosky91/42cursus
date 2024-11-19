@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/12 15:35:38 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:08:51 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -355,6 +355,13 @@ void			valid_path(t_game *game);
 /******************************************************************************/
 
 /**
+ * @brief Updates the position and sprite of the penguin in the window.
+ * 
+ * @param game All game information.
+ */
+void			animations(t_game *game);
+
+/**
  * @brief Prints an image corresponding to the cell type.
  * 
  * @param game All game information.
@@ -382,13 +389,6 @@ void			init_mlx(t_game *game);
  */
 int				move_penguin(t_game *game,
 					t_direction moving, int32_t x, int32_t y);
-
-/**
- * @brief Updates the position and sprite of the penguin in the window.
- * 
- * @param game All game information.
- */
-void			show_penguin(t_game *game);
 
 /**
  * @brief Starts the movement in the given direction when possible.

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 15:18:55 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/01 14:46:38 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/19 13:59:43 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	retry(t_game *game)
 	game->collected_fishes = 0;
 	game->home->closed->enabled = true;
 	game->home->open->enabled = false;
+	game->ending->id_ending = -2;
 	game->moves = 0;
 	refresh_counter(game, game->moves);
 }

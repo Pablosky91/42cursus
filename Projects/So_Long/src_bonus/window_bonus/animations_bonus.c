@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show_penguin_bonus.c                               :+:      :+:    :+:   */
+/*   animations_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:33 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/01 17:55:23 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/19 16:16:51 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 static void	show_sprite(t_game *game, mlx_image_t *image);
 
+//TODO static
+/**
+ * @brief Updates the position and sprite of the penguin in the window.
+ * 
+ * @param game All game information.
+ */
 void	show_penguin(t_game *game)
 {
 	if (game->penguin->facing == STILL
@@ -41,6 +47,52 @@ void	show_penguin(t_game *game)
 		show_sprite(game, game->penguin->east_a);
 	else if (game->penguin->facing == EAST)
 		show_sprite(game, game->penguin->east_b);
+}
+
+//TODO doc, macro frames, static
+void	show_seals(t_game *game)
+{
+	int		id_seal;
+	bool	first;
+
+	id_seal = 0;
+	while (id_seal < game->quantity_seals)
+	{
+		first = game->frame % 150 < 75;
+		if (id_seal == game->ending->id_ending)
+		{
+			first = game->frame % 60 < 30;
+			game->penguin->showing->enabled = false;
+			game->seals[id_seal]->left->enabled = false;
+			game->seals[id_seal]->right->enabled = false;
+			game->seals[id_seal]->eating_a->enabled = first;
+			game->seals[id_seal]->eating_b->enabled = !first;
+		}
+		else
+		{
+			game->seals[id_seal]->left->enabled = first;
+			game->seals[id_seal]->right->enabled = !first;
+		}
+		id_seal++;
+	}
+}
+
+void	animations(t_game *game)
+{
+	bool	first;
+
+	first = game->frame % 60 < 30;
+	if (game->ending->id_ending == -1)
+	{
+		game->penguin->showing->enabled = false;
+		game->home->open->enabled = false;
+		game->home->penguin_a->enabled = first;
+		game->home->penguin_b->enabled = !first;
+	}
+	else if (game->ending->id_ending == -2)
+		show_penguin(game);
+	show_seals(game);
+	game->frame++;
 }
 
 /**

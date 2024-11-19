@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/01 13:08:36 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:43:16 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	start_movement(t_game *game, t_direction direction)
 	int	row;
 	int	col;
 
-	if (game->penguin->facing != STILL)
+	if (game->penguin->facing != STILL || game->ending->id_ending != -2)
 		return ;
 	row = game->penguin->y / game->img_size;
 	col = game->penguin->x / game->img_size;

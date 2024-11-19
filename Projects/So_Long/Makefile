@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/11/18 18:45:24 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/11/19 09:10:43 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,10 +76,10 @@ SOURCES :=	\
 				valid_path.c\
 				)\
 			$(addprefix window/,\
+				animations.c\
 				draw_cell.c\
 				init_mlx.c\
 				move_penguin.c\
-				show_penguin.c\
 				start_movement.c\
 				)\
 

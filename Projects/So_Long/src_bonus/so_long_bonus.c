@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:45 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/01 18:12:13 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/19 08:52:50 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,8 @@ static void	init(t_game **game, int argc)
 	(*game)->counter = ft_calloc(1, sizeof(t_counter));
 	if (!((*game)->counter))
 		exit_game(*game, SL_NO_ALLOCATION);
+	(*game)->ending = ft_calloc(1, sizeof(t_ending));
+	if (!((*game)->ending))
+		exit_game(*game, SL_NO_ALLOCATION);
+	(*game)->ending->id_ending = -2;
 }

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:30:00 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/18 18:49:48 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/19 14:50:26 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@
 # define IMG_FISH_DEAD		"textures/bones.png"
 # define IMG_HOME_CLOSED	"textures/home_closed.png"
 # define IMG_HOME_OPEN		"textures/home_open.png"
+# define IMG_HOME_PENGUIN_A	"textures/home_penguin_a.png"
+# define IMG_HOME_PENGUIN_B	"textures/home_penguin_b.png"
 # define IMG_SEAL_A			"textures/seal_a.png"
 # define IMG_SEAL_B			"textures/seal_b.png"
 # define IMG_SEAL_EATING_A	"textures/seal_eating_a.png"
@@ -195,6 +197,8 @@ typedef struct s_seal
 {
 	mlx_image_t	*left;
 	mlx_image_t	*right;
+	mlx_image_t	*eating_a;
+	mlx_image_t	*eating_b;
 	int			id;
 	int			row;
 	int			col;
@@ -204,6 +208,8 @@ typedef struct s_home
 {
 	mlx_image_t	*open;
 	mlx_image_t	*closed;
+	mlx_image_t	*penguin_a;
+	mlx_image_t	*penguin_b;
 }	t_home;
 
 typedef struct s_cursor
@@ -224,6 +230,13 @@ typedef struct s_counter
 	int			hundreds_show;
 }	t_counter;
 
+typedef struct s_ending
+{
+	int		frame;
+	double	time;
+	int		id_ending;
+}	t_ending;
+
 typedef struct s_game
 {
 	mlx_t			*mlx;
@@ -235,6 +248,7 @@ typedef struct s_game
 	t_path_checker	*checker;
 	t_cursor		*cursor;
 	t_counter		*counter;
+	t_ending		*ending;
 	int				quantity_fishes;
 	int				collected_fishes;
 	int				quantity_seals;
@@ -444,6 +458,9 @@ void			valid_path(t_game *game);
 /*                             FUNCTIONS - WINDOW                             */
 /******************************************************************************/
 
+//TODO doc
+void			animations(t_game *game);
+
 /**
  * @brief Calculates the direction from the center of the penguin to the cursor.
  * 
@@ -492,13 +509,6 @@ void			refresh_counter(t_game *game, int moves);
  * @param game All game information.
  */
 void			retry(t_game *game);
-
-/**
- * @brief Updates the position and sprite of the penguin in the window.
- * 
- * @param game All game information.
- */
-void			show_penguin(t_game *game);
 
 /**
  * @brief Starts the movement in the given direction when possible.

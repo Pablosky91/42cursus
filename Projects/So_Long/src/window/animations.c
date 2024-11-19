@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   show_penguin.c                                     :+:      :+:    :+:   */
+/*   animations.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 17:55:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/01 17:53:33 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/19 09:09:57 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	show_sprite(t_game *game, mlx_image_t *image);
 
-void	show_penguin(t_game *game)
+void	animations(t_game *game)
 {
 	if (game->penguin->facing == STILL)
 		show_sprite(game, game->penguin->still);

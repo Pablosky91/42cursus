@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 23:10:27 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/18 19:31:55 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/19 15:29:45 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,29 @@ static void	create_image(t_game *game,
 
 void	draw_cell(t_game *game, int row, int col)
 {
+	static int	id_fish = 0;
+	static int	id_seal = 0;
+
 	create_image(game, NULL, IMG_ICE,
 		(int []){row, col, ICE_LAYER, true});
-	if (game->map->cells[row][col] == WALL)
+	if (game->map->cells[row][col] == FISH)
 	{
-		if (row == 0 && col == game->map->width - 1)
-			draw_counter(game, row, col, game->counter->units);
-		else if (row == 0 && col == game->map->width - 2)
-			draw_counter(game, row, col, game->counter->tens);
-		else if (row == 0 && col == game->map->width - 3)
-			draw_counter(game, row, col, game->counter->hundreds);
-		else
-			create_image(game, NULL, IMG_WALL,
-				(int []){row, col, OBJECTS_LAYER, true});
+		create_image(game, &game->fishes[id_fish]->alive, IMG_FISH_ALIVE,
+			(int []){row, col, OBJECTS_LAYER, true});
+		create_image(game, &game->fishes[id_fish++]->dead, IMG_FISH_DEAD,
+			(int []){row, col, OBJECTS_LAYER, false});
 	}
-	else if (game->map->cells[row][col] == PENGUIN)
-		draw_penguin(game, row, col);
+	else if (game->map->cells[row][col] == SEAL)
+	{
+		create_image(game, &game->seals[id_seal]->left, IMG_SEAL_A,
+			(int []){row, col, SEAL_LAYER, true});
+		create_image(game, &game->seals[id_seal]->right, IMG_SEAL_B,
+			(int []){row, col, SEAL_LAYER, false});
+		create_image(game, &game->seals[id_seal]->eating_a, IMG_SEAL_EATING_A,
+			(int []){row, col, SEAL_LAYER, false});
+		create_image(game, &game->seals[id_seal++]->eating_b, IMG_SEAL_EATING_B,
+			(int []){row, col, SEAL_LAYER, false});
+	}
 	else
 		draw_cell_continuation(game, row, col);
 }
@@ -49,28 +56,29 @@ void	draw_cell(t_game *game, int row, int col)
  */
 static void	draw_cell_continuation(t_game *game, int row, int col)
 {
-	static int	id_fish = 0;
-	static int	id_seal = 0;
-
-	if (game->map->cells[row][col] == FISH)
+	if (game->map->cells[row][col] == PENGUIN)
+		draw_penguin(game, row, col);
+	if (game->map->cells[row][col] == WALL)
 	{
-		create_image(game, &game->fishes[id_fish]->alive, IMG_FISH_ALIVE,
-			(int []){row, col, OBJECTS_LAYER, true});
-		create_image(game, &game->fishes[id_fish++]->dead, IMG_FISH_DEAD,
-			(int []){row, col, OBJECTS_LAYER, false});
-	}
-	else if (game->map->cells[row][col] == SEAL)
-	{
-		create_image(game, &game->seals[id_seal]->left, IMG_SEAL_A,
-			(int []){row, col, SEAL_LAYER, true});
-		create_image(game, &game->seals[id_seal++]->right, IMG_SEAL_B,
-			(int []){row, col, SEAL_LAYER, false});
+		if (row == 0 && col == game->map->width - 1)
+			draw_counter(game, row, col, game->counter->units);
+		else if (row == 0 && col == game->map->width - 2)
+			draw_counter(game, row, col, game->counter->tens);
+		else if (row == 0 && col == game->map->width - 3)
+			draw_counter(game, row, col, game->counter->hundreds);
+		else
+			create_image(game, NULL, IMG_WALL,
+				(int []){row, col, OBJECTS_LAYER, true});
 	}
 	else if (game->map->cells[row][col] == HOME)
 	{
 		create_image(game, &game->home->closed, IMG_HOME_CLOSED,
 			(int []){row, col, OBJECTS_LAYER, true});
 		create_image(game, &game->home->open, IMG_HOME_OPEN,
+			(int []){row, col, OBJECTS_LAYER, false});
+		create_image(game, &game->home->penguin_a, IMG_HOME_PENGUIN_A,
+			(int []){row, col, OBJECTS_LAYER, false});
+		create_image(game, &game->home->penguin_b, IMG_HOME_PENGUIN_B,
 			(int []){row, col, OBJECTS_LAYER, false});
 	}
 }
