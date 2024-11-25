@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/11/23 21:38:26 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/11/25 22:46:17 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ CFLAGS := -g3 -fsanitize=address -Wall -Wextra -Werror
 
 #INCLUDE
 
-LIBFT_PATH := ../../libft
+LIBFT_PATH := libft
 LIBFT := $(LIBFT_PATH)/libft.a
 LIBFT_FLAG := -L $(LIBFT_PATH) -l ft
 
@@ -280,6 +280,14 @@ error: all
 	@cat maps/invalid/other_characters.ber && echo
 	@./$(NAME) maps/invalid/other_characters.ber || true
 
+	@echo "\nMap: maps/invalid/no_path0.ber"
+	@cat maps/invalid/no_path0.ber && echo
+	@./$(NAME) maps/invalid/no_path0.ber || true
+	
+	@echo "\nMap: maps/invalid/no_path1.ber"
+	@cat maps/invalid/no_path1.ber && echo
+	@./$(NAME) maps/invalid/no_path1.ber || true
+
 .PHONY: l levels
 l: levels
 levels: all bonus
@@ -292,11 +300,17 @@ levels: all bonus
 	@echo
 	-./$(NAME) maps/tutorial3.ber
 	@echo
-	-./$(NAME) maps/square0.ber
+	-./$(BONUS_NAME) maps/tutorial4.ber
+	@echo
+	-./$(BONUS_NAME) maps/square0.ber
 	@echo
 	-./$(BONUS_NAME) maps/square1.ber
 	@echo
-	-./$(BONUS_NAME) maps/tutorial4.ber
+	-./$(BONUS_NAME) maps/heart.ber
+	@echo
+	-./$(BONUS_NAME) maps/9rooms.ber
+	@echo
+	-./$(BONUS_NAME) maps/4rooms.ber
 	@echo
 	-./$(BONUS_NAME) maps/labyrinth.ber
 	@echo
@@ -312,18 +326,21 @@ norminette:
 normi:
 	@if norminette src src_bonus libft | grep -q "Error"; then echo "\n$(RED)$$(norminette src src_bonus libft | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
 
-#until there's something better: make v CFLAGS=
-.PHONY: v valgrind
+.PHONY: v valgrind valgrind_no_flags
 v: valgrind
-valgrind: clean $(LIBFT) $(OBJECTS) | $(VALGRIND_DIR)
+valgrind:
+	@$(MAKE) CFLAGS= valgrind_no_flags
+valgrind_no_flags: clean $(LIBFT) $(OBJECTS) | $(VALGRIND_DIR)
 	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(NAME)
 	@-valgrind --leak-check=full --show-leak-kinds=all --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ././$(NAME) $(addprefix $(MAP_DIRECTORY), $(addsuffix $(MAP_EXTENSION), $(MAP)))
 	@echo "$(BLUE) $$(grep "ERROR SUMMARY" $(VALGRIND_DIR)/$$(ls valgrind | tail -1))"
 	@$(MAKE) clean
 
-.PHONY: vb balgrind
+.PHONY: vb balgrind balgrind_no_flags
 vb: balgrind
-balgrind: clean $(LIBFT) $(BONUS_OBJECTS) | $(VALGRIND_DIR)
+balgrind:
+	@$(MAKE) CFLAGS= balgrind_no_flags
+balgrind_no_flags: clean $(LIBFT) $(BONUS_OBJECTS) | $(VALGRIND_DIR)
 	@$(CC) $(CFLAGS) $(BONUS_OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(BONUS_NAME)
 	@-valgrind --leak-check=full --show-leak-kinds=all --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ././$(BONUS_NAME) $(addprefix $(MAP_DIRECTORY), $(addsuffix $(MAP_EXTENSION), $(MAP)))
 	@echo "$(BLUE) $$(grep "ERROR SUMMARY" $(VALGRIND_DIR)/$$(ls valgrind | tail -1))"
