@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/11/25 22:46:17 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/11/25 23:15:31 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -93,7 +93,6 @@ BONUS_SRC_DIR := src_bonus/
 BONUS_OBJ_DIR := obj_bonus/
 BONUS_HEADER := $(BONUS_SRC_DIR)/$(BONUS_NAME).h
 
-
 BONUS_SOURCES := \
 				$(addprefix pathing/,\
 					get_id_seal.c\
@@ -133,9 +132,6 @@ RESET := \033[0m
 MAP := medium
 MAP_DIRECTORY := maps/
 MAP_EXTENSION := .ber
-
-
-OUT := out
 
 VALGRIND_DIR := valgrind/
 
@@ -368,13 +364,13 @@ msg_mlx_end:
 	@echo "$(GREEN)MLX42 compilation complete$(RESET)"
 
 msg_clean_start:
-	@echo "$(YELLOW)Cleaning push_swap objects$(RED)"
+	@echo "$(YELLOW)Cleaning so_long objects$(RED)"
 
 msg_clean_end:
-	@echo "$(GREEN)Push_swap objects cleaned$(RESET)"
+	@echo "$(GREEN)So_long objects cleaned$(RESET)"
 
 msg_fclean_start:
-	@echo "$(YELLOW)Cleaning push_swap$(RED)"
+	@echo "$(YELLOW)Cleaning so_long$(RED)"
 
 msg_fclean_end:
-	@echo "$(GREEN)Push_swap cleaned$(RESET)"
+	@echo "$(GREEN)So_long cleaned$(RESET)"
