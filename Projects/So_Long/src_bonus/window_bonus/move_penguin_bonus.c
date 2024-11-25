@@ -6,16 +6,16 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:13 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/18 19:32:54 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:44:09 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long_bonus.h"
 
 static t_id_cell	get_id_cell(t_game *game,
-					t_direction moving, int32_t x, int32_t y);
+						t_direction moving, int32_t x, int32_t y);
 static void			goes_into_wall(t_game *game,
-					t_direction direction, int32_t *x, int32_t *y);
+						t_direction direction, int32_t *x, int32_t *y);
 static t_cell		get_cell_at(t_game *game, int32_t x, int32_t y);
 
 t_id_cell	move_penguin(t_game *game,
@@ -44,7 +44,6 @@ t_id_cell	move_penguin(t_game *game,
 	return (id_after);
 }
 
-//TODO redo doc
 /**
  * @brief Gets the id of a cell where a pixel is located.
  * 
@@ -52,11 +51,10 @@ t_id_cell	move_penguin(t_game *game,
  * @param moving Direction in which the penguin is moving.
  * @param x X ordinate of the pixel.
  * @param y Y ordinate of the pixel.
- * @return If there is a fish, its id. If it is the home, -HOME.
- * If it is a seal, -SEAL. Any other cell -1.
+ * @return The id_cell of the corresponding cell.
  */
 static t_id_cell	get_id_cell(t_game *game,
-				t_direction moving, int32_t x, int32_t y)
+	t_direction moving, int32_t x, int32_t y)
 {
 	t_id_cell	id_cell;
 	int32_t		coord_x;
@@ -89,7 +87,7 @@ static t_id_cell	get_id_cell(t_game *game,
  * @param y Y ordinate of the penguin.
  */
 static void	goes_into_wall(t_game *game,
-				t_direction direction, int32_t *x, int32_t *y)
+	t_direction direction, int32_t *x, int32_t *y)
 {
 	if ((direction == NORTH || direction == WEST)
 		&& get_cell_at(game, *x, *y) != WALL)

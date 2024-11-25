@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 16:59:29 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/19 16:08:51 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:11:35 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -324,6 +324,15 @@ t_cell			get_cell_by(t_game *game,
 int				get_id_fish(t_game *game, int row, int col);
 
 /**
+ * @brief Compares the given node to all stored nodes in the checker.
+ * 
+ * @param game All game information.
+ * @param node The new node to be compared.
+ * @return Wether the node is repeated or not.
+ */
+bool			is_node_repeated(t_game *game, t_status_node *node);
+
+/**
  * @brief Compares the content of two nodes.
  * 
  * @param game All game information.
@@ -333,15 +342,6 @@ int				get_id_fish(t_game *game, int row, int col);
  */
 bool			is_same_status(t_game *game,
 					t_status_node *status_1, t_status_node *status_2);
-
-/**
- * @brief Compares the given node to all stored nodes in the checker.
- * 
- * @param game All game information.
- * @param node The new node to be compared.
- * @return Wether the node is repeated or not.
- */
-bool			is_node_repeated(t_game *game, t_status_node *node);
 
 /**
  * @brief Checks wether there is a valid path in a map.

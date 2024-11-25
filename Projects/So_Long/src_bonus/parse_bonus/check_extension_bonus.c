@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:26:46 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/25 21:05:26 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,9 @@ void	check_extension(t_game *game, char *path)
 	free(extension);
 	if (path[len_path - len_ext - 1] == PATH_SEPARATOR)
 		exit_game(game, SL_INVALID_EXTENSION);
+	game->map->name = ft_strrchr(path, PATH_SEPARATOR);
+	game->map->name = ft_substr(game->map->name, 1,
+			ft_strlen(game->map->name) - len_ext - 1);
+	if (!game->map->name)
+		exit_game(game, SL_NO_ALLOCATION);
 }

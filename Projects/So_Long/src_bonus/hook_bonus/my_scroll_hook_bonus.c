@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 18:56:59 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/22 18:57:24 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/25 20:47:33 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	my_scroll_hook(double x_delta, double y_delta, void *param)
 		start_movement(game, WEST);
 	else if (y_delta < 0)
 		start_movement(game, SOUTH);
-	else
+	else if (x_delta < 0)
 		start_movement(game, EAST);
 }

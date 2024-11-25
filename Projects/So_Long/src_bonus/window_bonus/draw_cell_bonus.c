@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 23:10:27 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/19 15:29:45 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:29:33 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static void	draw_cell_continuation(t_game *game, int row, int col)
 {
 	if (game->map->cells[row][col] == PENGUIN)
 		draw_penguin(game, row, col);
-	if (game->map->cells[row][col] == WALL)
+	else if (game->map->cells[row][col] == WALL)
 	{
 		if (row == 0 && col == game->map->width - 1)
 			draw_counter(game, row, col, game->counter->units);

@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/11/19 09:10:43 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/11/23 21:38:26 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ DIRECTORIES :=	\
 
 SRC_DIR := src/
 OBJ_DIR := obj/
+HEADER := $(SRC_DIR)/$(NAME).h
 
 SOURCES :=	\
 			so_long.c\
@@ -90,6 +91,8 @@ SOURCES := $(addprefix $(SRC_DIR), $(SOURCES))
 
 BONUS_SRC_DIR := src_bonus/
 BONUS_OBJ_DIR := obj_bonus/
+BONUS_HEADER := $(BONUS_SRC_DIR)/$(BONUS_NAME).h
+
 
 BONUS_SOURCES := \
 				$(addprefix pathing/,\
@@ -138,6 +141,7 @@ VALGRIND_DIR := valgrind/
 
 #RULES
 
+.PHONY: a all
 a: all
 all: $(NAME)
 
@@ -153,54 +157,61 @@ $(MLX_NAME):
 	make -C $(MLX_BUILD) -j4
 	@$(MAKE) msg_mlx_end
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(LIBFT_FLAG) -I $(SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -c $^ -o $@
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER) | $(OBJ_DIR)
+	$(CC) $(CFLAGS) $(LIBFT_FLAG) -I $(SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -c $< -o $@
 
 $(OBJ_DIR):
 	$(MKDIR) $(addprefix $(OBJ_DIR),$(DIRECTORIES))
 
+.PHONY: c clean
 c: clean
 clean: msg_clean_start
 	$(RM) $(OBJ_DIR) $(BONUS_OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_PATH) clean
 	@$(MAKE) msg_clean_end
 
+.PHONY: f fclean
 f: fclean
 fclean: msg_fclean_start
 	$(RM) $(OBJ_DIR) $(BONUS_OBJ_DIR) $(MLX_BUILD) $(NAME) $(BONUS_NAME)
 	@$(MAKE) -C $(LIBFT_PATH) fclean
 	@$(MAKE) msg_fclean_end
 
+.PHONY: r re
 r: re
 re: fclean all
 
 #BONUS RULES
 
+.PHONY: b bonus
 b:bonus
 bonus: $(BONUS_NAME)
 
 $(BONUS_NAME): $(LIBFT) $(MLX_NAME) $(BONUS_OBJECTS)
 	$(CC) $(CFLAGS) $(BONUS_OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(BONUS_NAME)
 
-$(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c | $(BONUS_OBJ_DIR)
-	$(CC) $(CFLAGS) $(LIBFT_FLAG) -I $(BONUS_SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -c $^ -o $@
+$(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c $(BONUS_HEADER) | $(BONUS_OBJ_DIR)
+	$(CC) $(CFLAGS) $(LIBFT_FLAG) -I $(BONUS_SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -c $< -o $@
 
 $(BONUS_OBJ_DIR):
 	$(MKDIR) $(addprefix $(BONUS_OBJ_DIR),$(addsuffix _bonus,$(DIRECTORIES)))
 
 #EXTRA RULES
 
+.PHONY: reb
 reb: fclean bonus
 
-be: bonus
-	-./$(BONUS_NAME) $(addprefix $(MAP_DIRECTORY), $(addsuffix $(MAP_EXTENSION), $(MAP)))
-
+.PHONY: e exec
 e: exec
 exec: all
 	-./$(NAME) $(addprefix $(MAP_DIRECTORY), $(addsuffix $(MAP_EXTENSION), $(MAP)))
 
-rexec: re exec
+.PHONY: be bexec
+be: bexec
+bexec: bonus
+	-./$(BONUS_NAME) $(addprefix $(MAP_DIRECTORY), $(addsuffix $(MAP_EXTENSION), $(MAP)))
 
+.PHONY: error
 error: all
 	@echo "\nMap:"
 	@./$(NAME) || true
@@ -269,6 +280,8 @@ error: all
 	@cat maps/invalid/other_characters.ber && echo
 	@./$(NAME) maps/invalid/other_characters.ber || true
 
+.PHONY: l levels
+l: levels
 levels: all bonus
 	@echo
 	-./$(NAME) maps/tutorial0.ber
@@ -288,8 +301,10 @@ levels: all bonus
 	-./$(BONUS_NAME) maps/labyrinth.ber
 	@echo
 
+.PHONY: run
 run: levels fclean
 
+.PHONY: n norminette normi
 n: norminette
 norminette:
 	@echo "norminette src src_bonus libft | grep Error\n"
@@ -298,6 +313,7 @@ normi:
 	@if norminette src src_bonus libft | grep -q "Error"; then echo "\n$(RED)$$(norminette src src_bonus libft | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
 
 #until there's something better: make v CFLAGS=
+.PHONY: v valgrind
 v: valgrind
 valgrind: clean $(LIBFT) $(OBJECTS) | $(VALGRIND_DIR)
 	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(NAME)
@@ -305,6 +321,7 @@ valgrind: clean $(LIBFT) $(OBJECTS) | $(VALGRIND_DIR)
 	@echo "$(BLUE) $$(grep "ERROR SUMMARY" $(VALGRIND_DIR)/$$(ls valgrind | tail -1))"
 	@$(MAKE) clean
 
+.PHONY: vb balgrind
 vb: balgrind
 balgrind: clean $(LIBFT) $(BONUS_OBJECTS) | $(VALGRIND_DIR)
 	@$(CC) $(CFLAGS) $(BONUS_OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(BONUS_NAME)
@@ -315,13 +332,17 @@ balgrind: clean $(LIBFT) $(BONUS_OBJECTS) | $(VALGRIND_DIR)
 $(VALGRIND_DIR):
 	$(MKDIR) $(VALGRIND_DIR)
 
+.PHONY: last_valgrind
 last_valgrind:
 	@cat $(VALGRIND_DIR)$$(ls valgrind | tail -1)
 
+.PHONY: clean_valgrind
 clean_valgrind:
 	$(RM) $(VALGRIND_DIR)
 
 #MESSAGES
+
+.PHONY: msg_mlx_start msg_mlx_end msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
 
 msg_mlx_start:
 	@echo "$(YELLOW)Starting MLX42 compilation$(RESET)"
@@ -340,7 +361,3 @@ msg_fclean_start:
 
 msg_fclean_end:
 	@echo "$(GREEN)Push_swap cleaned$(RESET)"
-
-#PHONY
-
-.PHONY: all clean fclean re bonus be reb exec norminette normi valgrind last_valgrind clean_valgrind a c f r b e n v msg_mlx_start msg_mlx_end msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end

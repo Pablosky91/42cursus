@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:29:06 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/02 00:31:48 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/23 22:47:28 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	create_window(t_game *game)
 	int32_t	height;
 
 	mlx_set_setting(MLX_HEADLESS, true);
-	game->mlx = mlx_init(1, 1, WINDOW_TITLE, false);
+	game->mlx = mlx_init(1, 1, "", false);
 	if (!game->mlx)
 		exit_game(game, SL_MLX_INIT);
 	mlx_get_monitor_size(0, &width, &height);
@@ -58,7 +58,7 @@ static void	create_window(t_game *game)
 			(height * WINDOW_SIZE) / game->map->height);
 	game->speed = game->img_size * RELATIVE_SPEED;
 	game->mlx = mlx_init(game->map->width * game->img_size,
-			game->map->height * game->img_size, WINDOW_TITLE, false);
+			game->map->height * game->img_size, game->map->name, false);
 	if (!game->mlx)
 		exit_game(game, SL_MLX_INIT);
 }

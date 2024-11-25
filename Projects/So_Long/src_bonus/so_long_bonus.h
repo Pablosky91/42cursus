@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/14 19:30:00 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/19 14:50:26 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/25 21:10:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@
 # define MAP_EXTENSION	".ber"
 # define PATH_SEPARATOR	'/'
 
-# define WINDOW_TITLE	"So Long"
 # define WINDOW_SIZE	0.95
 # define RELATIVE_SPEED 0.125
 
@@ -43,6 +42,10 @@
 
 # define FRAMES_PENGUIN_STILL	30
 # define FRAMES_PENGUIN_MOVING	10
+# define FRAMES_SEAL_IDLE		75
+# define FRAMES_SEAL_EATING		20
+# define FRAMES_HOME_ENDING		30
+# define FRAMES_EXIT_GAME		150
 
 # define IMG_ICE			"textures/ice.png"
 # define IMG_WALL			"textures/wall/wall.png"
@@ -177,6 +180,7 @@ typedef struct s_penguin
 typedef struct s_map
 {
 	t_cell	**cells;
+	char	*name;
 	int		width;
 	int		height;
 	int		initial_row;
@@ -292,10 +296,22 @@ void			free_status(t_status_node *status);
 /*                              FUNCTIONS - HOOK                              */
 /******************************************************************************/
 
-//TODO doc
+/**
+ * @brief Function called when the user closes the window.
+ * It exits the program in a clean way, freeing all allocated memory.
+ * 
+ * @param param All game information.
+ */
 void			my_close_hook(void *param);
 
-//TODO doc
+/**
+ * @brief Function called whenever the mouse is moved.
+ * It sets the cursor to the closest direction.
+ * 
+ * @param x_pos The mouse x position.
+ * @param y_pos The mouse y position.
+ * @param param All game information.
+ */
 void			my_cursor_hook(double x_pos, double y_pos, void *param);
 
 /**
@@ -315,11 +331,26 @@ void			my_key_hook(mlx_key_data_t keydata, void *param);
  */
 void			my_loop_hook(void *param);
 
-//TODO doc
+/**
+ * @brief Function called whenever a mouse button is acted on.
+ * It starts the movement from the penguin to the mouse.
+ * 
+ * @param button The mouse button/key pressed.
+ * @param action The mouse action that took place.
+ * @param mods The modifier keys pressed together with the mouse key.
+ * @param param All game information.
+ */
 void			my_mouse_hook(mouse_key_t button,
 					action_t action, modifier_key_t mods, void *param);
 
-//TODO doc
+/**
+ * @brief Function called whenever a mouse wheel is acted on.
+ * It starts the movement in the direction of the scroll.
+ * 
+ * @param x_delta The mouse x delta.
+ * @param y_delta The mouse y delta.
+ * @param param All game information.
+ */
 void			my_scroll_hook(double x_delta, double y_delta, void *param);
 
 /******************************************************************************/
@@ -328,6 +359,7 @@ void			my_scroll_hook(double x_delta, double y_delta, void *param);
 
 /**
  * @brief Checks the given path has a valid extension.
+ * It also saves the name of the map.
  * 
  * @param game All game information.
  * @param path The path of the map file.
@@ -424,7 +456,14 @@ t_cell			get_cell_by(t_game *game,
  */
 int				get_id_fish(t_game *game, int row, int col);
 
-//TODO doc
+/**
+ * @brief Gets the seal id from a position, if it exists.
+ * 
+ * @param game All game information.
+ * @param row The row of the seal.
+ * @param col The column of the seal.
+ * @return The seal id. -1 if there's no seal on that position.
+ */
 int				get_id_seal(t_game *game, int row, int col);
 
 /**
@@ -458,14 +497,18 @@ void			valid_path(t_game *game);
 /*                             FUNCTIONS - WINDOW                             */
 /******************************************************************************/
 
-//TODO doc
+/**
+ * @brief Updates sprite of the penguin, seals and home.
+ * 
+ * @param game All game information.
+ */
 void			animations(t_game *game);
 
 /**
  * @brief Calculates the direction from the center of the penguin to the cursor.
  * 
  * @param game All game information.
- * @return The direction from penguin to the cursor.
+ * @return The direction from the penguin to the cursor.
  */
 t_direction		direction_to_mouse(t_game *game);
 
@@ -485,7 +528,6 @@ void			draw_cell(t_game *game, int row, int col);
  */
 void			init_mlx(t_game *game);
 
-//TODO redoc
 /**
  * @brief Updates the ordinates of the penguin as it moves.
  * 
@@ -493,18 +535,21 @@ void			init_mlx(t_game *game);
  * @param moving Direction in which the penguin is moving.
  * @param future_x Actual x ordinate of the penguin.
  * @param future_y Actual y ordinate of the penguin.
- * @return The id of the cell the penguin moves onto.
- * If there is a fish, its id. If it is the home, -HOME. Any other cell -1.
+ * @return The id_cell of the corresponding cell.
  */
 t_id_cell		move_penguin(t_game *game,
 					t_direction moving, int32_t x, int32_t y);
 
-//TODO doc
+/**
+ * @brief It prints the game moves in the upper right corner of the screen.
+ * 
+ * @param game All game information.
+ * @param moves The number to print
+ */
 void			refresh_counter(t_game *game, int moves);
 
-//TODO doc
 /**
- * @brief 
+ * @brief Resets all game parameters to the initial values.
  * 
  * @param game All game information.
  */

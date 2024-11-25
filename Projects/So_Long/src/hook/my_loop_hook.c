@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 21:03:25 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/19 09:09:57 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2024/11/21 17:18:22 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,17 +43,16 @@ void	my_loop_hook(void *param)
  */
 static void	collect_fish(t_game *game, int id_fish)
 {
-	if (!game->fishes[id_fish]->collected)
+	if (game->fishes[id_fish]->collected)
+		return ;
+	game->fishes[id_fish]->alive->enabled = false;
+	game->fishes[id_fish]->dead->enabled = true;
+	game->fishes[id_fish]->collected = true;
+	game->collected_fishes++;
+	if (game->collected_fishes == game->quantity_fishes)
 	{
-		game->fishes[id_fish]->alive->enabled = false;
-		game->fishes[id_fish]->dead->enabled = true;
-		game->fishes[id_fish]->collected = true;
-		game->collected_fishes++;
-		if (game->collected_fishes == game->quantity_fishes)
-		{
-			game->home->closed->enabled = false;
-			game->home->open->enabled = true;
-		}
+		game->home->closed->enabled = false;
+		game->home->open->enabled = true;
 	}
 }
 
