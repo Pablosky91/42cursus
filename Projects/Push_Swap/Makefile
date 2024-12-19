@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/10/18 16:13:17 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/12/17 17:06:31 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -173,7 +173,7 @@ norminette:
 normi:
 	@if norminette src libft | grep -q "Error"; then echo "\n$(RED)$$(norminette src libft | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
 
-visualize:
+visualize: all
 	cd visualizer/build;\
 	./bin/visualizer
 

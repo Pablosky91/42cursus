@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/11/25 23:15:31 by pdel-olm         ###   ########.fr        #
+#    Updated: 2024/12/17 20:19:53 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,8 +25,8 @@ CFLAGS := -g3 -fsanitize=address -Wall -Wextra -Werror
 
 #INCLUDE
 
-LIBFT_PATH := libft
-LIBFT := $(LIBFT_PATH)/libft.a
+LIBFT_PATH := libft/
+LIBFT := $(LIBFT_PATH)libft.a
 LIBFT_FLAG := -L $(LIBFT_PATH) -l ft
 
 MLX_PATH := MLX42
@@ -317,10 +317,10 @@ run: levels fclean
 .PHONY: n norminette normi
 n: norminette
 norminette:
-	@echo "norminette src src_bonus libft | grep Error\n"
-	@if norminette src src_bonus libft | grep -q "Error"; then echo "$(RED)$$(norminette src_bonus src libft | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
+	@echo "norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep Error\n"
+	@if norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep -q "Error"; then echo "$(RED)$$(norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
 normi:
-	@if norminette src src_bonus libft | grep -q "Error"; then echo "\n$(RED)$$(norminette src src_bonus libft | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
+	@if norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep -q "Error"; then echo "\n$(RED)$$(norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
 
 .PHONY: v valgrind valgrind_no_flags
 v: valgrind
