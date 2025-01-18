@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/18 17:00:57 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/01/18 17:01:00 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/01/18 19:58:09 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ RESET := \033[0m
 
 #EXTRA VARIABLES
 
-ARG := infile "grep -e line" "wc -l" outfile
+ARG := infile "grep -e line" "tail -1" "wc -m" outfile
 
 VALGRIND_DIR := valgrind/
 
