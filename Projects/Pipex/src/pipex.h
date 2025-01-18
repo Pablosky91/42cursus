@@ -5,14 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/25 23:07:50 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/11/25 23:09:00 by pdel-olm         ###   ########.fr       */
+/*   Created: 2025/01/18 16:57:50 by pdel-olm          #+#    #+#             */
+/*   Updated: 2025/01/18 16:57:51 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef PIPEX_H
 # define PIPEX_H
 
 # include "libft.h"
+# include <sys/wait.h>
 
 #endif

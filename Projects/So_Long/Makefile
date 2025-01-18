@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/12/17 20:19:53 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/01/16 16:20:22 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ MKDIR := mkdir -p
 NAME := so_long
 BONUS_NAME := so_long_bonus
 
-CC := gcc
+CC := cc
 CFLAGS := -g3 -fsanitize=address -Wall -Wextra -Werror
 
 #INCLUDE
@@ -154,7 +154,7 @@ $(MLX_NAME):
 	@$(MAKE) msg_mlx_end
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(LIBFT_FLAG) -I $(SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -c $< -o $@
 
 $(OBJ_DIR):
 	$(MKDIR) $(addprefix $(OBJ_DIR),$(DIRECTORIES))
@@ -187,7 +187,7 @@ $(BONUS_NAME): $(LIBFT) $(MLX_NAME) $(BONUS_OBJECTS)
 	$(CC) $(CFLAGS) $(BONUS_OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(BONUS_NAME)
 
 $(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c $(BONUS_HEADER) | $(BONUS_OBJ_DIR)
-	$(CC) $(CFLAGS) $(LIBFT_FLAG) -I $(BONUS_SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(BONUS_SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -c $< -o $@
 
 $(BONUS_OBJ_DIR):
 	$(MKDIR) $(addprefix $(BONUS_OBJ_DIR),$(addsuffix _bonus,$(DIRECTORIES)))

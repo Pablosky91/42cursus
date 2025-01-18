@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/11/25 23:09:31 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/11/25 23:18:04 by pdel-olm         ###   ########.fr        #
+#    Created: 2025/01/18 17:00:57 by pdel-olm          #+#    #+#              #
+#    Updated: 2025/01/18 17:01:00 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ LIBFT_PATH := ../../libft
 LIBFT := $(LIBFT_PATH)/libft.a
 LIBFT_FLAG := -L $(LIBFT_PATH) -l ft
 
-CC := gcc
+CC := cc
 CFLAGS := -g3 -Wall -Wextra -Werror -fsanitize=address
 
 #FILES
@@ -49,6 +49,8 @@ RESET := \033[0m
 
 #EXTRA VARIABLES
 
+ARG := infile "grep -e line" "wc -l" outfile
+
 VALGRIND_DIR := valgrind/
 
 #RULES
@@ -64,7 +66,7 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER) | $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(LIBFT_FLAG) -I $(SRC_DIR) -I $(LIBFT_PATH) -c $< -o $@
+	$(CC) $(CFLAGS) -I $(SRC_DIR) -I $(LIBFT_PATH) -c $< -o $@
 
 $(OBJ_DIR):
 	$(MKDIR) $(OBJ_DIR)
@@ -92,7 +94,8 @@ re: fclean all
 .PHONY: e exec
 e: exec
 exec: all
-	-./$(NAME)
+	-./$(NAME) $(ARG)
+	cat outfile
 
 .PHONY: n norminette normi
 n: norminette
