@@ -6,10 +6,9 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:57:50 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/01/18 16:57:51 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/01/21 21:11:47 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef PIPEX_H
 # define PIPEX_H
