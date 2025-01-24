@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/18 17:00:57 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/01/18 19:58:09 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/01/24 20:33:49 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,12 +108,13 @@ normi:
 .PHONY: v valgrind valgrind_no_flags
 v: valgrind
 valgrind:
-	@$(MAKE) CFLAGS= valgrind_no_flags
+	@$(MAKE) CFLAGS="-g3 -Wall -Wextra -Werror" valgrind_no_flags
 valgrind_no_flags: clean $(LIBFT) $(OBJECTS) | $(VALGRIND_DIR)
-	@$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) $(MLX_FLAG) -o $(NAME)
-	@-valgrind --leak-check=full --show-leak-kinds=all --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ././$(NAME) $(addprefix $(MAP_DIRECTORY), $(addsuffix $(MAP_EXTENSION), $(MAP)))
-	@echo "$(BLUE) $$(grep "ERROR SUMMARY" $(VALGRIND_DIR)/$$(ls valgrind | tail -1))"
+	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) -o $(NAME)
+	-valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ./$(NAME) $(ARG)
+	@echo "$(BLUE) $$(grep -e "ERROR SUMMARY" -e "FILE DESCRIPTORS" $(VALGRIND_DIR)/$$(ls valgrind | tail -1))"
 	@$(MAKE) clean
+	cat outfile
 
 $(VALGRIND_DIR):
 	$(MKDIR) $(VALGRIND_DIR)
@@ -128,13 +129,7 @@ clean_valgrind:
 
 #MESSAGES
 
-.PHONY: msg_mlx_start msg_mlx_end msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
-
-msg_mlx_start:
-	@echo "$(YELLOW)Starting MLX42 compilation$(RESET)"
-
-msg_mlx_end:
-	@echo "$(GREEN)MLX42 compilation complete$(RESET)"
+.PHONY: msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
 
 msg_clean_start:
 	@echo "$(YELLOW)Cleaning pipex objects$(RED)"

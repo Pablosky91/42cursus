@@ -34,16 +34,16 @@ char	**get_path(char **envp)
 	return (NULL);
 }
 
-char *join_path(char *path, char *command)
+char	*join_path(char *path, char *command)
 {
-	char	*path_command;
+	char		*path_command;
 	size_t		len_path;
 	size_t		len_command;
 	size_t		aux;
 
 	len_path = ft_strlen(path);
 	len_command = ft_strlen(command);
-	path_command = ft_calloc(len_path + len_command + 2, sizeof(char));
+	path_command = malloc(len_path + len_command + 2 * sizeof(char));
 	if (!path_command)
 		return (NULL);
 	aux = -1;
@@ -52,6 +52,7 @@ char *join_path(char *path, char *command)
 	path_command[aux] = '/';
 	while (++aux < len_path + len_command + 1)
 		path_command[aux] = command[aux - len_path - 1];
+	path_command[aux] = 0;
 	return (path_command);
 }
 
@@ -74,83 +75,97 @@ char	*get_path_command(char **path, char *command)
 	return (NULL);
 }
 
-int	main(int argc, char **argv, char **envp)
+bool	is_first_command(int n_cmd)
 {
-	char	**path;
-	char	*file1;
-	char	**cmd1;
-	char	**cmd2;
-	char	**cmd3;
-	char	*file2;
-	int		fds_1[2];
-	int		fds_2[2];
-	pid_t	pid1;
-	pid_t	pid2;
-	pid_t	pid3;
+	return (n_cmd == 2);
+}
+
+bool	is_last_command(t_pipex pipex, int n_cmd)
+{
+	return (n_cmd == pipex.argc - 2);
+}
+
+void	dup2_close(int fd1, int fd2)
+{
+	dup2(fd1, fd2);
+	close(fd1);
+}
+
+void	child(t_pipex pipex, int n_cmd, int *new_fds, int *old_fds)
+{
+	char	**cmd;
 	int		infile_fd;
 	int		outfile_fd;
 
-	path = get_path(envp);
+	if (is_first_command(n_cmd))
+	{
+		infile_fd = open(pipex.argv[1], O_RDONLY);
+		dup2_close(infile_fd, STDIN_FILENO);
+	}
+	else
+	{
+		dup2_close(old_fds[PIPE_READ], STDIN_FILENO);
+		close(old_fds[PIPE_WRITE]);
+	}
+	if (is_last_command(pipex, n_cmd))
+	{
+		outfile_fd = open(pipex.argv[pipex.argc - 1], O_CREAT | O_TRUNC | O_WRONLY, 0644);
+		dup2_close(outfile_fd, STDOUT_FILENO);
+	}
+	else
+	{
+		dup2_close(new_fds[PIPE_WRITE], STDOUT_FILENO);
+		close(new_fds[PIPE_READ]);
+	}
+	cmd = ft_split(pipex.argv[n_cmd], ' ');
+	execve(get_path_command(pipex.path, cmd[0]), cmd, pipex.envp);
+}
+
+int	*execute_command(t_pipex pipex, int n_cmd, int *old_fds)
+{
+	int		*new_fds;
+	pid_t	pid;
+
+	new_fds = NULL;
+	if (!is_last_command(pipex, n_cmd))
+	{
+		new_fds = malloc(2 * sizeof(int));
+		pipe(new_fds);
+	}
+	pid = fork();
+	if (pid == 0)
+		child(pipex, n_cmd, new_fds, old_fds);
+	if (!is_first_command(n_cmd))
+	{
+		close(old_fds[PIPE_WRITE]);
+		close(old_fds[PIPE_READ]);
+	}
+	free(old_fds);
+	return (new_fds);
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_pipex	pipex;
+	int		n_cmd;
+	int		*fds;
+
 	if (argc < 5)
 	{
 		ft_putendl_fd("Usage: ./pipex file1 cmd1 cmd2 file2", 2);
 		exit(1);
 	}
-	file1 = argv[1];
-	file2 = argv[argc - 1];
-	pipe(fds_1);
-	pid1 = fork();
-	if (pid1 == 0) // first child
-	{
-		infile_fd = open(file1, O_RDONLY);
-		dup2(infile_fd, STDIN_FILENO);
-		dup2(fds_1[1], STDOUT_FILENO);
-		close(fds_1[0]);
-		close(fds_1[1]);
-		close(infile_fd);
-		cmd1 = ft_split(argv[2], ' ');
-		execve(get_path_command(path, cmd1[0]), cmd1, envp);
-	}
-	else if (pid1 > 0) // first parent
-	{
-		pipe(fds_2);
-		pid2 = fork();
-		if (pid2 == 0) // second child
-		{
-			dup2(fds_1[0], STDIN_FILENO);
-			dup2(fds_2[1], STDOUT_FILENO);
-			close(fds_1[0]);
-			close(fds_1[1]);
-			cmd2 = ft_split(argv[3], ' ');
-			execve(get_path_command(path, cmd2[0]), cmd2, envp);
-		}
-		else if (pid2 > 0) //second parent
-		{
-			close(fds_1[0]);
-			close(fds_1[1]);
-			pid3 = fork();
-			if (pid3 == 0) // third child
-			{
-				outfile_fd = open(file2, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-				dup2(fds_2[0], STDIN_FILENO);
-				dup2(outfile_fd, STDOUT_FILENO);
-				close(fds_2[0]);
-				close(fds_2[1]);
-				close(outfile_fd);
-				cmd3 = ft_split(argv[4], ' ');
-				execve(get_path_command(path, cmd3[0]), cmd3, envp);
-			}
-			else if (pid3 > 0) //third parent
-			{
-				close(fds_2[0]);
-				close(fds_2[1]);
-				waitpid(pid1, NULL, 0);
-				waitpid(pid2, NULL, 0);
-				waitpid(pid3, NULL, 0);
-			}
-		}
-	}
-	ft_free_double_pointer((void **) path);
+	pipex.argv = argv;
+	pipex.argc = argc;
+	pipex.envp = envp;
+	pipex.path = get_path(envp);
+	n_cmd = 1;
+	fds = NULL;
+	while (++n_cmd < argc - 1)
+		fds = execute_command(pipex, n_cmd, fds);
+	while (wait(NULL) != -1)
+		;
+	ft_free_double_pointer((void **) pipex.path);
 }
 
 //PROTECT SPLIT AND JOIN
