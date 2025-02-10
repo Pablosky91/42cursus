@@ -6,12 +6,16 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:58:30 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:17 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/02/11 00:13:55 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+Counts the number of occurrences of c (converted to a char)
+	in the string pointed to by s.
+*/
 size_t	ft_count_char(char *s, int c)
 {
 	size_t	i;

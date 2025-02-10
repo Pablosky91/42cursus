@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/22 19:24:49 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:17 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/02/06 21:37:21 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_node	*get_first_node(t_data *data, t_half *half)
 		node = data->bot_a;
 	else if (half->location == TOP_B)
 		node = data->top_b;
-	else if (half->location == BOT_B)
+	else
 		node = data->bot_b;
 	return (node);
 }

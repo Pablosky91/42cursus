@@ -5,8 +5,8 @@ OTHER_PATH = ..
 
 RM = rm -f
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror $(BUF_FLAG)
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g3 $(BUF_FLAG)
 BUF =
 ifeq ($(BUF),)
  BUF_FLAG =

@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 12:11:22 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/12/17 17:06:31 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/02/11 00:19:26 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,8 +24,8 @@ LIBFT_PATH := libft
 LIBFT := $(LIBFT_PATH)/libft.a
 LIBFT_FLAG := -L $(LIBFT_PATH) -l ft
 
-CC := gcc
-CFLAGS := -g3 -Wall -Wextra -Werror -fsanitize=address
+CC := cc
+CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address
 
 #FILES
 
@@ -89,6 +89,12 @@ ARG := 99 98 97 96 95 94 93 92 91 90 89 88 87 86 85 84 83 82 81 80 79 78 77 76 7
 N := 3
 REPEAT := 10
 
+VISUALIZER_FOLDER := visualizer
+VISUALIZER_BUILD := $(VISUALIZER_FOLDER)/build
+VISUALIZER_BIN := bin/visualizer
+
+TESTER := tester
+
 #RULES
 
 a: all
@@ -101,7 +107,7 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -c $^ $(LIBFT_FLAG) -I $(LIBFT_PATH) -o $@
+	$(CC) $(CFLAGS) -c $^ -I $(LIBFT_PATH) -o $@
 
 $(OBJ_DIR):
 	$(MKDIR) $(OBJ_DIR)
@@ -114,7 +120,7 @@ clean: msg_clean_start
 
 f: fclean
 fclean: msg_fclean_start
-	$(RM) $(OBJ_DIR) $(NAME) $(BONUS_NAME)
+	$(RM) $(OBJ_DIR) $(NAME) $(BONUS_NAME) $(VISUALIZER_FOLDER) $(TESTER)
 	@$(MAKE) -C $(LIBFT_PATH) fclean
 	@$(MAKE) msg_fclean_end
 
@@ -130,7 +136,7 @@ $(BONUS_NAME): $(LIBFT) $(BONUS_OBJECTS)
 	$(CC) $(CFLAGS) $(BONUS_OBJECTS) $(LIBFT_FLAG) -o $(BONUS_NAME)
 
 $(BONUS_OBJ_DIR)%.o: $(BONUS_SRC_DIR)%.c | $(BONUS_OBJ_DIR)
-	$(CC) $(CFLAGS) -c $^ $(LIBFT_FLAG) -I $(LIBFT_PATH) -o $@
+	$(CC) $(CFLAGS) -c $^ -I $(LIBFT_PATH) -o $@
 
 $(BONUS_OBJ_DIR):
 	$(MKDIR) $(BONUS_OBJ_DIR)
@@ -169,17 +175,26 @@ loop: all
 n: norminette
 norminette:
 	@echo "norminette src libft | grep Error\n"
-	@if norminette src libft | grep -q "Error"; then echo "$(RED)$$(norminette src libft | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
+	@if norminette src libft | grep -q "Error"; then echo "$(RED)$$(norminette src libft | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')$(RESET)"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
 normi:
-	@if norminette src libft | grep -q "Error"; then echo "\n$(RED)$$(norminette src libft | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
+	@if norminette src libft | grep -q "Error"; then echo "\n$(RED)$$(norminette src libft | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')$(RESET)"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
 
-visualize: all
-	cd visualizer/build;\
-	./bin/visualizer
+visualize: all $(VISUALIZER_BUILD)/$(VISUALIZER_BIN)
+	cd $(VISUALIZER_BUILD);\
+	./$(VISUALIZER_BIN)
 
+$(VISUALIZER_BUILD)/$(VISUALIZER_BIN):
+	-git clone https://github.com/o-reo/push_swap_visualizer.git visualizer
+	$(MKDIR) $(VISUALIZER_BUILD)
+	cd $(VISUALIZER_BUILD);\
+	cmake ..;\
+	make
 
-psegura: all
-	$(MAKE) -C psegura
+test: all $(TESTER)
+	$(MAKE) -C $(TESTER)
+
+$(TESTER):
+	git clone https://github.com/PepeSegura/push_swap_Tester.git $(TESTER)
 
 #until there's something better: make v CFLAGS=
 v: valgrind
@@ -214,4 +229,4 @@ msg_fclean_end:
 
 #PHONY
 
-.PHONY: all clean fclean re bonus be reb once exec loop norminette normi visualize psegura valgrind last_valgrind clean_valgrind a c f r b o e l n v msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end
+.PHONY: all clean fclean re bonus be reb once exec loop norminette normi visualize test valgrind last_valgrind clean_valgrind a c f r b o e l n v msg_clean_start msg_clean_end msg_fclean_start msg_fclean_end

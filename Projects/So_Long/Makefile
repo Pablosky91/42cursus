@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/01/16 16:20:22 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/02/11 00:22:49 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,10 @@ RM := rm -rf
 MKDIR := mkdir -p
 
 NAME := so_long
-BONUS_NAME := so_long_bonus
+BONUS_NAME := soo_loong
 
 CC := cc
-CFLAGS := -g3 -fsanitize=address -Wall -Wextra -Werror
+CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address
 
 #INCLUDE
 
@@ -91,7 +91,7 @@ SOURCES := $(addprefix $(SRC_DIR), $(SOURCES))
 
 BONUS_SRC_DIR := src_bonus/
 BONUS_OBJ_DIR := obj_bonus/
-BONUS_HEADER := $(BONUS_SRC_DIR)/$(BONUS_NAME).h
+BONUS_HEADER := $(BONUS_SRC_DIR)/$(NAME)_bonus.h
 
 BONUS_SOURCES := \
 				$(addprefix pathing/,\
@@ -288,13 +288,13 @@ error: all
 l: levels
 levels: all bonus
 	@echo
-	-./$(NAME) maps/tutorial0.ber
+	-./$(BONUS_NAME) maps/tutorial0.ber
 	@echo
-	-./$(NAME) maps/tutorial1.ber
+	-./$(BONUS_NAME) maps/tutorial1.ber
 	@echo
-	-./$(NAME) maps/tutorial2.ber
+	-./$(BONUS_NAME) maps/tutorial2.ber
 	@echo
-	-./$(NAME) maps/tutorial3.ber
+	-./$(BONUS_NAME) maps/tutorial3.ber
 	@echo
 	-./$(BONUS_NAME) maps/tutorial4.ber
 	@echo
@@ -318,9 +318,9 @@ run: levels fclean
 n: norminette
 norminette:
 	@echo "norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep Error\n"
-	@if norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep -q "Error"; then echo "$(RED)$$(norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
+	@if norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep -q "Error"; then echo "$(RED)$$(norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')$(RESET)"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
 normi:
-	@if norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep -q "Error"; then echo "\n$(RED)$$(norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
+	@if norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep -q "Error"; then echo "\n$(RED)$$(norminette $(SRC_DIR) $(BONUS_SRC_DIR) $(LIBFT_PATH) | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')$(RESET)"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
 
 .PHONY: v valgrind valgrind_no_flags
 v: valgrind

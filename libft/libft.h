@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/01 21:03:15 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:06:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/02/11 00:11:04 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@
 # include <stdbool.h>
 
 # include "extra/extra.h"
-
-# include "gnl/get_next_line.h"
 
 # include "original/is/is.h"
 # include "original/lst/lst.h"

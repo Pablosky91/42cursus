@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/02 16:43:04 by pdel-olm          #+#    #+#              #
-#    Updated: 2024/10/24 20:39:09 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/02/11 00:25:39 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@ GREEN = \033[32m
 YELLOW = \033[33m
 BLUE = \033[36m
 
+ITALIC = \033[3m
+
 RESET = \033[0m
 
 #VARIABLES
@@ -25,8 +27,8 @@ NAME = libft.a
 
 RM = rm -rf
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g3
 
 AR = ar
 AR_FLAGS = -rc
@@ -39,9 +41,6 @@ SOURCES =	\
 				ft_get_max.c\
 				ft_get_min.c\
 				ft_str_equals.c)\
-			$(addprefix gnl/,\
-				get_next_line_utils.c\
-				get_next_line.c)\
 			$(addprefix original/is/,\
 				ft_isalnum.c\
 				ft_isalpha.c\
@@ -68,6 +67,7 @@ SOURCES =	\
 				ft_atoi.c\
 				ft_bzero.c\
 				ft_calloc.c\
+				ft_get_next_line.c\
 				ft_itoa.c\
 				ft_split.c\
 				ft_substr.c\
@@ -103,7 +103,7 @@ SOURCES =	\
 				ft_printf.c)
 
 OBJ_DIR = obj/
-ALL_OBJ_DIR = $(addprefix $(OBJ_DIR), gnl extra original/is original/lst original/mem original/other original/put original/str printf)
+ALL_OBJ_DIR = $(addprefix $(OBJ_DIR), extra original/is original/lst original/mem original/other original/put original/str printf)
 OBJECTS = $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 
 MAKEFLAGS = --no-print-directory
@@ -143,19 +143,19 @@ tab:
 	@echo -n "  "
 
 msg_all_start: tab
-	@echo "$(YELLOW)Starting library compilation$(BLUE)"
+	@echo "$(YELLOW)$(ITALIC)Starting library compilation$(BLUE)"
 
 msg_all_end: tab
 	@echo "$(GREEN)Library compilation complete$(RESET)"
 
 msg_clean_start: tab
-	@echo "$(YELLOW)Cleaning library objects$(RED)"
+	@echo "$(YELLOW)$(ITALIC)Cleaning library objects$(RED)"
 
 msg_clean_end: tab
 	@echo "$(GREEN)Library objects cleaned$(RESET)"
 
 msg_fclean_start: tab
-	@echo "$(YELLOW)Cleaning library$(RED)"
+	@echo "$(YELLOW)$(ITALIC)Cleaning library$(RED)"
 
 msg_fclean_end: tab
 	@echo "$(GREEN)Library cleaned$(RESET)"

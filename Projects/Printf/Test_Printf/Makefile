@@ -5,8 +5,8 @@ OTHER_PATH = ..
 
 RM = rm -f
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g3
 
 SOURCES = main.c
 OBJECTS = $(SOURCES:.c=.o)
@@ -14,6 +14,7 @@ OBJECTS = $(SOURCES:.c=.o)
 INCLUDE_PATH = $(OTHER_PATH)
 C_INCLUDE = -I $(INCLUDE_PATH)
 
+LIBRARY = ../libftprintf.a
 LIBRARY_PATH = $(OTHER_PATH)
 LIBRARY_NAME = ftprintf
 C_LIBRARY = -L $(LIBRARY_PATH) -l $(LIBRARY_NAME)
@@ -22,11 +23,11 @@ C_LIBRARY = -L $(LIBRARY_PATH) -l $(LIBRARY_NAME)
 
 all: $(NAME)
 
-$(NAME): library $(OBJECTS)
+$(NAME): $(LIBRARY) $(OBJECTS)
 	$(CC) $(OBJECTS) $(CFLAGS) $(C_INCLUDE) $(C_LIBRARY) -o $@
 
 %.o: %.c
-	$(CC) $(CFLAGS) $(C_INCLUDE) $(C_LIBRARY) -o $@ -c $^
+	$(CC) $(CFLAGS) $(C_INCLUDE) -o $@ -c $^
 
 clean:
 	$(RM) $(OBJECTS)
@@ -38,11 +39,11 @@ fclean: clean
 
 re: fclean all
 
-library:
+$(LIBRARY):
 	@$(MAKE) -C $(OTHER_PATH) all
 
 exec: all
 	@clear
 	@./$(NAME)
 
-.PHONY: all clean fclean re library exec
+.PHONY: all clean fclean re exec
