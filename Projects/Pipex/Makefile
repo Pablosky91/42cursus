@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/18 17:00:57 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/01/24 20:33:49 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/02/17 15:59:19 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,15 @@ MKDIR := mkdir -p
 
 NAME := pipex
 
+NORMAL_BUILD := .normal_built
+BONUS_BUILD := .bonus_built
+
 LIBFT_PATH := ../../libft
 LIBFT := $(LIBFT_PATH)/libft.a
 LIBFT_FLAG := -L $(LIBFT_PATH) -l ft
 
 CC := cc
-CFLAGS := -g3 -Wall -Wextra -Werror -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address
 
 #FILES
 
@@ -33,10 +36,27 @@ OBJ_DIR := obj/
 HEADER := $(SRC_DIR)/$(NAME).h
 
 SOURCES :=	\
-			pipex.c
+			pipex.c\
+			execute_command.c\
+			get_command.c\
+			get_env_path.c\
+			init.c\
+			utils.c\
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 SOURCES := $(addprefix $(SRC_DIR), $(SOURCES))
+
+SOURCES_BONUS :=	\
+			pipex.c\
+			execute_command.c\
+			get_command.c\
+			get_env_path.c\
+			heredoc_bonus.c\
+			init_bonus.c\
+			utils.c\
+
+OBJECTS_BONUS := $(addprefix $(OBJ_DIR), $(SOURCES_BONUS:.c=.o))
+SOURCES_BONUS := $(addprefix $(SRC_DIR), $(SOURCES_BONUS))
 
 #COLOURS
 
@@ -57,10 +77,12 @@ VALGRIND_DIR := valgrind/
 
 .PHONY: a all
 a: all
-all: $(NAME)
+all: $(NORMAL_BUILD)
 
-$(NAME): $(LIBFT) $(OBJECTS)
+$(NORMAL_BUILD): $(LIBFT) $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) -o $(NAME)
+	@$(RM) $(BONUS_BUILD)
+	@touch $(NORMAL_BUILD)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
@@ -74,14 +96,15 @@ $(OBJ_DIR):
 .PHONY: c clean
 c: clean
 clean: msg_clean_start
-	$(RM) $(OBJ_DIR) $(BONUS_OBJ_DIR)
+	$(RM) $(OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_PATH) clean
 	@$(MAKE) msg_clean_end
 
 .PHONY: f fclean
 f: fclean
 fclean: msg_fclean_start
-	$(RM) $(OBJ_DIR) $(BONUS_OBJ_DIR) $(NAME) $(BONUS_NAME)
+	$(RM) $(OBJ_DIR) $(NAME)
+	@$(RM) $(NORMAL_BUILD) $(BONUS_BUILD)
 	@$(MAKE) -C $(LIBFT_PATH) fclean
 	@$(MAKE) msg_fclean_end
 
@@ -89,21 +112,30 @@ fclean: msg_fclean_start
 r: re
 re: fclean all
 
+.PHONY: b bonus
+b: bonus
+bonus: $(BONUS_BUILD)
+
+$(BONUS_BUILD): $(LIBFT) $(OBJECTS_BONUS)
+	$(CC) $(CFLAGS) $(OBJECTS_BONUS) $(LIBFT_FLAG) -o $(NAME)
+	@$(RM) $(NORMAL_BUILD)
+	@touch $(BONUS_BUILD)
+
 #EXTRA RULES
 
 .PHONY: e exec
 e: exec
-exec: all
+exec:
 	-./$(NAME) $(ARG)
 	cat outfile
 
 .PHONY: n norminette normi
 n: norminette
 norminette:
-	@echo "norminette src src_bonus libft | grep Error\n"
-	@if norminette src src_bonus libft | grep -q "Error"; then echo "$(RED)$$(norminette src_bonus src libft | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
+	@echo "norminette src libft | grep Error\n"
+	@if norminette src libft | grep -q "Error"; then echo "$(RED)$$(norminette src libft | grep "Error" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')$(RESET)"; else echo "$(GREEN)Everything OK!$(RESET)"; fi
 normi:
-	@if norminette src src_bonus libft | grep -q "Error"; then echo "\n$(RED)$$(norminette src src_bonus libft | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
+	@if norminette src libft | grep -q "Error"; then echo "\n$(RED)$$(norminette src libft | grep "Error" | grep -v -e "TOO_MANY_FUNCS" -e "WRONG_SCOPE_COMMENT" -e "EMPTY_LINE_FUNCTION" -e "LINE_TOO_LONG" -e "TOO_MANY_LINES" -e "CONSECUTIVE_NEWLINES" | sed -z 's/\nError/\n\$(YELLOW)  Error/g' | sed -z 's/\n/\n\$(RED)/g')$(RESET)"; else echo "$(GREEN)Run full norminette!$(RESET)"; fi
 
 .PHONY: v valgrind valgrind_no_flags
 v: valgrind
@@ -111,7 +143,7 @@ valgrind:
 	@$(MAKE) CFLAGS="-g3 -Wall -Wextra -Werror" valgrind_no_flags
 valgrind_no_flags: clean $(LIBFT) $(OBJECTS) | $(VALGRIND_DIR)
 	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) -o $(NAME)
-	-valgrind --track-fds=yes --leak-check=full --show-leak-kinds=all --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ./$(NAME) $(ARG)
+	-valgrind --trace-children=yes --track-fds=yes --leak-check=full --show-leak-kinds=all --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ./$(NAME) $(ARG)
 	@echo "$(BLUE) $$(grep -e "ERROR SUMMARY" -e "FILE DESCRIPTORS" $(VALGRIND_DIR)/$$(ls valgrind | tail -1))"
 	@$(MAKE) clean
 	cat outfile

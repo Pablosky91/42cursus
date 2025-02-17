@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   get_env_path.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 12:19:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/02/17 15:40:45 by pdel-olm         ###   ########.fr       */
+/*   Created: 2025/02/06 21:46:11 by pdel-olm          #+#    #+#             */
+/*   Updated: 2025/02/17 15:52:31 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int	main(int argc, char **argv, char **envp)
+char	**get_env_path(char **envp)
 {
-	t_pipex	pipex;
-	int		*fds;
-	int		cmd_pos;
+	int		env_iter;
+	char	**split;
+	char	*substr;
 
-	fds = init(&pipex, argc, argv, envp);
-	cmd_pos = pipex.first_command_pos;
-	while (cmd_pos < argc - 1)
-		fds = execute_command(pipex, cmd_pos++, fds);
-	while (wait(NULL) != -1)
-		;
-	ft_free_double_pointer((void **) pipex.path);
+	env_iter = -1;
+	while (envp[++env_iter])
+	{
+		if (ft_strncmp(envp[env_iter], "PATH=", 5))
+			continue ;
+		substr = ft_substr(envp[env_iter], 5, ft_strlen(envp[env_iter]) - 5);
+		if (!substr)
+			return (NULL);
+		split = ft_split(substr, ':');
+		if (!split)
+			return (NULL);
+		free(substr);
+		return (split);
+	}
+	return (NULL);
 }
-
-//PROTECT SPLIT AND JOIN
-//PROTECT FILE OPEN
-//PROTECT DUP2
-//CLOSE ALL FDS
-//PROTECT EXECVE
-//FREE ALL
