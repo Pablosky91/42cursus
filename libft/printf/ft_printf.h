@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:14:16 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:17 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:31:12 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,20 @@
 
 # define HEX_UPPER "0123456789ABCDEF"
 # define HEX_LOWER "0123456789abcdef"
-# define PRINT_NULL "(null)"
+# define PRINT_NULL_STRING "(null)"
+# define PRINT_NULL_POINTER "(nil)"
 # define PRINTF_SPECIFIER '%'
 
+int	ft_printf_fd(int fd, const char *format, ...);
 int	ft_printf(const char *format, ...);
 
-int	pf_print_char(char c);
-int	pf_print_flag(char flag, va_list args);
-int	pf_print_hexadecimal(size_t hex, char *letter_case);
-int	pf_print_int(int nbr);
-int	pf_print_pointer(size_t p);
-int	pf_print_string(char *str);
-int	pf_print_unsigned_int(unsigned int nbr);
-int	pf_print(char c);
+int	pf_print_char(int fd, char c);
+int	pf_print_flag(int fd, char flag, va_list args);
+int	pf_print_hexadecimal(int fd, size_t hex, char *letter_case);
+int	pf_print_int(int fd, int nbr);
+int	pf_print_pointer(int fd, size_t p);
+int	pf_print_string(int fd, char *str);
+int	pf_print_unsigned_int(int fd, unsigned int nbr);
+int	pf_print(int fd, char c);
 
 #endif

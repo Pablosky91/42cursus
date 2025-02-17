@@ -6,14 +6,13 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:34:17 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:17 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:17:14 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	pf_print(char c)
+int	pf_print(int fd, char c)
 {
-	ft_putchar_fd(c, STDOUT_FILENO);
-	return (1);
+	return (write(fd, &c, 1));
 }

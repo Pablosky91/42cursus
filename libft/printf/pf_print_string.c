@@ -6,20 +6,20 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:19:25 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:17 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/02/17 16:33:00 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	pf_print_string(char *str)
+int	pf_print_string(int fd, char *str)
 {
-	int	i;
+	int	iter;
 
 	if (!str)
-		return (pf_print_string(PRINT_NULL));
-	i = 0;
-	while (str[i])
-		i += pf_print(str[i]);
-	return (i);
+		return (pf_print_string(fd, PRINT_NULL_STRING));
+	iter = 0;
+	while (str[iter])
+		iter += pf_print(fd, str[iter]);
+	return (iter);
 }
