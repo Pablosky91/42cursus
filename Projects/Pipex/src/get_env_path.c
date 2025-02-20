@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 21:46:11 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/02/17 15:52:31 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/02/17 20:15:58 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ char	**get_env_path(char **envp)
 		if (!substr)
 			return (NULL);
 		split = ft_split(substr, ':');
+		free(substr);
 		if (!split)
 			return (NULL);
-		free(substr);
 		return (split);
 	}
 	return (NULL);

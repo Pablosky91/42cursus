@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 21:38:15 by pdel-olm          #+#    #+#             */
-/*   Updated: 2024/10/18 16:13:17 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/02/17 17:30:12 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ bool	ft_free_double_pointer(void **double_pointer)
 	__u_int	i;
 
 	i = 0;
+	if (!double_pointer)
+		return (false);
 	while (double_pointer[i])
 		free(double_pointer[i++]);
 	free(double_pointer);

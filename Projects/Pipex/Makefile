@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/18 17:00:57 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/02/17 15:59:19 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/02/20 20:33:56 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,10 +37,11 @@ HEADER := $(SRC_DIR)/$(NAME).h
 
 SOURCES :=	\
 			pipex.c\
-			execute_command.c\
+			exit_pipex.c\
 			get_command.c\
 			get_env_path.c\
 			init.c\
+			process_command.c\
 			utils.c\
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
@@ -48,11 +49,12 @@ SOURCES := $(addprefix $(SRC_DIR), $(SOURCES))
 
 SOURCES_BONUS :=	\
 			pipex.c\
-			execute_command.c\
+			exit_pipex.c\
 			get_command.c\
 			get_env_path.c\
 			heredoc_bonus.c\
 			init_bonus.c\
+			process_command.c\
 			utils.c\
 
 OBJECTS_BONUS := $(addprefix $(OBJ_DIR), $(SOURCES_BONUS:.c=.o))
@@ -143,7 +145,7 @@ valgrind:
 	@$(MAKE) CFLAGS="-g3 -Wall -Wextra -Werror" valgrind_no_flags
 valgrind_no_flags: clean $(LIBFT) $(OBJECTS) | $(VALGRIND_DIR)
 	$(CC) $(CFLAGS) $(OBJECTS) $(LIBFT_FLAG) -o $(NAME)
-	-valgrind --trace-children=yes --track-fds=yes --leak-check=full --show-leak-kinds=all --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ./$(NAME) $(ARG)
+	-valgrind -s --trace-children=yes --track-fds=yes --leak-check=full --show-leak-kinds=all --log-file=$(VALGRIND_DIR)$$(date +"%y%m%d%H%M%S").txt ./$(NAME) $(ARG)
 	@echo "$(BLUE) $$(grep -e "ERROR SUMMARY" -e "FILE DESCRIPTORS" $(VALGRIND_DIR)/$$(ls valgrind | tail -1))"
 	@$(MAKE) clean
 	cat outfile

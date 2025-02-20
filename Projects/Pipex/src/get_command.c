@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:52:11 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/02/17 15:53:48 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/02/20 17:34:28 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,28 @@
 
 static char	*join_path(char *path, char *command);
 
-//TODO investigate what happens if no command is found
-char	*get_command(char **path, char *command)
+t_exit_code	get_command(char **path, char *command, char **path_command)
 {
-	char	*path_command;
 	int		path_iter;
 
-	if (!path)
-		return (NULL);
+	if (!path || !command)
+		return (EC_ERROR);
 	path_iter = -1;
 	while (path[++path_iter])
 	{
-		path_command = join_path(path[path_iter], command);
-		if (!path_command)
-			return (NULL);
-		if (!access(path_command, X_OK))
-			return (path_command);
-		free(path_command);
+		*path_command = join_path(path[path_iter], command);
+		if (!(*path_command))
+			return (EC_ERROR);
+		if (access(*path_command, F_OK) == -1)
+		{
+			free(*path_command);
+			continue ;
+		}
+		if (access(*path_command, X_OK) == -1)
+			return (EC_COMMAND_NOT_EXECUTABLE);
+		return (EC_SUCCESS);
 	}
-	return (NULL);
+	return (EC_COMMAND_NOT_FOUND);
 }
 
 static char	*join_path(char *path, char *command)
