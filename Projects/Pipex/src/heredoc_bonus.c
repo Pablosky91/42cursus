@@ -6,13 +6,14 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 21:46:25 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/02/18 19:44:05 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/03/06 21:23:49 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
 static bool	is_delimiter_line(char *delimiter, char *line);
+static void	here_doc_error(t_pipex *pipex, int *fds);
 
 int	*here_doc(t_pipex *pipex)
 {
@@ -23,12 +24,12 @@ int	*here_doc(t_pipex *pipex)
 	pipex->infile = NULL;
 	pipex->outfile_flag = O_CREAT | O_APPEND | O_WRONLY;
 	pipex->first_command_pos = 3;
-	fds = malloc(2 * sizeof(int));
+	fds = ft_calloc(2, sizeof(int));
 	if (!fds)
-		;//TODO protect malloc // return (NULL);
+		here_doc_error(pipex, fds);
 	end = false;
 	if (pipe(fds) == -1)
-		;//TODO protect pipe // return (NULL);
+		here_doc_error(pipex, fds);
 	while (!end)
 	{
 		ft_printf("%s", "> ");
@@ -54,4 +55,11 @@ static bool	is_delimiter_line(char *delimiter, char *line)
 		iter++;
 	}
 	return (!delimiter[iter] && line[iter] == '\n' && !line[iter + 1]);
+}
+
+static void	here_doc_error(t_pipex *pipex, int *fds)
+{
+	ft_free_double_pointer((void **)pipex->path);
+	free(fds);
+	exit(EC_ERROR);
 }

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:57:50 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/02/20 17:50:58 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/03/06 19:14:28 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef enum e_exit_code
 {
 	EC_SUCCESS					= 0,
 	EC_ERROR					= 1,
+	EC_FILE_NOT_FOUND			= 2,
 	EC_COMMAND_NOT_EXECUTABLE	= 126,
 	EC_COMMAND_NOT_FOUND		= 127
 }	t_exit_code;
@@ -50,6 +51,8 @@ int			*here_doc(t_pipex *pipex);
 int			*init(t_pipex *pipex, int argc, char **argv, char **envp);
 
 int			exit_pipex(t_pipex pipex, pid_t last_child);
+
+void		close_and_free_pipe(int *pipe);
 
 bool		reads_from_infile(t_pipex pipex, int cmd_pos);
 
