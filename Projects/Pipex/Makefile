@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/18 17:00:57 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/03/07 22:39:04 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/03/08 00:07:07 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ NAME := pipex
 NORMAL_BUILD := .normal_built
 BONUS_BUILD := .bonus_built
 
-LIBFT_PATH := ../../libft
+LIBFT_PATH := ./libft
 LIBFT := $(LIBFT_PATH)/libft.a
 LIBFT_FLAG := -L $(LIBFT_PATH) -l ft
 
