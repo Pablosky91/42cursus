@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/18 17:00:57 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/02/20 20:33:56 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/03/07 22:39:04 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIBFT := $(LIBFT_PATH)/libft.a
 LIBFT_FLAG := -L $(LIBFT_PATH) -l ft
 
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS := -Wall -Wextra -Werror -g3
 
 #FILES
 
@@ -160,6 +160,11 @@ last_valgrind:
 .PHONY: clean_valgrind
 clean_valgrind:
 	$(RM) $(VALGRIND_DIR)
+
+.PHONY: test
+test: bonus
+	cd tester;\
+	bash run.sh --show-valgrind
 
 #MESSAGES
 

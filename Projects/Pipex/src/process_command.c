@@ -6,18 +6,62 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 21:46:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/03/06 21:29:48 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/03/07 23:19:41 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static void	error(t_pipex pipex, int *write_pipe, int *read_pipe, t_exit_code exit_code)
+static void	child(t_pipex pipex, int cmd_pos, int *write_pipe, int *read_pipe);
+static bool	child_read(t_pipex pipex, int cmd_pos, int *read_pipe);
+static bool	child_write(t_pipex pipex, int cmd_pos, int *write_pipe);
+static void	error_message(t_exit_code *exit_value, char *cmd_path, char *cmd_0);
+
+int	*process_command(t_pipex pipex,
+	int cmd_pos, int *read_pipe, pid_t *child_pid)
 {
-	close_and_free_pipe(write_pipe);
-	close_and_free_pipe(read_pipe);
-	ft_free_double_pointer((void **)pipex.path);
-	exit(exit_code);
+	int		*write_pipe;
+
+	write_pipe = NULL;
+	if (!writes_to_outfile(pipex, cmd_pos))
+	{
+		write_pipe = ft_calloc(2, sizeof(int));
+		if (!write_pipe)
+			error_processing_command(pipex, write_pipe, read_pipe, EC_ERROR);
+		if (pipe(write_pipe) == -1)
+			error_processing_command(pipex, write_pipe, read_pipe, EC_ERROR);
+	}
+	*child_pid = fork();
+	if (*child_pid == -1)
+		error_processing_command(pipex, write_pipe, read_pipe, EC_ERROR);
+	if (*child_pid == 0)
+		child(pipex, cmd_pos, write_pipe, read_pipe);
+	if (!reads_from_infile(pipex, cmd_pos))
+		close_and_free_pipe(read_pipe);
+	return (write_pipe);
+}
+
+static void	child(t_pipex pipex, int cmd_pos, int *write_pipe, int *read_pipe)
+{
+	char		**cmd;
+	char		*cmd_path;
+	t_exit_code	exit_value;
+
+	cmd_path = NULL;
+	if (!child_read(pipex, cmd_pos, read_pipe))
+		error_processing_command(pipex, write_pipe, read_pipe, EC_ERROR);
+	if (!child_write(pipex, cmd_pos, write_pipe))
+		error_processing_command(pipex, write_pipe, read_pipe, EC_ERROR);
+	cmd = ft_split(pipex.argv[cmd_pos], ' ');
+	if (!cmd)
+		error_processing_command(pipex, write_pipe, read_pipe, EC_ERROR);
+	exit_value = get_command(pipex.path, cmd[0], &cmd_path);
+	if (exit_value == EC_SUCCESS)
+		execve(cmd_path, cmd, pipex.envp);
+	error_message(&exit_value, cmd_path, cmd[0]);
+	free(cmd_path);
+	ft_free_double_pointer((void **)cmd);
+	error_processing_command(pipex, write_pipe, read_pipe, exit_value);
 }
 
 static bool	child_read(t_pipex pipex, int cmd_pos, int *read_pipe)
@@ -76,61 +120,20 @@ static bool	child_write(t_pipex pipex, int cmd_pos, int *write_pipe)
 	return (error_sum == 0);
 }
 
-static void	child(t_pipex pipex, int cmd_pos, int *write_pipe, int *read_pipe)
+static void	error_message(t_exit_code *exit_value, char *cmd_path, char *cmd_0)
 {
-	char		**cmd;
-	char		*cmd_path;
-	t_exit_code	exit_value;
-
-	cmd_path = NULL;
-	if (!child_read(pipex, cmd_pos, read_pipe))
-		error(pipex, write_pipe, read_pipe, EC_ERROR);
-	if (!child_write(pipex, cmd_pos, write_pipe))
-		error(pipex, write_pipe, read_pipe, EC_ERROR);
-	cmd = ft_split(pipex.argv[cmd_pos], ' ');
-	if (!cmd)
-		error(pipex, write_pipe, read_pipe, EC_ERROR);
-	exit_value = get_command(pipex.path, cmd[0], &cmd_path);
-	if (exit_value == EC_SUCCESS)
-		execve(cmd_path, cmd, pipex.envp);
-	if (exit_value == EC_COMMAND_NOT_EXECUTABLE)
-		ft_printf_fd(STDERR_FILENO, "%s: Permission denied\n", cmd_path);
-	if (exit_value == EC_COMMAND_NOT_FOUND)
-		ft_printf_fd(STDERR_FILENO, "%s: Command not found\n", cmd[0]);
-	if (exit_value == EC_SUCCESS)
+	if (*exit_value == EC_SUCCESS)
 	{
 		ft_printf_fd(STDERR_FILENO, "%s: Is a directory\n", cmd_path);
-		exit_value = EC_COMMAND_NOT_EXECUTABLE;
+		*exit_value = EC_COMMAND_NOT_EXECUTABLE;
 	}
-	if (exit_value == EC_FILE_NOT_FOUND)
+	else if (*exit_value == EC_FILE_NOT_FOUND)
 	{
-		ft_printf_fd(STDERR_FILENO, "%s: No such file or directory\n", cmd_path);
-		exit_value = EC_COMMAND_NOT_FOUND;
+		ft_printf_fd(STDERR_FILENO, "%s: No such file or directory\n", cmd_0);
+		*exit_value = EC_COMMAND_NOT_FOUND;
 	}
-	free(cmd_path);
-	ft_free_double_pointer((void **)cmd);
-	error(pipex, write_pipe, read_pipe, exit_value);
-}
-
-int	*process_command(t_pipex pipex, int cmd_pos, int *read_pipe, pid_t *child_pid)
-{
-	int		*write_pipe;
-
-	write_pipe = NULL;
-	if (!writes_to_outfile(pipex, cmd_pos))
-	{
-		write_pipe = ft_calloc(2, sizeof(int));
-		if (!write_pipe)
-			error(pipex, write_pipe, read_pipe, EC_ERROR);
-		if (pipe(write_pipe) == -1)
-			error(pipex, write_pipe, read_pipe, EC_ERROR);
-	}
-	*child_pid = fork();
-	if (*child_pid == -1)
-		error(pipex, write_pipe, read_pipe, EC_ERROR);
-	if (*child_pid == 0)
-		child(pipex, cmd_pos, write_pipe, read_pipe);
-	if (!reads_from_infile(pipex, cmd_pos))
-		close_and_free_pipe(read_pipe);
-	return (write_pipe);
+	else if (*exit_value == EC_COMMAND_NOT_EXECUTABLE)
+		ft_printf_fd(STDERR_FILENO, "%s: Permission denied\n", cmd_path);
+	else if (*exit_value == EC_COMMAND_NOT_FOUND)
+		ft_printf_fd(STDERR_FILENO, "%s: Command not found\n", cmd_0);
 }

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 16:57:50 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/03/06 19:14:28 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/03/07 23:26:36 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ typedef struct s_pipex
 	int		first_command_pos;
 }	t_pipex;
 
-int			*process_command(t_pipex pipex, int cmd_pos, int *read_pipe, pid_t *last_child);
+//FUNCTIONS
+
+int			exit_pipex(t_pipex pipex, pid_t last_child);
 
 t_exit_code	get_command(char **path, char *command, char **path_command);
 
@@ -50,9 +52,15 @@ int			*here_doc(t_pipex *pipex);
 
 int			*init(t_pipex *pipex, int argc, char **argv, char **envp);
 
-int			exit_pipex(t_pipex pipex, pid_t last_child);
+int			*process_command(t_pipex pipex,
+				int cmd_pos, int *read_pipe, pid_t *last_child);
 
 void		close_and_free_pipe(int *pipe);
+
+//UTILS FUNCTIONS
+
+void		error_processing_command(t_pipex pipex,
+				int *write_pipe, int *read_pipe, t_exit_code exit_code);
 
 bool		reads_from_infile(t_pipex pipex, int cmd_pos);
 

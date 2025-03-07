@@ -6,34 +6,23 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 15:52:11 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/03/06 19:59:14 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/03/07 23:19:55 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-static char	*join_path(char *path, char *command);
+static t_exit_code	relative_absolute_path(char *command, char **path_command);
+static char			*join_path(char *path, char *command);
 
 t_exit_code	get_command(char **path, char *command, char **path_command)
 {
 	int		path_iter;
 
 	if (!path || !command)
-		return (EC_ERROR);
+		return (EC_FILE_NOT_FOUND);
 	if (ft_strchr(command, '/'))
-	{
-		*path_command = ft_strdup(command);
-		if (!(*path_command))
-			return (EC_ERROR);
-		if (access(*path_command, F_OK) == -1)
-		{
-			free(*path_command);
-			return (EC_FILE_NOT_FOUND);
-		}
-		if (access(*path_command, X_OK) == -1)
-			return (EC_COMMAND_NOT_EXECUTABLE);
-		return (EC_SUCCESS);
-	}
+		return (relative_absolute_path(command, path_command));
 	path_iter = -1;
 	while (path[++path_iter])
 	{
@@ -51,6 +40,18 @@ t_exit_code	get_command(char **path, char *command, char **path_command)
 	}
 	*path_command = NULL;
 	return (EC_COMMAND_NOT_FOUND);
+}
+
+static t_exit_code	relative_absolute_path(char *command, char **path_command)
+{
+	*path_command = ft_strdup(command);
+	if (!(*path_command))
+		return (EC_ERROR);
+	if (access(*path_command, F_OK) == -1)
+		return (EC_FILE_NOT_FOUND);
+	if (access(*path_command, X_OK) == -1)
+		return (EC_COMMAND_NOT_EXECUTABLE);
+	return (EC_SUCCESS);
 }
 
 static char	*join_path(char *path, char *command)
