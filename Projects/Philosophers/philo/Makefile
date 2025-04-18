@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/18 16:39:30 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/04/18 19:11:16 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/04/18 21:36:56 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ INC_DIR := include/
 HEADER := $(INC_DIR)/$(NAME).h
 
 SOURCES :=	\
+			parse.c\
 			philo.c\
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
