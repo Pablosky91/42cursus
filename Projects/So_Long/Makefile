@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/22 16:54:43 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/02/11 00:22:49 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/05/01 17:07:58 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -147,11 +147,14 @@ $(NAME): $(LIBFT) $(MLX_NAME) $(OBJECTS)
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_PATH)
 
-$(MLX_NAME):
+$(MLX_NAME): $(MLX_PATH)
 	@$(MAKE) msg_mlx_start
 	cmake $(MLX_PATH) -B $(MLX_BUILD)
 	make -C $(MLX_BUILD) -j4
 	@$(MAKE) msg_mlx_end
+
+$(MLX_PATH):
+	git clone https://github.com/codam-coding-college/MLX42.git
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER) | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -I $(SRC_DIR) -I $(LIBFT_PATH) -I $(MLX_INCLUDE) -c $< -o $@

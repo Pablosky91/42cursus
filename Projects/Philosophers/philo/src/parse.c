@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 21:18:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/04/18 21:36:11 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/05/01 18:44:05 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static bool	better_atoi(char *str, int *num);
 
 bool	parse(t_philo *philo, int argc, char **argv)
 {
+	philo->min_number_eat = -1;
 	if (argc < 5 || argc > 6
 		|| !better_atoi(argv[1], &philo->number_philosophers)
 		|| !better_atoi(argv[2], &philo->time_die)
@@ -26,7 +27,7 @@ bool	parse(t_philo *philo, int argc, char **argv)
 		|| philo->time_die < 0
 		|| philo->time_eat < 0
 		|| philo->time_sleep < 0
-		|| philo->min_number_eat < 0)
+		|| (argc == 6 && philo->min_number_eat < 0))
 	{
 		printf("\
 Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep\
