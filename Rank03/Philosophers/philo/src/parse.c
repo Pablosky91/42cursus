@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 21:18:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/05/01 18:44:05 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/05 21:39:04 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 static bool	better_atoi(char *str, int *num);
 
-bool	parse(t_philo *philo, int argc, char **argv)
+bool	parse(t_table *table, int argc, char **argv)
 {
-	philo->min_number_eat = -1;
+	table->min_number_eat = -1;
 	if (argc < 5 || argc > 6
-		|| !better_atoi(argv[1], &philo->number_philosophers)
-		|| !better_atoi(argv[2], &philo->time_die)
-		|| !better_atoi(argv[3], &philo->time_eat)
-		|| !better_atoi(argv[4], &philo->time_sleep)
-		|| (argc == 6 && !better_atoi(argv[5], &philo->min_number_eat))
-		|| philo->number_philosophers <= 0
-		|| philo->time_die < 0
-		|| philo->time_eat < 0
-		|| philo->time_sleep < 0
-		|| (argc == 6 && philo->min_number_eat < 0))
+		|| !better_atoi(argv[1], &table->number_philosophers)
+		|| !better_atoi(argv[2], &table->time_die)
+		|| !better_atoi(argv[3], &table->time_eat)
+		|| !better_atoi(argv[4], &table->time_sleep)
+		|| (argc == 6 && !better_atoi(argv[5], &table->min_number_eat))
+		|| table->number_philosophers <= 0
+		|| table->time_die < 0
+		|| table->time_eat < 0
+		|| table->time_sleep < 0
+		|| (argc == 6 && table->min_number_eat < 0))
 	{
 		printf("\
 Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep\
