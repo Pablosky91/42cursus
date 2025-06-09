@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:41:08 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/05 21:39:49 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/09 17:47:05 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,9 @@ struct s_philo
 };
 
 bool	parse(t_table *philo, int argc, char **argv);
+bool	create_philos(t_table *table);
+void	*routine(void *arg);
+void	print_philo(t_table *table, int id, int action);
+bool	join_philos(t_table *table);
 
 #endif
