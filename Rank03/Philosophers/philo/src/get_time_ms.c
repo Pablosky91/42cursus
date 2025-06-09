@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   get_time_ms.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/18 16:41:10 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/09 21:39:07 by pdel-olm         ###   ########.fr       */
+/*   Created: 2025/06/09 21:56:45 by pdel-olm          #+#    #+#             */
+/*   Updated: 2025/06/09 21:56:46 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-//TODO destroy mutexes
-int	main(int argc, char **argv)
+long	get_time_ms(t_timeval start)
 {
-	t_table	table;
+	t_timeval	now;
 
-	if (!parse(&table, argc, argv))
-		return (1);
-	init_forks(&table);
-	create_philos(&table);
-	join_philos(&table);
-	free(table.philos);
-	free(table.forks);
-	return (0);
+	gettimeofday(&now, NULL);
+	return (((now.tv_sec - start.tv_sec) * 1000)
+		+ ((now.tv_usec - start.tv_usec) / 1000));
 }

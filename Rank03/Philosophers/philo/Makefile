@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/18 16:39:30 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/06/09 17:47:50 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/06/09 23:37:20 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ HEADER := $(INC_DIR)/$(NAME).h
 
 SOURCES :=	\
 			create_philos.c\
+			get_time_ms.c\
+			init_forks.c\
 			join_philos.c\
 			parse.c\
 			philo.c\
