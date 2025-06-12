@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/18 16:39:30 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/06/09 23:37:20 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/06/12 18:43:32 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,14 +30,19 @@ INC_DIR := include/
 HEADER := $(INC_DIR)/$(NAME).h
 
 SOURCES :=	\
+			all_alive.c\
 			create_philos.c\
 			get_time_ms.c\
 			init_forks.c\
+			is_dead.c\
 			join_philos.c\
 			parse.c\
 			philo.c\
 			print_philo.c\
 			routine.c\
+			routine_eat.c\
+			routine_sleep.c\
+			routine_think.c\
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 SOURCES := $(addprefix $(SRC_DIR), $(SOURCES))

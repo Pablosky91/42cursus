@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   join_philos.c                                      :+:      :+:    :+:   */
+/*   all_alive.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/09 17:46:14 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/12 17:32:45 by pdel-olm         ###   ########.fr       */
+/*   Created: 2025/06/12 18:06:43 by pdel-olm          #+#    #+#             */
+/*   Updated: 2025/06/12 18:30:31 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-bool	join_philos(t_table *table)
+bool	all_alive(t_table *table)
 {
-	int	i;
+	bool	all_alive;
 
-	i = 0;
-	// if (pthread_mutex_destroy(&table->start_mutex))
-	// 	return (false);
-	while (i < table->number_philosophers)
-	{
-		if (pthread_join(table->philos[i].thread, NULL))
-			return (false);
-		i++;
-	}
-	return (true);
+	pthread_mutex_lock(&table->dead_mutex);
+	all_alive = !table->dead;
+	pthread_mutex_unlock(&table->dead_mutex);
+	return (all_alive);
 }
