@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:43:32 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/12 18:15:02 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/19 20:51:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*routine(void *arg)
 
 	philo = (t_philo *) arg;
 	// wait_to_start(philo->table);
-	while ((philo->times_eaten < philo->table->min_number_eat || philo->table->min_number_eat == -1) && all_alive(philo->table))
+	while (!is_satisfied(philo) && all_alive(philo->table))
 	{
 		routine_eat(philo);
 		routine_sleep(philo);

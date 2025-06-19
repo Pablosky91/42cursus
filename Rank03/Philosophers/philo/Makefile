@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/18 16:39:30 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/06/12 18:43:32 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/06/19 20:56:03 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SOURCES :=	\
 			get_time_ms.c\
 			init_forks.c\
 			is_dead.c\
+			is_satisfied.c\
 			join_philos.c\
 			parse.c\
 			philo.c\
@@ -58,7 +59,7 @@ RESET := \033[0m
 
 #EXTRA VARIABLES
 
-ARG = 4 40 10 5
+ARG = 4 480 120 60
 
 VALGRIND_DIR := valgrind/
 

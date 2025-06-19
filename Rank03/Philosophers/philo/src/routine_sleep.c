@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 17:58:45 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/12 17:59:40 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/19 20:51:26 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ static void	release_forks(t_philo *philo)
 	pthread_mutex_unlock(&philo->right->grab_mutex);
 	pthread_mutex_lock(&philo->left->taken_mutex);
 	philo->left->taken = false;
+	philo->left->orientation = RIGHT;
 	pthread_mutex_unlock(&philo->left->taken_mutex);
 	pthread_mutex_lock(&philo->right->taken_mutex);
 	philo->right->taken = false;
+	philo->right->orientation = LEFT;
 	pthread_mutex_unlock(&philo->right->taken_mutex);
 }

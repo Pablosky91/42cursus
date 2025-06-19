@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 17:58:48 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/12 18:41:25 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/19 16:44:06 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	routine_eat(t_philo *philo)
 			return ;
 		//usleep(1000);
 	}
-	philo->times_eaten++;
-	philo->time_last_meal = get_time_ms(philo->table->start_time);
 	print_philo(philo->table, philo->id, EAT);
+	philo->time_last_meal = get_time_ms(philo->table->start_time);
+	philo->times_eaten++;
 	usleep(philo->table->time_eat * 1000);
 }
 
@@ -35,7 +35,9 @@ static bool	grab_forks(t_philo *philo)
 	grabbed = false;
 	pthread_mutex_lock(&philo->left->taken_mutex);
 	pthread_mutex_lock(&philo->right->taken_mutex);
-	if (!philo->left->taken && !philo->right->taken)
+	if (!philo->left->taken && !philo->right->taken
+		&& philo->left->orientation != RIGHT
+		&& philo->right->orientation != LEFT)
 	{
 		pthread_mutex_lock(&philo->left->grab_mutex);
 		pthread_mutex_lock(&philo->right->grab_mutex);

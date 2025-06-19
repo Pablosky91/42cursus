@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:41:08 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/12 18:41:49 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/19 20:41:58 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,16 @@
 # include <sys/time.h>
 # include <stdlib.h>
 
-typedef struct s_table	t_table;
-typedef struct s_philo	t_philo;
-typedef struct s_fork	t_fork;
-typedef struct timeval	t_timeval;
-typedef enum e_message	t_message;
+typedef enum e_message		t_message;
+typedef enum e_orientation	t_orientation;
 
-typedef pthread_t		t_thread;
-typedef pthread_mutex_t	t_mutex;
+typedef struct s_table		t_table;
+typedef struct s_philo		t_philo;
+typedef struct s_fork		t_fork;
+typedef struct timeval		t_timeval;
+
+typedef pthread_t			t_thread;
+typedef pthread_mutex_t		t_mutex;
 
 enum e_message
 {
@@ -37,6 +39,13 @@ enum e_message
 	SLEEP,
 	THINK,
 	DIE,
+};
+
+enum e_orientation
+{
+	NEUTRAL,
+	LEFT,
+	RIGHT,
 };
 
 struct s_table
@@ -70,10 +79,11 @@ struct s_philo
 
 struct s_fork
 {
-	int		id;
-	bool	taken;
-	t_mutex	grab_mutex;
-	t_mutex	taken_mutex;
+	int				id;
+	bool			taken;
+	t_orientation	orientation;
+	t_mutex			grab_mutex;
+	t_mutex			taken_mutex;
 };
 
 bool	parse(t_table *philo, int argc, char **argv);
@@ -81,6 +91,7 @@ bool	init_forks(t_table *table);
 bool	create_philos(t_table *table);
 bool	all_alive(t_table *table);
 bool	is_dead(t_philo *philo);
+bool	is_satisfied(t_philo *philo);
 void	*routine(void *arg);
 void	routine_eat(t_philo *philo);
 void	routine_sleep(t_philo *philo);
