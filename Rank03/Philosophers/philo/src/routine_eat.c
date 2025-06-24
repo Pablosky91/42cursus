@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 17:58:48 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/19 16:44:06 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/24 22:00:48 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static bool	grab_forks(t_philo *philo);
 
 void	routine_eat(t_philo *philo)
 {
+	//TODO check death first, then forks
 	while (!grab_forks(philo))
 	{
 		if (is_dead(philo))
@@ -25,7 +26,7 @@ void	routine_eat(t_philo *philo)
 	print_philo(philo->table, philo->id, EAT);
 	philo->time_last_meal = get_time_ms(philo->table->start_time);
 	philo->times_eaten++;
-	usleep(philo->table->time_eat * 1000);
+	usleep_lesser(philo, philo->table->time_die, philo->table->time_eat);
 }
 
 static bool	grab_forks(t_philo *philo)
@@ -33,11 +34,13 @@ static bool	grab_forks(t_philo *philo)
 	bool	grabbed;
 
 	grabbed = false;
+	if (philo->left == philo->right)
+		return (grabbed);
 	pthread_mutex_lock(&philo->left->taken_mutex);
 	pthread_mutex_lock(&philo->right->taken_mutex);
 	if (!philo->left->taken && !philo->right->taken
-		&& philo->left->orientation != RIGHT
-		&& philo->right->orientation != LEFT)
+		&& philo->left->orientation != philo->id
+		&& philo->right->orientation != philo->id)
 	{
 		pthread_mutex_lock(&philo->left->grab_mutex);
 		pthread_mutex_lock(&philo->right->grab_mutex);
@@ -45,6 +48,8 @@ static bool	grab_forks(t_philo *philo)
 		print_philo(philo->table, philo->id, FORK);
 		philo->left->taken = true;
 		philo->right->taken = true;
+		philo->left->orientation = philo->id;
+		philo->right->orientation = philo->id;
 		grabbed = true;
 	}
 	pthread_mutex_unlock(&philo->left->taken_mutex);

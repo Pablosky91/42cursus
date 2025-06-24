@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:41:08 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/19 20:41:58 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/24 21:38:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 # include <stdlib.h>
 
 typedef enum e_message		t_message;
-typedef enum e_orientation	t_orientation;
 
 typedef struct s_table		t_table;
 typedef struct s_philo		t_philo;
@@ -41,13 +40,6 @@ enum e_message
 	DIE,
 };
 
-enum e_orientation
-{
-	NEUTRAL,
-	LEFT,
-	RIGHT,
-};
-
 struct s_table
 {
 	int			number_philosophers;
@@ -59,8 +51,6 @@ struct s_table
 	t_mutex		dead_mutex;
 	t_timeval	start_time;
 	t_philo		*philos;
-	// bool		start;
-	// t_mutex		start_mutex;
 	t_mutex		print_mutex;
 	t_fork		*forks;
 };
@@ -79,11 +69,11 @@ struct s_philo
 
 struct s_fork
 {
-	int				id;
-	bool			taken;
-	t_orientation	orientation;
-	t_mutex			grab_mutex;
-	t_mutex			taken_mutex;
+	int		id;
+	bool	taken;
+	int		orientation;
+	t_mutex	grab_mutex;
+	t_mutex	taken_mutex;
 };
 
 bool	parse(t_table *philo, int argc, char **argv);
@@ -92,10 +82,12 @@ bool	create_philos(t_table *table);
 bool	all_alive(t_table *table);
 bool	is_dead(t_philo *philo);
 bool	is_satisfied(t_philo *philo);
+void	usleep_lesser(t_philo *philo, long ms1, long ms2);
 void	*routine(void *arg);
 void	routine_eat(t_philo *philo);
 void	routine_sleep(t_philo *philo);
 void	routine_think(t_philo *philo);
+void	release_forks(t_philo *philo);
 void	print_philo(t_table *table, int id, t_message message);
 long	get_time_ms(t_timeval start);
 bool	join_philos(t_table *table);

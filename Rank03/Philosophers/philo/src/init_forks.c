@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 21:56:16 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/19 12:33:34 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/24 21:39:01 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ bool	init_forks(t_table *table)
 	{
 		table->forks[i].id = i + 1;
 		table->forks[i].taken = false;
-		table->forks[i].orientation = NEUTRAL;
+		table->forks[i].orientation = 0;
 		if (pthread_mutex_init(&table->forks[i].grab_mutex, NULL))
 			return (false);
 		if (pthread_mutex_init(&table->forks[i].taken_mutex, NULL))

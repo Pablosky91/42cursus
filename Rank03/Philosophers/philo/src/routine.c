@@ -6,40 +6,29 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:43:32 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/19 20:51:15 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/24 19:15:22 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// static void	wait_to_start(t_table *table);
 
 void	*routine(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *) arg;
-	// wait_to_start(philo->table);
 	while (!is_satisfied(philo) && all_alive(philo->table))
 	{
-		routine_eat(philo);
-		routine_sleep(philo);
 		routine_think(philo);
+		if (is_satisfied(philo) || !all_alive(philo->table))
+			return (NULL);
+		routine_eat(philo);
+		if (is_satisfied(philo) || !all_alive(philo->table))
+		{
+			release_forks(philo);
+			return (NULL);
+		}
+		routine_sleep(philo);
 	}
 	return (NULL);
 }
-
-// static void	wait_to_start(t_table *table)
-// {
-// 	bool	wait;
-
-// 	wait = true;
-// 	while (wait)
-// 	{
-// 		pthread_mutex_lock(&table->start_mutex);
-// 		if (table->start)
-// 			wait = false;
-// 		pthread_mutex_unlock(&table->start_mutex);
-// 		usleep(100);
-// 	}
-// }

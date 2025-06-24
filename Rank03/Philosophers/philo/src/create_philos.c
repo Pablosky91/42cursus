@@ -6,11 +6,13 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 17:45:50 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/12 17:51:49 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/24 21:59:10 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	assign_forks(t_table *table, int i);
 
 bool	create_philos(t_table *table)
 {
@@ -18,9 +20,6 @@ bool	create_philos(t_table *table)
 
 	if (gettimeofday(&table->start_time, NULL))
 		return (false);
-	// table->start = false;
-	// if (pthread_mutex_init(&table->start_mutex, NULL))
-		// return (false);
 	if (pthread_mutex_init(&table->print_mutex, NULL))
 		return (false);
 	if (pthread_mutex_init(&table->dead_mutex, NULL))
@@ -34,18 +33,29 @@ bool	create_philos(t_table *table)
 	{
 		table->philos[i].id = i + 1;
 		table->philos[i].table = table;
-		if (pthread_create(&(table->philos[i].thread), NULL, routine, &(table->philos[i])))
-			return (false);
-		table->philos[i].left = &table->forks[i];
-		table->philos[i].right = &table->forks[(i + 1) % table->number_philosophers];
+		assign_forks(table, i);
 		table->philos[i].times_eaten = 0;
 		table->philos[i].time_last_meal = 0;
+		if (pthread_create(&(table->philos[i].thread), NULL, routine, &(table->philos[i])))
+			return (false);
 		i++;
 	}
-	// pthread_mutex_lock(&table->start_mutex);
-	// table->start = true;
-	// if (gettimeofday(&table->start_time, NULL))
-	// 	return (false);
-	// pthread_mutex_unlock(&table->start_mutex);
 	return (true);
+}
+
+static void	assign_forks(t_table *table, int i)
+{
+	int	j;
+
+	j = (i + 1) % table->number_philosophers;
+	if (i < j)
+	{
+		table->philos[i].left = &table->forks[i];
+		table->philos[i].right = &table->forks[j];
+	}
+	else
+	{
+		table->philos[i].left = &table->forks[j];
+		table->philos[i].right = &table->forks[i];
+	}
 }

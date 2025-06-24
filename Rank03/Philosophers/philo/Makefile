@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/18 16:39:30 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/06/19 20:56:03 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/06/24 21:59:27 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,10 +40,12 @@ SOURCES :=	\
 			parse.c\
 			philo.c\
 			print_philo.c\
-			routine.c\
+			release_forks.c\
 			routine_eat.c\
 			routine_sleep.c\
 			routine_think.c\
+			routine.c\
+			usleep_lesser.c\
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.c=.o))
 SOURCES := $(addprefix $(SRC_DIR), $(SOURCES))
@@ -100,6 +102,18 @@ re: fclean all
 e: exec
 exec: all
 	-./$(NAME) $(ARG)
+
+.PHONY: e0 e1 e2 e3 e4
+e0: all
+	-./$(NAME) 1 800 200 200
+e1: all
+	-./$(NAME) 5 800 200 200
+e2: all
+	-./$(NAME) 5 800 200 200 7
+e3: all
+	-./$(NAME) 4 410 200 200
+e4: all
+	-./$(NAME) 4 310 200 200
 
 .PHONY: n norminette normi
 n: norminette
