@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:41:08 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/24 21:38:15 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/26 00:11:53 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <sys/time.h>
 # include <stdlib.h>
 
-typedef enum e_message		t_message;
+typedef enum e_action		t_action;
 
 typedef struct s_table		t_table;
 typedef struct s_philo		t_philo;
@@ -31,7 +31,7 @@ typedef struct timeval		t_timeval;
 typedef pthread_t			t_thread;
 typedef pthread_mutex_t		t_mutex;
 
-enum e_message
+enum e_action
 {
 	FORK,
 	EAT,
@@ -50,9 +50,7 @@ struct s_table
 	bool		dead;
 	t_mutex		dead_mutex;
 	t_timeval	start_time;
-	t_philo		*philos;
 	t_mutex		print_mutex;
-	t_fork		*forks;
 };
 
 struct s_philo
@@ -72,24 +70,24 @@ struct s_fork
 	int		id;
 	bool	taken;
 	int		orientation;
-	t_mutex	grab_mutex;
-	t_mutex	taken_mutex;
+	t_mutex	mutex;
 };
 
-bool	parse(t_table *philo, int argc, char **argv);
-bool	init_forks(t_table *table);
-bool	create_philos(t_table *table);
 bool	all_alive(t_table *table);
+bool	create_philos(t_table *table, t_philo **philos, t_fork **forks);
+long	get_time_ms(t_timeval start);
+bool	init_forks(t_table *table, t_fork **forks);
 bool	is_dead(t_philo *philo);
 bool	is_satisfied(t_philo *philo);
-void	usleep_lesser(t_philo *philo, long ms1, long ms2);
-void	*routine(void *arg);
+bool	join_philos(t_table *table, t_philo **philos);
+void	kill_philo(t_philo *philo);
+bool	parse(t_table *philo, int argc, char **argv);
+void	print_philo(t_table *table, int id, t_action message);
+void	release_forks(t_philo *philo);
 void	routine_eat(t_philo *philo);
 void	routine_sleep(t_philo *philo);
 void	routine_think(t_philo *philo);
-void	release_forks(t_philo *philo);
-void	print_philo(t_table *table, int id, t_message message);
-long	get_time_ms(t_timeval start);
-bool	join_philos(t_table *table);
+void	*routine(void *arg);
+void	usleep_lesser(t_philo *philo, long ms1, long ms2);
 
 #endif

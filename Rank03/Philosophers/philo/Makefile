@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/18 16:39:30 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/06/24 21:59:27 by pdel-olm         ###   ########.fr        #
+#    Updated: 2025/06/26 00:06:51 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SOURCES :=	\
 			is_dead.c\
 			is_satisfied.c\
 			join_philos.c\
+			kill_philo.c\
 			parse.c\
 			philo.c\
 			print_philo.c\
