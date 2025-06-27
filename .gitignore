@@ -18,3 +18,8 @@ checker
 pipex
 philo
 !philo/
+minishell
+!minishell/
+
+megaphone
+phonebook
