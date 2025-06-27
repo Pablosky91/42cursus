@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 16:41:08 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/26 00:11:53 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/27 13:59:28 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ struct s_table
 	int			min_number_eat;
 	bool		dead;
 	t_mutex		dead_mutex;
+	bool		dead_mutex_ok;
 	t_timeval	start_time;
 	t_mutex		print_mutex;
+	bool		print_mutex_ok;
 };
 
 struct s_philo
@@ -71,18 +73,19 @@ struct s_fork
 	bool	taken;
 	int		orientation;
 	t_mutex	mutex;
+	bool	mutex_ok;
 };
 
 bool	all_alive(t_table *table);
-bool	create_philos(t_table *table, t_philo **philos, t_fork **forks);
+void	create_philos(t_table *table, t_philo **philos, t_fork **forks);
 long	get_time_ms(t_timeval start);
 bool	init_forks(t_table *table, t_fork **forks);
 bool	is_dead(t_philo *philo);
 bool	is_satisfied(t_philo *philo);
-bool	join_philos(t_table *table, t_philo **philos);
+void	join_philos(t_table *table, t_philo **philos);
 void	kill_philo(t_philo *philo);
 bool	parse(t_table *philo, int argc, char **argv);
-void	print_philo(t_table *table, int id, t_action message);
+void	print_philo(t_table *table, t_philo *philo, t_action message);
 void	release_forks(t_philo *philo);
 void	routine_eat(t_philo *philo);
 void	routine_sleep(t_philo *philo);

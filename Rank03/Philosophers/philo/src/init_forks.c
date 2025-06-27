@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/09 21:56:16 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/25 22:22:20 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/26 11:14:19 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 bool	init_forks(t_table *table, t_fork **forks)
 {
-	int	i;
+	int		i;
+	bool	ok;
 
 	i = 0;
+	ok = true;
 	*forks = malloc(table->number_philosophers * sizeof(t_fork));
 	if (!*forks)
 		return (false);
@@ -25,9 +27,13 @@ bool	init_forks(t_table *table, t_fork **forks)
 		(*forks)[i].id = i + 1;
 		(*forks)[i].taken = false;
 		(*forks)[i].orientation = 0;
+		(*forks)[i].mutex_ok = true;
 		if (pthread_mutex_init(&(*forks)[i].mutex, NULL))
-			return (false);
+		{
+			(*forks)[i].mutex_ok = false;
+			ok = false;
+		}
 		i++;
 	}
-	return (true);
+	return (ok);
 }

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 18:06:43 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/12 18:30:31 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/26 11:48:49 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@ bool	all_alive(t_table *table)
 {
 	bool	all_alive;
 
-	pthread_mutex_lock(&table->dead_mutex);
+	if (pthread_mutex_lock(&table->dead_mutex))
+		return (false);
 	all_alive = !table->dead;
-	pthread_mutex_unlock(&table->dead_mutex);
+	if (pthread_mutex_unlock(&table->dead_mutex))
+		return (false);
 	return (all_alive);
 }

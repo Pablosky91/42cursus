@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 21:18:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/05 21:39:04 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/06/26 11:29:05 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	parse(t_table *table, int argc, char **argv)
 		|| (argc == 6 && table->min_number_eat < 0))
 	{
 		printf("\
-Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep\
+Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep \
 [number_of_times_each_philosopher_must_eat]\n\
 All arguments must be positive integers\n\
 number_of_philosophers must be greater than zero\n");
