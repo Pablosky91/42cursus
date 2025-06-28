@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/06/27 13:02:42 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/06/28 19:05:23 by pdel-olm         ###   ########.fr        #
+#    Created: 2025/06/28 09:22:54 by pdel-olm          #+#    #+#              #
+#    Updated: 2025/06/28 20:08:23 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ MAKEFLAGS := --no-print-directory
 
 RM := rm -rf
 
-NAME := megaphone
-NAME_CAPITAL := Megaphone
+NAME := phonebook
+NAME_CAPITAL := Phonebook
 
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98
@@ -26,7 +26,9 @@ CXXFLAGS := -Wall -Wextra -Werror -std=c++98
 #FILES
 
 SOURCES :=	\
-			megaphone.cpp\
+			main.cpp\
+			Contact.cpp\
+			Phonebook.cpp\
 
 OBJECTS := $(SOURCES:.cpp=.o)
 
@@ -72,9 +74,7 @@ re: fclean all
 .PHONY: e exec
 e: exec
 exec: all
-	./$(NAME) "shhhhh... I think the students are asleep..."
-	./$(NAME) Damnit " ! " "Sorry students, I thought this thing was off."
-	./$(NAME)
+	-./$(NAME)
 
 #MESSAGES
 

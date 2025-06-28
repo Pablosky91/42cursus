@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/27 13:02:37 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/28 17:44:30 by pdel-olm         ###   ########.fr       */
+/*   Created: 2025/06/28 19:17:27 by pdel-olm          #+#    #+#             */
+/*   Updated: 2025/06/28 21:42:37 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef CONTACT_HPP
+# define CONTACT_HPP
 
-int	main(int argc, char** argv)
+# include <iostream>
+
+class Contact
 {
-	if (argc == 1)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-	else
-		for (int i = 1; i < argc; i++)
-			for (size_t j = 0; j < ((std::string)argv[i]).length(); j++)
-				std::cout << (char)std::toupper(((std::string)argv[i])[j]);
-	std::cout << std::endl;
-	return (0);
-}
+	private:
+		std::string	first_name;
+		std::string	last_name;
+		std::string	nickname;
+		std::string	phone_number;
+		std::string	darkest_secret;
+
+		bool		get_field(std::string *field, std::string name);
+
+	public:		
+		bool	add(void);
+		void	display(void);
+};
+
+#endif
