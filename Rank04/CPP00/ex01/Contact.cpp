@@ -6,14 +6,16 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 19:11:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/06/28 21:51:29 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/07/01 19:56:27 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 #include <iostream>
 
-bool	Contact::get_field(std::string *field, std::string name)
+// PRIVATE METHODS
+
+bool	Contact::set_field(std::string *field, std::string name)
 {
 	while (true)
 	{
@@ -30,17 +32,26 @@ bool	Contact::get_field(std::string *field, std::string name)
 	return (true);
 }
 
+std::string	Contact::get_field_short(std::string field)
+{
+	if (field.length() <= 10)
+		return (field);
+	return (field.substr(0, 9) + '.');
+}
+
+// PUBLIC METHODS
+
 bool	Contact::add(void)
 {
-	if (!get_field(&first_name, "first name"))
+	if (!set_field(&first_name, "first name"))
 		return (false);
-	if (!get_field(&last_name, "last name"))
+	if (!set_field(&last_name, "last name"))
 		return (false);
-	if (!get_field(&nickname, "nickname"))
+	if (!set_field(&nickname, "nickname"))
 		return (false);
-	if (!get_field(&phone_number, "phone number"))
+	if (!set_field(&phone_number, "phone number"))
 		return (false);
-	if (!get_field(&darkest_secret, "darkest secret"))
+	if (!set_field(&darkest_secret, "darkest secret"))
 		return (false);
 	return (true);
 }
@@ -52,4 +63,19 @@ void	Contact::display(void)
 	std::cout << "Nickname: " << nickname << std::endl;
 	std::cout << "Phone number: " << phone_number << std::endl;
 	std::cout << "Darkest secret: " << darkest_secret << std::endl;
+}
+
+std::string	Contact::get_first_name_short(void)
+{
+	return (get_field_short(first_name));
+}
+
+std::string	Contact::get_last_name_short(void)
+{
+	return (get_field_short(last_name));
+}
+
+std::string	Contact::get_nickname_short(void)
+{
+	return (get_field_short(nickname));
 }
