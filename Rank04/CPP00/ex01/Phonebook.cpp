@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 19:11:30 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/07/01 20:28:10 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2025/07/04 12:50:28 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,36 +21,6 @@
 Phonebook::Phonebook(void)
 {
 	contact_count = 0;
-}
-
-// PRIVATE METHODS
-
-void	Phonebook::display_table(void)
-{
-	std::cout << std::endl;
-	display_row("Index", "First name", "Last name", "Nickname");
-	display_row("----------", "----------", "----------", "----------");
-	for (int i = 0; i < contact_count; i++)
-		display_row(i + 1, contacts[i].get_first_name_short(), contacts[i].get_last_name_short(), contacts[i].get_nickname_short());
-	std::cout << std::endl;
-}
-
-void	Phonebook::display_row(std::string str0, std::string str1, std::string str2, std::string str3)
-{
-	std::cout << "|" << std::setw(10) << str0;
-	std::cout << "|" << std::setw(10) << str1;
-	std::cout << "|" << std::setw(10) << str2;
-	std::cout << "|" << std::setw(10) << str3;
-	std::cout << "|" << std::endl;
-}
-
-void	Phonebook::display_row(int row, std::string str1, std::string str2, std::string str3)
-{
-	std::cout << "|" << std::setw(10) << row;
-	std::cout << "|" << std::setw(10) << str1;
-	std::cout << "|" << std::setw(10) << str2;
-	std::cout << "|" << std::setw(10) << str3;
-	std::cout << "|" << std::endl;
 }
 
 // PUBLIC METHODS
@@ -96,4 +66,34 @@ bool	Phonebook::search(void)
 	}
 	contacts[number - 1].display();
 	return (true);
+}
+
+// PRIVATE METHODS
+
+void	Phonebook::display_table(void)
+{
+	std::cout << std::endl;
+	display_row("Index", "First name", "Last name", "Nickname");
+	display_row("----------", "----------", "----------", "----------");
+	for (int i = 0; i < contact_count; i++)
+		display_row(i + 1, contacts[i].get_first_name_short(), contacts[i].get_last_name_short(), contacts[i].get_nickname_short());
+	std::cout << std::endl;
+}
+
+void	Phonebook::display_row(std::string str0, std::string str1, std::string str2, std::string str3)
+{
+	std::cout << "|" << std::setw(10) << str0;
+	std::cout << "|" << std::setw(10) << str1;
+	std::cout << "|" << std::setw(10) << str2;
+	std::cout << "|" << std::setw(10) << str3;
+	std::cout << "|" << std::endl;
+}
+
+void	Phonebook::display_row(int row, std::string str1, std::string str2, std::string str3)
+{
+	std::cout << "|" << std::setw(10) << row;
+	std::cout << "|" << std::setw(10) << str1;
+	std::cout << "|" << std::setw(10) << str2;
+	std::cout << "|" << std::setw(10) << str3;
+	std::cout << "|" << std::endl;
 }
