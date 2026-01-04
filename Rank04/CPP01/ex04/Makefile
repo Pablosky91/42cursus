@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/30 20:49:46 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/07/30 20:52:35 by pdel-olm         ###   ########.fr        #
+#    Updated: 2026/01/03 17:18:51 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,7 +72,7 @@ re: fclean all
 .PHONY: e exec
 e: exec
 exec: all
-	-./$(NAME)
+	-./$(NAME) Makefile Makefile elifekaM
 
 #MESSAGES
 
