@@ -6,11 +6,12 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:50:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/01/07 11:14:17 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/01/07 11:58:12 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Harl.hpp"
+#include <iostream>
 
 int	main(void)
 {
