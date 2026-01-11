@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/07 11:25:11 by pdel-olm          #+#    #+#              #
-#    Updated: 2026/01/07 11:40:17 by pdel-olm         ###   ########.fr        #
+#    Updated: 2026/01/11 19:42:47 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,11 @@ re: fclean all
 e: exec
 exec: all
 	-./$(NAME)
+	-./$(NAME) OTHER
+	-./$(NAME) DEBUG
+	-./$(NAME) INFO
+	-./$(NAME) WARNING
+	-./$(NAME) ERROR
 
 #MESSAGES
 

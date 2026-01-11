@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 11:25:07 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/01/07 12:10:04 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/01/11 20:00:27 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,19 @@
 # define HARL_HPP
 
 # include <iostream>
-# include <map>
 
 class Harl
 {
 	public:
-		void complain(std::string level);
+		static const int	N_LEVELS = 4;
+
+		void	complain(std::string level);
 
 	private:
-		typedef std::map<std::string, void (Harl::*)(void)> t_HarlMap;
-
-		void debug(void);
-		void info(void);
-		void warning(void);
-		void error(void);
+		void	debug(void);
+		void	info(void);
+		void	warning(void);
+		void	error(void);
 };
 
 #endif

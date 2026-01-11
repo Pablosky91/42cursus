@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/06 19:51:12 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/01/07 12:04:33 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/01/11 20:11:42 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,18 @@
 
 void	Harl::complain(std::string level)
 {
-	static t_HarlMap	map;
-	t_HarlMap::iterator	it;
+	std::string	levels[N_LEVELS] =				{"DEBUG",		"INFO",			"WARNING",		"ERROR"};
+	void (Harl::*functions[N_LEVELS])(void) =	{&Harl::debug,	&Harl::info,	&Harl::warning,	&Harl::error};
 
-	if (map.empty())
+	for (int i = 0; i < N_LEVELS; i++)
 	{
-		map["DEBUG"] = &Harl::debug;
-		map["INFO"] = &Harl::info;
-		map["WARNING"] = &Harl::warning;
-		map["ERROR"] = &Harl::error;
+		if (level == levels[i])
+		{
+			(this->*functions[i])();
+			return ;
+		}
 	}
-	it = map.find(level);
-	if (it != map.end())
-		(this->*(it->second))();
-	else
-		std::cout << "Probably complaining about insignificant problems." << std::endl;
+	std::cout << "Probably complaining about insignificant problems." << std::endl;
 }
 
 //PRIVATE METHODS
