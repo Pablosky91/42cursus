@@ -5,21 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/12 22:08:25 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/01/14 18:49:16 by pdel-olm         ###   ########.fr       */
+/*   Created: 2026/01/14 16:15:33 by pdel-olm          #+#    #+#             */
+/*   Updated: 2026/01/14 20:14:49 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
+#include <cmath>
 #include <iostream>
 
 #define RESET	"\033[0m"
 #define RED		"\033[31m"
 #define GREEN	"\033[32m"
 #define YELLOW	"\033[33m"
-#define BLUE	"\033[34m"
-#define MAGENTA	"\033[35m"
-#define CYAN	"\033[36m"
 
 //DEFAULT CONSTRUCTOR
 
@@ -32,15 +30,29 @@ Fixed::Fixed(): _value(0)
 
 Fixed::Fixed(const Fixed& other)
 {
-	std::cout << YELLOW << "Copy constructor called" << std::endl << RESET;
+	std::cout << GREEN << "Copy constructor called" << std::endl << RESET;
 	*this = other;
+}
+
+//INT CONSTRUCTOR
+
+Fixed::Fixed(const int value): _value(value << kFractionalBits)
+{
+	std::cout << GREEN << "Int constructor called" << std::endl << RESET;
+}
+
+//FLOAT CONSTRUCTOR
+
+Fixed::Fixed(const float value): _value(roundf(value * (1 << kFractionalBits)))
+{
+	std::cout << GREEN << "Float constructor called" << std::endl << RESET;
 }
 
 //COPY ASSIGNMENT OPERATOR
 
-Fixed& Fixed::operator=(const Fixed& other)
+Fixed&	Fixed::operator=(const Fixed& other)
 {
-	std::cout << MAGENTA << "Copy assignment operator called" << std::endl << RESET;
+	std::cout << YELLOW << "Copy assignment operator called" << std::endl << RESET;
 	if (this != &other)
 		_value = other.getRawBits();
 	return (*this);
@@ -53,16 +65,32 @@ Fixed::~Fixed()
 	std::cout << RED << "Destructor called" << std::endl << RESET;
 }
 
+//OVERLOAD
+
+std::ostream&	operator<<(std::ostream& ostream, const Fixed& fixed)
+{
+	ostream << fixed.toFloat();
+	return (ostream);
+}
+
 //PUBLIC MEMBER FUNCTIONS
 
-int Fixed::getRawBits(void) const
+int	Fixed::getRawBits(void) const
 {
-	std::cout << BLUE << "getRawBits member function called" << std::endl << RESET;
 	return (_value);
 }
 
-void Fixed::setRawBits(int const raw)
+void	Fixed::setRawBits(int const raw)
 {
-	std::cout << CYAN << "setRawBits member function called" << std::endl << RESET;
 	_value = raw;
+}
+
+int	Fixed::toInt(void) const
+{
+	return (_value >> kFractionalBits);
+}
+
+float	Fixed::toFloat(void) const
+{
+	return (static_cast<float>(_value) / (1 << kFractionalBits));
 }
