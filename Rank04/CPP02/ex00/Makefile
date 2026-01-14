@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/01/07 11:25:11 by pdel-olm          #+#    #+#              #
-#    Updated: 2026/01/12 22:56:12 by pdel-olm         ###   ########.fr        #
+#    Created: 2026/01/12 22:56:21 by pdel-olm          #+#    #+#              #
+#    Updated: 2026/01/14 16:11:08 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,20 +16,27 @@ MAKEFLAGS := --no-print-directory
 .DEFAULT_GOAL := all
 
 RM := rm -rf
+MKDIR := mkdir -p
 
-NAME := harlFilter
-NAME_CAPITAL := HarlFilter
+NAME := fixed
+NAME_CAPITAL := Fixed
 
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -fsanitize=address
 
 #FILES
 
+SRC_DIR := src/
+OBJ_DIR := obj/
+INC_DIR := include/
+
+VPATH :=  $(SRC_DIR)
+
 SOURCES :=	\
 			main.cpp\
-			Harl.cpp\
+			Fixed.cpp\
 
-OBJECTS := $(SOURCES:.cpp=.o)
+OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.cpp=.o))
 
 #COLOURS
 
@@ -45,8 +52,11 @@ RESET := \033[0m
 $(NAME): $(OBJECTS)
 	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $(NAME)
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+$(OBJ_DIR)%.o: %.cpp | $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -I $(INC_DIR) -c $< -o $@
+
+$(OBJ_DIR):
+	$(MKDIR) $(OBJ_DIR)
 
 .PHONY: a all
 a: all
@@ -55,13 +65,13 @@ all: $(NAME)
 .PHONY: c clean
 c: clean
 clean: msg_clean_start
-	$(RM) $(OBJECTS)
+	$(RM) $(OBJ_DIR)
 	@$(MAKE) msg_clean_end
 
 .PHONY: f fclean
 f: fclean
 fclean: msg_fclean_start
-	$(RM) $(OBJECTS) $(NAME)
+	$(RM) $(OBJ_DIR) $(NAME)
 	@$(MAKE) msg_fclean_end
 
 .PHONY: r re
@@ -74,11 +84,6 @@ re: fclean all
 e: exec
 exec: all
 	-./$(NAME)
-	-./$(NAME) OTHER
-	-./$(NAME) DEBUG
-	-./$(NAME) INFO
-	-./$(NAME) WARNING
-	-./$(NAME) ERROR
 
 #MESSAGES
 
