@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/14 16:15:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/01/18 22:38:33 by pdel-olm         ###   ########.fr       */
+/*   Created: 2026/01/16 21:41:08 by pdel-olm          #+#    #+#             */
+/*   Updated: 2026/01/18 22:39:32 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,30 @@ class Fixed
 
 		// ASSIGNMENT OPERATOR
 
-		Fixed	&operator =(const Fixed &other);
+		Fixed&	operator =(const Fixed &other);
+
+		// COMPARISON OPERATORS
+
+		bool	operator <(const Fixed &other) const;
+		bool	operator >(const Fixed &other) const;
+		bool	operator <=(const Fixed &other) const;
+		bool	operator >=(const Fixed &other) const;
+		bool	operator ==(const Fixed &other) const;
+		bool	operator !=(const Fixed &other) const;
+
+		// ARITHMETIC OPERATORS
+		
+		Fixed	operator +(const Fixed &other) const;
+		Fixed	operator -(const Fixed &other) const;
+		Fixed	operator *(const Fixed &other) const;
+		Fixed	operator /(const Fixed &other) const;
+
+		// (IN|DE)CREMENT OPERATORS
+
+		Fixed	&operator ++(void);
+		Fixed	operator ++(int);
+		Fixed	&operator --(void);
+		Fixed	operator --(int);
 
 		// MEMBER FUNCTIONS
 
@@ -38,9 +61,14 @@ class Fixed
 		int		toInt(void) const;
 		float	toFloat(void) const;
 
+		static Fixed		&min(Fixed &a, Fixed &b);
+		static const Fixed	&min(const Fixed &a, const Fixed &b);
+		static Fixed		&max(Fixed &a, Fixed &b);
+		static const Fixed	&max(const Fixed &a, const Fixed &b);
+
 	private:
 		static const int	kFractionalBits = 8;
-		int					_value;
+		int	_value;
 };
 
 std::ostream	&operator<<(std::ostream &ostream, const Fixed &fixed);

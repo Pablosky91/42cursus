@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 22:08:25 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/01/14 18:49:16 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/01/18 22:31:09 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,31 @@
 #define MAGENTA	"\033[35m"
 #define CYAN	"\033[36m"
 
-//DEFAULT CONSTRUCTOR
+// DEFAULT CONSTRUCTOR
 
 Fixed::Fixed(): _value(0)
 {
 	std::cout << GREEN << "Default constructor called" << std::endl << RESET;
 }
 
-//COPY CONSTRUCTOR
+// COPY CONSTRUCTOR
 
-Fixed::Fixed(const Fixed& other)
+Fixed::Fixed(const Fixed &other)
 {
 	std::cout << YELLOW << "Copy constructor called" << std::endl << RESET;
 	*this = other;
 }
 
-//COPY ASSIGNMENT OPERATOR
+// DESTRUCTOR
 
-Fixed& Fixed::operator=(const Fixed& other)
+Fixed::~Fixed()
+{
+	std::cout << RED << "Destructor called" << std::endl << RESET;
+}
+
+// COPY ASSIGNMENT OPERATOR
+
+Fixed	&Fixed::operator =(const Fixed &other)
 {
 	std::cout << MAGENTA << "Copy assignment operator called" << std::endl << RESET;
 	if (this != &other)
@@ -46,22 +53,15 @@ Fixed& Fixed::operator=(const Fixed& other)
 	return (*this);
 }
 
-//DESTRUCTOR
+// PUBLIC MEMBER FUNCTIONS
 
-Fixed::~Fixed()
-{
-	std::cout << RED << "Destructor called" << std::endl << RESET;
-}
-
-//PUBLIC MEMBER FUNCTIONS
-
-int Fixed::getRawBits(void) const
+int	Fixed::getRawBits(void) const
 {
 	std::cout << BLUE << "getRawBits member function called" << std::endl << RESET;
 	return (_value);
 }
 
-void Fixed::setRawBits(int const raw)
+void	Fixed::setRawBits(int const raw)
 {
 	std::cout << CYAN << "setRawBits member function called" << std::endl << RESET;
 	_value = raw;
