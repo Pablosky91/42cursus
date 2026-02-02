@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/30 22:20:14 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/01/30 22:20:15 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/02 11:32:08 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ ClapTrap::~ClapTrap()
 
 //COPY ASSIGNMENT OPERATOR
 
-ClapTrap	&ClapTrap::operator=(const ClapTrap &other)
+ClapTrap	&ClapTrap::operator =(const ClapTrap &other)
 {
 	std::cout << GREEN << "Copy ClapTrap assignment from " << other._name << std::endl << RESET;
 	if (this != &other)
