@@ -6,10 +6,9 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/07/23 21:43:08 by pdel-olm          #+#    #+#              #
-#    Updated: 2025/07/30 19:54:13 by pdel-olm         ###   ########.fr        #
+#    Updated: 2026/02/05 19:59:09 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-
 
 #GENERAL VARIABLES
 

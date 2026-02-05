@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 16:15:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/01/18 22:38:33 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:14:01 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FIXED_HPP
 
 # include <iostream>
-
 
 class Fixed
 {

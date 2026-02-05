@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/28 09:17:42 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/07/04 12:54:08 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:00:58 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ bool	prompt(std::string *command)
 	return (false);
 }
 
-int	main()
+int	main(void)
 {
 	std::string	command;
 	Phonebook	phonebook;

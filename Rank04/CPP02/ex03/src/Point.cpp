@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 23:31:08 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/02/02 11:31:09 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:08:20 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Point::Point(float const x, float const y): _x(x), _y(y)
 
 // COPY CONSTRUCTOR
 
-Point::Point(const Point& other): _x(other._x), _y(other._y)
+Point::Point(const Point &other): _x(other._x), _y(other._y)
 {}
 
 //DESTRUCTOR

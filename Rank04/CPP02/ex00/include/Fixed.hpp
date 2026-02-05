@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/12 22:08:22 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/01/18 22:37:45 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:08:20 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class Fixed
 
 		// ASSIGNMENT OPERATOR
 
-		Fixed	&operator =(const Fixed& other);
+		Fixed	&operator =(const Fixed &other);
 
 		// MEMEBER FUNCTIONS
 

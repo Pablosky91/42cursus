@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 19:10:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/02/05 19:54:34 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:08:20 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ DiamondTrap::DiamondTrap(): ClapTrap(), ScavTrap(), FragTrap()
 
 //COPY CONSTRUCTOR
 
-DiamondTrap::DiamondTrap(const DiamondTrap& other): ClapTrap(other), ScavTrap(other), FragTrap(other)
+DiamondTrap::DiamondTrap(const DiamondTrap &other): ClapTrap(other), ScavTrap(other), FragTrap(other)
 {
 	std::cout << GREEN << "Copy DiamondTrap constructor from " << other._name << std::endl << RESET;
 	*this = other;
@@ -76,7 +76,7 @@ DiamondTrap	&DiamondTrap::operator =(const DiamondTrap &other)
 
 //PUBLIC MEMBER FUNCTIONS
 
-void DiamondTrap::whoAmI()
+void DiamondTrap::whoAmI(void)
 {
 	if (!hasHitPoints())
 		return ;

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 21:41:08 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/01/19 21:01:49 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:12:31 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define FIXED_HPP
 
 # include <iostream>
-
 
 class Fixed
 {
@@ -29,7 +28,7 @@ class Fixed
 
 		// ASSIGNMENT OPERATOR
 
-		Fixed&	operator =(const Fixed &other);
+		Fixed	&operator =(const Fixed &other);
 
 		// COMPARISON OPERATORS
 

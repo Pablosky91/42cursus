@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 18:53:31 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/02/02 18:53:33 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:08:20 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ ScavTrap::ScavTrap(): ClapTrap()
 
 //COPY CONSTRUCTOR
 
-ScavTrap::ScavTrap(const ScavTrap& other): ClapTrap(other)
+ScavTrap::ScavTrap(const ScavTrap &other): ClapTrap(other)
 {
 	std::cout << GREEN << "Copy ScavTrap constructor from " << other._name << std::endl << RESET;
 	*this = other;
@@ -80,7 +80,7 @@ void	ScavTrap::attack(const std::string &target)
 	_energyPoints--;
 }
 
-void	ScavTrap::guardGate()
+void	ScavTrap::guardGate(void)
 {
 	if (!hasHitPoints())
 		return ;

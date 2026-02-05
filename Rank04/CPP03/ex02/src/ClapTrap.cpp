@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 11:26:08 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/02/02 11:32:08 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:08:20 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ ClapTrap::ClapTrap(): _name("Unnamed"), _hitPoints(10), _energyPoints(10), _atta
 
 //COPY CONSTRUCTOR
 
-ClapTrap::ClapTrap(const ClapTrap& other)
+ClapTrap::ClapTrap(const ClapTrap &other)
 {
 	std::cout << GREEN << "Copy ClapTrap constructor from " << other._name << std::endl << RESET;
 	*this = other;
@@ -40,7 +40,6 @@ ClapTrap::ClapTrap(std::string name): _name(name), _hitPoints(10), _energyPoints
 {
 	std::cout << GREEN << "ClapTrap " << name << " constructor" << std::endl << RESET;
 }
-
 
 //DESTRUCTOR
 

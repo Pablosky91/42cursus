@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/30 19:52:47 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/07/30 20:40:26 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:01:03 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "HumanB.hpp"
 #include "Weapon.hpp"
 
-int	main()
+int	main(void)
 {
 	{
 		Weapon club = Weapon("crude spiked club");

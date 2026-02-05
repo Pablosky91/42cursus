@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 18:53:15 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/02/02 18:53:16 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:16:27 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 //DEFAULT CONSTRUCTOR
 
-FragTrap::FragTrap()
+FragTrap::FragTrap(): ClapTrap()
 {
 	std::cout << GREEN << "Default FragTrap constructor" << std::endl << RESET;
 	_hitPoints = 100;
@@ -32,7 +32,7 @@ FragTrap::FragTrap()
 
 //COPY CONSTRUCTOR
 
-FragTrap::FragTrap(const FragTrap& other)
+FragTrap::FragTrap(const FragTrap &other): ClapTrap(other)
 {
 	std::cout << GREEN << "Copy FragTrap constructor from " << other._name << std::endl << RESET;
 	*this = other;

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 23:31:04 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/01/19 19:36:31 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:11:27 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 # define POINT_HPP
 
 # include "Fixed.hpp"
+# include <iostream>
 
 class Point
 {
 	public:
 		Point();
 		Point(float const x, float const y);
-		Point(const Point& other);
+		Point(const Point &other);
 		~Point();
 		Point	&operator =(const Point &other);
 

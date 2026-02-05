@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/27 03:27:56 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/01/30 21:20:11 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/05 20:08:20 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ class ClapTrap
 {
 	public:
 		ClapTrap();
-		ClapTrap(const ClapTrap& other);
+		ClapTrap(const ClapTrap &other);
 		ClapTrap(std::string name);
 		~ClapTrap();
 		ClapTrap	&operator =(const ClapTrap &other);
