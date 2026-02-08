@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/07 15:26:40 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/02/08 11:04:18 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/08 14:07:05 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,7 @@ Cat::~Cat()
 Cat	&Cat::operator =(const Cat &other)
 {
 	if (this != &other)
-	{
 		type = other.type;
-	}
 	return (*this);
 }
 

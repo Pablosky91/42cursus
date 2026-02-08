@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/06 00:00:24 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/02/08 11:05:35 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/08 14:07:28 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ WrongAnimal::~WrongAnimal()
 WrongAnimal	&WrongAnimal::operator =(const WrongAnimal &other)
 {
 	if (this != &other)
-	{
 		type = other.type;
-	}
 	return (*this);
 }
 

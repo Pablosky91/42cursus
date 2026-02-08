@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.cpp                                       :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/07 16:36:13 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/02/08 14:07:52 by pdel-olm         ###   ########.fr       */
+/*   Created: 2026/02/08 13:52:54 by pdel-olm          #+#    #+#             */
+/*   Updated: 2026/02/08 22:58:16 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "WrongCat.hpp"
+#include "Cat.hpp"
+#include "Brain.hpp"
 
 #define RESET	"\033[0m"
 #define RED		"\033[31m"
@@ -19,39 +20,55 @@
 
 //DEFAULT CONSTRUCTOR
 
-WrongCat::WrongCat()
+Cat::Cat()
 {
-	std::cout << GREEN << "WrongCat default constructor" << std::endl << RESET;
-	type = "WrongCat";
+	std::cout << GREEN << "Cat default constructor" << std::endl << RESET;
+	type = "Cat";
+	brain = new Brain();
 }
 
 //COPY CONSTRUCTOR
 
-WrongCat::WrongCat(const WrongCat& other)
+Cat::Cat(const Cat& other)
 {
-	std::cout << GREEN << "WrongCat copy constructor" << std::endl << RESET;
+	std::cout << GREEN << "Cat copy constructor" << std::endl << RESET;
+	brain = new Brain;
 	*this = other;
 }
 
 //DESTRUCTOR
 
-WrongCat::~WrongCat()
+Cat::~Cat()
 {
-	std::cout << RED << "WrongCat destructor" << std::endl << RESET;
+	std::cout << RED << "Cat destructor" << std::endl << RESET;
+	delete brain;
 }
 
 //COPY ASSIGNMENT OPERATOR
 
-WrongCat	&WrongCat::operator =(const WrongCat &other)
+Cat	&Cat::operator =(const Cat &other)
 {
 	if (this != &other)
+	{
 		type = other.type;
+		*brain = *other.brain;
+	}
 	return (*this);
 }
 
 //PUBLIC MEMBER FUNCTIONS
 
-void	WrongCat::makeSound(void) const
+void	Cat::makeSound(void) const
 {
-	std::cout << CYAN << "Rrrrup" << std::endl << RESET;
+	std::cout << CYAN << "Purrrr" << std::endl << RESET;
+}
+
+Brain	*Cat::getBrain(void) const
+{
+	return (brain);
+}
+
+void	Cat::setBrain(const Brain &brain)
+{
+	*(this->brain) = brain;
 }

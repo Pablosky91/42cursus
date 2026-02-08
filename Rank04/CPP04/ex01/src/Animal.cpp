@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.cpp                                       :+:      :+:    :+:   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/07 16:36:13 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/02/08 14:07:52 by pdel-olm         ###   ########.fr       */
+/*   Created: 2026/02/08 13:52:49 by pdel-olm          #+#    #+#             */
+/*   Updated: 2026/02/08 14:07:48 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "WrongCat.hpp"
+#include "Animal.hpp"
 
 #define RESET	"\033[0m"
 #define RED		"\033[31m"
@@ -19,30 +19,29 @@
 
 //DEFAULT CONSTRUCTOR
 
-WrongCat::WrongCat()
+Animal::Animal(): type("Animal")
 {
-	std::cout << GREEN << "WrongCat default constructor" << std::endl << RESET;
-	type = "WrongCat";
+	std::cout << GREEN << "Animal default constructor" << std::endl << RESET;
 }
 
 //COPY CONSTRUCTOR
 
-WrongCat::WrongCat(const WrongCat& other)
+Animal::Animal(const Animal& other)
 {
-	std::cout << GREEN << "WrongCat copy constructor" << std::endl << RESET;
+	std::cout << GREEN << "Animal copy constructor" << std::endl << RESET;
 	*this = other;
 }
 
 //DESTRUCTOR
 
-WrongCat::~WrongCat()
+Animal::~Animal()
 {
-	std::cout << RED << "WrongCat destructor" << std::endl << RESET;
+	std::cout << RED << "Animal destructor" << std::endl << RESET;
 }
 
 //COPY ASSIGNMENT OPERATOR
 
-WrongCat	&WrongCat::operator =(const WrongCat &other)
+Animal	&Animal::operator =(const Animal &other)
 {
 	if (this != &other)
 		type = other.type;
@@ -51,7 +50,12 @@ WrongCat	&WrongCat::operator =(const WrongCat &other)
 
 //PUBLIC MEMBER FUNCTIONS
 
-void	WrongCat::makeSound(void) const
+std::string Animal::getType(void) const
 {
-	std::cout << CYAN << "Rrrrup" << std::endl << RESET;
+	return (type);
+}
+
+void	Animal::makeSound(void) const
+{
+	std::cout << CYAN << "What does the animal say?" << std::endl << RESET;
 }

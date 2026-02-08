@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/05 22:28:51 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/02/08 11:05:20 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/02/08 14:06:58 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,7 @@ Animal::~Animal()
 Animal	&Animal::operator =(const Animal &other)
 {
 	if (this != &other)
-	{
 		type = other.type;
-	}
 	return (*this);
 }
 
