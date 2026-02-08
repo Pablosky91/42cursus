@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/02/02 18:52:41 by pdel-olm          #+#    #+#              #
-#    Updated: 2026/02/05 19:48:08 by pdel-olm         ###   ########.fr        #
+#    Updated: 2026/02/05 22:30:06 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRC_DIR := src/
 OBJ_DIR := obj/
 INC_DIR := include/
 
-VPATH :=  $(SRC_DIR)
+VPATH := $(SRC_DIR)
 
 SOURCES :=	\
 			main.cpp\

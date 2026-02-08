@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/02/02 11:25:37 by pdel-olm          #+#    #+#              #
-#    Updated: 2026/02/05 22:30:06 by pdel-olm         ###   ########.fr        #
+#    Created: 2026/02/02 18:52:41 by pdel-olm          #+#    #+#              #
+#    Updated: 2026/02/07 16:41:03 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ MAKEFLAGS := --no-print-directory
 RM := rm -rf
 MKDIR := mkdir -p
 
-NAME := fragTrap
-NAME_CAPITAL := FragTrap
+NAME := animal
+NAME_CAPITAL := Animal
 
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -fsanitize=address
@@ -34,9 +34,11 @@ VPATH := $(SRC_DIR)
 
 SOURCES :=	\
 			main.cpp\
-			ClapTrap.cpp\
-			ScavTrap.cpp\
-			FragTrap.cpp\
+			Animal.cpp\
+			Cat.cpp\
+			Dog.cpp\
+			WrongAnimal.cpp\
+			WrongCat.cpp\
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.cpp=.o))
 
