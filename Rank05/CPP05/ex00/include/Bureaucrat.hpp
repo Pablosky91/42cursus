@@ -6,14 +6,15 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 16:58:50 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/03/12 21:20:20 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/03/16 13:37:30 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
-# include <exception>
+# include "GradeTooHighException.hpp"
+# include "GradeTooLowException.hpp"
 # include <iostream>
 
 class Bureaucrat
@@ -33,16 +34,6 @@ class Bureaucrat
 
 		void	increment();
 		void	decrement();
-
-		class GradeTooHighException: public std::exception
-		{
-			virtual const char	*what() const throw();
-		};
-
-		class GradeTooLowException: public std::exception
-		{
-			virtual const char	*what() const throw();
-		};
 
 	private:
 		const std::string	_kName;

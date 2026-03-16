@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/06 18:26:25 by pdel-olm          #+#    #+#              #
-#    Updated: 2026/03/06 18:36:00 by pdel-olm         ###   ########.fr        #
+#    Updated: 2026/03/16 13:38:51 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,8 @@ VPATH := $(SRC_DIR)
 SOURCES :=	\
 			main.cpp\
 			Bureaucrat.cpp\
+			GradeTooHighException.cpp\
+			GradeTooLowException.cpp\
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.cpp=.o))
 

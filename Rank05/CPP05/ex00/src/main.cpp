@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 18:25:03 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/03/12 21:24:39 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/03/16 13:50:20 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,26 @@ int	main(void)
 	}
 	catch(const std::exception &e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << e.what() << "\n\n";
 	}
 
 	try
 	{
-		named.set_grade(300);
 		Bureaucrat	so_good(0);
 		std::cout << so_good;
 	}
 	catch(const std::exception &e)
 	{
-		std::cerr << e.what() << '\n';
+		std::cerr << e.what() << "\n\n";
+	}
+
+	try
+	{
+		named.set_grade(300);
+	}
+	catch(const std::exception &e)
+	{
+		std::cerr << e.what() << "\n\n";
 	}
 
 	return (0);

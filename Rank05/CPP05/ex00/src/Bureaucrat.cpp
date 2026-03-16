@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/06 16:59:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/03/12 21:20:34 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/03/16 13:40:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	Bureaucrat::set_grade(int grade)
 	_grade = grade;
 }
 
+//PUBLIC MEMBER FUNCTIONS
+
 void	Bureaucrat::increment(void)
 {
 	set_grade(_grade - 1);
@@ -101,16 +103,4 @@ void	Bureaucrat::increment(void)
 void	Bureaucrat::decrement(void)
 {
 	set_grade(_grade + 1);
-}
-
-//EXCEPTIONS
-
-const char	*Bureaucrat::GradeTooHighException::what() const throw()
-{
-	return ("Grade too high");
-}
-
-const char	*Bureaucrat::GradeTooLowException::what() const throw()
-{
-	return ("Grade too low");
 }
