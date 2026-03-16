@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cure.hpp                                           :+:      :+:    :+:   */
+/*   GradeTooLowException.hpp                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/10 10:14:53 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/03/16 14:00:45 by pdel-olm         ###   ########.fr       */
+/*   Created: 2026/03/16 13:55:36 by pdel-olm          #+#    #+#             */
+/*   Updated: 2026/03/16 13:55:37 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CURE_HPP
-# define CURE_HPP
+# include <exception>
 
-# include "AMateria.hpp"
-# include "ICharacter.hpp"
-# include <iostream>
-
-class Cure: public AMateria
+class GradeTooLowException: public std::exception
 {
 	public:
-		Cure();
-		Cure(const Cure &other);
-		~Cure();
-		Cure	&operator =(const Cure &other);
-
-		Cure	*clone(void) const;
-		void	use(ICharacter &target);
-	};
-
-#endif
+		virtual const char	*what() const throw();
+};

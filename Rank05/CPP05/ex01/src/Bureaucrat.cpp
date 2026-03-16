@@ -5,14 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/06 16:59:01 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/03/16 15:53:34 by pdel-olm         ###   ########.fr       */
+/*   Created: 2026/03/16 13:55:41 by pdel-olm          #+#    #+#             */
+/*   Updated: 2026/03/16 16:57:56 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Bureaucrat.hpp"
+
+#include "Form.hpp"
 #include "GradeTooHighException.hpp"
 #include "GradeTooLowException.hpp"
-#include "Bureaucrat.hpp"
 
 //DEFAULT CONSTRUCTOR
 
@@ -110,4 +112,20 @@ void	Bureaucrat::increment(void)
 void	Bureaucrat::decrement(void)
 {
 	setGrade(_grade + 1);
+}
+
+void	Bureaucrat::signForm(Form &form) const
+{
+	try
+	{
+		if (!form.beSigned(*this))
+			std::cout << _kName << " couldn't sign " << form.getName() << " because it is already signed.\n";
+		else
+			std::cout << _kName << " signed " << form.getName() << "\n";
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << _kName << " couldn't sign " << form.getName() << " because their grade is too low.\n";
+	}
+	
 }

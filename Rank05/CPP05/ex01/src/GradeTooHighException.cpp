@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cure.hpp                                           :+:      :+:    :+:   */
+/*   GradeTooHighException.cpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/02/10 10:14:53 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/03/16 14:00:45 by pdel-olm         ###   ########.fr       */
+/*   Created: 2026/03/16 13:55:55 by pdel-olm          #+#    #+#             */
+/*   Updated: 2026/03/16 13:55:56 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CURE_HPP
-# define CURE_HPP
+#include "GradeTooHighException.hpp"
 
-# include "AMateria.hpp"
-# include "ICharacter.hpp"
-# include <iostream>
-
-class Cure: public AMateria
+const char	*GradeTooHighException::what() const throw()
 {
-	public:
-		Cure();
-		Cure(const Cure &other);
-		~Cure();
-		Cure	&operator =(const Cure &other);
-
-		Cure	*clone(void) const;
-		void	use(ICharacter &target);
-	};
-
-#endif
+	return ("Grade too high");
+}
