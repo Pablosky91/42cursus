@@ -1,26 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*   GradeTooHighException.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 19:21:07 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/03/18 17:48:51 by pdel-olm         ###   ########.fr       */
+/*   Created: 2026/03/31 19:54:09 by pdel-olm          #+#    #+#             */
+/*   Updated: 2026/03/31 19:54:10 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "HumanA.hpp"
-#include "Weapon.hpp"
-#include <iostream>
+# include <exception>
 
-//CONSTRUCTOR
-
-HumanA::HumanA(const std::string &name, Weapon &weapon) : name(name), weapon(weapon) {}
-
-// PUBLIC METHODS
-
-void	HumanA::attack(void)
+class GradeTooHighException: public std::exception
 {
-	std::cout << name << " attacks with their " << weapon.getType() << std::endl;
-}
+	public:
+		virtual const char	*what() const throw();
+};

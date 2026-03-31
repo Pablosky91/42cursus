@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 13:55:41 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/03/17 16:09:09 by pdel-olm         ###   ########.fr       */
+/*   Created: 2026/03/31 19:54:04 by pdel-olm          #+#    #+#             */
+/*   Updated: 2026/03/31 19:54:05 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "GradeTooHighException.hpp"
 #include "GradeTooLowException.hpp"
 
@@ -114,7 +114,7 @@ void	Bureaucrat::decrement(void)
 	setGrade(_grade + 1);
 }
 
-void	Bureaucrat::signForm(Form &form) const
+void	Bureaucrat::signForm(AForm &form) const
 {
 	try
 	{
@@ -125,6 +125,19 @@ void	Bureaucrat::signForm(Form &form) const
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << _kName << " couldn't sign " << form.getName() << " because their grade is too low.\n";
+		std::cerr << _kName << " couldn't sign " << form.getName() << ": " << e.what() << ".\n";
+	}
+}
+
+void	Bureaucrat::executeForm(AForm const &form) const
+{
+	try
+	{
+		form.execute(*this);
+		std::cout << _kName << " executed " << form.getName() << "\n";
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << _kName << " couldn't execute " << form.getName() << ": " << e.what() << ".\n";
 	}
 }

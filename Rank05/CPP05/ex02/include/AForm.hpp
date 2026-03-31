@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/16 13:54:26 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/03/17 15:59:25 by pdel-olm         ###   ########.fr       */
+/*   Created: 2026/03/31 19:54:10 by pdel-olm          #+#    #+#             */
+/*   Updated: 2026/03/31 19:54:11 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 
 # include <iostream>
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 	public:
-		Form();
-		Form(const Form &other);
-		Form(std::string name);
-		Form(int grade_sign, int grade_execute);
-		Form(std::string name, int grade_sign, int grade_execute);
-		~Form();
-		Form	&operator =(const Form &other);
+		AForm();
+		AForm(const AForm &other);
+		AForm(std::string name);
+		AForm(int grade_sign, int grade_execute);
+		AForm(std::string name, int grade_sign, int grade_execute);
+		~AForm();
+		AForm	&operator =(const AForm &other);
 
 		const std::string	getName(void) const;
 		bool				getSigned(void) const;
@@ -34,7 +34,8 @@ class Form
 		int					getGradeSign(void) const;
 		int					getGradeExecute(void) const;
 
-		bool	beSigned(const Bureaucrat &bureaucrat);
+		bool			beSigned(const Bureaucrat &bureaucrat);
+		void			execute(const Bureaucrat &executor) const;
 
 	private:
 		const std::string	_kName;
@@ -43,8 +44,10 @@ class Form
 		const int			_kGrade_execute;
 
 		static int	validateGrade(int grade);
+
+		virtual void	executeAction(void) const = 0;
 };
 
-std::ostream	&operator<<(std::ostream &ostream, const Form &form);
+std::ostream	&operator<<(std::ostream &ostream, const AForm &form);
 
 #endif

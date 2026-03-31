@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/10 11:02:36 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/02/10 14:29:38 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/03/18 17:49:10 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "Cure.hpp"
 #include "Ice.hpp"
 #include "MateriaSource.hpp"
-# include <iostream>
+#include <iostream>
 
 #define RESET	"\033[0m"
 #define MAGENTA	"\033[35m"
@@ -59,7 +59,7 @@ int	main(void)
 	std::cout << MAGENTA << "Copying Character" << std::endl << RESET;
 	Character	*frisk = new Character(*chara);
 	frisk->setName("Frisk");
-	
+
 	std::cout << MAGENTA << "Character 2" << std::endl << RESET;
 	frisk->equip(src1->createMateria("ice"));
 	AMateria	*floor = frisk->getSlot(2);

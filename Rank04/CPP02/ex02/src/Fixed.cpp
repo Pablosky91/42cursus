@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 21:41:15 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/01/18 23:39:03 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/03/17 15:59:07 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ Fixed	&Fixed::operator --(void)
 Fixed	Fixed::operator --(int)
 {
 	Fixed old = *this;
-	
+
 	_value--;
 	return (old);
 }

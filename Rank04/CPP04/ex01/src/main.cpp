@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/08 13:53:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/02/08 23:06:42 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/03/17 15:59:15 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	main(void)
 
 	dog->getBrain()->newIdea("dog");
 	dog->getBrain()->listIdeas();
-	
+
 	Dog	*other = new Dog(*dog);
 	delete dog;
 

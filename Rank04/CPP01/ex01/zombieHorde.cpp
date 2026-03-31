@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 20:41:46 by pdel-olm          #+#    #+#             */
-/*   Updated: 2025/07/23 21:41:47 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/03/17 15:58:59 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 Zombie	*zombieHorde(int N, std::string name)
 {
 	Zombie*	horde;
-	
+
 	if (N < 0)
 	{
 		std::cout << "zombieHorde needs a positive number as argument" << std::endl;

@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/18 23:10:54 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/02/05 20:12:39 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/03/17 15:59:11 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ class Fixed
 		bool	operator !=(const Fixed &other) const;
 
 		// ARITHMETIC OPERATORS
-		
+
 		Fixed	operator +(const Fixed &other) const;
 		Fixed	operator -(const Fixed &other) const;
 		Fixed	operator *(const Fixed &other) const;

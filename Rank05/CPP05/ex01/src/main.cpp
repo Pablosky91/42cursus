@@ -6,13 +6,13 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 15:25:47 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/03/16 16:59:18 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/03/18 17:49:25 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "Bureaucrat.hpp"
-# include "Form.hpp"
-# include <iostream>
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
+#include <iostream>
 
 int	main(void)
 {
