@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/03/31 19:54:29 by pdel-olm          #+#    #+#              #
-#    Updated: 2026/04/01 22:08:11 by pdel-olm         ###   ########.fr        #
+#    Created: 2026/03/31 21:46:45 by pdel-olm          #+#    #+#              #
+#    Updated: 2026/04/01 21:19:05 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ MAKEFLAGS := --no-print-directory
 RM := rm -rf
 MKDIR := mkdir -p
 
-NAME := forms
-NAME_CAPITAL := Forms
+NAME := intern
+NAME_CAPITAL := Intern
 
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -fsanitize=address
@@ -38,6 +38,7 @@ SOURCES :=	\
 			Bureaucrat.cpp\
 			GradeTooHighException.cpp\
 			GradeTooLowException.cpp\
+			Intern.cpp\
 			PresidentialPardonForm.cpp\
 			RobotomyRequestForm.cpp\
 			ShrubberyCreationForm.cpp\
