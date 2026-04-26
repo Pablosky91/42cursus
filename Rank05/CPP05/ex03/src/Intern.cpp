@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/31 21:50:09 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/04/01 22:12:16 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/04/26 22:23:04 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ Intern::~Intern()
 
 Intern	&Intern::operator =(const Intern &other)
 {
-	if (this != &other) 
+	if (this != &other)
 		;
 	return (*this);
 }
