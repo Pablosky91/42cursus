@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/14 13:17:01 by pdel-olm          #+#    #+#              #
-#    Updated: 2026/06/19 12:34:04 by pdel-olm         ###   ########.fr        #
+#    Updated: 2026/06/19 13:43:33 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ MAKEFLAGS := --no-print-directory
 RM := rm -rf
 MKDIR := mkdir -p
 
-NAME := convert
-NAME_CAPITAL := Convert
+NAME := serializer
+NAME_CAPITAL := Serializer
 
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -fsanitize=address
@@ -34,7 +34,7 @@ VPATH := $(SRC_DIR)
 
 SOURCES :=	\
 			main.cpp\
-			ScalarConverter.cpp\
+			Serializer.cpp\
 
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.cpp=.o))
@@ -84,30 +84,7 @@ re: fclean all
 .PHONY: e exec
 e: exec
 exec: all
-	@-./$(NAME)				&& echo
-	@-./$(NAME) invalid		&& echo
-	@-./$(NAME) nanf		&& echo
-	@-./$(NAME) +inff		&& echo
-	@-./$(NAME) -inff		&& echo
-	@-./$(NAME) nan			&& echo
-	@-./$(NAME) +inf		&& echo
-	@-./$(NAME) -inf		&& echo
-	@-./$(NAME) 0			&& echo
-	@-./$(NAME) 42.0f		&& echo
-	@-./$(NAME) 42.42f		&& echo
-	@-./$(NAME) +42.42f		&& echo
-	@-./$(NAME) -42.42f		&& echo
-	@-./$(NAME) 42.0		&& echo
-	@-./$(NAME) 42.42		&& echo
-	@-./$(NAME) +42.42		&& echo
-	@-./$(NAME) -42.42		&& echo
-	@-./$(NAME) 65			&& echo
-	@-./$(NAME) +65			&& echo
-	@-./$(NAME) -65			&& echo
-	@-./$(NAME) a			&& echo
-	@-./$(NAME) "'a'"		&& echo
-	@-./$(NAME) "'0'"		&& echo
-	@-./$(NAME) " "			&& echo
+	@-./$(NAME)
 
 #MESSAGES
 

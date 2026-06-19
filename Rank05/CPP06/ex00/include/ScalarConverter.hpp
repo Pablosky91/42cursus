@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:26:42 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/05/23 20:41:56 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/06/19 12:32:13 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,6 @@ class ScalarConverter
 		ScalarConverter(const ScalarConverter &other);
 		ScalarConverter	&operator =(const ScalarConverter &other);
 		~ScalarConverter();
-
-		static Type	getType(const std::string &literal);
-		static void	convertToType(Scalars *scalars);
-		static void	convertToOtherTypes(Scalars *scalars);
-		static void	displayScalars(const Scalars &scalars);
 };
 
 #endif
