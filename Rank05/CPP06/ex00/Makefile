@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/14 13:17:01 by pdel-olm          #+#    #+#              #
-#    Updated: 2026/04/26 22:27:30 by pdel-olm         ###   ########.fr        #
+#    Updated: 2026/06/19 11:45:48 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,9 @@ VPATH := $(SRC_DIR)
 SOURCES :=	\
 			main.cpp\
 			ScalarConverter.cpp\
+			ScalarConverter_convertToType.cpp\
+			ScalarConverter_convertToOtherTypes.cpp\
+			ScalarConverter_displayScalars.cpp\
 			ScalarConverter_getType.cpp\
 
 
@@ -85,39 +88,30 @@ re: fclean all
 .PHONY: e exec
 e: exec
 exec: all
-	@@-./$(NAME)
-	@-./$(NAME) 0
-	@-./$(NAME) nan
-	@-./$(NAME) 42.0f
-	@-./$(NAME) 65
-	@-./$(NAME) -65
-	@-./$(NAME) +65
-	@-./$(NAME) a
-	@-./$(NAME) "'a'"
-	@-./$(NAME) "'0'"
-	@-./$(NAME) "'\''"
-	@-./$(NAME) "'''"
-	@-./$(NAME) '"a"'
-	@-./$(NAME) " "
-	@-./$(NAME) "	"
-	@-./$(NAME) "1.2f"
-	@-./$(NAME) "+1.2f"
-	@-./$(NAME) "-1.2f"
-	@-./$(NAME) "1.2f3"
-	@-./$(NAME) "1f2."
-	@-./$(NAME) "1.2."
-	@-./$(NAME) "1f2f"
-	@-./$(NAME) ".2f"
-	@-./$(NAME) "1.f"
-	@-./$(NAME) ".f"
-	@-./$(NAME) "1.2"
-	@-./$(NAME) "+1.2"
-	@-./$(NAME) "-1.2"
-	@-./$(NAME) "1.2."
-	@-./$(NAME) "1f2"
-	@-./$(NAME) ".2"
-	@-./$(NAME) "1."
-	@-./$(NAME) "."
+	-./$(NAME)
+	-./$(NAME) invalid
+	-./$(NAME) nanf
+	-./$(NAME) +inff
+	-./$(NAME) -inff
+	-./$(NAME) nan
+	-./$(NAME) +inf
+	-./$(NAME) -inf
+	-./$(NAME) 0
+	-./$(NAME) 42.0f
+	-./$(NAME) 42.42f
+	-./$(NAME) +42.42f
+	-./$(NAME) -42.42f
+	-./$(NAME) 42.0
+	-./$(NAME) 42.42
+	-./$(NAME) +42.42
+	-./$(NAME) -42.42
+	-./$(NAME) 65
+	-./$(NAME) +65
+	-./$(NAME) -65
+	-./$(NAME) a
+	-./$(NAME) "'a'"
+	-./$(NAME) "'0'"
+	-./$(NAME) " "
 
 #MESSAGES
 

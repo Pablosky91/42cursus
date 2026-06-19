@@ -6,15 +6,12 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/14 13:15:38 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/04/26 22:22:37 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/06/19 11:48:28 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 #include <iostream>
-
-// #include <cmath>
-#include <limits>
 
 int	main(int argc, char **argv)
 {

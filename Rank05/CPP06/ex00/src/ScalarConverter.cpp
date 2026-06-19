@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:26:45 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/04/26 22:22:04 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/05/23 20:41:51 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,29 @@ ScalarConverter	&ScalarConverter::operator =(const ScalarConverter &other)
 	return (*this);
 }
 
+//STATIC PRIVATE FUNCTION
+
+static Scalars	init_scalars(std::string literal, Type type)
+{
+	Scalars	scalars;
+
+	scalars.literal = literal;
+	scalars.type = type;
+	scalars.is_special = true;
+	scalars.char_value = 0;
+	scalars.int_value = 0;
+	scalars.float_value = 0;
+	scalars.double_value = 0;
+	return (scalars);
+}
+
 //PUBLIC STATIC FUNCTION
 
-void ScalarConverter::convert(std::string literal)
+void	ScalarConverter::convert(std::string literal)
 {
-	std::cout << literal << " ";
-	switch (getType(literal))
-	{
-	case 0:
-		std::cout << "type: CHAR" << "\n";
-		break;
-	case 1:
-		std::cout << "type: INT" << "\n";
-		break;
-	case 2:
-		std::cout << "type: FLOAT" << "\n";
-		break;
-	case 3:
-		std::cout << "type: DOUBLE" << "\n";
-		break;
-	case 4:
-		std::cout << "type: ERROR" << "\n";
-		break;
-	default:
-		std::cout << "type: SOMETHING WEIRD HAPPENED" << "\n";
-		break;
-	}
+	Scalars	scalars = init_scalars(literal, getType(literal));
+
+	convertToType(&scalars);
+	convertToOtherTypes(&scalars);
+	displayScalars(scalars);
 }

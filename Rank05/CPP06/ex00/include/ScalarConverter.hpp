@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:26:42 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/04/26 22:18:36 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/05/23 20:41:56 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,17 @@ enum Type
 	ERROR,
 };
 
+struct Scalars
+{
+	std::string	literal;
+	Type		type;
+	bool		is_special;
+	char		char_value;
+	int			int_value;
+	float		float_value;
+	double		double_value;
+};
+
 const float NANF = std::numeric_limits<float>::quiet_NaN();
 const float INFF = std::numeric_limits<float>::infinity();
 const float NINFF = -std::numeric_limits<float>::infinity();
@@ -36,16 +47,18 @@ const double NINF = -std::numeric_limits<double>::infinity();
 class ScalarConverter
 {
 	public:
-		ScalarConverter();
-		ScalarConverter(const ScalarConverter &other);
-		ScalarConverter	&operator =(const ScalarConverter &other);
-
 		static void	convert(std::string literal);
 
 	private:
+		ScalarConverter();
+		ScalarConverter(const ScalarConverter &other);
+		ScalarConverter	&operator =(const ScalarConverter &other);
 		~ScalarConverter();
 
-		static Type	getType(std::string literal);
+		static Type	getType(const std::string &literal);
+		static void	convertToType(Scalars *scalars);
+		static void	convertToOtherTypes(Scalars *scalars);
+		static void	displayScalars(const Scalars &scalars);
 };
 
 #endif

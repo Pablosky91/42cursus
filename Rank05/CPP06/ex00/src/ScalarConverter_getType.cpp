@@ -6,18 +6,18 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 20:56:13 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/04/26 22:27:51 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/05/21 19:36:56 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
 
-static bool	isInt(std::string literal);
-static bool	isChar(std::string literal);
-static bool	isFloat(std::string literal);
-static bool	isDouble(std::string literal);
+static bool	isInt(const std::string &literal);
+static bool	isChar(const std::string &literal);
+static bool	isFloat(const std::string &literal);
+static bool	isDouble(const std::string &literal);
 
-Type	ScalarConverter::getType(std::string literal)
+Type	ScalarConverter::getType(const std::string &literal)
 {
 	if (literal.empty())
 		return (ERROR);
@@ -32,7 +32,7 @@ Type	ScalarConverter::getType(std::string literal)
 	return (ERROR);
 }
 
-static bool	isInt(std::string literal)
+static bool	isInt(const std::string &literal)
 {
 	size_t	i = -1;
 
@@ -44,7 +44,7 @@ static bool	isInt(std::string literal)
 	return (true);
 }
 
-static bool	isChar(std::string literal)
+static bool	isChar(const std::string &literal)
 {
 	if (literal.length() == 1 && literal[0] >= 32 && literal[0] <= 126)
 		return (true);
@@ -57,7 +57,7 @@ static bool	isChar(std::string literal)
 	return (false);
 }
 
-static bool	isFloat(std::string literal)
+static bool	isFloat(const std::string &literal)
 {
 	size_t	i = 0;
 
@@ -80,7 +80,7 @@ static bool	isFloat(std::string literal)
 	return (i == literal.length());
 }
 
-static bool	isDouble(std::string literal)
+static bool	isDouble(const std::string &literal)
 {
 	size_t	i = 0;
 
