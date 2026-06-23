@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/06/23 15:30:52 by pdel-olm          #+#    #+#              #
-#    Updated: 2026/06/23 18:47:10 by pdel-olm         ###   ########.fr        #
+#    Created: 2026/06/23 18:42:31 by pdel-olm          #+#    #+#              #
+#    Updated: 2026/06/23 18:48:29 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ MAKEFLAGS := --no-print-directory
 RM := rm -rf
 MKDIR := mkdir -p
 
-NAME := identify
-NAME_CAPITAL := Identify
+NAME := array
+NAME_CAPITAL := Array
 
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -fsanitize=address
@@ -34,7 +34,6 @@ VPATH := $(SRC_DIR)
 
 SOURCES :=	\
 			main.cpp\
-			Base.cpp\
 
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.cpp=.o))
