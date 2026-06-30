@@ -27,7 +27,7 @@ Dog::Dog()
 
 //COPY CONSTRUCTOR
 
-Dog::Dog(const Dog& other)
+Dog::Dog(const Dog &other)
 {
 	std::cout << GREEN << "Dog copy constructor" << std::endl << RESET;
 	*this = other;

@@ -26,7 +26,7 @@ Cure::Cure(): AMateria("cure")
 
 //COPY CONSTRUCTOR
 
-Cure::Cure(const Cure& other)
+Cure::Cure(const Cure &other)
 {
 	std::cout << GREEN << "Cure copy constructor" << std::endl << RESET;
 	*this = other;

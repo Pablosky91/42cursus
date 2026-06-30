@@ -24,7 +24,7 @@ Bureaucrat::Bureaucrat():
 
 //COPY CONSTRUCTOR
 
-Bureaucrat::Bureaucrat(const Bureaucrat& other):
+Bureaucrat::Bureaucrat(const Bureaucrat &other):
 	_kName(other._kName)
 {
 	*this = other;

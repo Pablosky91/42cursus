@@ -29,7 +29,7 @@ Character::Character(): _name("Unnamed")
 
 //COPY CONSTRUCTOR
 
-Character::Character(const Character& other)
+Character::Character(const Character &other)
 {
 	std::cout << GREEN << "Character copy constructor" << std::endl << RESET;
 	for (int i = 0; i < INV_SIZE; i++)

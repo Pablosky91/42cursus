@@ -27,7 +27,7 @@ WrongCat::WrongCat()
 
 //COPY CONSTRUCTOR
 
-WrongCat::WrongCat(const WrongCat& other)
+WrongCat::WrongCat(const WrongCat &other)
 {
 	std::cout << GREEN << "WrongCat copy constructor" << std::endl << RESET;
 	*this = other;

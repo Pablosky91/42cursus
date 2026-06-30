@@ -31,7 +31,7 @@ Brain::Brain()
 
 //COPY CONSTRUCTOR
 
-Brain::Brain(const Brain& other)
+Brain::Brain(const Brain &other)
 {
 	std::cout << GREEN << "Brain copy constructor" << std::endl << RESET;
 	*this = other;

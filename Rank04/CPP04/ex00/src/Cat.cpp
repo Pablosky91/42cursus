@@ -27,7 +27,7 @@ Cat::Cat()
 
 //COPY CONSTRUCTOR
 
-Cat::Cat(const Cat& other)
+Cat::Cat(const Cat &other)
 {
 	std::cout << GREEN << "Cat copy constructor" << std::endl << RESET;
 	*this = other;

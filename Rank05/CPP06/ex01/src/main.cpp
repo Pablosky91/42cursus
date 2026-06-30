@@ -23,14 +23,14 @@ int	main(void)
 	data->id = 1;
 	data->value = 4.2;
 	std::cout << "Data (" << data->id << "): " << data->value << " at " << data << "\n";
-	
+
 	raw = Serializer::serialize(data);
 	std::cout << "Serial number: " << raw << "\n";
-	
+
 	copy = Serializer::deserialize(raw);
-	std::cout << "Data (" << copy->id << "): " << copy->value << " at " << data <<  "\n";
-	
-	std::cout << std::boolalpha << "Same address: " << (data == copy) <<  "\n";
+	std::cout << "Data (" << copy->id << "): " << copy->value << " at " << data << "\n";
+
+	std::cout << std::boolalpha << "Same address: " << (data == copy) << "\n";
 
 	delete data;
 	return (0);

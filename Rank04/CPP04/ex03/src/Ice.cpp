@@ -26,7 +26,7 @@ Ice::Ice(): AMateria("ice")
 
 //COPY CONSTRUCTOR
 
-Ice::Ice(const Ice& other)
+Ice::Ice(const Ice &other)
 {
 	std::cout << GREEN << "Ice copy constructor" << std::endl << RESET;
 	*this = other;

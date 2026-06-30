@@ -28,7 +28,7 @@ Form::Form():
 
 //COPY CONSTRUCTOR
 
-Form::Form(const Form& other):
+Form::Form(const Form &other):
 	_kName(other._kName),
 	_kGrade_sign(other._kGrade_sign),
 	_kGrade_execute(other._kGrade_execute)
