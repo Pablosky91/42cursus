@@ -24,7 +24,7 @@ RobotomyRequestForm::RobotomyRequestForm():
 
 //COPY CONSTRUCTOR
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other):
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other):
 	AForm(other),
 	_target("Untargeted")
 {

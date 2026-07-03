@@ -25,7 +25,7 @@ AMateria::AMateria()
 
 //COPY CONSTRUCTOR
 
-AMateria::AMateria(const AMateria& other)
+AMateria::AMateria(const AMateria &other)
 {
 	std::cout << GREEN << "AMateria copy constructor" << std::endl << RESET;
 	*this = other;

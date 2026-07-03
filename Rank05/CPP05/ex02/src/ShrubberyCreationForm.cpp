@@ -23,7 +23,7 @@ ShrubberyCreationForm::ShrubberyCreationForm():
 
 //COPY CONSTRUCTOR
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other):
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other):
 	AForm(other),
 	_target("Untargeted")
 {

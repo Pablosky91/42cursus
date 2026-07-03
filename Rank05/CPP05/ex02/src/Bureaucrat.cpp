@@ -26,7 +26,7 @@ Bureaucrat::Bureaucrat():
 
 //COPY CONSTRUCTOR
 
-Bureaucrat::Bureaucrat(const Bureaucrat& other):
+Bureaucrat::Bureaucrat(const Bureaucrat &other):
 	_kName(other._kName)
 {
 	*this = other;
@@ -123,7 +123,7 @@ void	Bureaucrat::signForm(AForm &form) const
 		else
 			std::cout << _kName << " signed " << form.getName() << "\n";
 	}
-	catch(const std::exception& e)
+	catch(const std::exception &e)
 	{
 		std::cerr << _kName << " couldn't sign " << form.getName() << ": " << e.what() << ".\n";
 	}
@@ -136,7 +136,7 @@ void	Bureaucrat::executeForm(AForm const &form) const
 		form.execute(*this);
 		std::cout << _kName << " executed " << form.getName() << "\n";
 	}
-	catch(const std::exception& e)
+	catch(const std::exception &e)
 	{
 		std::cerr << _kName << " couldn't execute " << form.getName() << ": " << e.what() << ".\n";
 	}

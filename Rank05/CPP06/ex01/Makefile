@@ -36,7 +36,6 @@ SOURCES :=	\
 			main.cpp\
 			Serializer.cpp\
 
-
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.cpp=.o))
 
 #COLOURS

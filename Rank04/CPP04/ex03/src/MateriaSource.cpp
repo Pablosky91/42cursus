@@ -29,7 +29,7 @@ MateriaSource::MateriaSource()
 
 //COPY CONSTRUCTOR
 
-MateriaSource::MateriaSource(const MateriaSource& other)
+MateriaSource::MateriaSource(const MateriaSource &other)
 {
 	std::cout << GREEN << "MateriaSource copy constructor" << std::endl << RESET;
 	for (int i = 0; i < MEM_SIZE; i++)

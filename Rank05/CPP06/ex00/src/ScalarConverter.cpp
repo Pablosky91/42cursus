@@ -6,7 +6,7 @@
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/13 21:26:45 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/06/19 12:38:53 by pdel-olm         ###   ########.fr       */
+/*   Updated: 2026/06/30 20:12:35 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ ScalarConverter::ScalarConverter()
 
 //COPY CONSTRUCTOR
 
-ScalarConverter::ScalarConverter(const ScalarConverter& other)
+ScalarConverter::ScalarConverter(const ScalarConverter &other)
 {
 	*this = other;
 }
@@ -323,6 +323,8 @@ static void	displayChar(const Scalars &scalars)
 		std::cout << "impossible\n";
 	else if (scalars.char_value < 32 || scalars.char_value > 126)
 		std::cout << "Non displayable\n";
+	else if (scalars.char_value == '\'')
+		std::cout << "'\\''\n";
 	else
 		std::cout << "'" << scalars.char_value <<"'\n";
 }

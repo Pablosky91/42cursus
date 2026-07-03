@@ -51,7 +51,7 @@ void	identify(Base &p)
 		(void) (dynamic_cast<A &>(p));
 		std::cout << "A\n";
 	}
-	catch(const std::exception& e)
+	catch(const std::exception &e)
 	{
 	}
 	try
@@ -59,7 +59,7 @@ void	identify(Base &p)
 		(void) (dynamic_cast<B &>(p));
 		std::cout << "B\n";
 	}
-	catch(const std::exception& e)
+	catch(const std::exception &e)
 	{
 	}
 	try
@@ -67,7 +67,7 @@ void	identify(Base &p)
 		(void) (dynamic_cast<C &>(p));
 		std::cout << "C\n";
 	}
-	catch(const std::exception& e)
+	catch(const std::exception &e)
 	{
 	}
 }

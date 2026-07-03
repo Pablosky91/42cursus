@@ -29,7 +29,7 @@ AForm::AForm():
 
 //COPY CONSTRUCTOR
 
-AForm::AForm(const AForm& other):
+AForm::AForm(const AForm &other):
 	_kName(other._kName),
 	_kGrade_sign(other._kGrade_sign),
 	_kGrade_execute(other._kGrade_execute)

@@ -25,7 +25,7 @@ AAnimal::AAnimal(): type("AAnimal")
 
 //COPY CONSTRUCTOR
 
-AAnimal::AAnimal(const AAnimal& other)
+AAnimal::AAnimal(const AAnimal &other)
 {
 	std::cout << GREEN << "AAnimal copy constructor" << std::endl << RESET;
 	*this = other;

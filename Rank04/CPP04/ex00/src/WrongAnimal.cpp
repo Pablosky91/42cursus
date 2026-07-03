@@ -26,7 +26,7 @@ WrongAnimal::WrongAnimal(): type("WrongAnimal")
 
 //COPY CONSTRUCTOR
 
-WrongAnimal::WrongAnimal(const WrongAnimal& other)
+WrongAnimal::WrongAnimal(const WrongAnimal &other)
 {
 	std::cout << GREEN << "WrongAnimal copy constructor" << std::endl << RESET;
 	*this = other;

@@ -35,7 +35,6 @@ VPATH := $(SRC_DIR)
 SOURCES :=	\
 			main.cpp\
 
-
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.cpp=.o))
 
 #COLOURS

@@ -6,7 +6,7 @@
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/04/14 13:17:01 by pdel-olm          #+#    #+#              #
-#    Updated: 2026/06/19 12:34:04 by pdel-olm         ###   ########.fr        #
+#    Updated: 2026/06/30 20:22:29 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ VPATH := $(SRC_DIR)
 SOURCES :=	\
 			main.cpp\
 			ScalarConverter.cpp\
-
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.cpp=.o))
 
@@ -84,30 +83,55 @@ re: fclean all
 .PHONY: e exec
 e: exec
 exec: all
-	@-./$(NAME)				&& echo
-	@-./$(NAME) invalid		&& echo
-	@-./$(NAME) nanf		&& echo
-	@-./$(NAME) +inff		&& echo
-	@-./$(NAME) -inff		&& echo
-	@-./$(NAME) nan			&& echo
-	@-./$(NAME) +inf		&& echo
-	@-./$(NAME) -inf		&& echo
-	@-./$(NAME) 0			&& echo
-	@-./$(NAME) 42.0f		&& echo
-	@-./$(NAME) 42.42f		&& echo
-	@-./$(NAME) +42.42f		&& echo
-	@-./$(NAME) -42.42f		&& echo
-	@-./$(NAME) 42.0		&& echo
-	@-./$(NAME) 42.42		&& echo
-	@-./$(NAME) +42.42		&& echo
-	@-./$(NAME) -42.42		&& echo
-	@-./$(NAME) 65			&& echo
-	@-./$(NAME) +65			&& echo
-	@-./$(NAME) -65			&& echo
-	@-./$(NAME) a			&& echo
-	@-./$(NAME) "'a'"		&& echo
-	@-./$(NAME) "'0'"		&& echo
-	@-./$(NAME) " "			&& echo
+	@echo "$(RED)\nNO ARGUMENT\n$(RESET)"
+	-./$(NAME)
+	@echo "$(RED)\nINVALID ARGUMENT\n$(RESET)"
+	./$(NAME) invalid
+	@echo "$(BLUE)\nSPECIAL ARGUMENTS\n$(RESET)"
+	./$(NAME) nanf
+	@echo
+	./$(NAME) +inff
+	@echo
+	./$(NAME) -inff
+	@echo
+	./$(NAME) nan
+	@echo
+	./$(NAME) +inf
+	@echo
+	./$(NAME) -inf
+	@echo "$(GREEN)\nCHARACTER ARGUMENTS\n$(RESET)"
+	./$(NAME) a
+	@echo
+	./$(NAME) "'a'"
+	@echo
+	./$(NAME) "'0'"
+	@echo
+	./$(NAME) " "
+	@echo "$(GREEN)\nINTEGER ARGUMENTS\n$(RESET)"
+	./$(NAME) 0
+	@echo
+	./$(NAME) 65
+	@echo
+	./$(NAME) +65
+	@echo
+	./$(NAME) -65
+	@echo "$(GREEN)\nFLOAT ARGUMENTS\n$(RESET)"
+	./$(NAME) 42.0f
+	@echo
+	./$(NAME) 42.42f
+	@echo
+	./$(NAME) +42.42f
+	@echo
+	./$(NAME) -42.42f
+	@echo "$(GREEN)\nDOUBLE ARGUMENTS\n$(RESET)"
+	./$(NAME) 42.0
+	@echo
+	./$(NAME) 42.42
+	@echo
+	./$(NAME) +42.42
+	@echo
+	./$(NAME) -42.42
+	@echo
 
 #MESSAGES
 

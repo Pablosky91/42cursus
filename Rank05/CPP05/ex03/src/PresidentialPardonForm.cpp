@@ -22,7 +22,7 @@ PresidentialPardonForm::PresidentialPardonForm():
 
 //COPY CONSTRUCTOR
 
-PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& other):
+PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &other):
 	AForm(other),
 	_target("Untargeted")
 {

@@ -26,7 +26,7 @@ Animal::Animal(): type("Animal")
 
 //COPY CONSTRUCTOR
 
-Animal::Animal(const Animal& other)
+Animal::Animal(const Animal &other)
 {
 	std::cout << GREEN << "Animal copy constructor" << std::endl << RESET;
 	*this = other;

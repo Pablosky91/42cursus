@@ -20,7 +20,7 @@ Serializer::Serializer()
 
 //COPY CONSTRUCTOR
 
-Serializer::Serializer(const Serializer& other)
+Serializer::Serializer(const Serializer &other)
 {
 	*this = other;
 }

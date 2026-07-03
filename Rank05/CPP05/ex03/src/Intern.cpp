@@ -24,7 +24,7 @@ Intern::Intern()
 
 //COPY CONSTRUCTOR
 
-Intern::Intern(const Intern& other)
+Intern::Intern(const Intern &other)
 {
 	*this = other;
 }

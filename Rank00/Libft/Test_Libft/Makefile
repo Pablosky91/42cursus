@@ -2,7 +2,6 @@
 
 NAME = test.out
 
-
 RM = rm -f
 
 CC = cc
