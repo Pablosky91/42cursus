@@ -31,7 +31,7 @@ int	main(void)
 	avg.signForm(tree);
 	bad.executeForm(tree);
 	avg.executeForm(tree);
-	std::cout << '\n';
+	std::cout << std::endl;
 
 	bad.executeForm(robot);
 	bad.signForm(robot);
@@ -39,7 +39,7 @@ int	main(void)
 	bad.executeForm(robot);
 	avg.executeForm(robot);
 	good.executeForm(robot);
-	std::cout << '\n';
+	std::cout << std::endl;
 
 	bad.executeForm(pardon);
 	bad.signForm(pardon);

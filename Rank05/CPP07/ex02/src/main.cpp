@@ -21,7 +21,6 @@ void	print_array(std::string str, Array<T> &arr)
 		std::cout << i << " -> "<< arr[i] << std::endl;
 }
 
-#define MAX_VAL 750
 int	main(void)
 {
 	Array<int>	*arr = new Array<int>(5);

@@ -25,21 +25,21 @@ int	main(void)
 	bureaucrat.signForm(*form);
 	bureaucrat.executeForm(*form);
 	delete(form);
-	std::cout << '\n';
+	std::cout << std::endl;
 
 	form = intern.makeForm("robotomy request", "Robert");
 	bureaucrat.executeForm(*form);
 	bureaucrat.signForm(*form);
 	bureaucrat.executeForm(*form);
 	delete(form);
-	std::cout << '\n';
+	std::cout << std::endl;
 
 	form = intern.makeForm("shrubbery creation", "home");
 	bureaucrat.executeForm(*form);
 	bureaucrat.signForm(*form);
 	bureaucrat.executeForm(*form);
 	delete(form);
-	std::cout << '\n';
+	std::cout << std::endl;
 
 	form = intern.makeForm("something else", "whatever");
 
