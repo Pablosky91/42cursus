@@ -24,14 +24,14 @@ void	print_array(std::string str, Array<T> &arr)
 int	main(void)
 {
 	Array<int>	*arr = new Array<int>(5);
-	
+
 	std::cout << "Size: " << arr->size() << std::endl;
 	print_array("Empty:", (*arr));
-	
+
 	for (size_t i = 0; i < arr->size(); i++)
 		(*arr)[i] = 50 - 10 * i;
 	print_array("Numbers:", (*arr));
-	
+
 	Array<int>	copy(*arr);
 	print_array("Copy:", copy);
 

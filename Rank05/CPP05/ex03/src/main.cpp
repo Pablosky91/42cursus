@@ -19,7 +19,7 @@ int	main(void)
 	Bureaucrat	bureaucrat("Bernard", 1);
 	Intern		intern;
 	AForm		*form = NULL;
-	
+
 	form = intern.makeForm("presidential pardon", "Baddie");
 	bureaucrat.executeForm(*form);
 	bureaucrat.signForm(*form);
