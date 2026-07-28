@@ -25,6 +25,7 @@ class Array
 		~Array();
 
 		unsigned long	size(void) const;
+
 	private:
 		unsigned long	_size;
 		T				*_array;

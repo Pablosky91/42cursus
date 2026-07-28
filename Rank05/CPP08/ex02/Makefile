@@ -5,8 +5,8 @@
 #                                                     +:+ +:+         +:+      #
 #    By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/07/23 13:15:26 by pdel-olm          #+#    #+#              #
-#    Updated: 2026/07/25 13:25:59 by pdel-olm         ###   ########.fr        #
+#    Created: 2026/07/27 20:06:17 by pdel-olm          #+#    #+#              #
+#    Updated: 2026/07/27 20:10:22 by pdel-olm         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,8 @@ MAKEFLAGS := --no-print-directory
 RM := rm -rf
 MKDIR := mkdir -p
 
-NAME := span
-NAME_CAPITAL := Span
+NAME := mutantStack
+NAME_CAPITAL := MutantStack
 
 CXX := c++
 CXXFLAGS := -Wall -Wextra -Werror -std=c++98 -fsanitize=address -g3
@@ -34,7 +34,6 @@ VPATH := $(SRC_DIR)
 
 SOURCES :=	\
 			main.cpp\
-			Span.cpp\
 
 OBJECTS := $(addprefix $(OBJ_DIR), $(SOURCES:.cpp=.o))
 
