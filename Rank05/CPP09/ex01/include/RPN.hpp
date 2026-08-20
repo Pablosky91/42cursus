@@ -1,33 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   iter.hpp                                           :+:      :+:    :+:   */
+/*   RPN.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/23 19:22:05 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/07/03 21:02:48 by pdel-olm         ###   ########.fr       */
+/*   Created: 2026/08/20 10:32:45 by pdel-olm          #+#    #+#             */
+/*   Updated: 2026/08/20 17:09:09 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITER_HPP
-# define ITER_HPP
+#ifndef RPN_HPP
+# define RPN_HPP
 
-# include <iostream>
+# include <stack>
+# include <string>
 
-template <typename T, typename F>
-void	iter(T *array, const int length, F function)
+class RPN
 {
-	if (!array)
-		return ;
-	for (int i = 0; i < length; i++)
-		function(array[i]);
-}
+	public:
+		RPN();
+		RPN(const RPN &other);
+		~RPN();
+		RPN	&operator =(const RPN &other);
 
-template <typename T>
-void	print(const T &n)
-{
-	std::cout << n << " ";
-}
+		void	new_token(std::string token);
+		int		get_result(void);
+
+	private:
+		std::stack<long>	_stack;
+
+		void	operate(std::string token);
+};
 
 #endif

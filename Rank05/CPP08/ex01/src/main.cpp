@@ -26,7 +26,7 @@ int	main(void)
 		sp.shortestSpan();
 		sp.longestSpan();
 	}
-	catch(const std::exception& e)
+	catch(const std::exception &e)
 	{
 		std::cerr << "Span has less than 2 numbers\n";
 	}
@@ -40,7 +40,7 @@ int	main(void)
 		sp.addNumber(11);
 		sp.addNumber(20);
 	}
-	catch(const std::exception& e)
+	catch(const std::exception &e)
 	{
 		std::cerr << "Span full\n";
 	}
@@ -50,7 +50,7 @@ int	main(void)
 		std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
 		std::cout << "Longest span: " << sp.longestSpan() << std::endl;
 	}
-	catch(const std::exception& e)
+	catch(const std::exception &e)
 	{
 		std::cerr << "Span has less than 2 numbers\n";
 	}
@@ -61,7 +61,7 @@ int	main(void)
 			values[i] = std::rand();
 		sp2.addRange(values.begin(), values.end());
 	}
-	catch(const std::exception& e)
+	catch(const std::exception &e)
 	{
 		std::cerr << "Span can't take so many numbers\n";
 	}
@@ -71,7 +71,7 @@ int	main(void)
 		std::cout << "Shortest span: " << sp2.shortestSpan() << std::endl;
 		std::cout << "Longest span: " << sp2.longestSpan() << std::endl;
 	}
-	catch(const std::exception& e)
+	catch(const std::exception &e)
 	{
 		std::cerr << "Span has less than 2 numbers\n";
 	}

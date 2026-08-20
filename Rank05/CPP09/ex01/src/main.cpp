@@ -5,59 +5,40 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pdel-olm <pdel-olm@student.42madrid.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/29 19:05:39 by pdel-olm          #+#    #+#             */
-/*   Updated: 2026/08/01 22:25:15 by pdel-olm         ###   ########.fr       */
+/*   Created: 2026/08/19 11:56:37 by pdel-olm          #+#    #+#             */
+/*   Updated: 2026/08/20 16:26:42 by pdel-olm         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BitcoinExchange.hpp"
-#include <fstream>
+#include "RPN.hpp"
 #include <iostream>
 #include <sstream>
 
 int	main(int argc, char **argv)
 {
-	BitcoinExchange		btc;
-	std::ifstream		data("data.csv");
-	std::ifstream		input(argv[1]);
 	std::istringstream	iss;
-	std::string			line;
+	std::string			token;
+	RPN					rpn;
 
-	if (argc != 2)
+	if (argc == 1)
 	{
-		std::cerr << "Pass an input file as the only argument" << std::endl;
+		std::cerr << "Pass an inverted polish mathematical expression as an argument" << std::endl;
 		return (1);
 	}
-
-	if (!data.is_open())
-	{
-		std::cerr << "Can't load bitcoin prices: file data.csv is missing" << std::endl;
-		return (1);
-	}
-
 	try
 	{
-		btc.loadDatabase(data);
+		for (int i = 1; i < argc; i++)
+		{
+			iss.str(argv[i]);
+			while (iss >> token)
+				rpn.new_token(token);
+			iss.clear();
+		}
+		std::cout << rpn.get_result() << std::endl;
 	}
 	catch(const std::exception &e)
 	{
-		std::cerr << "Can't load bitcoin prices: error in file data.csv:\n\t" << e.what() << std::endl;
-		return (1);
+		std::cerr << e.what() << std::endl;
 	}
-
-	if (!input.is_open())
-	{
-		std::cerr << "Can't open file " << argv[1] << std::endl;
-		return (1);
-	}
-
-	std::getline(input, line);
-	while(std::getline(input, line))
-	{
-		iss.str(line);
-		iss.clear();
-		btc.evaluateInput(iss);
-	}
-
 	return (0);
 }

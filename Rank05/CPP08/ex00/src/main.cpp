@@ -29,7 +29,7 @@ int	main(void)
 		std::cout << *(easyfind(set, 3)) << std::endl;
 		std::cout << *(easyfind(set, 4)) << std::endl;
 	}
-	catch(const std::exception& e)
+	catch(const std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
@@ -46,7 +46,7 @@ int	main(void)
 		std::cout << *(easyfind(vector, 30)) << std::endl;
 		std::cout << *(easyfind(vector, 40)) << std::endl;
 	}
-	catch(const std::exception& e)
+	catch(const std::exception &e)
 	{
 		std::cerr << e.what() << std::endl;
 	}

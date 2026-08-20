@@ -70,12 +70,12 @@ unsigned int	Span::shortestSpan()
 	for (unsigned int i = 0; i < _numbers.size() - 1; i++)
 		if (static_cast<unsigned int> (_numbers[i + 1] - _numbers[i]) < min)
 			min = _numbers[i + 1] - _numbers[i];
-	return min;
+	return (min);
 }
 
 unsigned int	Span::longestSpan()
 {
 	if (_numbers.size() <= 1)
 		throw std::exception();
-	return _numbers.back() - _numbers.front();
+	return (_numbers.back() - _numbers.front());
 }

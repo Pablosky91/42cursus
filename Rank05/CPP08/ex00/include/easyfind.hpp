@@ -29,7 +29,7 @@ typename C::const_iterator	easyfind(const C &container, int value)
 		oss << "No " << value << " in container";
 		throw std::runtime_error(oss.str());
 	}
-	return it;
+	return (it);
 }
 
 #endif
