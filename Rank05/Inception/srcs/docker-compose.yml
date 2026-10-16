@@ -1,0 +1,66 @@
+services:
+
+  nginx:
+    container_name: nginx
+    build: requirements/nginx
+    restart: on-failure
+    ports:
+      - "443:443"
+    volumes:
+      - wp_volume:/var/www/wordpress
+    networks:
+      - docker-network
+    depends_on:
+      wordpress:
+        condition: service_healthy
+
+  mariadb:
+    container_name: mariadb
+    build: requirements/mariadb
+    restart: on-failure
+    env_file: .env
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_volume:/var/lib/mysql
+    networks:
+      - docker-network
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h 127.0.0.1 -u root -p\"$DB_ROOT_PASS\" --silent"]
+      interval: 3s
+      retries: 100
+
+  wordpress:
+    container_name: wordpress
+    build: requirements/wordpress
+    restart: on-failure
+    env_file: .env
+    volumes:
+      - wp_volume:/var/www/wordpress
+    networks:
+      - docker-network
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "php-fpm8.2 -t"]
+      interval: 3s
+      retries: 100
+
+volumes:
+  db_volume:
+    driver: local
+    driver_opts:
+      device: /home/$USER/data/DB
+      o: bind
+      type: none
+  wp_volume:
+    driver: local
+    driver_opts:
+      device: /home/$USER/data/WordPress
+      o: bind
+      type: none
+
+networks:
+  docker-network:
+    driver: bridge
